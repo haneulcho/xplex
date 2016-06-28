@@ -23,7 +23,7 @@ function storevilla_body_classes( $classes ) {
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
 	}
-	
+
 	if(is_singular(array( 'post','page' ))){
         global $post;
         $post_sidebar = get_post_meta($post->ID, 'storevilla_page_layouts', true);
@@ -34,7 +34,7 @@ function storevilla_body_classes( $classes ) {
     }
 
     if ( is_woocommerce_activated() ) {
-        
+
         if( is_product_category() || is_shop() ) {
             $woo_page_layout = get_theme_mod( 'storevilla_woocommerce_products_page_layout','rightsidebar' );
             if(!$woo_page_layout){
@@ -107,55 +107,55 @@ function storevilla_html_tag_schema() {
  * Storevilla Woocommerce Query
 */
 if ( is_woocommerce_activated() ) {
-    
+
     function storevilla_woocommerce_query($product_type, $product_category, $product_number){
-    
+
         $product_args       =   '';
-        
+
         global $product_label_custom;
-    
+
         if($product_type == 'category'){
             $product_args = array(
                 'post_type' => 'product',
                 'tax_query' => array(
                     array('taxonomy'  => 'product_cat',
-                     'field'     => 'id', 
-                     'terms'     => $product_category                                                                 
+                     'field'     => 'id',
+                     'terms'     => $product_category
                     )
                 ),
                 'posts_per_page' => $product_number
             );
         }
-        
+
         elseif($product_type == 'latest_product'){
             $product_label_custom = __('New', 'storevilla');
             $product_args = array(
                 'post_type' => 'product',
                 'tax_query' => array(
                     array('taxonomy'  => 'product_cat',
-                     'field'     => 'id', 
-                     'terms'     => $product_category                                                                 
+                     'field'     => 'id',
+                     'terms'     => $product_category
                     )
                 ),
                 'posts_per_page' => $product_number
             );
         }
-        
+
         elseif($product_type == 'feature_product'){
             $product_args = array(
-                'post_type'        => 'product',  
-                'meta_key'         => '_featured',  
-                'meta_value'       => 'yes', 
+                'post_type'        => 'product',
+                'meta_key'         => '_featured',
+                'meta_value'       => 'yes',
                 'tax_query' => array(
                     array('taxonomy'  => 'product_cat',
-                     'field'     => 'id', 
-                     'terms'     => $product_category                                                                 
+                     'field'     => 'id',
+                     'terms'     => $product_category
                     )
-                ), 
-                'posts_per_page'   => $product_number   
+                ),
+                'posts_per_page'   => $product_number
             );
         }
-    
+
         elseif($product_type == 'upsell_product'){
             $product_args = array(
                 'post_type'         => 'product',
@@ -165,7 +165,7 @@ if ( is_woocommerce_activated() ) {
                 'posts_per_page'    => $product_number
             );
         }
-    
+
         elseif($product_type == 'on_sale'){
             $product_args = array(
             'post_type'      => 'product',
@@ -186,7 +186,7 @@ if ( is_woocommerce_activated() ) {
                 )
             ));
         }
-        
+
         return $product_args;
     }
 }
@@ -197,11 +197,11 @@ if ( is_woocommerce_activated() ) {
  * Advance WooCommerce Product Search With Category
 */
 if(!function_exists ('storevilla_product_search')){
-	
+
 	function storevilla_product_search(){
-		
+
 		if ( is_woocommerce_activated() ) {
-			
+
 			$args = array(
 				'number'     => '',
 				'orderby'    => 'name',
@@ -209,12 +209,12 @@ if(!function_exists ('storevilla_product_search')){
 				'hide_empty' => true,
 				'include'    => array()
 			);
-			$product_categories = get_terms( 'product_cat', $args ); 
+			$product_categories = get_terms( 'product_cat', $args );
 			$categories_show = '<option value="">'.__('All Categories','storevilla').'</option>';
 			$check = '';
 			if(is_search()){
 				if(isset($_GET['term']) && $_GET['term']!=''){
-					$check = $_GET['term'];	
+					$check = $_GET['term'];
 				}
 			}
 			$checked = '';
@@ -240,9 +240,9 @@ if(!function_exists ('storevilla_product_search')){
 							 <input type="hidden" name="post_type" value="product" />
 							 <input type="hidden" name="taxonomy" value="product_cat" />
 						 </div>
-					</form>';			
+					</form>';
 			echo $form;
-		}		 
+		}
 	}
 }
 
@@ -253,8 +253,8 @@ if(!function_exists ('storevilla_product_search')){
 **/
 
 if ( ! function_exists( 'storevilla_payment_logo' ) ) {
-	
-    function storevilla_payment_logo() { 
+
+    function storevilla_payment_logo() {
       $payment_logo_one = esc_url( get_theme_mod('paymentlogo_image_one') );
       $payment_logo_two = esc_url( get_theme_mod('paymentlogo_image_two') );
       $payment_logo_three = esc_url( get_theme_mod('paymentlogo_image_three') );
@@ -283,15 +283,15 @@ if ( ! function_exists( 'storevilla_payment_logo' ) ) {
 	      <?php } ?>
 	    </div>
   	<?php
-	} 
+	}
 }
 
 /**
- * Limit word function 
+ * Limit word function
  */
- 
+
 if ( ! function_exists( 'storevilla_word_count' ) ) {
-	
+
     function storevilla_word_count($string, $limit) {
         $stringtags = strip_tags($string);
         $stringtags = strip_shortcodes($stringtags);
@@ -302,20 +302,20 @@ if ( ! function_exists( 'storevilla_word_count' ) ) {
 
 
 /**
- * Store Villa Header Promo Function Area 
+ * Store Villa Header Promo Function Area
  */
- 
+
 if ( ! function_exists( 'storevilla_promo_area' ) ) {
-	
+
     function storevilla_promo_area() {
-        
+
         $header_promo = esc_attr( get_theme_mod( 'storevilla_main_header_promo_area', 'enable' ) );
-        
+
         $promo_one_image = esc_url( get_theme_mod( 'storevilla_promo_area_one_image' ) );
         $promo_one_title = get_theme_mod( 'storevilla_promo_area_one_title' );
         $promo_one_desc = esc_textarea( get_theme_mod( 'storevilla_promo_area_one_desc' ) );
         $promo_one_link = esc_url( get_theme_mod( 'storevilla_promo_area_one_link' ) );
-        
+
         $promo_two_image = esc_url( get_theme_mod( 'storevilla_promo_area_two_image' ) );
         $promo_two_title = get_theme_mod( 'storevilla_promo_area_two_title' );
         $promo_two_desc = esc_textarea( get_theme_mod( 'storevilla_promo_area_two_desc' ) );
@@ -343,7 +343,7 @@ if ( ! function_exists( 'storevilla_promo_area' ) ) {
                     </div>
                 </a>
             </div>
-            
+
         </div>
     <?php
     }
@@ -357,8 +357,8 @@ if ( ! function_exists( 'storevilla_promo_area' ) ) {
 **/
 
 if ( ! function_exists( 'storevilla_service_section' ) ) {
-    
-  function storevilla_service_section() {  
+
+  function storevilla_service_section() {
 
         $services_icon_one = esc_attr( get_theme_mod( 'storevilla_services_icon_one', 'fa fa-truck' ) );
         $service_title_one = esc_attr( get_theme_mod( 'storevilla_service_title_one','FREE SHIPPING WORLDWIDE' ) );
@@ -371,16 +371,16 @@ if ( ! function_exists( 'storevilla_service_section' ) ) {
         $services_icon_three = esc_attr( get_theme_mod( 'storevilla_services_icon_three', 'fa fa-dollar' ) );
         $service_title_three = esc_attr( get_theme_mod( 'storevilla_service_title_three', 'MONEY BACK GUARANTEE' ) );
         $service_desc_three = esc_attr( get_theme_mod( 'storevilla_service_desc_three' ) );
-       
+
         $service_area = esc_attr( get_theme_mod( 'storevilla_services_area_settings','enable' ) );
 
     if(!empty( $service_area ) && $service_area == 'enable') {
       ?>
-      
+
         <div class="our-features-box clearfix">
-        
+
             <div class="store-container">
-             
+
                 <div class="feature-box">
                   <span><i class="<?php if(!empty( $services_icon_one )) { echo $services_icon_one; } ?>">&nbsp;</i></span>
                   <div class="content">
@@ -413,12 +413,12 @@ if ( ! function_exists( 'storevilla_service_section' ) ) {
                     <?php } ?>
                   </div>
                 </div>
-          
+
             </div>
 
         </div>
     <?php  }
-    
+
     }
 }
 
@@ -430,17 +430,17 @@ if ( ! function_exists( 'storevilla_service_section' ) ) {
 /**
  * Page and Post Page Display Layout Metabox function
  */
- 
+
 add_action('add_meta_boxes', 'storevilla_metabox_section');
 
 if ( ! function_exists( 'storevilla_metabox_section' ) ) {
-	
-    function storevilla_metabox_section(){   
-        add_meta_box('storevilla_display_layout', 
-            __( 'Display Layout Options', 'storevilla' ), 
-            'storevilla_display_layout_callback', 
-            array('page','post'), 
-            'normal', 
+
+    function storevilla_metabox_section(){
+        add_meta_box('storevilla_display_layout',
+            __( 'Display Layout Options', 'storevilla' ),
+            'storevilla_display_layout_callback',
+            array('page','post'),
+            'normal',
             'high'
         );
     }
@@ -481,25 +481,25 @@ if ( ! function_exists( 'storevilla_display_layout_callback' ) ) {
     ?>
         <table class="form-table">
             <tr>
-              <td>            
+              <td>
                 <?php
-                  $i = 0;  
-                  foreach ($storevilla_page_layouts as $field) {  
-                  $storevilla_page_metalayouts = get_post_meta( $post->ID, 'storevilla_page_layouts', true ); 
-                ?>            
+                  $i = 0;
+                  foreach ($storevilla_page_layouts as $field) {
+                  $storevilla_page_metalayouts = get_post_meta( $post->ID, 'storevilla_page_layouts', true );
+                ?>
                   <div class="radio-image-wrapper slidercat" id="slider-<?php echo $i; ?>" style="float:left; margin-right:30px;">
                     <label class="description">
                         <span>
                           <img src="<?php echo esc_url( $field['thumbnail'] ); ?>" />
                         </span></br>
-                        <input type="radio" name="storevilla_page_layouts" value="<?php echo $field['value']; ?>" <?php checked( $field['value'], 
+                        <input type="radio" name="storevilla_page_layouts" value="<?php echo $field['value']; ?>" <?php checked( $field['value'],
                             $storevilla_page_metalayouts ); if(empty($storevilla_page_metalayouts) && $field['value']=='rightsidebar'){ echo "checked='checked'";  } ?>/>
                          <?php echo $field['label']; ?>
                     </label>
                   </div>
                 <?php  $i++; }  ?>
               </td>
-            </tr>            
+            </tr>
         </table>
     <?php
     }
@@ -508,29 +508,29 @@ if ( ! function_exists( 'storevilla_display_layout_callback' ) ) {
 /**
  * Save the custom metabox data
  */
- 
+
 if ( ! function_exists( 'storevilla_save_page_settings' ) ) {
-    function storevilla_save_page_settings( $post_id ) { 
-        global $storevilla_page_layouts, $post; 
+    function storevilla_save_page_settings( $post_id ) {
+        global $storevilla_page_layouts, $post;
         if ( !isset( $_POST[ 'storevilla_settings_nonce' ] ) || !wp_verify_nonce( $_POST[ 'storevilla_settings_nonce' ], basename( __FILE__ ) ) )
             return;
-        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE)  
-            return;        
-        if ('page' == $_POST['post_type']) {  
-            if (!current_user_can( 'edit_page', $post_id ) )  
-                return $post_id;  
-        } elseif (!current_user_can( 'edit_post', $post_id ) ) {  
-                return $post_id;  
-        }    
-        foreach ($storevilla_page_layouts as $field) {  
-            $old = get_post_meta( $post_id, 'storevilla_page_layouts', true); 
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE)
+            return;
+        if ('page' == $_POST['post_type']) {
+            if (!current_user_can( 'edit_page', $post_id ) )
+                return $post_id;
+        } elseif (!current_user_can( 'edit_post', $post_id ) ) {
+                return $post_id;
+        }
+        foreach ($storevilla_page_layouts as $field) {
+            $old = get_post_meta( $post_id, 'storevilla_page_layouts', true);
             $new = sanitize_text_field($_POST['storevilla_page_layouts']);
-            if ($new && $new != $old) {  
-                update_post_meta($post_id, 'storevilla_page_layouts', $new);  
-            } elseif ('' == $new && $old) {  
-                delete_post_meta($post_id,'storevilla_page_layouts', $old);  
-            } 
-         } 
+            if ($new && $new != $old) {
+                update_post_meta($post_id, 'storevilla_page_layouts', $new);
+            } elseif ('' == $new && $old) {
+                delete_post_meta($post_id,'storevilla_page_layouts', $old);
+            }
+         }
     }
 }
 add_action('save_post', 'storevilla_save_page_settings');
@@ -539,7 +539,7 @@ add_action('save_post', 'storevilla_save_page_settings');
 /* Custom Customizer Class */
 
 if(class_exists( 'WP_Customize_control')) :
-    
+
     class Storevilla_Image_Radio_Control extends WP_Customize_Control {
         public $type = 'radioimage';
         public function render_content() {
@@ -547,14 +547,14 @@ if(class_exists( 'WP_Customize_control')) :
             ?>
             <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
             <div id="input_<?php echo $this->id; ?>" class="image">
-                <?php foreach ( $this->choices as $value => $label ) : ?>                
+                <?php foreach ( $this->choices as $value => $label ) : ?>
                         <label for="<?php echo $this->id . $value; ?>">
                             <input class="image-select" type="radio" value="<?php echo esc_attr( $value ); ?>" name="<?php echo esc_attr( $name ); ?>" id="<?php echo $this->id . $value; ?>" <?php $this->link(); checked( $this->value(), $value ); ?>>
                             <img src="<?php echo esc_html( $label ); ?>"/>
                         </label>
                 <?php endforeach; ?>
             </div>
-            <?php 
+            <?php
         }
     }
 
@@ -569,9 +569,9 @@ remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_p
 remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
 remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
 function storevilla_woocommerce_template_loop_product_thumbnail(){ ?>
-    <div class="item-img">          
-        
-        <?php global $post, $product; if ( $product->is_on_sale() ) : 
+    <div class="item-img">
+
+        <?php global $post, $product; if ( $product->is_on_sale() ) :
             echo apply_filters( 'woocommerce_sale_flash', '<div class="new-label new-top-right">' . __( 'Sale!', 'storevilla' ) . '</div>', $post, $product ); ?>
         <?php endif; ?>
         <?php
@@ -580,11 +580,11 @@ function storevilla_woocommerce_template_loop_product_thumbnail(){ ?>
                 echo '<div class="new-label new-top-left">'.$product_label_custom.'</div>';
             }
         ?>
-        <a class="product-image" title="<?php the_title(); ?>" href="<?php the_permalink(); ?>">
+        <a class="product-image" title="<?php the_title_attribute(); ?>" href="<?php the_permalink(); ?>">
             <?php echo woocommerce_get_product_thumbnail(); ?>
-        </a>           
+        </a>
     </div>
-<?php 
+<?php
 }
 add_action( 'woocommerce_before_shop_loop_item_title', 'storevilla_woocommerce_template_loop_product_thumbnail', 10 );
 
@@ -593,13 +593,13 @@ add_action( 'woocommerce_before_shop_loop_item_title', 'storevilla_woocommerce_t
 remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
 function storevilla_woocommerce_template_loop_product_title(){
     global $product;
-    if( is_home() || is_front_page() ) {    
+    if( is_home() || is_front_page() ) {
         $term = wp_get_post_terms($product->id,'product_cat',array('fields'=>'ids'));
         if(!empty( $term[0] )) {
             $procut_cat = get_term_by( 'id', $term[0], 'product_cat' );
-            $category_link = get_term_link( $term[0],'product_cat' ); 
-        } 
-    }   
+            $category_link = get_term_link( $term[0],'product_cat' );
+        }
+    }
  ?>
     <div class="block-item-title">
         <?php  if(!empty( $term[0] )) { ?>
@@ -609,7 +609,7 @@ function storevilla_woocommerce_template_loop_product_title(){
                 </a>
             </span>
         <?php } ?>
-        <h3><a title="<?php the_title(); ?>" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+        <h3><a title="<?php the_title_attribute(); ?>" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
     </div>
 <?php }
 add_action( 'woocommerce_shop_loop_item_title', 'storevilla_woocommerce_template_loop_product_title', 10 );
@@ -622,11 +622,11 @@ function storevilla_woocommerce_template_loop_add_to_cart(){
 ?>
     <div class="product-button-wrap clearfix">
         <?php woocommerce_template_loop_add_to_cart(); ?>
-        
-            <a class="villa-details" title="<?php the_title(); ?>" href="<?php the_permalink(); ?>">
+
+            <a class="villa-details" title="<?php the_title_attribute(); ?>" href="<?php the_permalink(); ?>">
                 <?php _e('View Details','storevilla'); ?>
             </a>
-        
+
     </div>
 <?php
 }
@@ -637,7 +637,7 @@ remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_l
 function storevilla_woocommerce_template_loop_price(){
 ?>
     <div class="product-price-wrap">
-        <?php woocommerce_template_loop_price(); ?>        
+        <?php woocommerce_template_loop_price(); ?>
     </div>
 <?php
 }
@@ -646,7 +646,7 @@ add_action( 'woocommerce_after_shop_loop_item_title' ,'storevilla_woocommerce_te
 function storevilla_woocommerce_template_loop_quick_info(){
 ?>
     <ul class="add-to-links">
-        <?php 
+        <?php
             global $product;
             if( function_exists( 'YITH_WCQV' ) ){
                 $quick_view = YITH_WCQV_Frontend();
@@ -654,7 +654,7 @@ function storevilla_woocommerce_template_loop_quick_info(){
                 $label = esc_html( get_option( 'yith-wcqv-button-label' ) );
                 echo '<li><a href="#" class="link-quickview yith-wcqv-button" data-product_id="' . $product->id . '">' . $label . '</a></li>';
             }
-        
+
           if( function_exists( 'YITH_WCWL' ) ){
             $url = add_query_arg( 'add_to_wishlist', $product->id );
             ?>
@@ -794,7 +794,7 @@ function storevilla_media_uploader_custom_sizes( $sizes ) {
 
 
 /**
- ** Retina images image generate function 
+ ** Retina images image generate function
 **/
 function retina_support_attachment_meta( $metadata, $attachment_id ) {
     foreach ( $metadata as $key => $value ) {
@@ -805,7 +805,7 @@ function retina_support_attachment_meta( $metadata, $attachment_id ) {
             }
         }
     }
- 
+
     return $metadata;
 }
 add_filter( 'wp_generate_attachment_metadata', 'retina_support_attachment_meta', 10, 2 );
@@ -819,12 +819,12 @@ function retina_support_create_images( $file, $width, $height, $crop = false ) {
         $resized_file = wp_get_image_editor( $file );
         if ( ! is_wp_error( $resized_file ) ) {
             $filename = $resized_file->generate_filename( $width . 'x' . $height . '@2x' );
- 
+
             $resized_file->resize( $width * 2, $height * 2, $crop );
             $resized_file->save( $filename );
- 
+
             $info = $resized_file->get_size();
- 
+
             return array(
                 'file' => wp_basename( $filename ),
                 'width' => $info['width'],
