@@ -1,0 +1,442 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Korean Payment Gateway with LG U+ 2.0.0\n"
+"POT-Creation-Date: 2014-05-21 22:59+0900\n"
+"PO-Revision-Date: 2014-05-21 22:59+0900\n"
+"Last-Translator: \n"
+"Language-Team: planet8 <thomas@planet8.co>\n"
+"Language: ko_KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Basepath: /\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-SearchPath-0: D:\\Work\\LGUplus\\woocommerce-lguplus-kr\\languages\n"
+"X-Poedit-SearchPath-1: D:\\Work\\LGUplus\\woocommerce-lguplus-kr\n"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/card.php:16
+msgid "LG U+ Credit Card"
+msgstr "LG U+ 신용카드"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/card.php:18
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1227
+msgid "Credit Card"
+msgstr "신용카드"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/card.php:20
+msgid "Payment via credit card."
+msgstr "신용카드로 결제를 진행합니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:73
+msgid "Enable/Disable"
+msgstr "활성화/비활성화"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:75
+msgid "Enable this method."
+msgstr "결제수단 활성화."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:79
+msgid "Enable/Disable Test Mode"
+msgstr "테스트 모드 활성화/비활성화"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:81
+msgid "Enable test mode."
+msgstr "테스트 모드가 활성화 됩니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:86
+msgid "Title"
+msgstr "제목"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:88
+msgid "Title that users will see during checkout."
+msgstr "체크아웃시 사용자가 보게 될 제목입니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:92
+msgid "Description"
+msgstr "설명"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:94
+msgid "Description that users will see during checkout."
+msgstr "체크아웃시 사용자가 보게 될 설명입니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:98
+msgid "Merchant Key"
+msgstr "Merchant Key"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:100
+msgid "Please enter your LG U+ Merchant Key."
+msgstr "LG U+ Merchant Key를 입력해주세요."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:100
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:106
+#, php-format
+msgid "You can to get this information in: %sLG U+ Account%s."
+msgstr "이 정보는 %sLG U+ 계정정보%s 에서 얻으실 수 있습니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:104
+msgid "Merchant ID"
+msgstr "Merchant ID"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:106
+msgid "Please enter your LG U+ Merchant ID."
+msgstr "LG U+ Merchant ID를 입력해주세요."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:110
+msgid "Language"
+msgstr "언어"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:112
+msgid "Select the language for your LG U+ form."
+msgstr "LG U+ 폼에 사용할 언어를 선택해주세요."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:114
+msgid "Use WooCommerce Language"
+msgstr "우커머스 언어 사용"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:115
+msgid "English"
+msgstr "영어"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:116
+msgid "Korean"
+msgstr "한글"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:118
+msgid "Auto"
+msgstr "Auto"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:121
+msgid "Style"
+msgstr "스타일"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:123
+msgid "Select the style for your LG U+ form."
+msgstr "LG U+ 폼에 사용할 스타일을 선택해주세요."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:153
+msgid "Log Directory:"
+msgstr "로그 디렉토리:"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:158
+msgid "Please use this log directory in the mall.conf file."
+msgstr "이 값을 mall.conf 파일 내부에 log_dir 값에 적용 해주세요."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:164
+msgid "Gateway Disabled"
+msgstr "게이트웨이 비활성화"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:164
+msgid "This payment method does not support your store currency."
+msgstr "이 결제 방법은 귀하의 스토어에서 사용하는 통화를 지원하지 않습니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:171
+msgid "<p> Please wait while your payment is being processed. </p>"
+msgstr "<p> 결제가 진행중입니다. 잠시만 기다려주세요. </p>"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:178
+#, php-format
+msgid "Your currency (%s) is not supported by this payment method."
+msgstr "이 결제 방법은 선택하신 통화(%s)를 지원하지 않습니다"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:399
+msgid "Payment failed."
+msgstr "결제 실패."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:404
+msgid "Failed to install ActiveX."
+msgstr "ActiveX 설치 실패."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:468
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:469
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:486
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:487
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:676
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:677
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:951
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:952
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1059
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1060
+msgid " (Mobile)"
+msgstr " (모바일)"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:596
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:688
+#, php-format
+msgid ""
+"Waiting for payment. Payment method: %s. Bank Name: %s. Bank Account: %s. LG "
+"U+ TID: %s. Timestamp: %s."
+msgstr ""
+"입금 대기중. 결제방법: %s. 은행이름: %s. 은행계좌: %s. LG U+ TID: %s. 타임스"
+"탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:615
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:724
+#, php-format
+msgid "Failed to verify integrity of payment. Timestamp: %s."
+msgstr "거래금액 검증에 실패하였습니다. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:625
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:734
+#, php-format
+msgid "Payment failed. Response message: %s. Timestamp: %s."
+msgstr "결제 실패. 수신 메세지: %s. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:691
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:821
+#, php-format
+msgid ""
+"Payment notification received. Payment method: %s. LG U+ TID: %s. Timestamp: "
+"%s."
+msgstr "결제 통보 수신 완료. 결제방법: %s. LG U+ TID: %s.  타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:696
+#, php-format
+msgid ""
+"Rollback sequence initiated due to failure of updating store DB. LG U+ TID: "
+"%s. LG U+ MID: %s. LG U+ OID: %s. Timestamp: %s."
+msgstr ""
+"상점 DB 업데이트 실패로 인한 Rollback 처리가 시작되었습니다. LG U+ TID: %s. "
+"LG U+ MID: %s. LG U+ OID: %s.  타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:697
+#, php-format
+msgid "TX Rollback Response Code: %s."
+msgstr "TX Rollback Response Code: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:698
+#, php-format
+msgid "TX Rollback Response Message: %s."
+msgstr "TX Rollback Response Message: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:701
+msgid "Auto-cancel sequence successfully initiated."
+msgstr "자동 취소 요청이 성공적으로 실행되었습니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:703
+msgid "Auto-cancel sequence has failed to initiate."
+msgstr "자동 취소 요청이 실패하였습니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:752
+#, php-format
+msgid ""
+"Failed to process notification. No payment request found. Timestamp: %s."
+msgstr ""
+"결제 통보를 처리할 수 없습니다. 결제 정보를 찾을 수 없습니다. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:812
+#, php-format
+msgid "Payment notification received but an error has occured. Timestamp: %s."
+msgstr "결제 통보 수신을 완료하였지만, 오류가 발생하였습니다. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:817
+#, php-format
+msgid ""
+"Payment notification received but order is already completed. Timestamp: %s."
+msgstr ""
+"결제 통보 수신은 완료하였지만, 이 거래는 이미 완료 되었습니다.  타임스탬프: "
+"%s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:825
+#, php-format
+msgid ""
+"Payment notification received but failed to complete process. Response "
+"message: %s. Timestamp: %s."
+msgstr ""
+"결제 통보 수신을 완료하였지만, 프로세스를 완료할 수 없습니다. 수신 메세지: "
+"%s. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:829
+#, php-format
+msgid ""
+"Payment notification received but hash data does not match. Response "
+"message: %s. Timestamp: %s."
+msgstr ""
+"결제 통보 수신을 완료하였지만, hash값이 상이합니다. 수신 메세지: %s.  타임스"
+"탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:830
+msgid "Payment notification received but hash data does not match."
+msgstr "결제 통보 수신을 완료하였지만, hash값이 상이합니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:847
+#, php-format
+msgid ""
+"Failed to process CAS notification. No payment request found. Timestamp: %s."
+msgstr ""
+"CAS 통보를 처리할 수 없습니다. 결제 정보를 찾을 수 없습니다.타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:897
+#, php-format
+msgid "CAS notification received but an error has occured. Timestamp: %s"
+msgstr "CAS 통보 수신을 완료하였지만, 오류가 발생하였습니다. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:903
+#, php-format
+msgid ""
+"CAS notification received but order is already completed. Timestamp: %s."
+msgstr ""
+"CAS 통보 수신을 완료하였지만, 이 거래는 이미 완료 되었습니다.  타임스탬프: "
+"%s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:907
+#, php-format
+msgid ""
+"CAS notification received. Account successfully assigned. Timestamp: %s."
+msgstr "CAS 통보 수신 완료. 계좌 할당 성공. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:912
+#, php-format
+msgid ""
+"CAS notification received. Payment method: %s. LG U+ TID: %s. Timestamp: %s."
+msgstr "CAS 통보 수신 완료. 결제방법: %s. LG U+ TID: %s. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:916
+#, php-format
+msgid "CAS notification received. Account transfer cancelled. Timestamp: %s."
+msgstr "CAS 통보 수신 완료. 계좌 이체가 취소 되었습니다. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:920
+#, php-format
+msgid ""
+"CAS notification received but failed to complete process. Response message: "
+"%s. Timestamp: %s."
+msgstr ""
+"CAS 통보 수신을 완료하였지만, 프로세스를 완료할 수 없습니다. 수신 메세지: "
+"%s. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:924
+#, php-format
+msgid ""
+"CAS notification received but hash data does not match. Response message: "
+"%s. Timestamp: %s."
+msgstr ""
+"CAS 통보 수신을 완료하였지만, hash값이 상이합니다. 수신 메세지: %s.  타임스탬"
+"프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:925
+msgid "CAS notification received but hash data does not match."
+msgstr "CAS 통보 수신을 완료하였지만, hash값이 상이합니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:942
+#, php-format
+msgid ""
+"Failed to process MT notification. No payment request found. Timestamp: %s."
+msgstr ""
+"MT 통보를 처리할 수 없습니다. 결제 정보를 찾을 수 없습니다.타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1008
+#, php-format
+msgid "MT notification received but an error has occured. Timestamp: %s"
+msgstr "MT 통보 수신을 완료하였지만, 오류가 발생하였습니다. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1013
+#, php-format
+msgid ""
+"MT notification received. Payment method: %s. LG U+ TID: %s. Timestamp: %s."
+msgstr "MT 통보 수신 완료. 결제방법: %s. LG U+ TID: %s. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1016
+#, php-format
+msgid ""
+"MT notification received but failed to complete process. Response message: "
+"%s. Timestamp: %s."
+msgstr ""
+"MT 통보 수신을 완료하였지만, 프로세스를 완료할 수 없습니다. 수신 메세지: %s. "
+"타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1020
+#, php-format
+msgid ""
+"MT notification received but hash data does not match. Response message: %s. "
+"Timestamp: %s."
+msgstr ""
+"MT 통보 수신을 완료하였지만, hash값이 상이합니다. 수신 메세지: %s.  타임스탬"
+"프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1021
+msgid "MT notification received but hash data does not match."
+msgstr "MT 통보 수신을 완료하였지만, hash값이 상이합니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1036
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1129
+msgid "Session has expired or the request is invalid."
+msgstr "세션이 만료되었거나 올바르지 않은 요청입니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1050
+#, php-format
+msgid ""
+"Failed to process WAP notification. No payment request found. Timestamp: %s."
+msgstr ""
+"WAP 통보를 처리할 수 없습니다. 결제 정보를 찾을 수 없습니다.타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1072
+#, php-format
+msgid ""
+"WAP notification received but order is already processing. Timestamp: %s."
+msgstr ""
+"WAP 통보 수신은 완료하였지만, 이 거래는 현재 처리중입니다.  타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1074
+#, php-format
+msgid ""
+"WAP notification received but order is already completed. Timestamp: %s."
+msgstr ""
+"WAP 통보 수신은 완료하였지만, 이 거래는 이미 완료 되었습니다.  타임스탬프: "
+"%s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1095
+#, php-format
+msgid ""
+"WAP notification received. Payment method: %s. LG U+ TID: %s. Timestamp: %s."
+msgstr "WAP 통보 수신 완료. 결제방법: %s. LG U+ TID: %s. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1114
+#, php-format
+msgid ""
+"WAP notification received but order status is invalid. Current status: %s. "
+"Timestamp: %s."
+msgstr ""
+"WAP 통보 수신을 완료하였지만, 이 거래의 상태가 올바르지 않습니다. 현재 상태: "
+"%s. 타임스탬프: %s."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1230
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/transfer.php:18
+msgid "Account Transfer"
+msgstr "계좌이체"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1233
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/virtual.php:18
+msgid "Virtual Account"
+msgstr "가상계좌"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/lguplus.php:1236
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/mobile.php:18
+msgid "Mobile Payment"
+msgstr "휴대폰 소액결제"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/mobile.php:16
+msgid "LG U+ Mobile Payment"
+msgstr "LG U+ 휴대폰 소액결제"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/mobile.php:20
+msgid "Payment via mobile phone."
+msgstr "휴대폰 소액결제로 결제를 진행합니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/transfer.php:16
+msgid "LG U+ Account Transfer"
+msgstr "LG U+ 계좌이체"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/transfer.php:20
+msgid "Payment via real time account transfer."
+msgstr "실시간 계좌이체로 결제를 진행합니다."
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/virtual.php:16
+msgid "LG U+ Virtual Account"
+msgstr "LG U+ 가상계좌"
+
+#: D:\Work\LGUplus\woocommerce-lguplus-kr/virtual.php:20
+msgid "Payment via virtual account transfer."
+msgstr "가상계좌로 결제를 진행합니다."

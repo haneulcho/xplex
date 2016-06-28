@@ -1,0 +1,28 @@
+#address-sel{
+    width: 100%;
+}
+
+#address-sel2{
+    width: 100%;
+}
+
+
+.address_block {
+    overflow: visible !important;
+}
+
+
+#submit-this{
+    margin: 4px 0;
+}
+
+#address-list {
+    height: 0px !important;
+}
+
+.chosen-container-active, .chosen-with-drop, .chosen-single {
+}
+
+.chosen-container {
+  
+}

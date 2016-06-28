@@ -1,0 +1,15 @@
+/*
+Theme Name:     Memorable_child
+Description:    Memorable child theme
+Author:         xplex
+Template:       memorable
+
+(optional values you can add: Theme URI, Author URI, Version)
+*/
+
+
+
+body {
+color: #666666;
+font-family: "돋움", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
