@@ -3,3 +3,4 @@ wp-config.php
 .htaccess_bak
 readme.html
 hosting_index.html
+.DS_Store
