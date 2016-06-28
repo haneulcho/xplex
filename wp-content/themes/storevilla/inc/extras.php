@@ -750,7 +750,14 @@ add_filter('excerpt_more', 'storevilla_excerpt_more');
  **/
 add_filter( 'woocommerce_breadcrumb_defaults', 'storevilla_change_breadcrumb_delimiter' );
 function storevilla_change_breadcrumb_delimiter( $defaults ) {
-    $defaults['delimiter'] = ' &gt; ';
+		$defaults = array(
+			'delimiter'   => ' &gt; ',
+			'wrap_before' => '<nav class="woocommerce-breadcrumb" itemprop="breadcrumb">',
+			'wrap_after'  => '</nav>',
+			'before'      => '',
+			'after'       => '',
+			'home'        => _x( 'X-PLEX', 'breadcrumb', 'woocommerce' ),
+		);
     return $defaults;
 }
 
