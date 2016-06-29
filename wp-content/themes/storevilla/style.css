@@ -309,7 +309,7 @@ html {
 *:before,
 *:after {
     /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
-    
+
     box-sizing: inherit;
 }
 body {
@@ -347,7 +347,7 @@ hr {
 ul,
 ol {
     margin: 0;
-    padding: 0; 
+    padding: 0;
 }
 ul li {
     list-style: none;
@@ -364,7 +364,7 @@ dd {
 img {
     height: auto;
     /* Make sure images are scaled correctly. */
-    
+
     max-width: 100%;
     /* Adhere to container width. */
 }
@@ -731,7 +731,7 @@ a:active {
 
 .infinite-scroll.neverending .site-footer {
     /* Theme Footer (when set to scrolling) */
-    
+
     display: none;
 }
 /* When Infinite Scroll has reached its end we need to re-display elements that were hidden (via .neverending) before. */
@@ -852,7 +852,7 @@ a {
 	text-decoration:none;
 }
 p {
-    margin: 0 0 10px; 
+    margin: 0 0 10px;
 }
 h1, h2, h3, h4, h5, h6 {
     margin: 0 0 15px;
@@ -887,7 +887,7 @@ header css
 ================
 */
 .site-header .top-header {
-    border-bottom: 1px solid #f7f7f7;   
+    border-bottom: 1px solid #f7f7f7;
 }
 /*
 ================
@@ -1034,13 +1034,13 @@ top-header-regin css
 .top-header-regin .widget_shopping_cart_content {
     padding-left: 10px;
     border: 1px solid #cbcbcb;
-} 
+}
 .top-header-regin .widget_shopping_cart_content li {
     margin-left: 0 !important;
     width: 100%;
 }
 .top-header-regin .widget_shopping_cart_content li a {
-    padding: 0 !important; 
+    padding: 0 !important;
 }
 .top-header-regin .widget_shopping_cart_content .mini_cart_item a.remove {
     float: right;
@@ -1077,7 +1077,7 @@ top-header-regin css
 ================
 end
 ================
-*/ 
+*/
 .header-wrap {
     padding: 20px 0;
 }
@@ -1118,7 +1118,7 @@ end
     float: left;
 }
 .header-wrap .search-cart-wrap .advance-search {
-    border: 1px solid #cbcbcb;    
+    border: 1px solid #cbcbcb;
 }
 .header-wrap .search-cart-wrap .advance-search .sv_search_wrap,
 .header-wrap .search-cart-wrap .advance-search .sv_search_form {
@@ -1179,7 +1179,7 @@ search field css
     position: absolute;
     left: 0;
     height: 30px;
-    top: 7px;   
+    top: 7px;
 }
 .header-wrap .search-cart-wrap .advance-search .sv_search_form input[type=text],
 .normal-search .search-form .search-field {
@@ -1296,7 +1296,7 @@ site-header-cart menu css
 .header-wrap .site-header-cart.menu li .widget.woocommerce.widget_shopping_cart .cart_list.product_list_widget li.empty {
     padding: 60px 0 30px;
     position: relative;
-} 
+}
 .header-wrap .site-header-cart.menu li .widget.woocommerce.widget_shopping_cart .cart_list.product_list_widget li.empty:before {
     position: absolute;
     content: '\f291';
@@ -1325,7 +1325,7 @@ add to cart css (global)
 }
 .cart_list {
     max-height: 300px;
-    overflow-y:auto;   
+    overflow-y:auto;
 }
 .widget-area .widget_shopping_cart .cart_list {
     max-height: 100%;
@@ -1334,11 +1334,11 @@ add to cart css (global)
 .widget-area .widget_shopping_cart .buttons a {
     font-size: 12px;
 }
-.woocommerce .widget_shopping_cart .cart_list li, 
+.woocommerce .widget_shopping_cart .cart_list li,
 .woocommerce.widget_shopping_cart .cart_list li {
-    padding-left:0; 
+    padding-left:0;
 }
-.woocommerce ul.cart_list li img, 
+.woocommerce ul.cart_list li img,
 .woocommerce ul.product_list_widget li img {
     box-shadow: none;
     float: left;
@@ -1346,7 +1346,7 @@ add to cart css (global)
     margin-right:10px;
     width: 65px;
 }
-.woocommerce .widget_shopping_cart .total, 
+.woocommerce .widget_shopping_cart .total,
 .woocommerce.widget_shopping_cart .total {
     padding: 10px 0;
     text-align: left;
@@ -1388,7 +1388,7 @@ add to cart css (global)
 }
 .site-header-cart .woocommerce a.button.checkout {
     float: right;
-    background: #dd1f26;    
+    background: #dd1f26;
 }
 .site-header-cart .woocommerce a.button.checkout:before {
     content: '\f00c';
@@ -1539,6 +1539,7 @@ site content slider and ads
 .site-content .slider-wrapper ul.store-gallery li {
     position: relative;
 }
+/*
 .site-content .slider-wrapper ul.store-gallery li:before {
     bottom: 0;
     content: "";
@@ -1549,6 +1550,7 @@ site content slider and ads
     z-index: 1;
     background: rgba(0,0,0,0.3);
 }
+*/
 .site-content .slider-wrapper ul.store-gallery li img {
     vertical-align: top;
 }
@@ -1678,11 +1680,11 @@ pagination-css
 +++++++++++++++
 widget slider css
 +++++++++++++
-*************************************************************************/ 
+*************************************************************************/
 /*
 widget title css
 */
-.main-widget-wrap .no-bg-image .block-title span, 
+.main-widget-wrap .no-bg-image .block-title span,
 .main-widget-wrap .no-bg-image .block-title h2 {
     color: #fff;
     margin-bottom: 0;
@@ -1707,13 +1709,13 @@ h1.page-title,
     font-size: 26px;
     font-family: Open Sans;
     font-weight: 400;
-    margin-bottom: 0;     
+    margin-bottom: 0;
 }
 .woocommerce div.product .product_title {
     margin-bottom: 3px;
 }
 h1.page-title {
-    margin: 0 0 10px; 
+    margin: 0 0 10px;
 }
 .main-widget-wrap section {
     padding: 10px 0 20px;
@@ -1724,7 +1726,7 @@ category section widget css
 ====================
 */
 .widget_storevilla_cat_widget_area .category-area {
-    padding: 40px 0 50px;    
+    padding: 40px 0 50px;
 }
 .block-title {
     padding-bottom: 30px;
@@ -1782,7 +1784,7 @@ end of pointer css
 */
 /*
 ==========================================================
-widget_storevilla_cat_widget_area css 
+widget_storevilla_cat_widget_area css
 ==========================================================
 */
 .widget_storevilla_cat_widget_area .category-slider {
@@ -1846,7 +1848,7 @@ widget_storevilla_cat_widget_area css end
 */
 /*
 ==========================================================
-widget_storevilla_cat_widget_area css 
+widget_storevilla_cat_widget_area css
 ==========================================================
 */
 .widget_storevilla_latest_product_cat_widget_area .lSSlideOuter,
@@ -1890,7 +1892,7 @@ widget_storevilla_cat_widget_area css
     font-family: Lato;
     text-transform: uppercase;
     color: #9e9e9e;
-    font-size: 10px;      
+    font-size: 10px;
     display: block;
     margin-bottom: 5px;
     -webkit-font-smoothing: subpixel-antialiased;
@@ -1908,7 +1910,7 @@ widget_storevilla_cat_widget_area css
     font-weight: 500;
     text-transform: capitalize;
     color: #000;
-    font-size: 18px;      
+    font-size: 18px;
     display: block;
     white-space: nowrap;
     overflow: hidden;
@@ -1927,7 +1929,7 @@ widget_storevilla_cat_widget_area css
 .widget_storevilla_cat_with_product_widget_area .cat-with-product li .product-price-wrap,
 .woocommerce ul.products li .product-price-wrap {
     border-top: 1px solid #eeeeee;
-    text-align: center; 
+    text-align: center;
 }
 .widget_storevilla_latest_product_cat_widget_area .latest-product-slider li ul li,
 .widget_storevilla_product_widget_area .store-product li ul li {
@@ -2017,7 +2019,7 @@ ul.add-to-links {
 ul.add-to-links li {
     display: inline-block;
     float: none !important;
-    margin: 0 20px; 
+    margin: 0 20px;
 }
 ul.add-to-links li a {
     font-size: 10px;
@@ -2027,7 +2029,7 @@ ul.add-to-links li a {
     color: #666666;
     display: block;
     text-transform: uppercase;
-    margin: 0 4px; 
+    margin: 0 4px;
 }
 .single-product ul.products .add-to-links {
     margin:0;
@@ -2082,15 +2084,15 @@ sale and new button css for all
     color: #fff;
     font-size: 14px;
     text-transform: uppercase;
-    -webkit-transform: rotate(-90deg);  
-    -ms-transform: rotate(-90deg);      
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
     transform: rotate(-90deg);
 }
 .item-img .new-label.new-top-left {
     right: 0;
     background: #0091D5;
     padding: 9px 13px;
-    top: 2px;   
+    top: 2px;
 }
 .item-img .new-label.new-top-left:before {
     width: 0;
@@ -2100,8 +2102,8 @@ sale and new button css for all
     border-color: transparent transparent transparent #007cb6 ;
     content: '';
     position: absolute;
-    -webkit-transform: rotate(90deg);  
-    -ms-transform: rotate(90deg);      
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
     transform: rotate(90deg);
     -o-transform: rotate(90deg);
     bottom: -8px;
@@ -2112,7 +2114,7 @@ sale and new button css for all
     left: 0;
     background: #dd1f26;
     padding: 9px 13px;
-    top: 4px;   
+    top: 4px;
 }
 .woocommerce span.onsale {
     border-radius: 0;
@@ -2130,8 +2132,8 @@ sale and new button css for all
     border-color: transparent transparent transparent #ae1e24;
     content: '';
     position: absolute;
-    -webkit-transform: rotate(90deg);  
-    -ms-transform: rotate(90deg);      
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
     transform: rotate(90deg);
     -o-transform: rotate(90deg);
     bottom: -9px;
@@ -2150,7 +2152,7 @@ product-button-wrap and button css
 =================
 */
 .product-button-wrap {
-    margin: 0 0 15px; 
+    margin: 0 0 15px;
 }
 .product-button-wrap a,
 .woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button {
@@ -2180,7 +2182,7 @@ product-button-wrap and button css
     position: relative;
     border: 1px solid #0091D5;
     transition: all 0.5s;
-    -webkit-transition: all 0.5s; 
+    -webkit-transition: all 0.5s;
 }
 .product-button-wrap a.button:hover,
 .product-button-wrap a.added_to_cart:hover,
@@ -2199,7 +2201,7 @@ product-button-wrap and button css
 }
 .product-button-wrap a.button.added {
     display: none;
-}       
+}
 .product-button-wrap a.button:before,
 .product-button-wrap a.added_to_cart:before {
     content: '\f07a';
@@ -2219,8 +2221,8 @@ product-button-wrap and button css
     float: right;
     display: block;
     background: #dd1f26;
-    padding-left: 30px; 
-    position: relative; 
+    padding-left: 30px;
+    position: relative;
     border:1px solid #DD1F26;
 }
 .product-button-wrap a.villa-details:before {
@@ -2256,7 +2258,7 @@ widget_storevilla_cat_with_product_widget_area css
     border-bottom: 1px solid #eeeeee;
 }
 .widget_storevilla_cat_with_product_widget_area .left_align .lSSlideWrapper.usingCss {
-    border-left: 1px solid #eeeeee;    
+    border-left: 1px solid #eeeeee;
 }
 .widget_storevilla_cat_with_product_widget_area .block-title-desc {
     font-family: Open Sans;
@@ -2423,7 +2425,7 @@ end of css
 */
 /*
 =========================================
-widget_storevilla_promo_pages_area css 
+widget_storevilla_promo_pages_area css
 =========================================
 */
 .widget_storevilla_promo_pages_area .promo-seciont{
@@ -2502,7 +2504,7 @@ widget_storevilla_promo_pages_area css
     font-size: 14px;
     color: #8b8b8b;
     padding: 9px 25px;
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
 }
 .widget_storevilla_blog_widget_area .large-blog-preview a.blog-preview-btn,
 .widget_storevilla_blog_widget_area .blog-preview a.blog-preview-btn {
@@ -2523,7 +2525,7 @@ widget_storevilla_promo_pages_area css
 .widget_storevilla_blog_widget_area .blog-inner {
     border: 1px solid #eeeeee;
     overflow: hidden;
-    padding: 30px 30px 10px; 
+    padding: 30px 30px 10px;
 }
 .widget_storevilla_blog_widget_area .blog-preview-item .entry-thumb {
     margin-bottom: 5px;
@@ -2542,7 +2544,7 @@ end of css
 */
 /*
 ===============================================
-widget_storevilla_testimonial_widget_area css 
+widget_storevilla_testimonial_widget_area css
 ===============================================
 */
 .widget_storevilla_testimonial_widget_area .store-container {
@@ -2735,7 +2737,7 @@ footer css
 }
 .site-footer .site-info a:hover {
     color: #30CFEF;
-} 
+}
 .site-footer .payment-accept {
     float: right;
     padding: 21px 0;
@@ -2955,7 +2957,7 @@ end of css
     font-size: 14px;
     border: 1px solid #eeeeee;
     color: #000;
-    padding: 5px 10px; 
+    padding: 5px 10px;
     height: 31.5px;
 }
 .widget_product_search form input[type=submit] {
@@ -2971,7 +2973,7 @@ end of css
     border: none;
     color: #fff;
     height: 31px;
-    padding: 5px 14px; 
+    padding: 5px 14px;
 }
 .widget_search form input[type=submit]:hover,
 .widget_product_search form input[type=submit]:hover,
@@ -3016,7 +3018,7 @@ tags cloud css
 .widget-area .widget_tag_cloud .tagcloud a,
 .widget-area .widget_product_tag_cloud .tagcloud a {
     color: #000;
-    padding: 5px 10px; 
+    padding: 5px 10px;
 }
 .widget_tag_cloud .tagcloud a,
 .widget_product_tag_cloud .tagcloud a {
@@ -3037,7 +3039,7 @@ tags cloud css
     border:1px solid #0091D5;
 }
 .widget_products ul li span.product-title,
-.woocommerce ul.cart_list li a, 
+.woocommerce ul.cart_list li a,
 .woocommerce ul.product_list_widget li a {
     font-size: 13px;
     font-weight: 400;
@@ -3104,7 +3106,7 @@ scroll up css
 ===========================
 */
 a.scrollup {
-    bottom: 15px; 
+    bottom: 15px;
     right: 15px;
     background: rgba(0,0,0,0.4);
     color: #fff;
@@ -3214,7 +3216,7 @@ woocommerce css
 }
 .woocommerce .woocommerce-breadcrumb a:hover {
     color: #0091D5;
-} 
+}
 
 .woocommerce .woocommerce-breadcrumb a:hover:before {
     left: 4px;
@@ -3256,9 +3258,9 @@ woocommerce css
 .woocommerce ul.products li.product .button {
     margin-top: 0;
 }
-.woocommerce #respond input#submit:hover, 
-.woocommerce a.button:hover, 
-.woocommerce button.button:hover, 
+.woocommerce #respond input#submit:hover,
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
 .woocommerce input.button:hover {
     background: none;
     color: #000;
@@ -3289,7 +3291,7 @@ woocommerce css
 .woocommerce #primary ul.products li .item-img .product-image {
     overflow: hidden;
     display: block;
-} 
+}
 .woocommerce #primary ul.products li a img {
     transform: translateZ(0px);
     -webkit-transform: translateZ(0px);
@@ -3418,7 +3420,7 @@ blog post css
     color: #888;
     display: inline-block;
     position: relative;
-    padding: 0 0 0 20px; 
+    padding: 0 0 0 20px;
     border-radius: 0;
 }
 .storevilla-blog .sv-post-content .category-name span:before {
@@ -3443,7 +3445,7 @@ blog post css
 }
 .storevilla-blog .sv-post-content .post-meta .date {
     position: relative;
-    padding: 0 10px; 
+    padding: 0 10px;
 }
 .storevilla-blog .sv-post-content .post-meta .date:before,
 .storevilla-blog .sv-post-content .post-meta .date:after {
@@ -3485,7 +3487,7 @@ blog post css
     font-size: 14px;
 }
 .single-product div[itemprop="description"] p {
-    margin-bottom: 13px;    
+    margin-bottom: 13px;
 }
 .single-product div[itemprop="description"] {
     color: #8b8b8b;
@@ -3685,13 +3687,13 @@ single page navigation css
     top: 0;
 }
 .post-navigation .nav-links .nav-next a:before {
-    right: -30px;    
+    right: -30px;
     content: '\f101';
     font-family: FontAwesome;
     position: absolute;
     top: 0;
 }
-/*end of css*/ 
+/*end of css*/
 /*
 =================
 comment css
@@ -3752,12 +3754,12 @@ comment css
     color: #fff;
     border-radius: 0;
     transition: all 300ms ease-in-out 0s;
-    -webkit-transition: all 300ms ease-in-out 0s;  
+    -webkit-transition: all 300ms ease-in-out 0s;
 }
 .comments-area .form-submit .submit:hover {
     transition: all 300ms ease-in-out 0s;
     -webkit-transition: all 300ms ease-in-out 0s;
-    background: #DD1F26;    
+    background: #DD1F26;
 }
 /*end of css*/
 /*
@@ -3857,7 +3859,7 @@ woocommerce-variation-add-to-cart variations_button
     font-size: 10px;
     float: left;
     vertical-align: middle;
-    border-right: 1px solid #0091D5; 
+    border-right: 1px solid #0091D5;
 }
 .quantity button.increase {
     border-right: 0;
@@ -3879,32 +3881,32 @@ woocommerce-variation-add-to-cart variations_button
 .woocommerce #respond input#submit.alt.disabled:hover,
 .woocommerce #respond input#submit.alt:disabled,
 .woocommerce #respond input#submit.alt:disabled:hover,
-.woocommerce #respond input#submit.alt[disabled]:disabled, 
-.woocommerce #respond input#submit.alt[disabled]:disabled:hover, 
-.woocommerce a.button.alt.disabled, 
-.woocommerce a.button.alt.disabled:hover, 
-.woocommerce a.button.alt:disabled, 
-.woocommerce a.button.alt:disabled:hover, 
-.woocommerce a.button.alt[disabled]:disabled, 
-.woocommerce a.button.alt[disabled]:disabled:hover, 
-.woocommerce button.button.alt.disabled, 
-.woocommerce button.button.alt.disabled:hover, 
-.woocommerce button.button.alt:disabled, 
-.woocommerce button.button.alt:disabled:hover, 
-.woocommerce button.button.alt[disabled]:disabled, 
-.woocommerce button.button.alt[disabled]:disabled:hover, 
-.woocommerce input.button.alt.disabled, 
-.woocommerce input.button.alt.disabled:hover, 
-.woocommerce input.button.alt:disabled, 
-.woocommerce input.button.alt:disabled:hover, 
-.woocommerce input.button.alt[disabled]:disabled, 
+.woocommerce #respond input#submit.alt[disabled]:disabled,
+.woocommerce #respond input#submit.alt[disabled]:disabled:hover,
+.woocommerce a.button.alt.disabled,
+.woocommerce a.button.alt.disabled:hover,
+.woocommerce a.button.alt:disabled,
+.woocommerce a.button.alt:disabled:hover,
+.woocommerce a.button.alt[disabled]:disabled,
+.woocommerce a.button.alt[disabled]:disabled:hover,
+.woocommerce button.button.alt.disabled,
+.woocommerce button.button.alt.disabled:hover,
+.woocommerce button.button.alt:disabled,
+.woocommerce button.button.alt:disabled:hover,
+.woocommerce button.button.alt[disabled]:disabled,
+.woocommerce button.button.alt[disabled]:disabled:hover,
+.woocommerce input.button.alt.disabled,
+.woocommerce input.button.alt.disabled:hover,
+.woocommerce input.button.alt:disabled,
+.woocommerce input.button.alt:disabled:hover,
+.woocommerce input.button.alt[disabled]:disabled,
 .woocommerce input.button.alt[disabled]:disabled:hover {
     border-radius: 0;
-    background: #0091D5; 
+    background: #0091D5;
 }
-.woocommerce #respond input#submit.alt, 
-.woocommerce a.button.alt, 
-.woocommerce button.button.alt, 
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
 .woocommerce input.button.alt {
     background: #0091D5;
     border-radius: 0;
@@ -3923,9 +3925,9 @@ button.single_add_to_cart_button:before {
     font-size: 13px;
     top: 7px;
 }
-.woocommerce #respond input#submit.alt:hover, 
-.woocommerce a.button.alt:hover, 
-.woocommerce button.button.alt:hover, 
+.woocommerce #respond input#submit.alt:hover,
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover,
 .woocommerce input.button.alt:hover {
     background: #0083C1;
 }
@@ -3934,7 +3936,7 @@ button.single_add_to_cart_button:before {
 }
 .woocommerce .woocommerce-breadcrumb {
     display: block;
-    margin: 0 0 30px; 
+    margin: 0 0 30px;
 }
 /*end*/
 .single-product .summary.entry-summary .variations_form.cart {
@@ -4041,7 +4043,7 @@ sidebar pagelayout css
 .bothsidebar #secondaryleft{
     margin-left:-300px;
     float: left;
-    width: 47%; 
+    width: 47%;
 }
 .bothsidebar #secondaryright{
     float: right;
@@ -4051,7 +4053,7 @@ sidebar pagelayout css
     width: 47%;
 }
 .bothsidebar #primary{
-    width: 100%; 
+    width: 100%;
     position: relative;
     float: none;
 }
@@ -4109,7 +4111,7 @@ no-results not-found css
     font-size: 13px;
     font-family: Open Sans;
     height: 31.5px;
-    padding: 3px 10px; 
+    padding: 3px 10px;
 }
 /*
 =========================
@@ -4117,7 +4119,7 @@ error 404
 =========================
 */
 #primary-404 .site-main {
-    padding: 60px 0; 
+    padding: 60px 0;
 }
 #primary-404 .site-main .error-404.not-found {
     text-align: center;
@@ -4127,7 +4129,7 @@ error 404
 }
 #primary-404 .site-main .error-404.not-found .page-content p {
     margin-bottom: 40px;
-} 
+}
 .error-homepage a {
     display: inline-block;
     background: #0091D5;
@@ -4146,13 +4148,13 @@ pagination css
 .woocommerce nav.woocommerce-pagination ul li {
     border-color: #0091D5;
 }
-.woocommerce nav.woocommerce-pagination ul li a:focus, 
-.woocommerce nav.woocommerce-pagination ul li a:hover, 
+.woocommerce nav.woocommerce-pagination ul li a:focus,
+.woocommerce nav.woocommerce-pagination ul li a:hover,
 .woocommerce nav.woocommerce-pagination ul li span.current {
     background: #0091D5;
     color: #fff;
 }
-.woocommerce nav.woocommerce-pagination ul li a, 
+.woocommerce nav.woocommerce-pagination ul li a,
 .woocommerce nav.woocommerce-pagination ul li span {
     color: #0091D5;
 }
@@ -4221,7 +4223,7 @@ woocommerce-tabs css
     color: #000;
     padding: 5px 10px;
     width: 100%;
-    font-size: 14px;   
+    font-size: 14px;
 }
 .woocommerce-tabs .comment-respond .comment-form-author input,
 .woocommerce-tabs .comment-respond .comment-form-email input {
@@ -4250,7 +4252,7 @@ woocommerce-tabs css
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs {
     padding: 0 0 0 5px;
-    margin: 0; 
+    margin: 0;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs::before {
     border:none;
@@ -4258,7 +4260,7 @@ woocommerce-tabs css
 .woocommerce div.product .woocommerce-tabs ul.tabs li {
     margin: 0 5px 0 -5px;
     border: none;
-    border-radius: 0;    
+    border-radius: 0;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li a {
     font-family: Open Sans;
@@ -4396,12 +4398,12 @@ comments-area css
 .comments-area .reply a {
     display: inline-block;
     background: #0091D5;
-    padding: 5px 15px;  
+    padding: 5px 15px;
     color: #fff;
-    font-size: 12px;   
+    font-size: 12px;
 }
 .comments-area .reply a:hover {
-    background: #FBB203;  
+    background: #FBB203;
 }
 .comments-area ol.children {
   margin: 0 0 0 25px;
@@ -4428,7 +4430,7 @@ table.group_table td a.button {
 }
 .woocommerce div.product form.cart .group_table td.label a {
     color: #0091D5;
-    font-size: 12px;      
+    font-size: 12px;
 }
 .woocommerce div.product form.cart .group_table td.label a:hover {
   color: #FBB203;
@@ -4454,10 +4456,10 @@ archive add to links
 ====================
 */
 .archive .products .add-to-links {
-    padding-left:12px        
+    padding-left:12px
 }
 .archive .products .add-to-links li {
-    margin: 0 7px;    
+    margin: 0 7px;
 }
 /*
 css
@@ -4481,7 +4483,7 @@ css
     list-style: none
 }
 .woocommerce-checkout-payment li.wc_payment_method.payment_method_paypal a.about_paypal {
-    color: #0091D5;       
+    color: #0091D5;
 }
 .woocommerce-page tr.cart_item td.product-name {
     width: 41%;

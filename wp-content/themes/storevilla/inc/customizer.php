@@ -197,180 +197,138 @@ function storevilla_customize_register( $wp_customize ) {
         'active_callback' => 'storevilla_top_header_optons',
     ));
 
-
-	$wp_customize->add_section( 'storevilla_main_banner_area', array(
-		'title'           =>      __('Main Banner Section Area', 'storevilla'),
-		'priority'        =>      '111',
-    ));
-
-    $wp_customize->add_setting('storevilla_main_banner_settings', array(
-        'default' => 'enable',
-        'capability' => 'edit_theme_options',
-        'sanitize_callback' => 'storevilla_radio_enable_disable_sanitize'  //done
-	));
-
-	$wp_customize->add_control('storevilla_main_banner_settings', array(
-		'type' => 'radio',
-		'label' => __('Enable / Disable Main Banner Area', 'storevilla'),
-		'section' => 'storevilla_main_banner_area',
-		'settings' => 'storevilla_main_banner_settings',
-		'choices' => array(
-         'enable' => __('Enable', 'storevilla'),
-         'disable' => __('Disable', 'storevilla')
-        )
-	));
-
-
-	$wp_customize->add_setting( 'storevilla_main_banner_slider', array(
-      'sanitize_callback' => 'storevilla_sanitize_text',
-      'default' => '',
-      'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control( new Storevilla_Pro_General_Repeater( $wp_customize, 'storevilla_main_banner_slider', array(
-      'label'   => esc_html__('Main Slider Section','storevilla'),
-      'section' => 'storevilla_main_banner_area',
-      'description' => __('Upload Slider Image With Slider Title, Description, Link & Button Text','storevilla'),
-          'image_control' => true,
-          'title_control' => true,
-          'text_control' => true,
-          'link_control' => true,
-          'subtitle_control' => true
-    )));
-
-
-
-	$wp_customize->add_section( 'storevilla_main_header_promo_area', array(
-		'title'           =>      __('Header Promo Section Area', 'storevilla'),
-		'priority'        =>      '112',
-    ));
-
-    $wp_customize->add_setting('storevilla_main_header_promo_settings', array(
-        'default' => 'enable',
-        'capability' => 'edit_theme_options',
-        'sanitize_callback' => 'storevilla_radio_enable_disable_sanitize'  //done
-	));
-
-	$wp_customize->add_control('storevilla_main_header_promo_settings', array(
-		'type' => 'radio',
-		'label' => __('Enable / Disable Main Header Promo Area', 'storevilla'),
-		'section' => 'storevilla_main_header_promo_area',
-		'settings' => 'storevilla_main_header_promo_settings',
-		'choices' => array(
-         'enable' => __('Enable', 'storevilla'),
-         'disable' => __('Disable', 'storevilla')
-        )
-	));
-
-
-	$wp_customize->add_setting( 'storevilla_promo_area_one_image', array(
-        'default'       =>      '',
-        'sanitize_callback' => 'esc_url_raw' // done
-    ));
-
-    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'storevilla_promo_area_one_image', array(
-        'section'       =>      'storevilla_main_header_promo_area',
-        'label'         =>      __('Upload Promo One Image', 'storevilla'),
-        'type'          =>      'image',
-    )));
-
-    $wp_customize->add_setting('storevilla_promo_area_one_title', array(
-        'default' => '',
-        'sanitize_callback' => 'storevilla_text_sanitize',  // done
-        'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control('storevilla_promo_area_one_title',array(
-        'type' => 'text',
-        'label' => __('Promo One Title', 'storevilla'),
-        'section' => 'storevilla_main_header_promo_area',
-        'setting' => 'storevilla_promo_area_one_title',
-    ));
-
-    $wp_customize->add_setting('storevilla_promo_area_one_desc', array(
-        'default' => '',
-       	'sanitize_callback' => 'esc_textarea', // done
-        'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control('storevilla_promo_area_one_desc',array(
-        'type' => 'textarea',
-        'label' => __('Promo One Short Description', 'storevilla'),
-        'section' => 'storevilla_main_header_promo_area',
-        'setting' => 'storevilla_promo_area_one_desc',
-    ));
-
-
-    $wp_customize->add_setting('storevilla_promo_area_one_link', array(
-        'default' => '',
-        'sanitize_callback' => 'esc_url_raw',  // done
-        'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control('storevilla_promo_area_one_link',array(
-        'type' => 'text',
-        'label' => __('Promo One Link', 'storevilla'),
-        'section' => 'storevilla_main_header_promo_area',
-        'setting' => 'storevilla_promo_area_one_link',
-    ));
-
-    $wp_customize->add_setting( 'storevilla_promo_area_two_image', array(
-        'default'       =>      '',
-        'sanitize_callback' => 'esc_url_raw' // done
-    ));
-
-    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'storevilla_promo_area_two_image', array(
-        'section'       =>      'storevilla_main_header_promo_area',
-        'label'         =>      __('Upload Promo Two Image', 'storevilla'),
-        'type'          =>      'image',
-    )));
-
-
-    $wp_customize->add_setting('storevilla_promo_area_two_title', array(
-        'default' => '',
-        'sanitize_callback' => 'storevilla_text_sanitize',  // done
-        'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control('storevilla_promo_area_two_title',array(
-        'type' => 'text',
-        'label' => __('Promo Two Title', 'storevilla'),
-        'section' => 'storevilla_main_header_promo_area',
-        'setting' => 'storevilla_promo_area_two_title',
-    ));
-
-    $wp_customize->add_setting('storevilla_promo_area_two_desc', array(
-        'default' => '',
-       	'sanitize_callback' => 'esc_textarea', // done
-        'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control('storevilla_promo_area_two_desc',array(
-        'type' => 'textarea',
-        'label' => __('Promo Two Short Description', 'storevilla'),
-        'section' => 'storevilla_main_header_promo_area',
-        'setting' => 'storevilla_promo_area_two_desc',
-    ));
-
-
-    $wp_customize->add_setting('storevilla_promo_area_two_link', array(
-        'default' => '',
-        'sanitize_callback' => 'esc_url_raw',  // done
-        'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control('storevilla_promo_area_two_link',array(
-        'type' => 'text',
-        'label' => __('Promo Two Link', 'storevilla'),
-        'section' => 'storevilla_main_header_promo_area',
-        'setting' => 'storevilla_promo_area_two_link',
-    ));
+	// XPLEX에서 사용하지 않습니다.
+	// $wp_customize->add_section( 'storevilla_main_header_promo_area', array(
+	// 	'title'           =>      __('Header Promo Section Area', 'storevilla'),
+	// 	'priority'        =>      '112',
+  //   ));
+	//
+  //   $wp_customize->add_setting('storevilla_main_header_promo_settings', array(
+  //       'default' => 'enable',
+  //       'capability' => 'edit_theme_options',
+  //       'sanitize_callback' => 'storevilla_radio_enable_disable_sanitize'  //done
+	// ));
+	//
+	// $wp_customize->add_control('storevilla_main_header_promo_settings', array(
+	// 	'type' => 'radio',
+	// 	'label' => __('Enable / Disable Main Header Promo Area', 'storevilla'),
+	// 	'section' => 'storevilla_main_header_promo_area',
+	// 	'settings' => 'storevilla_main_header_promo_settings',
+	// 	'choices' => array(
+  //        'enable' => __('Enable', 'storevilla'),
+  //        'disable' => __('Disable', 'storevilla')
+  //       )
+	// ));
+	//
+	//
+	// $wp_customize->add_setting( 'storevilla_promo_area_one_image', array(
+  //       'default'       =>      '',
+  //       'sanitize_callback' => 'esc_url_raw' // done
+  //   ));
+	//
+  //   $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'storevilla_promo_area_one_image', array(
+  //       'section'       =>      'storevilla_main_header_promo_area',
+  //       'label'         =>      __('Upload Promo One Image', 'storevilla'),
+  //       'type'          =>      'image',
+  //   )));
+	//
+  //   $wp_customize->add_setting('storevilla_promo_area_one_title', array(
+  //       'default' => '',
+  //       'sanitize_callback' => 'storevilla_text_sanitize',  // done
+  //       'transport' => 'postMessage'
+  //   ));
+	//
+  //   $wp_customize->add_control('storevilla_promo_area_one_title',array(
+  //       'type' => 'text',
+  //       'label' => __('Promo One Title', 'storevilla'),
+  //       'section' => 'storevilla_main_header_promo_area',
+  //       'setting' => 'storevilla_promo_area_one_title',
+  //   ));
+	//
+  //   $wp_customize->add_setting('storevilla_promo_area_one_desc', array(
+  //       'default' => '',
+  //      	'sanitize_callback' => 'esc_textarea', // done
+  //       'transport' => 'postMessage'
+  //   ));
+	//
+  //   $wp_customize->add_control('storevilla_promo_area_one_desc',array(
+  //       'type' => 'textarea',
+  //       'label' => __('Promo One Short Description', 'storevilla'),
+  //       'section' => 'storevilla_main_header_promo_area',
+  //       'setting' => 'storevilla_promo_area_one_desc',
+  //   ));
+	//
+	//
+  //   $wp_customize->add_setting('storevilla_promo_area_one_link', array(
+  //       'default' => '',
+  //       'sanitize_callback' => 'esc_url_raw',  // done
+  //       'transport' => 'postMessage'
+  //   ));
+	//
+  //   $wp_customize->add_control('storevilla_promo_area_one_link',array(
+  //       'type' => 'text',
+  //       'label' => __('Promo One Link', 'storevilla'),
+  //       'section' => 'storevilla_main_header_promo_area',
+  //       'setting' => 'storevilla_promo_area_one_link',
+  //   ));
+	//
+  //   $wp_customize->add_setting( 'storevilla_promo_area_two_image', array(
+  //       'default'       =>      '',
+  //       'sanitize_callback' => 'esc_url_raw' // done
+  //   ));
+	//
+  //   $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'storevilla_promo_area_two_image', array(
+  //       'section'       =>      'storevilla_main_header_promo_area',
+  //       'label'         =>      __('Upload Promo Two Image', 'storevilla'),
+  //       'type'          =>      'image',
+  //   )));
+	//
+	//
+  //   $wp_customize->add_setting('storevilla_promo_area_two_title', array(
+  //       'default' => '',
+  //       'sanitize_callback' => 'storevilla_text_sanitize',  // done
+  //       'transport' => 'postMessage'
+  //   ));
+	//
+  //   $wp_customize->add_control('storevilla_promo_area_two_title',array(
+  //       'type' => 'text',
+  //       'label' => __('Promo Two Title', 'storevilla'),
+  //       'section' => 'storevilla_main_header_promo_area',
+  //       'setting' => 'storevilla_promo_area_two_title',
+  //   ));
+	//
+  //   $wp_customize->add_setting('storevilla_promo_area_two_desc', array(
+  //       'default' => '',
+  //      	'sanitize_callback' => 'esc_textarea', // done
+  //       'transport' => 'postMessage'
+  //   ));
+	//
+  //   $wp_customize->add_control('storevilla_promo_area_two_desc',array(
+  //       'type' => 'textarea',
+  //       'label' => __('Promo Two Short Description', 'storevilla'),
+  //       'section' => 'storevilla_main_header_promo_area',
+  //       'setting' => 'storevilla_promo_area_two_desc',
+  //   ));
+	//
+	//
+  //   $wp_customize->add_setting('storevilla_promo_area_two_link', array(
+  //       'default' => '',
+  //       'sanitize_callback' => 'esc_url_raw',  // done
+  //       'transport' => 'postMessage'
+  //   ));
+	//
+  //   $wp_customize->add_control('storevilla_promo_area_two_link',array(
+  //       'type' => 'text',
+  //       'label' => __('Promo Two Link', 'storevilla'),
+  //       'section' => 'storevilla_main_header_promo_area',
+  //       'setting' => 'storevilla_promo_area_two_link',
+  //   ));
 
 
 		// XPLEX Index Hero Img Area
 		$wp_customize->add_section( 'xplex_main_heroimg_area', array(
 			'title'           =>      __('XPLEX Index Hero Img Area', 'storevilla'),
-			'priority'        =>      '112',
+			'priority'        =>      '111',
 	    ));
 
 	    $wp_customize->add_setting('xplex_main_heroimg_area_settings', array(
@@ -414,6 +372,47 @@ function storevilla_customize_register( $wp_customize ) {
 	        'section' => 'xplex_main_heroimg_area',
 	        'setting' => 'xplex_main_heroimg_area_title',
 	    ));
+
+		// XPLEX Index Banner Area
+		$wp_customize->add_section( 'storevilla_main_banner_area', array(
+			'title'           =>      __('XPLEX Index Banner Area', 'storevilla'),
+			'priority'        =>      '112',
+	    ));
+
+	    $wp_customize->add_setting('storevilla_main_banner_settings', array(
+	        'default' => 'enable',
+	        'capability' => 'edit_theme_options',
+	        'sanitize_callback' => 'storevilla_radio_enable_disable_sanitize'  //done
+		));
+
+		$wp_customize->add_control('storevilla_main_banner_settings', array(
+			'type' => 'radio',
+			'label' => __('Enable / Disable XPLEX Index Banner', 'storevilla'),
+			'section' => 'storevilla_main_banner_area',
+			'settings' => 'storevilla_main_banner_settings',
+			'choices' => array(
+	         'enable' => __('Enable', 'storevilla'),
+	         'disable' => __('Disable', 'storevilla')
+	        )
+		));
+
+
+		$wp_customize->add_setting( 'storevilla_main_banner_slider', array(
+	      'sanitize_callback' => 'storevilla_sanitize_text',
+	      'default' => '',
+	      'transport' => 'postMessage'
+	    ));
+
+	    $wp_customize->add_control( new Storevilla_Pro_General_Repeater( $wp_customize, 'storevilla_main_banner_slider', array(
+	      'label'   => esc_html__('Main Slider Section','storevilla'),
+	      'section' => 'storevilla_main_banner_area',
+	      'description' => __('Upload Slider Image With Slider Title, Description, Link & Button Text','storevilla'),
+	          'image_control' => true,
+	          'title_control' => true,
+	          'text_control' => false,
+	          'link_control' => true,
+	          'subtitle_control' => false
+	    )));
 
 	$imagepath =  get_template_directory_uri() . '/images/';
 
@@ -535,66 +534,67 @@ function storevilla_customize_register( $wp_customize ) {
 
 
 
-    $wp_customize->add_section( 'storevilla_brands_logo_area', array(
-		'title'           =>      __('Brands Logo Section Area', 'storevilla'),
-		'priority'        =>      '114',
-    ));
-
-    $wp_customize->add_setting('storevilla_brands_area_settings', array(
-        'default' => 'enable',
-        'capability' => 'edit_theme_options',
-        'sanitize_callback' => 'storevilla_radio_enable_disable_sanitize'  //done
-	));
-
-	$wp_customize->add_control('storevilla_brands_area_settings', array(
-		'type' => 'radio',
-		'label' => __('Options Enable/Disable Brands Loga Area', 'storevilla'),
-		'section' => 'storevilla_brands_logo_area',
-		'settings' => 'storevilla_brands_area_settings',
-		'choices' => array(
-         'enable' => __('Enable', 'storevilla'),
-         'disable' => __('Disable', 'storevilla')
-        )
-	));
-
-    $wp_customize->add_setting('storevilla_brands_top_title', array(
-        'default' => '',
-        'sanitize_callback' => 'storevilla_text_sanitize',  // done
-        'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control('storevilla_brands_top_title',array(
-        'type' => 'text',
-        'label' => __('Brands Top Title', 'storevilla'),
-        'section' => 'storevilla_brands_logo_area',
-        'setting' => 'storevilla_brands_top_title',
-    ));
-
-    $wp_customize->add_setting('storevilla_brands_main_title', array(
-        'default' => '',
-        'sanitize_callback' => 'storevilla_text_sanitize',  // done
-        'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control('storevilla_brands_main_title',array(
-        'type' => 'text',
-        'label' => __('Brands Main Title', 'storevilla'),
-        'section' => 'storevilla_brands_logo_area',
-        'setting' => 'storevilla_brands_main_title',
-    ));
-
-	$wp_customize->add_setting( 'storevilla_brands_logo', array(
-      'sanitize_callback' => 'storevilla_sanitize_text',
-      'default' => '',
-      'transport' => 'postMessage'
-    ));
-
-    $wp_customize->add_control( new Storevilla_Pro_General_Repeater( $wp_customize, 'storevilla_brands_logo', array(
-      'label'   => esc_html__('Our Brands Logo Area','storevilla'),
-      'section' => 'storevilla_brands_logo_area',
-      'description' => __('Upload Your Brands Logo Here','storevilla'),
-          'image_control' => true,
-    )));
+	// XPLEX에서 사용하지 않습니다.
+  //   $wp_customize->add_section( 'storevilla_brands_logo_area', array(
+	// 	'title'           =>      __('Brands Logo Section Area', 'storevilla'),
+	// 	'priority'        =>      '114',
+  //   ));
+	//
+  //   $wp_customize->add_setting('storevilla_brands_area_settings', array(
+  //       'default' => 'enable',
+  //       'capability' => 'edit_theme_options',
+  //       'sanitize_callback' => 'storevilla_radio_enable_disable_sanitize'  //done
+	// ));
+	//
+	// $wp_customize->add_control('storevilla_brands_area_settings', array(
+	// 	'type' => 'radio',
+	// 	'label' => __('Options Enable/Disable Brands Loga Area', 'storevilla'),
+	// 	'section' => 'storevilla_brands_logo_area',
+	// 	'settings' => 'storevilla_brands_area_settings',
+	// 	'choices' => array(
+  //        'enable' => __('Enable', 'storevilla'),
+  //        'disable' => __('Disable', 'storevilla')
+  //       )
+	// ));
+	//
+  //   $wp_customize->add_setting('storevilla_brands_top_title', array(
+  //       'default' => '',
+  //       'sanitize_callback' => 'storevilla_text_sanitize',  // done
+  //       'transport' => 'postMessage'
+  //   ));
+	//
+  //   $wp_customize->add_control('storevilla_brands_top_title',array(
+  //       'type' => 'text',
+  //       'label' => __('Brands Top Title', 'storevilla'),
+  //       'section' => 'storevilla_brands_logo_area',
+  //       'setting' => 'storevilla_brands_top_title',
+  //   ));
+	//
+  //   $wp_customize->add_setting('storevilla_brands_main_title', array(
+  //       'default' => '',
+  //       'sanitize_callback' => 'storevilla_text_sanitize',  // done
+  //       'transport' => 'postMessage'
+  //   ));
+	//
+  //   $wp_customize->add_control('storevilla_brands_main_title',array(
+  //       'type' => 'text',
+  //       'label' => __('Brands Main Title', 'storevilla'),
+  //       'section' => 'storevilla_brands_logo_area',
+  //       'setting' => 'storevilla_brands_main_title',
+  //   ));
+	//
+	// $wp_customize->add_setting( 'storevilla_brands_logo', array(
+  //     'sanitize_callback' => 'storevilla_sanitize_text',
+  //     'default' => '',
+  //     'transport' => 'postMessage'
+  //   ));
+	//
+  //   $wp_customize->add_control( new Storevilla_Pro_General_Repeater( $wp_customize, 'storevilla_brands_logo', array(
+  //     'label'   => esc_html__('Our Brands Logo Area','storevilla'),
+  //     'section' => 'storevilla_brands_logo_area',
+  //     'description' => __('Upload Your Brands Logo Here','storevilla'),
+  //         'image_control' => true,
+  //   )));
 
 
 	// Services Area

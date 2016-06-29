@@ -33,7 +33,7 @@ class Storevilla_Pro_General_Repeater extends WP_Customize_Control {
         $title_control = $options['title_control'];
     } else {
         $title_control = false;
-    }                           
+    }
     if(!empty($options['text_control'])){
         $text_control = $options['text_control'];
     } else {
@@ -48,7 +48,7 @@ class Storevilla_Pro_General_Repeater extends WP_Customize_Control {
         $subtitle_control = $options['subtitle_control'];
     } else {
         $subtitle_control = false;
-    } 
+    }
     ?>
 
     <span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
@@ -210,7 +210,7 @@ class Storevilla_Pro_General_Repeater extends WP_Customize_Control {
         foreach($json as $icon){
     ?>
     <div class="store_villa_general_control_repeater_container store_villa_draggable">
-        <div class="storevilla-customize-control-title"><?php esc_html_e('Store Villa','storevilla')?></div>
+        <div class="storevilla-customize-control-title"><?php $banner_num = $it + 1; $banner_txt = '배너 내용 확인_'.$banner_num; esc_html_e($banner_txt,'storevilla')?></div>
         <div class="storevilla-box-content-hidden">
                 <?php if($image_control == true && $icon_control == true){ ?>
                     <span class="customize-control-title"><?php esc_html_e('Image type','storevilla');?></span>
@@ -266,7 +266,7 @@ class Storevilla_Pro_General_Repeater extends WP_Customize_Control {
                     <input type="text" value="<?php if(!empty($icon->subtitle)) echo esc_attr($icon->subtitle); ?>" class="store_villa_subtitle_control" placeholder="<?php esc_html_e('Button Text','storevilla'); ?>"/>
                     <?php   }   ?>
                 <input type="hidden" class="store_villa_box_id" value="<?php if(!empty($icon->id)) echo esc_attr($icon->id); ?>">
-                <button type="button" class="store_villa_general_control_remove_field button" <?php if ($it == 0) echo 'style="display:none;"'; ?>><?php esc_html_e('Delete field','storevilla'); ?></button>
+                <button type="button" class="store_villa_general_control_remove_field button" <?php if ($it == 0) echo 'style="display:none;"'; ?>><?php esc_html_e('이 배너 삭제하기','storevilla'); ?></button>
         </div>
     </div>
     <?php $it++; } } } if ( !empty($this_default) && empty($json)) { ?>
@@ -275,5 +275,5 @@ class Storevilla_Pro_General_Repeater extends WP_Customize_Control {
     <input type="hidden" id="store_villa_<?php echo $options['section']; ?>_repeater_colector" <?php $this->link(); ?> class="store_villa_repeater_colector" value="<?php echo esc_textarea( $this->value() ); ?>" />
     <?php } ?>
 </div>
-<button type="button"   class="button add_field store_villa_general_control_new_field"><?php esc_html_e('Add new field','storevilla'); ?></button>
+<button type="button"   class="button add_field store_villa_general_control_new_field"><?php esc_html_e('배너 추가하기','storevilla'); ?></button>
 <?php } }

@@ -125,8 +125,8 @@ add_action( 'save_post',     'storevilla_category_transient_flusher' );
 /**
  * Store Villa Custom Function Section.
  */
- 
- 
+
+
 /**
 * Header Section Function Area
 */
@@ -157,92 +157,92 @@ if ( ! function_exists( 'storevilla_top_header' ) ) {
 		// Quick Info
 			$emial_icon = esc_attr ( get_theme_mod('storevilla_email_icon') ) ;
 			$email_address = esc_attr ( get_theme_mod('storevilla_email_title') );
-			
+
 			$phone_icon = esc_attr ( get_theme_mod('storevilla_phone_icon') );
 			$phone_number = esc_attr ( get_theme_mod('storevilla_phone_number') );
-			
+
 			$map_address_iocn = esc_attr ( get_theme_mod('storevilla_address_icon') );
 			$map_address = esc_attr ( get_theme_mod('storevilla_map_address') );
-			
+
 			$shop_open_icon = esc_attr ( get_theme_mod('storevilla_shop_open_icon') );
 			$shop_open_time = esc_attr ( get_theme_mod('storevilla_shop_open_time') );
-			
-			
-			
+
+
+
 		if( !empty( $top_header ) && $top_header == 'enable' ) {
 			?>
 				<div class="top-header">
-					
+
 					<div class="store-container clearfix">
-						
-						<?php  
+
+						<?php
 							if( !empty( $header_options ) && $header_options == 'nav' ) { ?>
 							<nav class="top-navigation" role="navigation"><?php  wp_nav_menu( array( 'theme_location'	=> 'topmenu', 'container' => '' ) ); ?> </nav>
 							<?php //apply_filters( 'storevilla_top_nav', '<nav class="top-navigation" role="navigation">'. wp_nav_menu( array( 'theme_location'	=> 'topmenu', ) ) .' </nav>' ); ?>
 							<?php }else{
 						?>
 							<ul class="store-quickinfo">
-									
+
 								<?php if(!empty( $email_address )) { ?>
-									
+
 				                    <li>
 				                    	<span class="<?php if(!empty( $emial_icon )) { echo $emial_icon; } ?>">&nbsp;</span>
 				                    	<a href="mailto:<?php echo $email_address; ?>"><?php echo $email_address; ?></a>
 				                    </li>
 			                    <?php }  ?>
-			                    
+
 			                    <?php if(!empty( $phone_number )) { ?>
-									
+
 				                    <li>
 				                    	<span class="<?php if(!empty( $phone_icon )) { echo $phone_icon; } ?>">&nbsp;</span>
 				                   		<?php echo $phone_number; ?>
 				                    </li>
 			                    <?php }  ?>
-			                    
+
 			                    <?php if(!empty( $map_address )) { ?>
-									
+
 				                    <li>
 				                    	<span class="<?php if(!empty( $map_address_iocn )) { echo $map_address_iocn; } ?>">&nbsp;</span>
 				                    	<?php echo $map_address; ?>
 				                    </li>
 			                    <?php }  ?>
-			                    
+
 			                    <?php if(!empty( $shop_open_time )) { ?>
-									
+
 				                    <li>
 				                    	<span class="<?php if(!empty( $shop_open_icon )) { echo $shop_open_icon; } ?>">&nbsp;</span>
 				                    	<?php echo $shop_open_time; ?>
 				                    </li>
 			                    <?php }  ?>
-			                    
+
 							</ul>
-			                  
+
 						<?php
 							}
 						?>
-						
+
 						<!-- Top-navigation -->
-						
-						<div class="top-header-regin">						
-								
+
+						<div class="top-header-regin">
+
 	                		<ul class="site-header-cart menu">
 
-    							<?php if (is_user_logged_in()) { ?>	
-    							
+    							<?php if (is_user_logged_in()) { ?>
+
     				                <li class="my_account_wrapper">
     									<a href="<?php echo $url = admin_url( 'profile.php' ); ?>" title="<?php _e('My Account','storevilla');?>">
     										<?php _e('My Account','storevilla'); ?>
     									</a>
     								</li>
-    			
+
     								<li>
     				                    <a class="sv_logout" href="<?php echo wp_logout_url( home_url() ); ?>">
     				                        <?php _e(' Logout', 'storevilla'); ?>
     				                    </a>
     			                    </li>
-    			
+
     			                <?php } else { ?>
-    			
+
     			                	<li>
     				                    <a class="sv_login" href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>">
     				                        <?php _e('Login / Register', 'storevilla'); ?>
@@ -261,18 +261,18 @@ if ( ! function_exists( 'storevilla_top_header' ) ) {
 				                    </li>
 
 					            <?php } ?>
-	                			
+
 	                			<li>
 	                				<a class="cart-contents" href="<?php echo esc_url( WC()->cart->get_cart_url() ); ?>" title="<?php _e( 'View your shopping cart', 'storevilla' ); ?>">
 	                					<div class="count">
 	                						<i class="fa  fa-shopping-basket"></i>
 	                						<span class="cart-count"><?php echo wp_kses_data( sprintf( _n( '%d', WC()->cart->get_cart_contents_count(), 'storevilla' ) ) ); ?></span>
-	                					</div>	                					
+	                					</div>
 	                				</a>
 	                				<?php the_widget( 'WC_Widget_Cart', 'title=' ); ?>
 	                			</li>
 
-	                			<?php   if ( is_woocommerce_activated() ) { 
+	                			<?php   if ( is_woocommerce_activated() ) {
 					            	if ( is_active_sidebar( 'header-1' ) ) { ?>
 										<li>
 											<div class="header-widget-region" role="complementary">
@@ -281,12 +281,12 @@ if ( ! function_exists( 'storevilla_top_header' ) ) {
 										</li>
 								<?php } } ?>
 
-	                		</ul>								
-					          
+	                		</ul>
+
 						</div>
-						
+
 					</div>
-					
+
 				</div>
 			<?php
 		}
@@ -302,7 +302,7 @@ if ( ! function_exists( 'storevilla_button_header' ) ) {
 	 */
 	function storevilla_button_header() {
 		?>
-	
+
 	<div class="header-wrap clearfix">
 		<div class="store-container">
 			<div class="site-branding">
@@ -315,7 +315,7 @@ if ( ! function_exists( 'storevilla_button_header' ) ) {
 					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 					<?php
 						$description = get_bloginfo( 'description', 'display' );
-						if ( $description || is_customize_preview() ) : 
+						if ( $description || is_customize_preview() ) :
 					?>
 					<p class="site-description"><?php echo $description; ?></p>
 				</div>
@@ -323,14 +323,14 @@ if ( ! function_exists( 'storevilla_button_header' ) ) {
 			</div><!-- .site-branding -->
 			<div class="search-cart-wrap clearfix">
 			<?php
-			
+
 			/**
 			 * Display Product Search
 			 * @since  1.0.0
 			 * @uses  is_woocommerce_activated() check if WooCommerce is activated
 			 * @return void
 			 */
-				 
+
 				if ( is_woocommerce_activated() ) { ?>
 					<div class="advance-search">
 						<?php storevilla_product_search(); ?>
@@ -339,12 +339,12 @@ if ( ! function_exists( 'storevilla_button_header' ) ) {
 					<div class="normal-search">
 						<?php get_search_form(); ?>
 					</div>
-				<?php } ?>		
-			
-			</div>	
+				<?php } ?>
+
+			</div>
 		</div>
 	</div>
-	
+
 	<?php
 	}
 }
@@ -390,7 +390,7 @@ if ( ! function_exists( 'storevilla_footer_widgets' ) ) {
 	 * @return void
 	 */
 	function storevilla_footer_widgets() {
-		
+
 			if ( is_active_sidebar( 'footer-4' ) ) {
 				$widget_columns = apply_filters( 'storevilla_footer_widget_regions', 5 );
 			} elseif ( is_active_sidebar( 'footer-3' ) ) {
@@ -404,44 +404,44 @@ if ( ! function_exists( 'storevilla_footer_widgets' ) ) {
 			} else {
 				$widget_columns = apply_filters( 'storevilla_footer_widget_regions', 0 );
 			}
-	
+
 			if ( $widget_columns > 0 ) : ?>
-	
+
 				<section class="footer-widgets col-<?php echo intval( $widget_columns ); ?> clearfix">
-					
+
 					<div class="top-footer-wrap">
 
 						<div class="store-container">
 
 							<?php $i = 0; while ( $i < $widget_columns ) : $i++; ?>
-			
+
 								<?php if ( is_active_sidebar( 'footer-' . $i ) ) : ?>
-			
+
 									<section class="block footer-widget-<?php echo intval( $i ); ?>">
 							        	<?php dynamic_sidebar( 'footer-' . intval( $i ) ); ?>
 									</section>
-			
-						        <?php endif; ?>
-			
-							<?php endwhile; 
 
-							if ( is_active_sidebar( 'quick-info' ) ) { ?>		
-								<div class="footer-quick-info" role="complementary">				
-									<?php dynamic_sidebar( 'quick-info' ); ?>				
-								</div>			
+						        <?php endif; ?>
+
+							<?php endwhile;
+
+							if ( is_active_sidebar( 'quick-info' ) ) { ?>
+								<div class="footer-quick-info" role="complementary">
+									<?php dynamic_sidebar( 'quick-info' ); ?>
+								</div>
 							<?php } ?>
 
 						</div>
 
 					</div>
-	
+
 				</section><!-- .footer-widgets  -->
-	
+
 		<?php endif;
 	}
 }
 
- 
+
 if ( ! function_exists( 'storevilla_credit' ) ) {
 	/**
 	 * Display the theme credit
@@ -450,18 +450,18 @@ if ( ! function_exists( 'storevilla_credit' ) ) {
 	 */
 	function storevilla_credit() {
 		?>
-		
+
 		<div class="bottom-footer-wrap clearfix">
 
 			<div class="store-container">
 
 				<div class="site-info">
 					<?php $copyright = get_theme_mod( 'storevilla_footer_copyright' ); if( !empty( $copyright ) ) { ?>
-						<?php echo esc_html( apply_filters( 'storevilla_copyright_text', $copyright . ' - ' . get_bloginfo( 'name' ) ) ); ?>	
+						<?php echo esc_html( apply_filters( 'storevilla_copyright_text', $copyright . ' - ' . get_bloginfo( 'name' ) ) ); ?>
 					<?php } else { ?>
 						<?php echo esc_html( apply_filters( 'storevilla_copyright_text', $content = '&copy; ' . date( 'Y' ) . ' - ' . get_bloginfo( 'name' ) ) ); ?>
 					<?php } ?>
-					<?php if ( apply_filters( 'storevilla_credit_link', true ) ) { 
+					<?php if ( apply_filters( 'storevilla_credit_link', true ) ) {
 						printf( __( '%1$s By %2$s', 'storevilla' ), ' ', '<a href=" ' . esc_url('https://accesspressthemes.com/') . ' " alt="Premium WordPress Themes & Plugins by WooThemes" title="Premium WordPress Themes & Plugins by WooThemes" rel="designer" target="_blank">AccessPress Themes</a>' ); ?>
 					<?php } ?>
 				</div><!-- .site-info -->
@@ -483,7 +483,7 @@ if ( ! function_exists( 'storevilla_payment_logo_area' ) ) {
 				</div>
 
 			</div>
-			
+
 		</div>
 		<?php
 	}
@@ -495,7 +495,7 @@ if ( ! function_exists( 'storevilla_payment_logo_area' ) ) {
 /**
  * Main HomePage Section Function Area
  */
- 
+
 if ( ! function_exists( 'storevilla_main_slider' ) ) {
 	/**
 	 * Display the banner slider
@@ -503,9 +503,9 @@ if ( ! function_exists( 'storevilla_main_slider' ) ) {
 	 * @return void
 	 */
 	function storevilla_main_slider() {
-		
+
 			$slider_options = get_theme_mod( 'storevilla_main_banner_settings','enable' );
-			
+
 			if(!empty( $slider_options ) && $slider_options == 'enable' ){
 		?>
 			<div class="store-villa-banner clearfix">
@@ -516,20 +516,13 @@ if ( ! function_exists( 'storevilla_main_slider' ) ) {
 								$all_slider = get_theme_mod('storevilla_main_banner_slider');
 								if(!empty( $all_slider )) {
 								$banner_slider = json_decode( $all_slider );
-								foreach($banner_slider as $slider){	
+								foreach($banner_slider as $slider){
 							?>
+							<?php if($slider->image_url && $slider->link): ?>
 							<li class="banner-slider">
-								<img src="<?php echo esc_url($slider->image_url); ?>" alt="<?php echo esc_attr($slider->title); ?>"/>
-								<div class="banner-slider-info">
-									<h2 class="caption-title"><?php echo $slider->title;?></h2>
-									<div class="caption-content">
-											<?php echo $slider->text; ?>
-									</div>
-									<?php if($slider->subtitle): ?>
-										<a class="slider-button" href="<?php echo esc_url($slider->link); ?>"><?php echo esc_attr($slider->subtitle); ?></a>
-									<?php endif; ?>
-								</div>
+									<a class="slider-button" href="<?php echo esc_url($slider->link); ?>">								<img src="<?php echo esc_url($slider->image_url); ?>" alt="<?php echo esc_attr($slider->title); ?>"/></a>
 							</li>
+							<?php endif; ?>
 							<?php } } ?>
 						</ul>
 					</div>
@@ -551,11 +544,11 @@ if ( ! function_exists( 'storevilla_main_widget' ) ) {
 	function storevilla_main_widget() {
 		?>
 			<div class="main-widget-wrap">
-				<?php 
-					if ( is_active_sidebar( 'mainwidgetarea' ) ) { 
-						
-						dynamic_sidebar( 'mainwidgetarea' ); 
-						
+				<?php
+					if ( is_active_sidebar( 'mainwidgetarea' ) ) {
+
+						dynamic_sidebar( 'mainwidgetarea' );
+
 					}
 				?>
 			</div>
@@ -573,7 +566,7 @@ if ( ! function_exists( 'storevilla_breand_logo' ) ) {
 			$brands_options = get_theme_mod ( 'storevilla_brands_area_settings','enable' );
 			$brand_top_title = get_theme_mod( 'storevilla_brands_top_title' );
 			$brand_main_title = get_theme_mod( 'storevilla_brands_main_title' );
-			
+
 			if(!empty( $brands_options ) && $brands_options == 'enable' ){
 		?>
 			<div class="brand-logo-wrap">
@@ -587,18 +580,18 @@ if ( ! function_exists( 'storevilla_breand_logo' ) ) {
 							$all_brands_logo = get_theme_mod('storevilla_brands_logo');
 							if(!empty( $all_brands_logo )) {
 							$brands_logo = json_decode( $all_brands_logo );
-							foreach($brands_logo as $logo){	
+							foreach($brands_logo as $logo){
 						?>
 							<li>
 								<img src="<?php echo esc_url( $logo->image_url ); ?>" />
 							</li>
-						
+
 						<?php } } ?>
 					</ul>
 				</div>
-				
+
 			</div>
-			
+
 		<?php
 			}
 	}
@@ -612,8 +605,8 @@ if ( ! function_exists( 'storevilla_service_area' ) ) {
 	 * @return void
 	 */
 	function storevilla_service_area() {
-		 
+
 		 storevilla_service_section();
-			
+
 	}
 }

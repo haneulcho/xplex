@@ -53,8 +53,8 @@ add_action( 'storevilla_footer', 'storevilla_payment_logo', 40 );
 add_action( 'storevilla_homepage', 'xplex_main_heroimg', 10 );
 add_action( 'storevilla_homepage', 'storevilla_main_slider', 20 );
 add_action( 'storevilla_homepage', 'storevilla_main_widget', 30 );
-add_action( 'storevilla_homepage', 'storevilla_breand_logo', 40 );
-add_action( 'storevilla_homepage', 'storevilla_service_area', 50 );
+// add_action( 'storevilla_homepage', 'storevilla_breand_logo', 40 );
+//add_action( 'storevilla_homepage', 'storevilla_service_area', 50 );
 
 
 /**
