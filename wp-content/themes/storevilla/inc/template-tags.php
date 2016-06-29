@@ -526,7 +526,6 @@ if ( ! function_exists( 'storevilla_main_slider' ) ) {
 							<?php } } ?>
 						</ul>
 					</div>
-					<?php storevilla_promo_area(); ?>
 				</div>
 			</div>
 		<?php
