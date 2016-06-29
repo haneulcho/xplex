@@ -34,7 +34,7 @@ function storevilla_setup() {
 	 * provide it for us.
 	 */
 	add_theme_support( 'title-tag' );
-	
+
 	add_theme_support( 'woocommerce' );
 
 	/*
@@ -45,12 +45,13 @@ function storevilla_setup() {
 	add_theme_support( 'post-thumbnails' );
 	add_image_size('storevilla-cat-image', 275, 370, true);
 	add_image_size('storevilla-blog-grid', 255, 160, true);
-	add_image_size('storevilla-blog-image', 1170, 470, true);		
+	add_image_size('storevilla-blog-image', 1170, 470, true);
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'topmenu' => esc_html__( 'Top Menu', 'storevilla' ),
 		'primary' => esc_html__( 'Primary Menu', 'storevilla' ),
+		'footermenu' => esc_html__( 'Footer Menu', 'storevilla' ),
 	) );
 
 	/*
@@ -110,7 +111,7 @@ add_action( 'after_setup_theme', 'storevilla_content_width', 0 );
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function storevilla_widgets_init() {
-	
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'Right Sidebar Widget Area', 'storevilla' ),
 		'id'            => 'sidebar-1',
@@ -120,7 +121,7 @@ function storevilla_widgets_init() {
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
-	
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'Left Sidebar Widget Area', 'storevilla' ),
 		'id'            => 'sidebar-2',
@@ -130,8 +131,8 @@ function storevilla_widgets_init() {
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
-	
-	
+
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'Top Right Header Widget Area', 'storevilla' ),
 		'id'            => 'header-1',
@@ -139,7 +140,7 @@ function storevilla_widgets_init() {
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 	) );
-	
+
 	register_sidebar( array(
 		'name'          => esc_html__( 'SV : Main Block Widget Area', 'storevilla' ),
 		'id'            => 'mainwidgetarea',
@@ -149,11 +150,11 @@ function storevilla_widgets_init() {
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
-	
+
 	$footer_widget_regions = apply_filters( 'storevilla_footer_widget_regions', 5 );
-	
+
 	for ( $i = 1; $i <= intval( $footer_widget_regions ); $i++ ) {
-		
+
 		register_sidebar( array(
 			'name' 				=> sprintf( __( 'Footer Widget Area %d', 'storevilla' ), $i ),
 			'id' 				=> sprintf( 'footer-%d', $i ),
@@ -164,7 +165,7 @@ function storevilla_widgets_init() {
 			'after_title' 		=> '</h3>',
 		) );
 	}
-	
+
 
 	register_sidebar( array(
 		'name'          => esc_html__( 'Footer Quick Information Area', 'storevilla' ),
@@ -190,33 +191,33 @@ function storevilla_scripts() {
     wp_enqueue_style('storevilla-google-fonts', add_query_arg( $storevilla_font_args, "//fonts.googleapis.com/css" ) );
 
 	/*------------------- CSS Style ---------------------------------*/
-	
+
 	wp_enqueue_style( 'storevilla-font-awesome', get_template_directory_uri() . '/css/font-awesome.css');
-	
+
 	wp_enqueue_style( 'storevilla-lightslider', get_template_directory_uri() . '/css/lightslider.css');
 
 	wp_enqueue_style( 'storevilla-style', get_stylesheet_uri() );
 
 	wp_enqueue_style( 'storevilla-responsive', get_template_directory_uri() . '/css/responsive.css');
 
-	
-	
+
+
 	$storevilla_theme = wp_get_theme();
     $theme_version = $storevilla_theme->get( 'Version' );
-	
+
 	/*------------------- JavaScript ---------------------------------------*/
-	
+
 	wp_enqueue_script( 'storevilla-lightslider', get_template_directory_uri() . '/js/lightslider.js', array(), esc_attr( $theme_version ), true );
 
 	wp_enqueue_script( 'storevilla-navigation', get_template_directory_uri() . '/js/navigation.js', array(), esc_attr( $theme_version ), true );
 
 	wp_enqueue_script( 'storevilla-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), esc_attr( $theme_version ), true );
-	
+
 	wp_enqueue_script( 'storevilla-retina', get_template_directory_uri() . '/js/retina.js', array('jquery'), esc_attr( $theme_version ), true );
 
 	wp_enqueue_script( 'storevilla-common', get_template_directory_uri() . '/js/common.js', array('jquery'), esc_attr( $theme_version ), true );
-	
-	
+
+
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}

@@ -31,6 +31,7 @@ add_action( 'storevilla_header', 'storevilla_primary_navigation', 60 );
 * @see  storevilla_payment_logo()
 */
 
+add_action( 'storevilla_footer', 'xplex_footer_navigation', 0 );
 add_action( 'storevilla_footer', 'storevilla_footer_widgets', 10 );
 add_action( 'storevilla_footer', 'storevilla_credit', 20 );
 add_action( 'storevilla_footer', 'storevilla_payment_logo', 40 );

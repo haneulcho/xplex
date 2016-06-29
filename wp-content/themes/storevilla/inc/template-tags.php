@@ -382,6 +382,29 @@ if ( ! function_exists( 'storevilla_primary_navigation' ) ) {
 /**
  * Footer Section Function Area
  */
+ if ( ! function_exists( 'xplex_footer_navigation' ) ) {
+ 	/**
+ 	 * Display Primary Navigation
+ 	 * @since  1.0.0
+ 	 * @return void
+ 	 */
+ 	function xplex_footer_navigation() {
+ 		?>
+ 		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<?php
+				wp_nav_menu(
+					array(
+						'theme_location'	=> 'footermenu',
+						'menu_id' => 'footer-menu',
+						'container_class'	=> 'footer-navigation',
+					)
+				);
+			?>
+ 		</nav><!-- #site-navigation -->
+ 		<?php
+ 	}
+ }
+
 
 if ( ! function_exists( 'storevilla_footer_widgets' ) ) {
 	/**
