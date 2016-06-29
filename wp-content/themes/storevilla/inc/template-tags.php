@@ -465,13 +465,13 @@ if ( ! function_exists( 'storevilla_footer_widgets' ) ) {
 }
 
 
-if ( ! function_exists( 'storevilla_credit' ) ) {
+if ( ! function_exists( 'xplex_footer_section' ) ) {
 	/**
 	 * Display the theme credit
 	 * @since  1.0.0
 	 * @return void
 	 */
-	function storevilla_credit() {
+	function xplex_footer_section() {
 		?>
 
 		<div class="bottom-footer-wrap clearfix">
@@ -479,13 +479,13 @@ if ( ! function_exists( 'storevilla_credit' ) ) {
 			<div class="store-container">
 
 				<div class="site-info">
-					<?php $copyright = get_theme_mod( 'storevilla_footer_copyright' ); if( !empty( $copyright ) ) { ?>
-						<?php echo esc_html( apply_filters( 'storevilla_copyright_text', $copyright . ' - ' . get_bloginfo( 'name' ) ) ); ?>
-					<?php } else { ?>
-						<?php echo esc_html( apply_filters( 'storevilla_copyright_text', $content = '&copy; ' . date( 'Y' ) . ' - ' . get_bloginfo( 'name' ) ) ); ?>
+					<?php $information = get_theme_mod( 'xplex_footer_information' ); if( !empty( $information ) ) { ?>
+						<?php echo apply_filters( 'xplex_footer_information', $information ); ?>
 					<?php } ?>
-					<?php if ( apply_filters( 'storevilla_credit_link', true ) ) {
-						printf( __( '%1$s By %2$s', 'storevilla' ), ' ', '<a href=" ' . esc_url('https://accesspressthemes.com/') . ' " alt="Premium WordPress Themes & Plugins by WooThemes" title="Premium WordPress Themes & Plugins by WooThemes" rel="designer" target="_blank">AccessPress Themes</a>' ); ?>
+					<?php $copyright = get_theme_mod( 'xplex_footer_copyright' ); if( !empty( $copyright ) ) { ?>
+						<span class="xplex-copy"><?php echo apply_filters( 'xplex_footer_copyright', $copyright ); ?></span>
+					<?php } else { ?>
+						<span class="xplex-copy"><?php echo apply_filters( 'xplex_footer_copyright', $content = '&copy; ' . date( 'Y' ) ); ?></span>
 					<?php } ?>
 				</div><!-- .site-info -->
 		<?php

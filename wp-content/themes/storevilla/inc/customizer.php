@@ -744,23 +744,34 @@ function storevilla_customize_register( $wp_customize ) {
     ));
 
 
-
-	$wp_customize->add_section( 'storevilla_copyright', array(
-		'title'           =>      __('Copyright Message Section', 'storevilla'),
+	// XPLEX Copyright Section
+	$wp_customize->add_section( 'xplex_footer_section', array(
+		'title'           =>      __('XPLEX Footer Section', 'storevilla'),
 		'priority'        =>      '116',
     ));
 
-    $wp_customize->add_setting('storevilla_footer_copyright', array(
+    $wp_customize->add_setting('xplex_footer_information', array(
          'default' => '',
          'capability' => 'edit_theme_options',
-         'sanitize_callback' => 'esc_textarea'  //done
     ));
 
-	$wp_customize->add_control('storevilla_footer_copyright', array(
+	$wp_customize->add_control('xplex_footer_information', array(
 	 'type' => 'textarea',
-	 'label' => __('Copyright', 'storevilla'),
-	 'section' => 'storevilla_copyright',
-	 'settings' => 'storevilla_footer_copyright'
+	 'label' => __('XPLEX Information', 'storevilla'),
+	 'section' => 'xplex_footer_section',
+	 'settings' => 'xplex_footer_information'
+	));
+
+	$wp_customize->add_setting('xplex_footer_copyright', array(
+			 'default' => '',
+			 'capability' => 'edit_theme_options',
+	));
+
+	$wp_customize->add_control('xplex_footer_copyright', array(
+	'type' => 'textarea',
+	'label' => __('XPLEX Copyright', 'storevilla'),
+	'section' => 'xplex_footer_section',
+	'settings' => 'xplex_footer_copyright'
 	));
 
 	// Payment Logo Section
