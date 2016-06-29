@@ -23,14 +23,14 @@ add_action( 'storevilla_header', 'storevilla_primary_navigation', 60 );
 /**
  * Footer action Area
  */
- 
+
 /**
 * Header
 * @see  storevilla_footer_widgets()
 * @see  storevilla_credit()
 * @see  storevilla_payment_logo()
 */
- 
+
 add_action( 'storevilla_footer', 'storevilla_footer_widgets', 10 );
 add_action( 'storevilla_footer', 'storevilla_credit', 20 );
 add_action( 'storevilla_footer', 'storevilla_payment_logo', 40 );
@@ -40,26 +40,28 @@ add_action( 'storevilla_footer', 'storevilla_payment_logo', 40 );
 /**
  * Main HomePage Section Function Area
 **/
- 
+
 /**
 * Header
+* @see  storevilla_index_img_area()
 * @see  storevilla_main_slider()
 * @see  storevilla_main_widget()
 * @see  storevilla_breand_logo()
 * * @see  storevilla_service_area()
 */
- 
-add_action( 'storevilla_homepage', 'storevilla_main_slider', 10 );
-add_action( 'storevilla_homepage', 'storevilla_main_widget', 20 );
-add_action( 'storevilla_homepage', 'storevilla_breand_logo', 30 );
-add_action( 'storevilla_homepage', 'storevilla_service_area', 40 );
+
+add_action( 'storevilla_homepage', 'xplex_main_heroimg', 10 );
+add_action( 'storevilla_homepage', 'storevilla_main_slider', 20 );
+add_action( 'storevilla_homepage', 'storevilla_main_widget', 30 );
+add_action( 'storevilla_homepage', 'storevilla_breand_logo', 40 );
+add_action( 'storevilla_homepage', 'storevilla_service_area', 50 );
 
 
 /**
  * Themes required Plugins Install Section
  */
 if ( ! function_exists( 'storevilla_root_register_required_plugins' ) ) :
-	
+
 	function storevilla_root_register_required_plugins() {
 
 	    $plugins = array(
@@ -82,7 +84,7 @@ if ( ! function_exists( 'storevilla_root_register_required_plugins' ) ) :
 	            'name' => 'YITH WooCommerce Wishlist',
 	            'slug' => 'yith-woocommerce-wishlist',
 	            'required' => false,
-	        ),	        
+	        ),
 	        array(
 	            'name' => 'AccessPress Social Share',
 	            'slug' => 'accesspress-social-share',

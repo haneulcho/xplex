@@ -23,7 +23,7 @@ get_header(); ?>
            * @hooked storevilla_breand_logo - 30
            * @hooked storevilla_service_area - 40
            */
-          do_action( 'storevilla_homepage' ); 
+          do_action( 'storevilla_homepage' );
       ?>
 
   <?php do_action( 'storevilla_after_homepage' ); ?>

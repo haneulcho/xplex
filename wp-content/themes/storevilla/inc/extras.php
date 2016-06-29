@@ -350,6 +350,31 @@ if ( ! function_exists( 'storevilla_promo_area' ) ) {
 }
 
 
+/**
+ * XPLEX Index Hero Img Area
+ */
+
+if ( ! function_exists( 'xplex_main_heroimg' ) ) {
+
+    function xplex_main_heroimg() {
+
+        $heroimg = esc_attr( get_theme_mod( 'xplex_main_heroimg_area_settings', 'enable' ) );
+
+        $heroimg_image = esc_url( get_theme_mod( 'xplex_main_heroimg_area_image' ) );
+        $heroimg_title = get_theme_mod( 'xplex_main_heroimg_area_title' );
+
+				if(!empty( $heroimg ) && $heroimg == 'enable') {
+    ?>
+        <div class="heroimg">
+					<?php if(!empty( $heroimg_title ) ) { ?><h2><?php echo $heroimg_title; ?></h2><?php } ?>
+					<?php if(!empty( $heroimg_image )) { ?>
+						<img src="<?php echo $heroimg_image; ?>" title="<?php echo $heroimg_title; ?>" />
+					<?php } ?>
+        </div>
+    <?php
+				}
+    }
+}
 
 
 /**
