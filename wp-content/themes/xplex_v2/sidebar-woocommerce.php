@@ -13,14 +13,6 @@ $post_sidebar =  get_theme_mod( 'storevilla_woocommerce_single_products_page_lay
 $post_sidebar =  get_theme_mod( 'storevilla_woocommerce_products_page_layout','rightsidebar' );
 }
 
-if( $post_sidebar == 'rightsidebar' && is_active_sidebar('sidebar-1')){
-	?>
-		<aside id="secondaryright" class="widget-area" role="complementary">
-			<?php dynamic_sidebar( 'sidebar-1' ); ?>
-		</aside><!-- #secondary -->
-	<?php
-}
-
 if( $post_sidebar == 'leftsidebar' && is_active_sidebar('sidebar-2')){
 	?>
 		<aside id="secondaryleft" class="widget-area" role="complementary">
@@ -28,4 +20,3 @@ if( $post_sidebar == 'leftsidebar' && is_active_sidebar('sidebar-2')){
 		</aside><!-- #secondary -->
 	<?php
 }
-

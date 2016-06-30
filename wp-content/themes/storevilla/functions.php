@@ -113,16 +113,6 @@ add_action( 'after_setup_theme', 'storevilla_content_width', 0 );
 function storevilla_widgets_init() {
 
 	register_sidebar( array(
-		'name'          => esc_html__( 'Right Sidebar Widget Area', 'storevilla' ),
-		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'storevilla' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h3 class="widget-title">',
-		'after_title'   => '</h3>',
-	) );
-
-	register_sidebar( array(
 		'name'          => esc_html__( 'Left Sidebar Widget_default', 'storevilla' ),
 		'id'            => 'sidebar-2',
 		'description'   => esc_html__( '왼쪽 사이드바에 들어갈 위젯을 넣어주세요.', 'storevilla' ),
@@ -175,16 +165,6 @@ function storevilla_widgets_init() {
 		) );
 	}
 
-
-	register_sidebar( array(
-		'name'          => esc_html__( 'Footer Quick Information Area', 'storevilla' ),
-		'id'            => 'quick-info',
-		'description'   => esc_html__( 'Add quick contact information widgets here.', 'storevilla' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h3 class="widget-title">',
-		'after_title'   => '</h3>',
-	) );
 }
 add_action( 'widgets_init', 'storevilla_widgets_init' );
 

@@ -446,13 +446,7 @@ if ( ! function_exists( 'storevilla_footer_widgets' ) ) {
 
 						        <?php endif; ?>
 
-							<?php endwhile;
-
-							if ( is_active_sidebar( 'quick-info' ) ) { ?>
-								<div class="footer-quick-info" role="complementary">
-									<?php dynamic_sidebar( 'quick-info' ); ?>
-								</div>
-							<?php } ?>
+							<?php endwhile; ?>
 
 						</div>
 
