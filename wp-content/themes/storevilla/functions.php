@@ -123,15 +123,24 @@ function storevilla_widgets_init() {
 	) );
 
 	register_sidebar( array(
-		'name'          => esc_html__( 'Left Sidebar Widget Area', 'storevilla' ),
+		'name'          => esc_html__( 'Left Sidebar Widget_default', 'storevilla' ),
 		'id'            => 'sidebar-2',
-		'description'   => esc_html__( 'Add widgets here.', 'storevilla' ),
+		'description'   => esc_html__( '왼쪽 사이드바에 들어갈 위젯을 넣어주세요.', 'storevilla' ),
 		'before_widget' => '<section id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</section>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'   => '</h3>',
 	) );
 
+	register_sidebar( array(
+		'name'          => esc_html__( 'Left Sidebar Widget_common', 'storevilla' ),
+		'id'            => 'sidebar-3',
+		'description'   => esc_html__( '왼쪽 사이드바에 들어갈 공통 위젯을 넣어주세요. (카테고리 제외)', 'storevilla' ),
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+	) );
 
 	register_sidebar( array(
 		'name'          => esc_html__( 'Top Right Header Widget Area', 'storevilla' ),
@@ -151,7 +160,7 @@ function storevilla_widgets_init() {
 		'after_title'   => '</h3>',
 	) );
 
-	$footer_widget_regions = apply_filters( 'storevilla_footer_widget_regions', 5 );
+	$footer_widget_regions = apply_filters( 'storevilla_footer_widget_regions', 2 );
 
 	for ( $i = 1; $i <= intval( $footer_widget_regions ); $i++ ) {
 

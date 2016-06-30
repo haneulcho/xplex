@@ -28,7 +28,7 @@ get_header(); ?>
 
 		</div><!-- #primary -->
 
-		<?php get_sidebar('right'); ?>
+		<?php get_sidebar(); ?>
 
 	</div>
 

@@ -24,12 +24,16 @@ function storevilla_body_classes( $classes ) {
 		$classes[] = 'hfeed';
 	}
 
+	if(is_category(array('webzine','publishmarketing','dear-reader','interview','p-note')) || is_singular(array('post'))) {
+		if(!$theme_webzine){
+				$theme_webzine = 'webzine';
+		}
+		$classes[] = $theme_webzine;
+	}
+
 	if(is_singular(array( 'post','page' ))){
         global $post;
-        $post_sidebar = get_post_meta($post->ID, 'storevilla_page_layouts', true);
-        if(!$post_sidebar){
-            $post_sidebar = 'rightsidebar';
-        }
+        $post_sidebar = 'leftsidebar';
         $classes[] = $post_sidebar;
     }
 
@@ -38,7 +42,7 @@ function storevilla_body_classes( $classes ) {
         if( is_product_category() || is_shop() ) {
             $woo_page_layout = get_theme_mod( 'storevilla_woocommerce_products_page_layout','rightsidebar' );
             if(!$woo_page_layout){
-                $woo_page_layout = 'rightsidebar';
+                $woo_page_layout = 'leftsidebar';
             }
             $classes[] = $woo_page_layout;
         }
@@ -46,19 +50,11 @@ function storevilla_body_classes( $classes ) {
         if( is_singular('product') ) {
             $woo_page_layout = get_theme_mod( 'storevilla_woocommerce_single_products_page_layout','rightsidebar' );
             if(!$woo_page_layout){
-                $woo_page_layout = 'rightsidebar';
+                $woo_page_layout = 'leftsidebar';
             }
             $classes[] = $woo_page_layout;
         }
     }
-
-    $web_layout = get_theme_mod( 'storevilla_web_page_layout_options', 'disable' );
-    if($web_layout == 'enable'){
-        $classes[] = 'boxlayout';
-    }else{
-        $classes[] = 'fulllayout';
-    }
-
 
 	return $classes;
 }
@@ -377,190 +373,6 @@ if ( ! function_exists( 'xplex_main_heroimg' ) ) {
 }
 
 
-/**
-** Store Villa Service section
-**/
-
-if ( ! function_exists( 'storevilla_service_section' ) ) {
-
-  function storevilla_service_section() {
-
-        $services_icon_one = esc_attr( get_theme_mod( 'storevilla_services_icon_one', 'fa fa-truck' ) );
-        $service_title_one = esc_attr( get_theme_mod( 'storevilla_service_title_one','FREE SHIPPING WORLDWIDE' ) );
-        $service_desc_one = esc_attr( get_theme_mod( 'storevilla_service_desc_one' ) );
-
-        $services_icon_two = esc_attr( get_theme_mod( 'storevilla_services_icon_two', 'fa fa-headphones' ) );
-        $service_title_two = esc_attr( get_theme_mod( 'storevilla_service_title_two', '24X7 CUSTOMER SUPPORT' ) );
-        $service_desc_two = esc_attr( get_theme_mod( 'storevilla_service_desc_two' ) );
-
-        $services_icon_three = esc_attr( get_theme_mod( 'storevilla_services_icon_three', 'fa fa-dollar' ) );
-        $service_title_three = esc_attr( get_theme_mod( 'storevilla_service_title_three', 'MONEY BACK GUARANTEE' ) );
-        $service_desc_three = esc_attr( get_theme_mod( 'storevilla_service_desc_three' ) );
-
-        $service_area = esc_attr( get_theme_mod( 'storevilla_services_area_settings','enable' ) );
-
-    if(!empty( $service_area ) && $service_area == 'enable') {
-      ?>
-
-        <div class="our-features-box clearfix">
-
-            <div class="store-container">
-
-                <div class="feature-box">
-                  <span><i class="<?php if(!empty( $services_icon_one )) { echo $services_icon_one; } ?>">&nbsp;</i></span>
-                  <div class="content">
-                    <?php if(!empty( $service_title_one )) { ?>
-                    <h3><?php echo $service_title_one; ?></h3>
-                    <?php }  if(!empty( $service_desc_one )) { ?>
-                    <p><?php echo $service_desc_one; ?></p>
-                    <?php } ?>
-                  </div>
-                </div>
-
-                <div class="feature-box">
-                  <span><i class="<?php if(!empty( $services_icon_two )) { echo $services_icon_two; } ?>">&nbsp;</i></span>
-                  <div class="content">
-                    <?php if(!empty( $service_title_two )) { ?>
-                    <h3><?php echo $service_title_two; ?></h3>
-                    <?php }  if(!empty( $service_desc_two )) { ?>
-                    <p><?php echo $service_desc_two; ?></p>
-                    <?php } ?>
-                  </div>
-                </div>
-
-                <div class="feature-box">
-                  <span><i class="<?php if(!empty( $services_icon_three )) { echo $services_icon_three; } ?>">&nbsp;</i></span>
-                  <div class="content">
-                    <?php if(!empty( $service_title_three )) { ?>
-                    <h3><?php echo $service_title_three; ?></h3>
-                    <?php }  if(!empty( $service_desc_three )) { ?>
-                    <p><?php echo $service_desc_three; ?></p>
-                    <?php } ?>
-                  </div>
-                </div>
-
-            </div>
-
-        </div>
-    <?php  }
-
-    }
-}
-
-
-
-
-
-
-/**
- * Page and Post Page Display Layout Metabox function
- */
-
-add_action('add_meta_boxes', 'storevilla_metabox_section');
-
-if ( ! function_exists( 'storevilla_metabox_section' ) ) {
-
-    function storevilla_metabox_section(){
-        add_meta_box('storevilla_display_layout',
-            __( 'Display Layout Options', 'storevilla' ),
-            'storevilla_display_layout_callback',
-            array('page','post'),
-            'normal',
-            'high'
-        );
-    }
-}
-
-$storevilla_page_layouts =array(
-
-    'leftsidebar' => array(
-        'value'     => 'leftsidebar',
-        'label'     => __( 'Left Sidebar', 'storevilla' ),
-        'thumbnail' => get_template_directory_uri() . '/images/left-sidebar.png',
-    ),
-    'rightsidebar' => array(
-        'value'     => 'rightsidebar',
-        'label'     => __( 'Right Sidebar(Default)', 'storevilla' ),
-        'thumbnail' => get_template_directory_uri() . '/images/right-sidebar.png',
-    ),
-     'nosidebar' => array(
-        'value'     => 'nosidebar',
-        'label'     => __( 'Full width', 'storevilla' ),
-        'thumbnail' => get_template_directory_uri() . '/images/no-sidebar.png',
-    ),
-    'bothsidebar' => array(
-        'value'     => 'bothsidebar',
-        'label'     => __( 'Both Sidebar', 'storevilla' ),
-        'thumbnail' => get_template_directory_uri() . '/images/both-sidebar.png',
-    )
-);
-
-/**
- * Function for Page layout meta box
-*/
-
-if ( ! function_exists( 'storevilla_display_layout_callback' ) ) {
-    function storevilla_display_layout_callback(){
-        global $post, $storevilla_page_layouts;
-        wp_nonce_field( basename( __FILE__ ), 'storevilla_settings_nonce' );
-    ?>
-        <table class="form-table">
-            <tr>
-              <td>
-                <?php
-                  $i = 0;
-                  foreach ($storevilla_page_layouts as $field) {
-                  $storevilla_page_metalayouts = get_post_meta( $post->ID, 'storevilla_page_layouts', true );
-                ?>
-                  <div class="radio-image-wrapper slidercat" id="slider-<?php echo $i; ?>" style="float:left; margin-right:30px;">
-                    <label class="description">
-                        <span>
-                          <img src="<?php echo esc_url( $field['thumbnail'] ); ?>" />
-                        </span></br>
-                        <input type="radio" name="storevilla_page_layouts" value="<?php echo $field['value']; ?>" <?php checked( $field['value'],
-                            $storevilla_page_metalayouts ); if(empty($storevilla_page_metalayouts) && $field['value']=='rightsidebar'){ echo "checked='checked'";  } ?>/>
-                         <?php echo $field['label']; ?>
-                    </label>
-                  </div>
-                <?php  $i++; }  ?>
-              </td>
-            </tr>
-        </table>
-    <?php
-    }
-}
-
-/**
- * Save the custom metabox data
- */
-
-if ( ! function_exists( 'storevilla_save_page_settings' ) ) {
-    function storevilla_save_page_settings( $post_id ) {
-        global $storevilla_page_layouts, $post;
-        if ( !isset( $_POST[ 'storevilla_settings_nonce' ] ) || !wp_verify_nonce( $_POST[ 'storevilla_settings_nonce' ], basename( __FILE__ ) ) )
-            return;
-        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE)
-            return;
-        if ('page' == $_POST['post_type']) {
-            if (!current_user_can( 'edit_page', $post_id ) )
-                return $post_id;
-        } elseif (!current_user_can( 'edit_post', $post_id ) ) {
-                return $post_id;
-        }
-        foreach ($storevilla_page_layouts as $field) {
-            $old = get_post_meta( $post_id, 'storevilla_page_layouts', true);
-            $new = sanitize_text_field($_POST['storevilla_page_layouts']);
-            if ($new && $new != $old) {
-                update_post_meta($post_id, 'storevilla_page_layouts', $new);
-            } elseif ('' == $new && $old) {
-                delete_post_meta($post_id,'storevilla_page_layouts', $old);
-            }
-         }
-    }
-}
-add_action('save_post', 'storevilla_save_page_settings');
-
-
 /* Custom Customizer Class */
 
 if(class_exists( 'WP_Customize_control')) :
@@ -714,7 +526,7 @@ if (!function_exists('storevilla_loop_columns')) {
     }
 }
 
-add_action( 'body_class', 'storevilla_woo_body_class');
+add_action( 'body_class',  'storevilla_woo_body_class');
 if (!function_exists('storevilla_woo_body_class')) {
     function storevilla_woo_body_class( $class ) {
            $class[] = 'columns-'.storevilla_loop_columns();

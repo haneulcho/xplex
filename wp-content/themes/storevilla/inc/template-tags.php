@@ -618,17 +618,3 @@ if ( ! function_exists( 'storevilla_breand_logo' ) ) {
 			}
 	}
 }
-
-
-if ( ! function_exists( 'storevilla_service_area' ) ) {
-	/**
-	 * Display the brand logo
-	 * @since  1.0.0
-	 * @return void
-	 */
-	function storevilla_service_area() {
-
-		 storevilla_service_section();
-
-	}
-}

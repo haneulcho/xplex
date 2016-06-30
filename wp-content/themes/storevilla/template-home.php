@@ -20,10 +20,8 @@ get_header(); ?>
           /**
            * @hooked storevilla_main_slider - 10
            * @hooked storevilla_main_widget - 20
-           * @hooked storevilla_breand_logo - 30
-           * @hooked storevilla_service_area - 40
            */
-          do_action( 'storevilla_homepage' ); 
+          do_action( 'storevilla_homepage' );
       ?>
 
   <?php do_action( 'storevilla_after_homepage' ); ?>
