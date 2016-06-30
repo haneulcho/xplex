@@ -27,4 +27,4 @@ get_header(); ?>
   <?php do_action( 'storevilla_after_homepage' ); ?>
 
 
-<?php get_footer();
+<?php get_footer(); ?>
