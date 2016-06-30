@@ -3140,7 +3140,7 @@ inner pages css
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 */
 #primary {
-    float: left;
+    float: right;
     width: 70%;
 }
 #secondaryright {

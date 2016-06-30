@@ -1,5 +1,3 @@
-좋같ㅋ티ㅏㅗㅇ히
-
 <?php
 /**
  * The sidebar containing the main widget area.

@@ -6,17 +6,11 @@
  *
  * @package Store_Villa
  */
-
-if(is_singular()){
-$post_sidebar =  get_theme_mod( 'storevilla_woocommerce_single_products_page_layout','rightsidebar' );
-}else{
-$post_sidebar =  get_theme_mod( 'storevilla_woocommerce_products_page_layout','rightsidebar' );
+?>
+<aside id="secondaryleft" class="widget-area left" role="complementary">
+<?php
+if (is_active_sidebar('sidebar-2')) {
+	dynamic_sidebar( 'sidebar-2' );
 }
-
-if( $post_sidebar == 'leftsidebar' && is_active_sidebar('sidebar-2')){
-	?>
-		<aside id="secondaryleft" class="widget-area" role="complementary">
-			<?php dynamic_sidebar( 'sidebar-2' ); ?>
-		</aside><!-- #secondary -->
-	<?php
-}
+dynamic_sidebar( 'sidebar-3' ); ?>
+</aside><!-- #secondary -->
