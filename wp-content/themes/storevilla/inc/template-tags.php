@@ -322,25 +322,6 @@ if ( ! function_exists( 'storevilla_button_header' ) ) {
 				<?php endif; ?>
 			</div><!-- .site-branding -->
 			<div class="search-cart-wrap clearfix">
-			<?php
-
-			/**
-			 * Display Product Search
-			 * @since  1.0.0
-			 * @uses  is_woocommerce_activated() check if WooCommerce is activated
-			 * @return void
-			 */
-
-				if ( is_woocommerce_activated() ) { ?>
-					<div class="advance-search">
-						<?php storevilla_product_search(); ?>
-					</div>
-				<?php } else{ ?>
-					<div class="normal-search">
-						<?php get_search_form(); ?>
-					</div>
-				<?php } ?>
-
 			</div>
 		</div>
 	</div>
