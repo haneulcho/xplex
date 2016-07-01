@@ -82,7 +82,19 @@ class WP_Widget_Recent_Posts extends WP_Widget {
 		<ul>
 		<?php while ( $r->have_posts() ) : $r->the_post(); ?>
 			<li>
-				<a href="<?php the_permalink(); ?>"><?php get_the_title() ? the_title() : the_ID(); ?></a>
+				<a href="<?php the_permalink(); ?>">
+					<?php if(get_the_title()) {
+						$origin_title = the_title($before = '', $after = '', FALSE);
+						if(strlen($origin_title) > 48) {
+							$recent_title = mb_substr($origin_title, 0, 22, 'UTF-8').'...';
+						} else {
+							$recent_title = $origin_title;
+						}
+					} else {
+						$recent_title = the_ID();
+					}
+						echo $recent_title;
+					?></a>
 			<?php if ( $show_date ) : ?>
 				<span class="post-date"><?php echo get_the_date(); ?></span>
 			<?php endif; ?>
