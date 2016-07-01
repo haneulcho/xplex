@@ -227,11 +227,8 @@ if(!function_exists ('storevilla_product_search')){
 			}
 			$categories_show .= '</optgroup>';
 			$form = '<form role="search" method="get" id="searchform"  action="' . esc_url( home_url( '/'  ) ) . '">
-						 <div class="sv_search_wrap">
-                            <select class="sv_search_product false" name="term">'.$categories_show.'</select>
-						 </div>
-                         <div class="sv_search_form">
-							 <input type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="' .__('search entire store here','storevilla'). '" />
+							<div class="sv_search_form">
+							 <input type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="' .__('여기에 강의 키워드를 입력하세요.','storevilla'). '" />
 							 <button type="submit" id="searchsubmit"><i class="fa fa-search"></i></button>
 							 <input type="hidden" name="post_type" value="product" />
 							 <input type="hidden" name="taxonomy" value="product_cat" />
@@ -585,9 +582,10 @@ add_filter('excerpt_more', 'storevilla_excerpt_more');
 /**
  * Change the Breadcrumb Arrow Function
  **/
-add_filter( 'woocommerce_breadcrumb_defaults', 'storevilla_change_breadcrumb_delimiter' );
-function storevilla_change_breadcrumb_delimiter( $defaults ) {
-		$defaults = array(
+remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0 );
+//add_filter( 'woocommerce_breadcrumb_defaults', 'storevilla_change_breadcrumb_delimiter' );
+function storevilla_change_breadcrumb_delimiter() {
+		$args = array(
 			'delimiter'   => ' &gt; ',
 			'wrap_before' => '<nav class="woocommerce-breadcrumb" itemprop="breadcrumb">',
 			'wrap_after'  => '</nav>',
@@ -595,8 +593,9 @@ function storevilla_change_breadcrumb_delimiter( $defaults ) {
 			'after'       => '',
 			'home'        => _x( 'X-PLEX', 'breadcrumb', 'woocommerce' ),
 		);
-    return $defaults;
+		woocommerce_breadcrumb($args);
 }
+add_action( 'xplex_custom_breadcrumb', 'storevilla_change_breadcrumb_delimiter', 20 );
 
 /**
  * Woo Commerce Social Share

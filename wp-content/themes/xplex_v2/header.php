@@ -33,15 +33,30 @@
 						**@see storevilla_top_nav (filter for top header navigation)
 					 * @see  storevilla_button_header() - 20
 					 * @see  storevilla_primary_navigation() - 30
-					 */			
-					do_action( 'storevilla_header' ); 
+					 */
+					do_action( 'storevilla_header' );
 				?>
 		</header><!-- #masthead -->
-	
+		<?php if( !( is_home() || is_front_page() ) ) { ?>
+		<div id="xbreadcrumb">
+			<div class="store-container clearfix">
+			<?php
+			if( !( is_category() ) ) {
+				do_action( 'xplex_custom_breadcrumb' );
+			}
+			if( is_category('webzine') || is_category('publishmarketing') || is_category('dear-reader') || is_category('interview') || is_category('p-note') ) {
+			?>
+				<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="<?php echo get_home_url(); ?>">X-PLEX</a> &gt; <?php echo single_cat_title(); ?></nav>
+			<?php
+			}
+			?>
+			</div>
+		</div>
+		<?php } ?>
 	<?php do_action( 'storevilla_after_header' ); ?>
 
 	<div id="content" class="site-content">
 	<?php if( !( is_home() || is_front_page() ) ) { ?>
 		<div class="store-container clearfix">
 			<div class="store-container-inner clearfix">
-	<?php } 
+	<?php }
