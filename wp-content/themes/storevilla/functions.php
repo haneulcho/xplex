@@ -202,7 +202,7 @@ function storevilla_scripts() {
 
 	wp_enqueue_script( 'storevilla-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), esc_attr( $theme_version ), true );
 
-	wp_enqueue_script( 'storevilla-retina', get_template_directory_uri() . '/js/retina.js', array('jquery'), esc_attr( $theme_version ), true );
+	//wp_enqueue_script( 'storevilla-retina', get_template_directory_uri() . '/js/retina.js', array('jquery'), esc_attr( $theme_version ), true );
 
 	wp_enqueue_script( 'storevilla-common', get_template_directory_uri() . '/js/common.js', array('jquery'), esc_attr( $theme_version ), true );
 

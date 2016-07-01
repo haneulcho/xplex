@@ -14,8 +14,6 @@
 
 get_header(); ?>
 
-  <?php do_action( 'storevilla_before_homepage' ); ?>
-
       <?php
           /**
            * @hooked storevilla_main_slider - 10
@@ -23,8 +21,5 @@ get_header(); ?>
            */
           do_action( 'storevilla_homepage' );
       ?>
-
-  <?php do_action( 'storevilla_after_homepage' ); ?>
-
 
 <?php get_footer(); ?>

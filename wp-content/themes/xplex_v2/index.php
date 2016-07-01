@@ -16,7 +16,7 @@ get_header(); ?>
 
 	<div class="store-container">
 
-		<div id="primary" class="content-area">
+		<div id="primary_home" class="content-area">
 
 			<main id="main" class="site-main" role="main">
 

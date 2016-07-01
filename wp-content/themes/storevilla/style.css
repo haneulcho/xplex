@@ -47,6 +47,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 html {
     font-family: sans-serif;
@@ -238,7 +239,8 @@ input,
 select,
 textarea {
     color: #404040;
-    font-family: Open Sans;
+    font-family:"Noto Sans KR", sans-serif;
+    font-weight:300;
     font-size: 16px;
     font-size: 1rem;
     /* line-height: 1.5; */
@@ -473,15 +475,15 @@ textarea {
 --------------------------------------------------------------*/
 
 a {
-    color: royalblue;
+    color: #333;
 }
 a:visited {
-    color: purple;
+    color: #333;
 }
 a:hover,
 a:focus,
 a:active {
-    color: midnightblue;
+    color: #333;
 }
 a:focus {
     outline: 0;
@@ -494,11 +496,19 @@ a:active {
 ## Menus
 --------------------------------------------------------------*/
 .main-navigation {
-    clear: both;
     display: block;
-    float: left;
-    width: 100%;
+    float: right;
+    margin-top:65px;
 }
+.home .main-navigation {clear: both;width: 100%;margin-top:0;padding:4px 0 0;}
+.home .main-navigation #primary-menu {
+    text-align:center;
+}
+.home .main-navigation #primary-menu > li {
+    float:none;
+    display:inline-block;
+}
+.main-navigation #primary-menu > li {float:left;}
 .main-navigation ul {
     display: none;
     list-style: none;
@@ -506,45 +516,101 @@ a:active {
     padding-left: 0;
 }
 .main-navigation li {
-    float: left;
     position: relative;
 }
 .main-navigation a {
     display: block;
     text-decoration: none;
+    color:#444;
 }
-.main-navigation ul ul {
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+
+.main-navigation li.menu-item-has-children {
+    position: relative;
+}
+.main-navigation li.menu-item-has-children > a:before {
+    position: absolute;
+    content: '\f107';
+    font-family: FontAwesome;
+    font-size:12px;
+    right: 14px;
+    color: #ccc;
+    line-height: 28px;
+}
+.main-navigation li.menu-item-has-children ul li.menu-item-has-children > a:before {
+    color: #000 !important;
+    content: '\f105';
+}
+#primary-menu >li>a {
+    font-weight: 400;
+    font-size: 18px;
+    padding:10px 30px 18px;
+    position: relative;
+    letter-spacing:-0.8px;
+}
+.main-navigation ul li:first-child a {
+    margin-left: 0;
+}
+.main-navigation li.current-category-ancestor > a,
+.main-navigation li.current-menu-ancestor > a {color:#f06363;}
+#primary-menu >li>a:hover,
+.main-navigation li.menu-item-has-children > a:hover:before,
+.main-navigation ul li.current-menu-item > a,
+.main-navigation ul li a:hover,
+.main-navigation ul ul li.current-menu-item a,
+.main-navigation ul ul li a:hover {
+    color:#f06363;
+    transition: all 300ms ease-in-out 0s;
+    -webkit-transition: all 300ms ease-in-out 0s;
+}
+/*
+======== drop down menu =======
+*/
+.main-navigation .sub-menu {
     float: left;
     position: absolute;
-    top: 1.5em;
-    left: -999em;
     z-index: 99999;
+    background: #fff none repeat scroll 0 0;
+    top: 100%;
+    left: 50px;
+    width:210px;
+    padding:15px 0;
+    visibility: hidden;
+    opacity: 0;
+    border: 1px solid rgb(246, 246, 246);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2.457px 1.721px 7px 0px rgba(0, 0, 0, 0.13);
 }
-/* .main-navigation ul ul ul {
-    left: -999em;
-    top: 0;
-} */
-.main-navigation ul ul a {
-    width: 200px;
+.main-navigation ul li:hover > ul {
+    opacity: 1;
+    visibility: visible;
+    top: 100%;
+    transition: all 300ms ease-in-out 0s;
+    -webkit-transition: all 300ms ease-in-out 0s;
+    left: 20px;
 }
-.main-navigation ul ul li {} .main-navigation li:hover > a,
-.main-navigation li.focus > a {} .main-navigation ul ul:hover > a,
-.main-navigation ul ul .focus > a {} .main-navigation ul ul a:hover,
-.main-navigation ul ul a.focus {} .main-navigation ul li:hover > ul,
-.main-navigation ul li.focus > ul {
-    left: auto;
-}
-.main-navigation ul ul li:hover > ul,
-.main-navigation ul ul li.focus > ul {
-    left: 100%;
-}
-.main-navigation .current_page_item > a,
-.main-navigation .current-menu-item > a,
-.main-navigation .current_page_ancestor > a,
-.main-navigation .current-menu-ancestor > a {}
-/* Small menu. */
+.main-navigation ul li:nth-child(4) .sub-menu {left:-50px;}
+.main-navigation ul li:nth-child(4):hover .sub-menu {left:-20px;}
+.main-navigation ul li:last-child .sub-menu {left:-88px;width:165px;}
+.main-navigation ul li:last-child:hover .sub-menu {left:-58px;}
 
+.home .main-navigation ul li:nth-child(4) .sub-menu,
+.home .main-navigation ul li:last-child .sub-menu {left:50px;}
+.home .main-navigation ul li:nth-child(4):hover .sub-menu,
+.home .main-navigation ul li:last-child:hover .sub-menu {left:20px;}
+.main-navigation ul ul ul {
+    top: 0 !important
+}
+.main-navigation ul li ul li a {
+    font-size:13px;
+    letter-spacing:-0.7px;
+    font-weight:300;
+    margin-left: 0;
+    padding: 10px 20px 10px 28px;
+    text-align:left;
+    line-height:1;
+}
+.main-navigation ul li ul li a:hover {font-weight:500;}
+/* Small menu. */
 .menu-toggle,
 .main-navigation.toggled ul {
     display: block;
@@ -557,6 +623,21 @@ a:active {
         display: block;
     }
 }
+
+/*
+===========
+lSSslide ul css
+===========
+*/
+.lSSlideOuter  ul {
+    height: auto !important;
+}
+/*
+===========
+end of css
+===========
+*/
+
 .site-main .comment-navigation,
 .site-main .posts-navigation,
 .site-main .post-navigation {
@@ -825,7 +906,7 @@ object {
 ======================================================================
 */
 .store-container {
-	max-width: 1170px;
+	max-width: 1180px;
 	margin: 0 auto;
 }
 article .entry-content ul {
@@ -857,7 +938,6 @@ p {
 h1, h2, h3, h4, h5, h6 {
     margin: 0 0 15px;
     line-height: 1.2;
-    font-family: Open Sans;
     font-weight: 400;
 }
 h1 {
@@ -908,6 +988,7 @@ header nav css
     position:relative;
     cursor: pointer;
 }
+.top-header .top-navigation ul li:first-child a {padding-left:0;}
 .top-header .top-navigation ul li a {
     color: #333;
     display: block;
@@ -915,7 +996,7 @@ header nav css
     position: relative;
 }
 .top-header .top-navigation ul li a:before {
-    border-left: 1px solid #333;
+    border-left: 1px solid #ddd;
     content: "";
     height: 10px;
     left: 0;
@@ -961,7 +1042,7 @@ quickinfo css
     color: #333333;
     display: inline-block;
     text-transform: lowercase;
-    font-family: Open Sans;
+
     font-size: 12px;
 }
 .top-header ul.store-quickinfo li a:hover {
@@ -979,29 +1060,42 @@ top-header-regin css
     text-transform: uppercase;
     position: relative;
 }
+.top-header .top-header-regin ul {margin-right:15px;}
 .top-header .top-header-regin ul > li {
     float:left;
-    margin-left:10px;
+    position:relative;
+    margin-left:20px;
 }
 .top-header .top-header-regin ul li a {
     color: #333333;
     float: left;
     padding: 10px 0;
 }
+.top-header .top-header-regin ul li a:after {
+    border-left: 1px solid #ddd;
+    content: "";
+    height: 10px;
+    left: -11px;
+    position: absolute;
+    top: 13px;
+}
+.top-header .top-header-regin ul li:first-child a:after {border-left:0;}
 .top-header .top-header-regin ul li a:hover,
 .top-header-regin .count .fa.fa-shopping-basket:hover {
     color:#0091D5;
 }
 .top-header .top-header-regin ul li a.quick-wishlist {
     position: relative;
-    margin-left: 17px;
+    margin-left: 15px;
 }
+.top-header .top-header-regin ul li a.quick-wishlist:after {left:-26px;}
 .top-header .top-header-regin ul li a.quick-wishlist:before {
     position: absolute;
     content:'\f08a';
     font-family:FontAwesome;
     font-size:11px;
     left: -15px;
+    top:11px;
 }
 .top-header .top-header-regin a.sv_login {
     position: relative;
@@ -1057,7 +1151,7 @@ top-header-regin css
     position: relative;
 }
 .top-header-regin ul li span.cart-count {
-  background: #0091d5 none repeat scroll 0 0;
+  background: #f06363 none repeat scroll 0 0;
   border-radius: 100%;
   color: #fff;
   font-size: 8px;
@@ -1071,15 +1165,17 @@ top-header-regin css
   width: 15px;
 }
 .top-header-regin ul li span.cart-count:hover {
-    background: #DD1F26;
+    background: #df4848;
 }
 /*
 ================
 end
 ================
 */
+.home .header-wrap .site-branding {float:none;text-align:center;}
+.home .header-wrap {padding:20px 0 0;}
 .header-wrap {
-    padding: 20px 0;
+    padding: 10px 0 3px;
 }
 .header-wrap .site-branding {
     float: left;
@@ -1141,7 +1237,6 @@ select option css
     width: 120px;
     height: 45px;
     font-size: 13px;
-    font-family: Open Sans;
     padding: 0 20px 0 15px;
     color: #8e8e8e;
     margin-right: 3px;
@@ -1251,7 +1346,6 @@ site-header-cart menu css
     color: #fff;
     text-align: right;
     font-size: 12px;
-    font-family: Open Sans;
     font-weight: 600;
     text-transform: uppercase;
     display: block;
@@ -1413,111 +1507,6 @@ add to cart css (global)
 /*
 =================
 *****************
-main nav css
-*****************
-=================
-*/
-.main-navigation {
-    background: #0091d5;
-}
-.main-navigation li {
-    float: left;
-}
-.main-navigation li.menu-item-has-children {
-    position: relative;
-}
-.main-navigation li.menu-item-has-children > a:before {
-    position: absolute;
-    content: '\f107';
-    font-family: FontAwesome;
-    right: 11px;
-    color: #fff;
-    line-height: 21px;
-}
-.main-navigation li.menu-item-has-children ul li.menu-item-has-children > a:before {
-    color: #000 !important;
-    content: '\f105';
-}
-.main-navigation ul li a {
-    font-family: Open Sans;
-    font-weight: 400;
-    font-size: 14px;
-    color: #fff;
-    padding: 20px 25px;
-    position: relative;
-}
-.main-navigation ul li:first-child a {
-    margin-left: 0;
-}
-.main-navigation ul li.current-menu-item > a,
-.main-navigation ul li a:hover {
-    background: rgba(0,0,0,0.5);
-    transition: all 300ms ease-in-out 0s;
-    -webkit-transition: all 300ms ease-in-out 0s;
-}
-.main-navigation ul ul li.current-menu-item a,
-.main-navigation ul ul li a:hover {
-    background: #0091D5;
-    color: #fff;
-}
-/*
-======== drop down menu =======
-*/
-.main-navigation ul ul {
-    background: #fff none repeat scroll 0 0;
-    top: 100%;
-    border-left: 1px solid #dfe3e3;
-    border-right: 1px solid #dfe3e3;
-    border-bottom: 1px solid #dfe3e3;
-    border-radius: 0 0 3px 3px;
-    visibility: hidden;
-    opacity: 0;
-    left: 40px;
-}
-.main-navigation ul li:hover > ul {
-    opacity: 1;
-    visibility: visible;
-    top: 100%;
-    transition: all 300ms ease-in-out 0s;
-    -webkit-transition: all 300ms ease-in-out 0s;
-    left: 0;
-}
-.main-navigation ul ul ul {
-    top: 0 !important
-}
-.main-navigation ul li ul li a {
-    margin-left: 0;
-    padding: 7px 10px;
-    font-weight: 400;
-    color: #000 !important;
-}
-.main-navigation ul li ul li:hover a {
-    color: #fff;
-}
-.main-navigation ul li ul li a:last-child {
-    border-bottom: none;
-}
-/*
-===========
-end of css
-===========
-*/
-/*
-===========
-lSSslide ul css
-===========
-*/
-.lSSlideOuter  ul {
-    height: auto !important;
-}
-/*
-===========
-end of css
-===========
-*/
-/*
-=================
-*****************
 site content slider and ads
 *****************
 =================
@@ -1526,11 +1515,12 @@ site content slider and ads
     padding: 30px 0 0;
 } */
 .site-content .store-villa-banner {
-    padding: 30px 0 0;
-}
-.site-content .slider-wrapper {
     float: left;
     width: 65%;
+    max-width:760px;
+    padding:0;
+}
+.site-content .slider-wrapper {
     position: relative;
 }
 .site-content .slider-wrapper .lSAction {
@@ -1562,13 +1552,13 @@ site content slider and ads
     color: #fff;
     right: 50px;
     font-size: 18px;
-    font-family: Open Sans;
+
     text-transform: uppercase;
     font-weight: 400;
     max-width: 400px;
 }
 .site-content .slider-wrapper ul.store-gallery li .banner-slider-info h2.caption-title {
-    font-family: Open Sans;
+
     font-weight: 700;
     color: #fff;
     text-transform: uppercase;
@@ -1692,7 +1682,7 @@ widget title css
 
 .main-widget-wrap .block-title span,
 .block-title span {
-    font-family: Open Sans;
+
     font-size: 14px;
     color: #0091d5;
     text-transform: uppercase;
@@ -1707,7 +1697,7 @@ h1.page-title,
     color: #6a6a6a;
     text-transform: uppercase;
     font-size: 26px;
-    font-family: Open Sans;
+
     font-weight: 400;
     margin-bottom: 0;
 }
@@ -1717,9 +1707,7 @@ h1.page-title,
 h1.page-title {
     margin: 0 0 10px;
 }
-.main-widget-wrap section {
-    padding: 10px 0 20px;
-}
+
 /*
 ====================
 category section widget css
@@ -1906,7 +1894,7 @@ widget_storevilla_cat_widget_area css
 .widget_storevilla_product_widget_area .store-product li .block-item-title h3 a,
 .widget_storevilla_cat_with_product_widget_area .cat-with-product li .block-item-title h3 a,
 .woocommerce ul.products li.product .block-item-title h3 a {
-    font-family: Open Sans;
+
     font-weight: 500;
     text-transform: capitalize;
     color: #000;
@@ -1969,7 +1957,7 @@ img animation css
 }
 .widget_categories select.postform,
 .woocommerce.widget_product_categories select.dropdown_product_cat{
-    font-family: Open Sans;
+
     font-size: 13px;
     height: 30px;
     padding: 0 10px;
@@ -1984,7 +1972,7 @@ price tag css for all
 */
 span.price span {
     margin: 0 5px;
-    font-family: Open Sans;
+
     color: #000;
     font-size: 14px;
     font-weight: 600;
@@ -2261,7 +2249,7 @@ widget_storevilla_cat_with_product_widget_area css
     border-left: 1px solid #eeeeee;
 }
 .widget_storevilla_cat_with_product_widget_area .block-title-desc {
-    font-family: Open Sans;
+
     font-size: 14px;
     color: #e5e5e5;
     padding: 20px 26px;
@@ -2465,7 +2453,7 @@ widget_storevilla_promo_pages_area css
 .widget_storevilla_promo_pages_area .promo-area h2,
 .widget_storevilla_blog_widget_area .blog-preview .blog-preview-info h2 a,
 .widget_storevilla_blog_widget_area .large-blog-preview .blog-preview-info h2 a {
-    font-family: Open Sans;
+
     font-size: 20px;
     color: #333333;
     font-weight: 300;
@@ -2486,7 +2474,7 @@ widget_storevilla_promo_pages_area css
 .widget_storevilla_blog_widget_area .blog-preview .blog-preview-info .blog-preview_desc,
 .widget_storevilla_blog_widget_area .large-blog-preview .blog-preview_desc {
     color: #8b8b8b;
-    font-family: Open Sans;
+
     font-size: 14px;
     margin-bottom: 15px;
     display: block;
@@ -2500,7 +2488,7 @@ widget_storevilla_promo_pages_area css
     display: inline-block;
     border-radius:0;
     text-transform: uppercase;
-    font-family: Open Sans;
+
     font-size: 14px;
     color: #8b8b8b;
     padding: 9px 25px;
@@ -2586,7 +2574,7 @@ widget_storevilla_testimonial_widget_area css
     margin: 0 auto;
     width: 70%;
     color: #fff;
-    font-family: Open Sans;
+
     font-size: 14px;
 }
 .widget_storevilla_testimonial_widget_area .testimonial-area .testimonial-preview-info h2 {
@@ -2652,7 +2640,7 @@ our-features-box css
 }
 .our-features-box .feature-box .content {
     font-size: 14px;
-    font-family: Open Sans;
+
     color: #3d3d3d;
 }
 .our-features-box .feature-box .content h3 {
@@ -2723,15 +2711,25 @@ footer css
     margin-left: 0.7%;
     padding-top: 35px;
 }
-.site-footer .bottom-footer-wrap {
-    background: #2f2f2f;
+footer {
+    background: #f8f8f8;
 }
+.foot-navigation {padding-top:30px;}
+#footer-menu {overflow:hidden;}
+#footer-menu li {display:inline-block;float:left;margin-left:22px;}
+#footer-menu li a {font-size:12px;color:#3d3d3d;font-weight:500;}
+#footer-menu li:first-child {margin-left:0;}
 .site-footer .site-info {
     float: left;
-    font-size: 13px;
+    font-size: 11px;
+    letter-spacing:-0.3px;
+    width:100%;
     color: #8b8b8b;
-    padding: 25px 0 25px;
+    padding: 15px 0 28px;
+    background:url('images/footerlogo.png') no-repeat top right;
 }
+.site-footer .xplex-copy {display:block;margin-top:10px;}
+.site-footer .xplex-copy em {display:inline-block;margin:0 3px;color:#f06363;font-weight:bold;}
 .site-footer .site-info a {
     color: #fff;
 }
@@ -2763,11 +2761,15 @@ widgets css
 widget title
 ============
 */
-h3.widget-title,
+h3.widget-title {
+  color:#f06363;
+  font-size:14px;
+  font-weight:500;
+}
 h3.comment-reply-title,
 .comments-area h2.comments-title {
     color: #0091d5;
-    font-family: Open Sans;
+
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 20px;
@@ -3148,14 +3150,24 @@ inner pages css
     padding: 45px 0 0 0;
     float: right;
 }
-#primary .site-main {
-    padding: 30px 0;
+#primary_home .site-main {
+    padding: 0 0 30px;
 }
 #secondaryleft {
     float: left;
     width: 26%;
     padding: 45px 0 0 0;
 }
+/* index (hero img, banner, letter) */
+.heroimg h2 {position:absolute;font-size:0;text-indent:-9999px;line-height:0;}
+.banner_letter {overflow:hidden;margin:20px 0 5px;padding:8px 0;border-top:1px dashed #eeeeee;border-bottom:1px dashed #eeeeee;}
+.banner_letter .main-widget-wrap {float:right;width:350px;max-height:150px;padding:20px 0 0;}
+.main-widget-wrap .mc-field-group input {float:left;display:inline-block;width:235px;padding:8px 13px;border:1px dashed #f06363;background:url('images/mail_plain.jpg') no-repeat 198px 4px;color:#f06363;font-size:13px;font-weight:400;outline:0;border-radius:0;}
+.main-widget-wrap .mc-field-group input:focus {background:#f8f8f8;}
+#mc-embedded-subscribe {float:right;width:105px;height:37px;padding:0;border-radius:0;background-color:#f06363;color:#ffffff;font-weight:500;border:0;box-shadow:none;font-size:15px;text-shadow:none;line-height:1;outline:0;}
+#mc-embedded-subscribe:hover,
+#mc-embedded-subscribe:focus {background-color:#df4848;}
+.main-widget-wrap h4 {font-size:12px;font-weight:400;color:#888888;letter-spacing:-0.5px;line-height:1.3;}
 /*
 ==================
 right sidebar
@@ -3371,7 +3383,7 @@ blog post css
 ==========================================================
 */
 .storevilla-blog {
-    font-family: Open Sans;
+
 }
 .storevilla-blog figure {
     overflow: hidden;
@@ -3503,7 +3515,7 @@ blog post css
     text-transform: capitalize;
     vertical-align: middle;
     color: #888;
-    font-family: Open Sans;
+
     font-size: 14px;
 }
 .storevilla-blog .sv-post-content a.sv-btn-countinuereading:before,
@@ -3523,7 +3535,7 @@ blog post css
 }
 .storevilla-blog .sv-post-foot a {
     font-size: 13px;
-    font-family: Open Sans;
+
     color: #888;
     transition: all 300ms ease-in-out 0s;
     -webkit-transition: all 300ms ease-in-out 0s;
@@ -3617,7 +3629,7 @@ compare clear button
     color: #000;
     font-size: 12px;
     padding: 6px 20px;
-    font-family: Open Sans;
+
 }
 .yith-woocompare-widget .compare.button {
     background-color: #0091d5;
@@ -3702,7 +3714,7 @@ comment css
 .comments-area .comment-notes {
     color: #f00;
     font-size: 13px;
-    font-family: Open Sans;
+
     margin-bottom: 5px;
 }
 .comments-area p label {
@@ -3768,7 +3780,7 @@ category taxonomy-description css
 ==========
 */
 .taxonomy-description {
-    font-family: Open Sans;
+
     font-size: 14px;
     color: #8b8b8b;
     margin-bottom: 15px
@@ -3826,14 +3838,14 @@ variations_form cart
 */
 .variations_form.cart label {
     font-size: 13px;
-    font-family: Open Sans;
+
     color: #000;
     text-transform: uppercase;
 }
 .woocommerce div.product form.cart .variations select {
     height: 30px;
     font-size: 13px;
-    font-family: Open Sans;
+
     padding: 0 10px;
 }
 .woocommerce div.product form.cart .variations td {
@@ -3955,7 +3967,7 @@ button.single_add_to_cart_button:before {
     width: auto;
     font-size: 14px;
     text-transform: capitalize;
-    font-family: Open Sans;
+
     color: #8b8b8b;
     padding: 15px 0;
 }
@@ -4060,13 +4072,13 @@ sidebar pagelayout css
 
 .woocommerce-tabs.wc-tabs-wrapper,
 .page .entry-content {
-    font-family: Open Sans;
+
     font-size: 14px;
     color: #8b8b8b;
 }
 .woocommerce-tabs.wc-tabs-wrapper ul.tabs li a {
     font-size: 16px;
-    font-family: Open Sans;
+
     font-weight: 300;
 }
 .woocommerce-tabs.wc-tabs-wrapper h2,
@@ -4075,11 +4087,11 @@ sidebar pagelayout css
     color: #0091d5;
     font-weight: 300;
     margin-bottom: 15px;
-    font-family: Open Sans;
+
 }
 .related.products h2 {
     color: #6a6a6a;
-    font-family: Open Sans;
+
     text-transform: uppercase;
     font-size: 26px;
 }
@@ -4109,7 +4121,7 @@ no-results not-found css
     border-radius: 0 !important;
     font-style: normal;
     font-size: 13px;
-    font-family: Open Sans;
+
     height: 31.5px;
     padding: 3px 10px;
 }
@@ -4263,7 +4275,7 @@ woocommerce-tabs css
     border-radius: 0;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li a {
-    font-family: Open Sans;
+
     font-weight: 400;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active,

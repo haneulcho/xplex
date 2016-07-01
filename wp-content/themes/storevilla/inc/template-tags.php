@@ -323,8 +323,6 @@ if ( ! function_exists( 'storevilla_button_header' ) ) {
 			</div><!-- .site-branding -->
 			<div class="search-cart-wrap clearfix">
 			</div>
-		</div>
-	</div>
 
 	<?php
 	}
@@ -355,6 +353,8 @@ if ( ! function_exists( 'storevilla_primary_navigation' ) ) {
 				?>
 			</div>
 		</nav><!-- #site-navigation -->
+	</div>
+</div>
 		<?php
 	}
 }
@@ -371,7 +371,7 @@ if ( ! function_exists( 'storevilla_primary_navigation' ) ) {
  	 */
  	function xplex_footer_navigation() {
  		?>
- 		<nav id="site-navigation" class="main-navigation" role="navigation">
+ 		<nav id="site-foot-navigation" class="foot-navigation store-container" role="navigation">
 			<?php
 				wp_nav_menu(
 					array(
@@ -463,6 +463,8 @@ if ( ! function_exists( 'xplex_footer_section' ) ) {
 						<span class="xplex-copy"><?php echo apply_filters( 'xplex_footer_copyright', $content = '&copy; ' . date( 'Y' ) ); ?></span>
 					<?php } ?>
 				</div><!-- .site-info -->
+			</div>
+		</div>
 		<?php
 	}
 }
@@ -506,6 +508,7 @@ if ( ! function_exists( 'storevilla_main_slider' ) ) {
 
 			if(!empty( $slider_options ) && $slider_options == 'enable' ){
 		?>
+		<div class="banner_letter">
 			<div class="store-villa-banner clearfix">
 				<div class="store-container">
 					<div class="slider-wrapper">
@@ -549,6 +552,7 @@ if ( ! function_exists( 'storevilla_main_widget' ) ) {
 					}
 				?>
 			</div>
+		</div>
 		<?php
 	}
 }
