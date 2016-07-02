@@ -449,62 +449,47 @@ function storevilla_woocommerce_template_loop_product_title(){
 add_action( 'woocommerce_shop_loop_item_title', 'storevilla_woocommerce_template_loop_product_title', 10 );
 
 /* Product Add to Cart and View Details */
+/* xplex 장바구니에 담기 / 위시리스트 / 자세히 보기 */
 remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
 
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 function storevilla_woocommerce_template_loop_add_to_cart(){
 ?>
-    <div class="product-button-wrap clearfix">
-        <?php woocommerce_template_loop_add_to_cart(); ?>
+    <div class="xproduct product-button-wrap clearfix">
+			<ul class="add-to-links">
+				<?php
+				global $product;
+				if( function_exists( 'YITH_WCQV' ) ){
+					$quick_view = YITH_WCQV_Frontend();
+					remove_action( 'woocommerce_after_shop_loop_item', array( $quick_view, 'yith_add_quick_view_button' ), 15 );
+					$label = esc_html( get_option( 'yith-wcqv-button-label' ) );
+					echo '<li><a href="#" class="link-quickview yith-wcqv-button" data-product_id="' . $product->id . '"><i class="fa fa-search" aria-hidden="true"></i></a></li>';
+				}
 
-            <a class="villa-details" title="<?php the_title_attribute(); ?>" href="<?php the_permalink(); ?>">
-                <?php _e('View Details','storevilla'); ?>
-            </a>
-
-    </div>
+				if( function_exists( 'YITH_WCWL' ) ){
+					$url = add_query_arg( 'add_to_wishlist', $product->id );
+					?>
+					<li>
+						<a class="link-wishlist" href="<?php echo $url ?>">
+							<?php _e('<i class="fa fa-heart-o" aria-hidden="true"></i> WISH','storevilla'); ?>
+						</a>
+					</li>
+					<?php
+				}
+				?>
+				<li>
+					<?php woocommerce_template_loop_add_to_cart(); ?>
+				</li>
+				<li>
+					<a class="villa-details" title="<?php the_title_attribute(); ?>" href="<?php the_permalink(); ?>">
+              <?php _e('자세히 보기','storevilla'); ?>
+          </a>
+				</li>
+	    </ul>
+		</div>
 <?php
 }
 add_action( 'woocommerce_after_shop_loop_item_title' ,'storevilla_woocommerce_template_loop_add_to_cart', 11 );
-
-
-remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
-function storevilla_woocommerce_template_loop_price(){
-?>
-    <div class="product-price-wrap">
-        <?php woocommerce_template_loop_price(); ?>
-    </div>
-<?php
-}
-add_action( 'woocommerce_after_shop_loop_item_title' ,'storevilla_woocommerce_template_loop_price', 12 );
-
-function storevilla_woocommerce_template_loop_quick_info(){
-?>
-    <ul class="add-to-links">
-        <?php
-            global $product;
-            if( function_exists( 'YITH_WCQV' ) ){
-                $quick_view = YITH_WCQV_Frontend();
-                remove_action( 'woocommerce_after_shop_loop_item', array( $quick_view, 'yith_add_quick_view_button' ), 15 );
-                $label = esc_html( get_option( 'yith-wcqv-button-label' ) );
-                echo '<li><a href="#" class="link-quickview yith-wcqv-button" data-product_id="' . $product->id . '">' . $label . '</a></li>';
-            }
-
-          if( function_exists( 'YITH_WCWL' ) ){
-            $url = add_query_arg( 'add_to_wishlist', $product->id );
-            ?>
-            <li>
-                <a class="link-wishlist" href="<?php echo $url ?>">
-                    <?php _e('Add To Wishlist','storevilla'); ?>
-                </a>
-            </li>
-            <?php
-          }
-        ?>
-    </ul>
-<?php
-}
-add_action( 'woocommerce_after_shop_loop_item' ,'storevilla_woocommerce_template_loop_quick_info', 11 );
-
 
 
 /**
