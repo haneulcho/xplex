@@ -4264,7 +4264,9 @@ woocommerce-tabs css
     padding:35px 45px;
 }
 .woocommerce #review_form #respond .comment-form {
+  position:relative;
   margin:0 22px 0 34px;
+  padding-top:32px;
 }
 .woocommerce #review_form #respond .comment-form-comment label {display:none;}
 .woocommerce #review_form #respond textarea {
@@ -4336,12 +4338,17 @@ woocommerce-tabs css
     color: #f06363;
 }
 .woocommerce .woocommerce-tabs .comment-form-rating {
-
+  position:absolute;
+  top:0;
+  left:0;
 }
 .woocommerce .woocommerce-tabs .comment-form-rating label,
 .woocommerce .woocommerce-tabs .comment-form-rating .stars {
     display: inline-block;
     vertical-align: middle;
+}
+.woocommerce #review_form #respond {
+  padding-top:30px;
 }
 .woocommerce .woocommerce-tabs .comment-form-rating .stars {
     margin-bottom: 0 !important;
@@ -4397,7 +4404,7 @@ woocommerce-tabs css
 }
 .woocommerce-tabs .comment-respond .comment-form-author input,
 .woocommerce-tabs .comment-respond .comment-form-email input {
-    font-size:12px;    
+    font-size:12px;
     height: 35px;
 }
 .woocommerce-tabs .comment-respond .form-submit {
