@@ -8,19 +8,19 @@
  */
 
 ?>
-
+single 웹진 글 보기 화면 템플릿
 <article id="post-<?php the_ID(); ?>" <?php post_class('storevilla-blog'); ?>>
 
-	<?php 
+	<?php
 		if( has_post_thumbnail() ){
 			$image = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'storevilla-blog-image', true);
 	?>
 		<figure>
 			<img src="<?php echo esc_url( $image[0] ); ?>" alt="<?php the_title(); ?>">
 			<div class="sv-img-hover">
-				<div class="holder">				
+				<div class="holder">
 				</div>
-			</div>		
+			</div>
 		</figure>
 
 	<?php } ?>
