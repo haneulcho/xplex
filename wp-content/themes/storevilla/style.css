@@ -3263,7 +3263,7 @@ woocommerce css
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 */
 .woocommerce ul.products li.product h3 {color:#333;font-size:16px;font-weight:500;padding:16px 0 5px;line-height:1.4;}
-.woocommerce ul.products li.product h3 > div {font-weight:300;}
+.woocommerce ul.products li.product h3 > div {font-weight:300;margin-top:2px;}
 .woocommerce ul.products li.product h3,
 .woocommerce ul.products li.product .price {margin-left:20px;margin-right:20px;}
 .woocommerce ul.products li.product .price .amount {margin:0;}
@@ -3606,6 +3606,8 @@ blog post css
     margin-right: 15px;
     padding-left: 15px;
     position: relative;
+    color:#888;
+    font-size:12px;
 }
 .blog-meta li.sv-author:before {
     content: '\f007';
@@ -3686,28 +3688,27 @@ single page navigation css
 .post-navigation .nav-links {
     border-bottom: 1px solid #efefef;
     border-top: 1px solid #efefef;
-    margin: 0 auto 40px;
+    margin: 0 auto;
     overflow: hidden;
 }
 .post-navigation .nav-links .nav-previous {
-    border-right: 1px solid #efefef;
-    text-align: right;
-    padding-right: 30px;
+    text-align:left;
+    padding-left: 60px;
 }
 .post-navigation .nav-links .nav-next {
-    text-align: left;
-    padding-left: 30px;
-    border-left: 1px solid #efefef;
+    text-align:right;
+    padding-right: 60px;
 }
 .post-navigation .nav-links .nav-previous,
 .post-navigation .nav-links .nav-next {
-    padding-top:30px;
-    padding-bottom:30px;
+    padding-top:20px;
+    padding-bottom:20px;
 }
 .post-navigation .nav-links .nav-previous a,
 .post-navigation .nav-links .nav-next a {
-    color: #424242;
-    font-size: 14px;
+    color: #555555;
+    font-size: 13.5px;
+    font-weight:400;
     position: relative;
     transition: all 300ms ease-in-out 0s;
     -webkit-transition: all 300ms ease-in-out 0s;
@@ -4258,6 +4259,72 @@ pagination css
 woocommerce-tabs css
 ====================
 */
+.comments-area {
+  background-color:#fcfcfc;
+  padding:35px 60px !important;
+  overflow:hidden;
+  margin-bottom:45px;
+}
+.comments-area .comment-form-comment {margin-bottom:0;}
+.comments-area .comment-form-comment label {display:none;}
+.comments-area .comment-form-comment textarea {
+  border: 1px solid #efefef;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #555;
+    height:130px;
+    padding:5px 10px;
+  }
+.comments-area #respond p {
+  margin: 0 0 10px;
+}
+.comments-area .comment-form-author,
+.comments-area .comment-form-email,
+.comments-area .comment-form-url {
+  margin:0 20px 10px 0 !important;
+  width:auto;
+  display:inline-block;
+  vertical-align: middle;
+}
+.comments-area .comment-form-author label span, .comments-area .comment-form-email label span,
+.comments-area .comment-form-url label span {
+  color:#ff0000;
+}
+.comments-area .comment-form-author label, .comments-area .comment-form-email label,
+.comments-area .comment-form-url label {
+  display:inline-block;
+  float:left;
+  margin:8px 10px 0 0;
+  color:#333;
+  font-weight:400;
+  font-size:12px;
+}
+.comments-area .comment-form-author input, .comments-area .comment-form-email input,
+.comments-area .comment-form-url input {
+  font-size:12px;
+  height:35px;
+  float:left;
+  color:#555;
+  padding:5px 10px;
+  border:1px solid #efefef;
+  width:auto;
+}
+.comments-area .comment-form-comment {float:left;width:82%;}
+.comments-area .form-submit {float:right;width:17%;}
+.comments-area .form-submit input#submit {
+  width:100%;
+  height:130px;
+  font-size:15px;
+  font-weight:700;
+  color:#fff
+  padding:10px;
+  ine-height:1.4;
+}
+.comments-area h3.comment-reply-title {
+  font-size:17px;
+  margin-bottom:10px;
+}
 .woocommerce-tabs .entry-content ol li {
     list-style: disc;
 }
@@ -4268,7 +4335,8 @@ woocommerce-tabs css
     padding-left: 17px;
     margin-bottom: 10px;
 }
-.woocommerce #reviews #review_form_wrapper {
+.woocommerce #reviews #review_form_wrapper,
+.comments-area {
     padding:35px 45px;
 }
 .woocommerce #review_form #respond .comment-form {
@@ -4356,7 +4424,7 @@ woocommerce-tabs css
     vertical-align: middle;
 }
 .woocommerce #review_form #respond {
-  padding-top:30px;
+  padding-top:2px;
 }
 .woocommerce .woocommerce-tabs .comment-form-rating .stars {
     margin-bottom: 0 !important;
@@ -4483,11 +4551,13 @@ woocommerce-tabs css
 }
 .woocommerce div.product .woocommerce-tabs .panel.entry-content h2,
 .woocommerce div.product .woocommerce-tabs .panel.entry-content h3 {
-  font-size:1.2em;
-  margin:0 0 5px;
+  font-size:17px;
+  margin:0 0 8px;
+}
+.woocommerce div.product .woocommerce-tabs .panel.entry-content p {
+  margin-bottom:25px;
 }
 .woocommerce div.product .woocommerce-tabs .panel.entry-content h4 {
-  font-size:1.2em;
   margin:0 0 .618em;
 }
 .woocommerce div.product .woocommerce-tabs .panel.entry-content h2,
@@ -4558,28 +4628,35 @@ comments-area css
 ====================
 */
 .comments-area .comment-list {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .comments-area ol li .comment-body {
-    background: #f1f1f1 none repeat scroll 0 0;
-    margin-bottom: 10px;
-    padding: 10px 60px 10px 10px;
+  width: 100%;
+      margin: 0 0 26px 0;
+      padding: 20px 30px 20px;
+      border: 0;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.07);
+      border-radius:4px;
 }
+.comments-area ol li .comment-body .reply {text-align:right;}
 .comments-area ol li .comment-author img {
     height: 32px;
     margin-right: 10px;
     width: 32px;
 }
-.comment-author .fn a, .comment-author .says {
-  color: #000;
-  display: inline-block;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: bold;
-  margin-top: 6px;
-  padding-top: 10px;
-  text-transform: capitalize;
+.comment-author .fn a {
+  font-size:13px;
+  font-weight:400;
+  color:#555;
+  margin:0;
+  padding:0;
+  vertical-align:10px;
 }
+.comment-author .says {
+  display:none !important;
+}
+.comment-meta {background:none !important;}
 .comments-area .comment-metadata a {
   color: #777777;
   font-size: 12px;
@@ -5004,4 +5081,28 @@ button.product_type_external css
   border:1px solid rgb(246, 246, 246);
   background-color: #fff;
   box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.07);
+}
+.w_view {
+  margin:0;
+  padding:40px 70px;
+  background-color:#fcfcfc;
+}
+.w_view > h2 {margin:0 auto;text-align:center;
+  margin:60px auto;
+  font-size:38px;
+  font-weight:500;
+  color:#3ea6fe;
+  line-height:1;
+  letter-spacing:-1px;
+}
+.w_view .entry-content {
+  font-size:14px;
+  color:#444;
+  line-height:1.6;
+}
+.w_view .entry-content > p {
+  margin-bottom:25px;
+}
+.w_view + .post-navigation {
+  margin:0 !important;
 }

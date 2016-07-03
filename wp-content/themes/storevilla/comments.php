@@ -1,85 +1,75 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
- * The template for displaying comments.
+ * Comments Template
  *
- * This is the template that displays the area of the page that contains both the current comments
- * and the comment form.
+ * This template file handles the display of comments, pingbacks and trackbacks.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * External functions are used to display the various types of comments.
  *
- * @package Store_Villa
+ * @package WooFramework
+ * @subpackage Tem plate
  */
 
-/*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password we will
- * return early without loading the comments.
- */
-if ( post_password_required() ) {
-	return;
+// Do not delete these lines
+if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) ) {
+	die ( 'Please do not load this page directly. Thanks!' );
 }
+
+if ( post_password_required() ) { ?>
+	<p class="nocomments"><?php _e( 'This post is password protected. Enter the password to view comments.', 'woothemes' ); ?></p>
+<?php return; } ?>
+
+<?php $comments_by_type = &separate_comments( $comments ); ?>
+
+<!-- You can start editing here. -->
+
+<?php if ( have_comments() ) { ?>
+
+<div id="comments">
+
+	<?php if ( ! empty( $comments_by_type['comment'] ) ) { ?>
+		<h3><?php comments_number( __( 'No Responses', 'woothemes' ), __( 'One Response', 'woothemes' ), __( '% Responses', 'woothemes' ) ); ?> <?php _e( 'to', 'woothemes' ); ?> &#8220;<?php the_title(); ?>&#8221;</h3>
+
+		<ol class="commentlist">
+
+			<?php wp_list_comments( 'avatar_size=50&callback=custom_comment&type=comment' ); ?>
+
+		</ol>
+
+		<nav class="navigation fix">
+			<div class="fl"><?php previous_comments_link(); ?></div>
+			<div class="fr"><?php next_comments_link(); ?></div>
+		</nav><!-- /.navigation -->
+	<?php } ?>
+
+	<?php if ( ! empty( $comments_by_type['pings'] ) ) { ?>
+
+        <h3 id="pings"><?php _e( 'Trackbacks/Pingbacks', 'woothemes' ); ?></h3>
+
+        <ol class="pinglist">
+            <?php wp_list_comments( 'type=pings&callback=list_pings' ); ?>
+        </ol>
+
+	<?php }; ?>
+
+</div> <!-- /#comments_wrap -->
+
+<?php } else { // this is displayed if there are no comments so far ?>
+
+
+	<?php
+		// If there are no comments and comments are closed, let's leave a little note, shall we?
+		if ( comments_open() && is_singular() ) { ?>
+			<div id="comments">
+				<h5 class="nocomments"><?php _e( 'No comments yet.', 'woothemes' ); ?></h5>
+			</div>
+		<?php } ?>
+
+<?php
+	} // End IF Statement
+
+	/* The Respond Form. Uses filters in the theme-functions.php file to customise the form HTML. */
+	if ( comments_open() )
+		comment_form();
 ?>
-
-<div id="comments" class="comments-area">
-
-	<?php
-	// You can start editing here -- including this comment!
-	if ( have_comments() ) : ?>
-		<h2 class="comments-title">
-			<?php
-				printf( // WPCS: XSS OK.
-					esc_html( _nx( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'storevilla' ) ),
-					number_format_i18n( get_comments_number() ),
-					'<span>' . get_the_title() . '</span>'
-				);
-			?>
-		</h2>
-
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
-		<nav id="comment-nav-above" class="navigation comment-navigation" role="navigation">
-			<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'storevilla' ); ?></h2>
-			<div class="nav-links">
-
-				<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'storevilla' ) ); ?></div>
-				<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'storevilla' ) ); ?></div>
-
-			</div><!-- .nav-links -->
-		</nav><!-- #comment-nav-above -->
-		<?php endif; // Check for comment navigation. ?>
-
-		<ol class="comment-list">
-			<?php
-				wp_list_comments( array(
-					'style'      => 'ol',
-					'short_ping' => true,
-				) );
-			?>
-		</ol><!-- .comment-list -->
-
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
-		<nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
-			<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'storevilla' ); ?></h2>
-			<div class="nav-links">
-
-				<div class="nav-previous"><?php previous_comments_link( esc_html__( 'Older Comments', 'storevilla' ) ); ?></div>
-				<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments', 'storevilla' ) ); ?></div>
-
-			</div><!-- .nav-links -->
-		</nav><!-- #comment-nav-below -->
-		<?php
-		endif; // Check for comment navigation.
-
-	endif; // Check for have_comments().
-
-
-	// If comments are closed and there are comments, let's leave a little note, shall we?
-	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
-
-		<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'storevilla' ); ?></p>
-	<?php
-	endif;
-
-	comment_form();
-	?>
-
-</div><!-- #comments -->
