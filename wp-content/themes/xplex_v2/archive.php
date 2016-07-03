@@ -8,8 +8,7 @@
  */
 
 get_header(); ?>
-archive.php
-	<div id="primary" class="content-area">
+	<div id="primary" class="content-area w_list">
 		<main id="main" class="site-main" role="main">
 
 		<?php
@@ -35,7 +34,10 @@ archive.php
 
 			endwhile;
 
-			the_posts_pagination();
+			the_posts_pagination( array(
+				'prev_text' => '&larr;',
+				'next_text' => '&rarr;'
+			) );
 
 		else :
 

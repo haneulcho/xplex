@@ -563,25 +563,6 @@ a:active {
     transition: all 300ms ease-in-out 0s;
     -webkit-transition: all 300ms ease-in-out 0s;
 }
-.webzine .main-navigation li.current-category-ancestor > a,
-.webzine .main-navigation li.current-menu-ancestor > a,
-.webzine #primary-menu >li>a:hover,
-.webzine .main-navigation li.menu-item-has-children > a:hover:before,
-.webzine .main-navigation ul li.current-menu-item > a,
-.webzine .main-navigation ul li.current-post-ancestor > a,
-.webzine .main-navigation ul li a:hover,
-.webzine .main-navigation ul ul li.current-menu-item a,
-.webzine .main-navigation ul ul li a:hover,
-.webzine #secondaryleft ul.sub-menu li.current-menu-item a,
-.webzine #secondaryleft ul.sub-menu li.current-menu-parent a,
-.webzine #secondaryleft ul.sub-menu li a:hover,
-.webzine .sv_search_form input[type="text"]:focus
- {
-  color:#3ea6fe;
-}
-.webzine #secondaryleft .widget_nav_menu h3:after {
-  background:#3ea6fe;
-}
 /*
 ======== drop down menu =======
 */
@@ -647,7 +628,6 @@ a:active {
 #xbreadcrumb {height:50px;background-color:#f06363;}
 #xbreadcrumb .woocommerce-breadcrumb, #xbreadcrumb .woocommerce-breadcrumb a {color:#fff;font-size:12px;line-height:1;}
 #xbreadcrumb .woocommerce-breadcrumb {margin:20px 0 0 2px;}
-.webzine #xbreadcrumb {height:50px;background-color:#3ea6fe;color:#fff;}
 
 
 /*
@@ -3247,10 +3227,10 @@ right sidebar
 left sidebar
 ==================
 */
-.webzine #secondaryleft, .leftsidebar #secondaryleft {
+.leftsidebar #secondaryleft {
     float: left;
 }
-.webzine #primary, .leftsidebar #primary {
+.leftsidebar #primary {
     float: right;
 }
 /*
@@ -3842,31 +3822,43 @@ category taxonomy-description css
 ==========
 */
 .navigation.pagination {
-  text-align: center;
+  overflow:hidden;
+  width:100%;
+  margin-bottom:40px;
+  text-align: right;
+}
+.pagination .nav-links {
+  clear:both;
+  float:right;
+  display:inline-block;
+  white-space: nowrap;
+  margin:0;
+  padding:0;
 }
 .pagination .nav-links span,
 .pagination .nav-links a {
+    float:left;
     display: inline-block;
-    border: 1px solid #c6c6c6;
-    height: 30px;
-    width: 30px;
+    width: 35px;
+    height: 35px;
+    margin:0 0 0 10px;
+    padding:12px 5px 0;
+    font-size:12.5px;
+    font-weight:400;
     text-align: center;
-    line-height: 30px;
-    border-left: none;
-    font-size: 13px;
+    line-height: 1;
+    border: none;
     transition: all 300ms ease-in-out 0s;
     -webkit-transition: all 300ms ease-in-out 0s;
-    color: #000;
-    margin:0 0 0 -4px;
+    color: #888;
+    background:#f8f8f8;
 }
 .pagination .nav-links span,
 .pagination .nav-links a.prev.page-numbers {
-    border-left: 1px solid #c6c6c6;
+    border-left:none;
 }
 .pagination .nav-links a.next.page-numbers,
 .pagination .nav-links a.prev.page-numbers {
-    width: auto;
-    padding:0 5px;
     transition: all 300ms ease-in-out 0s;
     -webkit-transition: all 300ms ease-in-out 0s;
 }
@@ -4889,4 +4881,45 @@ button.product_type_external css
 */
 .button.product_type_external {
   margin-bottom: 5px !important;
+}
+
+/* css for webzine only */
+.webzine #secondaryleft {
+  float: left;
+}
+.webzine #primary {
+  float: right;
+}
+.webzine #primary.w_list {
+  float:none;
+  width:100%;
+  max-width:100%;
+}
+.webzine .main-navigation li.current-category-ancestor > a,
+.webzine .main-navigation li.current-menu-ancestor > a,
+.webzine #primary-menu >li>a:hover,
+.webzine .main-navigation li.menu-item-has-children > a:hover:before,
+.webzine .main-navigation ul li.current-menu-item > a,
+.webzine .main-navigation ul li.current-post-ancestor > a,
+.webzine .main-navigation ul li a:hover,
+.webzine .main-navigation ul ul li.current-menu-item a,
+.webzine .main-navigation ul ul li a:hover,
+.webzine #secondaryleft ul.sub-menu li.current-menu-item a,
+.webzine #secondaryleft ul.sub-menu li.current-menu-parent a,
+.webzine #secondaryleft ul.sub-menu li a:hover,
+.webzine .sv_search_form input[type="text"]:focus,
+.webzine h1.page-title,
+.webzine .storevilla-blog h3 a:hover
+ {
+  color:#3ea6fe;
+}
+.webzine #secondaryleft .widget_nav_menu h3:after {
+  background:#3ea6fe;
+}
+.webzine #xbreadcrumb {height:50px;background-color:#3ea6fe;color:#fff;}
+.webzine .pagination .nav-links span.current,
+.webzine .pagination .nav-links a:hover {
+    background: #3ea6fe;
+    border-color: #3ea6fe;
+    color: #fff;
 }
