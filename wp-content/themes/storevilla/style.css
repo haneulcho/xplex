@@ -1697,7 +1697,6 @@ widget title css
 .main-widget-wrap .block-title h2,
 .block-title h2,
 h1.page-title,
-.woocommerce div.product .product_title,
 .page h3.entry-title {
     color: #6a6a6a;
     text-transform: uppercase;
@@ -1707,8 +1706,15 @@ h1.page-title,
     margin-bottom: 0;
 }
 .woocommerce div.product .product_title {
-    margin-bottom: 3px;
+    color:#333;
+    font-size:28px;
+    line-height:1.35;
+    font-weight:400;
+    letter-spacing:-1px;
+    margin:10px 0 5px 0;
 }
+.woocommerce div.product p.price,
+.woocommerce div.product .summary span.price {font-size:22px;font-weight:300;color:#c79a26;line-height:1;margin-bottom:22px;margin-left:3px;}
 h1.page-title {
     font-size:22px;
     font-weight:500;
@@ -1717,6 +1723,11 @@ h1.page-title {
     color:#f06363;
     line-height:1;
 }
+span.in_stock, span.out_stock {
+  display:inline-block;padding:4px 10px;max-height:20px;text-align:center;font-family:"dotum","gulim", "Noto Sans KR", sans-serif;font-size:12px;font-weight:400;line-height:1;vertical-align:5px;margin-bottom:18px;
+}
+span.in_stock {background-color:#dfaf43;color:#fff;}
+span.out_stock {background-color:#bbbbbb;color:#fff;}
 
 /*
 ====================
@@ -2060,7 +2071,6 @@ ul.add-to-links li a.button {padding-left:28px;}
 }
 .single-product ul.products .add-to-links {
     margin:0;
-    padding-left: 23px;
 }
 ul.add-to-links li a:hover {
     color: #f06363 !important;
@@ -3337,9 +3347,6 @@ woocommerce css
     line-height: 1;
     padding: 0;
 }
-.single-product .products ul.add-to-links li {
-    margin:0 5px;
-}
 /*woocommerce img hover*/
 .woocommerce #primary ul.products li .item-img .product-image {
     overflow: hidden;
@@ -3380,6 +3387,7 @@ woocommerce css
 /*
 single pages
 */
+.woocommerce div.product div.images {margin-bottom:40px;}
 .woocommerce .woocommerce-product-rating .star-rating,
 .woocommerce-review-link {
     margin: 0 10px 0 0;
@@ -3398,9 +3406,7 @@ single pages
 }
 a.woocommerce-main-image {
     display: block;
-    border: 1px solid #c6c6c6;
-    padding: 2px;
-    margin-bottom: 10px;
+    width:400px;
 }
 .woocommerce div.product div.summary {
     margin-top: 0;
@@ -3410,8 +3416,6 @@ a.woocommerce-main-image {
     margin-bottom: 0;
 }
 .woocommerce div.product form.cart {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
     padding: 15px 0; /*yo hatcha hai*/
 }
 .woocommerce nav.woocommerce-pagination {margin-bottom:40px;text-align:right;}
@@ -3538,11 +3542,14 @@ blog post css
     font-size: 14px;
 }
 .single-product div[itemprop="description"] p {
-    margin-bottom: 13px;
+    margin-bottom: 10px;
+    color:#666;
+    font-size:14px;
 }
 .single-product div[itemprop="description"] {
     color: #8b8b8b;
-    margin-top: 5px;
+    padding-top:20px;
+    border-top:1px solid #efefef;
 }
 .storevilla-blog .sv-post-content a.sv-btn-countinuereading {
     display: inline-block;
@@ -3894,7 +3901,8 @@ variations_form cart
 woocommerce-variation-add-to-cart variations_button
 */
 .woocommerce div.product form.cart div.quantity {
-    border: 1px solid #0091D5;
+    border: 1px solid #e5e5e5;
+    margin-right:6px;
 }
 .quantity button,
 .quantity .input-text.text {
@@ -3902,22 +3910,22 @@ woocommerce-variation-add-to-cart variations_button
     box-shadow: none;
     text-shadow: none;
     border: none;
-    width: 30px;
-    height: 32px;
+    width: 40px;
+    height: 42px;
     border-radius: 0;
     text-align: center;
-    padding: 5px;
+    padding: 0;
     font-size: 10px;
-    float: left;
     vertical-align: middle;
-    border-right: 1px solid #0091D5;
 }
+.quantity button:focus,
+.quantity button:hover {background:#ccc;color:#fff;}
 .quantity button.increase {
     border-right: 0;
 }
 .quantity button {
-    background: #0091D5;
-    color: #fff;
+    background: #f0f0f0;
+    color: #888;
 }
 .cart_item .quantity .input-text {
     overflow: hidden;
@@ -3925,8 +3933,9 @@ woocommerce-variation-add-to-cart variations_button
     border-bottom: 1px solid #0091D5;
 }
 .quantity .input-text.text {
-    width: auto;
+    width: 70px;
     font-size: 14px;
+    color:#f06363;
 }
 .woocommerce #respond input#submit.alt.disabled,
 .woocommerce #respond input#submit.alt.disabled:hover,
@@ -3953,34 +3962,33 @@ woocommerce-variation-add-to-cart variations_button
 .woocommerce input.button.alt[disabled]:disabled,
 .woocommerce input.button.alt[disabled]:disabled:hover {
     border-radius: 0;
-    background: #0091D5;
+    background: #f06363;
 }
 .woocommerce #respond input#submit.alt,
 .woocommerce a.button.alt,
 .woocommerce button.button.alt,
 .woocommerce input.button.alt {
-    background: #0091D5;
+    background: #f06363;
     border-radius: 0;
     position: relative;
 }
 button.single_add_to_cart_button.button.alt {
-  padding-left: 30px !important;
   position: relative;
   display: inline-block;
+  height:44px;
+  padding:0 35px;
+  border:none;
+  font-size:18px;
+  text-align:center;
+  line-height:1;
+  font-weight:bold;
 }
-button.single_add_to_cart_button:before {
-    content: '\f07a';
-    position:absolute;
-    left: 11px;
-    font-family: FontAwesome;
-    font-size: 13px;
-    top: 7px;
-}
+
 .woocommerce #respond input#submit.alt:hover,
 .woocommerce a.button.alt:hover,
 .woocommerce button.button.alt:hover,
 .woocommerce input.button.alt:hover {
-    background: #0083C1;
+    background: #df4848;
 }
 .woocommerce #content table.cart td.actions .input-text, .woocommerce table.cart td.actions .input-text, .woocommerce-page #content table.cart td.actions .input-text, .woocommerce-page table.cart td.actions .input-text {
     width: auto;
@@ -4000,7 +4008,7 @@ button.single_add_to_cart_button:before {
 }
 .single-product .yith-wcwl-add-to-wishlist,
 .single-product .entry-summary .compare.button {
-    display: inline-block !important;
+    display: none;
     vertical-align: middle;
     width: auto;
     font-size: 14px;
@@ -4042,6 +4050,7 @@ button.single_add_to_cart_button:before {
     left: 0;
 }
 .single-product .product_meta {
+    display:none;
     font-size: 13px;
     border-top: 1px solid #ddd;
     padding: 15px 0;
@@ -4076,8 +4085,17 @@ button.single_add_to_cart_button:before {
     color: #0091D5;
 }
 .single-product .storevilla-social {
-    padding-top: 10px;
+    padding-top: 15px;
 }
+/* share buttons */
+#main .sd-social-icon .sd-content ul li[class*='share-'] a.sd-button {
+    background:#f0f0f0 !important;
+    color:#aaa !important;
+}
+#main .sharedaddy h3.sd-title {font-size:12px;font-weight:500;color:#888;margin-right:15px;}
+#main .sharedaddy h3.sd-title:before {border:none;}
+#main .sharedaddy .sd-content {display:inline-block;}
+
 /*
 ========================
 sidebar pagelayout css

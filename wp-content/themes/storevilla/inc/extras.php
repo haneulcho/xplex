@@ -491,6 +491,21 @@ function storevilla_woocommerce_template_loop_add_to_cart(){
 }
 add_action( 'woocommerce_after_shop_loop_item_title' ,'storevilla_woocommerce_template_loop_add_to_cart', 11 );
 
+/* move the sharing and like buttons */
+function jptweak_remove_share() {
+    remove_filter( 'the_content', 'sharing_display',19 );
+    remove_filter( 'the_excerpt', 'sharing_display',19 );
+    if ( class_exists( 'Jetpack_Likes' ) ) {
+        remove_filter( 'the_content', array( Jetpack_Likes::init(), 'post_likes' ), 30, 1 );
+    }
+}
+
+add_action( 'loop_start', 'jptweak_remove_share' );
+
+/* remove product availability */
+add_filter( 'woocommerce_get_availability', 'custom_get_availability', 1, 2);
+function custom_get_availability( $availability, $_product ) {
+}
 
 /**
  * Woo Commerce Number of row filter Function
@@ -590,9 +605,14 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 function storevilla_woocommerce_template_single_sharing() { ?>
     <div class="storevilla-social">
         <?php
-            if ( is_plugin_active( 'accesspress-social-share/accesspress-social-share.php' ) ) {
-                echo do_shortcode("[apss-share share_text='Share this']");
-            }
+				if ( function_exists( 'sharing_display' ) ) {
+sharing_display( '', true );
+}
+
+if ( class_exists( 'Jetpack_Likes' ) ) {
+$custom_likes = new Jetpack_Likes;
+echo $custom_likes->post_likes( '' );
+}
         ?>
     </div>
 <?php }

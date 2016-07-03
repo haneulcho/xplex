@@ -22,8 +22,7 @@ global $qtyloop;
 $qtyloop ++;
 ?>
 <div class="quantity">
-	<button onclick="var result = document.getElementById('qty<?php echo esc_html($qtyloop) ;?>'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
+	<button onclick="var result = document.getElementById('qty<?php echo esc_html($qtyloop) ;?>'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus"></i></button>
 	<input type="text" step="<?php echo esc_attr( $step ); ?>" min="<?php echo esc_attr( $min_value ); ?>" max="<?php echo esc_attr( $max_value ); ?>" name="<?php echo esc_attr( $input_name ); ?>" value="<?php echo esc_attr( $input_value ); ?>" title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'storevilla-pro' ) ?>" class="input-text qty text" size="4"  id="qty<?php echo esc_html($qtyloop) ;?>" />
-	<button onclick="var result = document.getElementById('qty<?php echo esc_html($qtyloop) ;?>'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
+	<button onclick="var result = document.getElementById('qty<?php echo esc_html($qtyloop) ;?>'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus"></i></button>
 </div>
-
