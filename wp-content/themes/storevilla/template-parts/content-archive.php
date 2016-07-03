@@ -8,7 +8,6 @@
  */
 
 ?>
-웹진 리스트 화면
 <article id="post-<?php the_ID(); ?>" <?php post_class('storevilla-blog'); ?>>
 
 	<?php
@@ -26,26 +25,13 @@
 
 	<div class="sv-post-content">
 
-		<div class="post-meta category-name">
-			<span><?php the_category( ', ' ); ?></span>
-		</div>
-
 		<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-		<div class="post-meta">
-			<span class="date"><?php the_time('M, d Y'); ?></span>
-		</div>
-
 		<div class="description"><?php the_excerpt(); ?></div>
-		<a href="<?php the_permalink(); ?>" class="sv-btn-countinuereading"><?php _e('countinue reading','storevilla'); ?></a>
+    <div class="post-meta">
+      <span class="date"><?php the_time('M, d Y'); ?></span>
+      <a href="<?php the_permalink(); ?>" class="sv-btn-countinuereading"><?php _e('countinue reading','storevilla'); ?></a>
+    </div>
 
-		<div class="sv-post-foot">
-			<?php the_tags(''); ?>
-			<div class="post-meta pull-right">
-				<span class="sv-post-author"><?php _e('Post By :','storevilla'); ?>
-					<?php the_author_link(); ?>
-				</span>
-			</div>
-		</div>
 	</div>
 
 </article><!-- #post-## -->
