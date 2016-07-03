@@ -1,10 +1,10 @@
 jQuery(document).ready(function ($) {
 
-   /* Main Menu Responsive Toggle */   
+   /* Main Menu Responsive Toggle */
    $(".menu-toggle").click(function () {
        $(this).toggleClass("on");
        $("#primary-menu").slideToggle();
-   });   
+   });
 
    /* Mani Banner Slider */
     $('.store-gallery').lightSlider({
@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
             $('#store-gallery').removeClass('cS-hidden');
         }
     });
-    
+
     /* Testimonial Slider */
     $('#testimonial-area').lightSlider({
         adaptiveHeight:false,
@@ -37,7 +37,7 @@ jQuery(document).ready(function ($) {
             $('.testimonial-area').removeClass('cS-hidden');
         }
     });
-    
+
     /* Brands Logo Slider */
     $('#brands-logo').lightSlider({
         adaptiveHeight:false,
@@ -70,14 +70,14 @@ jQuery(document).ready(function ($) {
                 }
             ]
     });
-    
+
 
     /* Only Category */
 
     $('.widget_storevilla_cat_widget_area').each(function(){
-        
+
         var Id = $(this).attr('id');
-        var NewId = Id; 
+        var NewId = Id;
 
         NewId = $('#'+Id+" .category-slider").lightSlider({
             item:4,
@@ -108,10 +108,10 @@ jQuery(document).ready(function ($) {
         });
 
         $('#'+Id+' .villa-lSPrev').click(function(){
-            NewId.goToPrevSlide(); 
+            NewId.goToPrevSlide();
         });
         $('#'+Id+' .villa-lSNext').click(function(){
-            NewId.goToNextSlide(); 
+            NewId.goToNextSlide();
         });
 
     });
@@ -119,9 +119,9 @@ jQuery(document).ready(function ($) {
 
     /* Only Latest Product */
     $('.widget_storevilla_latest_product_cat_widget_area').each(function(){
-        
+
         var Id = $(this).attr('id');
-        var NewId = Id; 
+        var NewId = Id;
 
         var NewId = $('#'+Id+" .latest-product-slider").lightSlider({
             item:4,
@@ -153,10 +153,10 @@ jQuery(document).ready(function ($) {
         });
 
         $('#'+Id+' .villa-lSPrev').click(function(){
-            NewId.goToPrevSlide(); 
+            NewId.goToPrevSlide();
         });
         $('#'+Id+' .villa-lSNext').click(function(){
-            NewId.goToNextSlide(); 
+            NewId.goToNextSlide();
         });
 
     });
@@ -164,9 +164,9 @@ jQuery(document).ready(function ($) {
 
     /* Only Product Latest,Features,On Salse, Up Salse Product */
     $('.widget_storevilla_product_widget_area').each(function(){
-        
+
         var Id = $(this).attr('id');
-        var NewId = Id; 
+        var NewId = Id;
 
         var NewId = $('#'+Id+" .store-product").lightSlider({
             item:4,
@@ -198,10 +198,10 @@ jQuery(document).ready(function ($) {
         });
 
         $('#'+Id+' .villa-lSPrev').click(function(){
-            NewId.goToPrevSlide(); 
+            NewId.goToPrevSlide();
         });
         $('#'+Id+' .villa-lSNext').click(function(){
-            NewId.goToNextSlide(); 
+            NewId.goToNextSlide();
         });
 
     });
@@ -235,17 +235,17 @@ jQuery(document).ready(function ($) {
                 }
             ]
         });
-    
+
      /* Product Single Page Thumbinal Images */
-    
+
     $(".storevilla-thumbnails").lightSlider({
         item:3,
         loop:true,
         pager:false,
         speed:600,
     });
-    
-    
+
+
     // ScrollUp
 	jQuery(window).scroll(function() {
 		if (jQuery(this).scrollTop() > 1000) {
@@ -261,7 +261,7 @@ jQuery(document).ready(function ($) {
 		}, 2000);
 		return false;
 	});
-    
+
     jQuery('.store-promo-wrap').each(function(){
         var dis = $(this);
         $(window).resize(function(){
@@ -269,9 +269,11 @@ jQuery(document).ready(function ($) {
           var imageDataWidth = dis.width();
             imageProportions = 240/374;
             imageProportionsHeight = parseInt(imageDataWidth*imageProportions, 10);
-            dis.find('.sv-promo-area').height(imageProportionsHeight);         
+            dis.find('.sv-promo-area').height(imageProportionsHeight);
         }).resize();
 
     });
-    
+
+    //webzine list ordered
+    $('#main .w_child').jaliswall({item:'.w_li'});
 });

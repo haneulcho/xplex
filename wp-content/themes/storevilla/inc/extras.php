@@ -454,6 +454,18 @@ function storevilla_woocommerce_template_loop_product_title(){
         <h3><a title="<?php the_title_attribute(); ?>" href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
     </div>
 <?php }
+
+/* webzine 웹진 페이지 요약문 글자수 줄이기 */
+function fix_the_excerpt($text) {
+  return str_replace('[...]', '...', $text);
+}
+add_filter('the_excerpt', 'fix_the_excerpt');
+
+function custom_excerpt_length( $length ) {
+	return 30;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
 add_action( 'woocommerce_shop_loop_item_title', 'storevilla_woocommerce_template_loop_product_title', 10 );
 
 /* Product Add to Cart and View Details */

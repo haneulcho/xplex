@@ -204,8 +204,9 @@ function storevilla_scripts() {
 
 	//wp_enqueue_script( 'storevilla-retina', get_template_directory_uri() . '/js/retina.js', array('jquery'), esc_attr( $theme_version ), true );
 
-	wp_enqueue_script( 'storevilla-common', get_template_directory_uri() . '/js/common.js', array('jquery'), esc_attr( $theme_version ), true );
+	wp_enqueue_script( 'storevilla-jaliswall', get_template_directory_uri() . '/js/jaliswall.js', array(), esc_attr( $theme_version ), true );
 
+	wp_enqueue_script( 'storevilla-common', get_template_directory_uri() . '/js/common.js', array('jquery'), esc_attr( $theme_version ), true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

@@ -28,13 +28,14 @@ get_header(); ?>
 					$cat_id = $cat->cat_ID;
 					$cat_slug = $cat->slug;
 					$cat_name = $cat->name;
+					$limit_per_page = 6;
 
 					$cats[] = array('id' => 49, 'slug' => 'publishmarketing', 'name' => '유재건의 출판마케팅 이야기');
 					$cats[] = array('id' => 19, 'slug' => 'dear-reader', 'name' => '디어리더');
 					$cats[] = array('id' => 52, 'slug' => 'interview', 'name' => '인터뷰 (Fox 이야기)');
 					$cats[] = array('id' => 48, 'slug' => 'p-note', 'name' => '퍼블리셔\'스 노트');
 
-					echo '<h1 class="page-title">'.$cat_name.'</h1>';
+					echo '<h1 class="page-title">웹진</h1>';
 				?>
 				<ul class="w_header_cat">
 					<?php
@@ -47,7 +48,7 @@ get_header(); ?>
 							} else {
 								$w_class = '';
 							}
-							echo '<li class="'.$w_class.'"><a href="./'.$cslug.'">'.$cname.'</a></li>';
+							echo '<li class="'.$w_class.'"><a href="./'.$cslug.'"><i class="fa fa-angle-right" aria-hidden="true"></i>'.$cname.'</a></li>';
 						}
 					?>
 				</ul>
@@ -59,18 +60,19 @@ get_header(); ?>
 					$cid = $row['id'];
 					$cslug = $row['slug'];
 					$cname = $row['name'];
-					$cat_query = new WP_Query("cat=".$cid."&posts_per_page=3");
+					$cat_query = new WP_Query("cat=".$cid."&posts_per_page=".$limit_per_page);
 
 					/* Start the Loop */
-					echo '<div class="w_group"><h2>'.$cname.'<a href="./'.$cslug.'">전체 글 보기</a></h2>';
+					echo '<div class="w_group"><h2>'.$cname.'<a href="./'.$cslug.'">전체 글 보기</a></h2><div class="w_child">';
 
 					while ( $cat_query->have_posts() ) : $cat_query->the_post();
 					get_template_part( 'template-parts/content', 'archive' );
 					endwhile;
 
-					echo '</div>';
+					echo '</div></div>';
 				} // end foreach
 			} else {
+				echo '<div class="w_group"><h2>'.$cat_name.'</h2><div class="w_child">';
 				/* Start the Loop */
 				while ( have_posts() ) : the_post();
 
@@ -82,11 +84,12 @@ get_header(); ?>
 					get_template_part( 'template-parts/content', 'archive' );
 
 				endwhile;
+				echo '</div></div>';
 				the_posts_pagination( array(
 					'prev_text' => '&larr;',
 					'next_text' => '&rarr;'
 				) );
-			}
+			} // end else
 
 		else :
 
@@ -96,7 +99,6 @@ get_header(); ?>
 
 		</main><!-- #main -->
 	</div><!-- #primary -->
-
 <?php get_sidebar();
 
 get_footer();

@@ -3416,7 +3416,7 @@ blog post css
     overflow: hidden;
     position: relative;
     display: block;
-    margin: 0 0 25px !important;
+    margin: 0 !important;
 }
 .storevilla-blog figure img {
     vertical-align: top;
@@ -3450,10 +3450,28 @@ blog post css
     position: relative;
     width: 100%;
 }
+.storevilla-blog .sv-post-content {
+  padding:0 30px 23px;
+}
+.storevilla-blog .sv-post-content h3 {
+  padding-top:24px;
+  margin-bottom: 15px;
+}
+.storevilla-blog .sv-post-content h3 a {
+  color:#333;
+  margin:0;
+  font-size:17px;
+  letter-spacing: -1px;
+  line-height:1.4;
+}
+.storevilla-blog .sv-post-content .description {
+  margin-bottom: 15px;
+  font-size:12px;
+  line-height:1.5;
+}
 .storevilla-blog .sv-post-content,
 .storevilla-blog .entry-content {
-    text-align: center;
-    color: #8b8b8b;
+    color: #777777;
 }
 .storevilla-blog .sv-post-content .category-name span {
     color: #888;
@@ -3471,8 +3489,7 @@ blog post css
 }
 .storevilla-blog .sv-post-content .category-name span a,
 .storevilla-blog .sv-post-content .post-meta .date  {
-    font-style: italic;
-    font-size: 14px;
+    font-size: 11px;
     color: #888;
     transition: all 300ms ease-in-out 0s;
     -webkit-transition: all 300ms ease-in-out 0s;
@@ -3484,22 +3501,11 @@ blog post css
 }
 .storevilla-blog .sv-post-content .post-meta .date {
     position: relative;
-    padding: 0 10px;
+    margin:0;
+    padding:0;
 }
-.storevilla-blog .sv-post-content .post-meta .date:before,
-.storevilla-blog .sv-post-content .post-meta .date:after {
-    background: #8b8b8b;
-    content: "";
-    display: block;
-    height: 1px;
-    left: 100%;
-    position: absolute;
-    top: 50%;
-    width: 80px;
-}
-.storevilla-blog .sv-post-content .post-meta .date:before {
-    left: auto;
-    right: 100%;
+.storevilla-blog .sv-post-content .post-meta .date i {
+  margin-right:5px;
 }
 .storevilla-blog h3 a {
     color: #424242;
@@ -3517,9 +3523,8 @@ blog post css
     -webkit-transition: all 300ms ease-in-out 0s;
 }
 .storevilla-blog .sv-post-content .post-meta {
-    margin-bottom: 20px;
+  overflow:hidden;
 }
-.storevilla-blog .sv-post-content .description,
 .storevilla-blog .entry-content,
 .single-product div[itemprop="description"] {
     text-align: left;
@@ -3533,35 +3538,25 @@ blog post css
 .single-product div[itemprop="description"] {
     color: #8b8b8b;
     padding-top:20px;
+    font-size:12px;
     border-top:1px solid #efefef;
 }
 .storevilla-blog .sv-post-content a.sv-btn-countinuereading {
     display: inline-block;
+    float:right;
     font-weight: 400;
-    line-height: 14px;
-    margin: 10px 0 10px;
-    padding: 5px 10px;
+    line-height: 1;
+    color:#888;
+    background:#f8f8f8;
+    margin:0 0 0 10px;
+    padding: 8px 12px;
     position: relative;
-    text-transform: capitalize;
     vertical-align: middle;
-    color: #888;
-
-    font-size: 14px;
+    font-size: 12px;
+    letter-spacing:-0.7px;
 }
-.storevilla-blog .sv-post-content a.sv-btn-countinuereading:before,
-.storevilla-blog .sv-post-content a.sv-btn-countinuereading:after {
-    background: #888 none repeat scroll 0 0;
-    content: "";
-    display: block;
-    height: 82%;
-    left: 0;
-    position: absolute;
-    top: 15%;
-    width: 1px;
-}
-.storevilla-blog .sv-post-content a.sv-btn-countinuereading:before {
-    left: auto;
-    right: 0
+.storevilla-blog .sv-post-content a.sv-btn-countinuereading i {
+  margin-right:6px;
 }
 .storevilla-blog .sv-post-foot a {
     font-size: 13px;
@@ -3571,8 +3566,10 @@ blog post css
     -webkit-transition: all 300ms ease-in-out 0s;
 }
 .storevilla-blog .sv-post-foot a:hover,
+.w_group ul li:first-child a.sv-btn-countinuereading,
 .storevilla-blog .sv-post-content a.sv-btn-countinuereading:hover {
-    color: #30cfef;
+    color: #fff;
+    background:#3ea6fe;
     transition: all 300ms ease-in-out 0s;
     -webkit-transition: all 300ms ease-in-out 0s;
 }
@@ -4909,11 +4906,14 @@ button.product_type_external css
 .webzine #secondaryleft ul.sub-menu li a:hover,
 .webzine .sv_search_form input[type="text"]:focus,
 .webzine h1.page-title,
-.webzine .storevilla-blog h3 a:hover
+.webzine .storevilla-blog h3 a:hover,
+.w_header_cat li a:hover,
+.w_header_cat li.w_active a
  {
   color:#3ea6fe;
 }
-.webzine #secondaryleft .widget_nav_menu h3:after {
+.webzine #secondaryleft .widget_nav_menu h3:after,
+.w_group h2 > a:hover {
   background:#3ea6fe;
 }
 .webzine #xbreadcrumb {height:50px;background-color:#3ea6fe;color:#fff;}
@@ -4922,4 +4922,86 @@ button.product_type_external css
     background: #3ea6fe;
     border-color: #3ea6fe;
     color: #fff;
+}
+.w_list header.page-header {height:32px;margin-bottom:45px;}
+.w_list h1.page-title {
+  float:left;
+  position:relative;
+  margin: 0 0 0 -2px;
+  font-size:30px;
+  line-height:1;
+}
+.w_list h1.page-title:after {
+  background: #3ea6fe;
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 2px;
+  left: 2px;
+  top: 50px;
+}
+.w_header_cat {
+  float:right;
+  margin:10px 0 0 0;
+  padding:0;
+}
+.w_header_cat li {
+  float:left;
+  display:inline-block;
+  margin-left:30px;
+}
+.w_header_cat li a {
+  display:block;
+  padding: 0;
+  color:#666;
+  font-size:15px;
+  font-weight:400;
+  letter-spacing:-0.5px;
+  transition: all 300ms ease-in-out 0s;
+  -webkit-transition: all 300ms ease-in-out 0s;
+}
+.w_header_cat li a i {
+  margin-right:6px;
+  vertical-align:2px;
+  line-height:1;
+  font-size:12px;
+  color:#ccc;
+}
+.w_group {
+  clear:both;
+  margin-bottom:20px;
+  padding:50px 50px 35px;
+  background:#fcfcfc;
+}
+.w_group h2 {
+  margin:0 0 25px 0;
+  color:#333;
+  font-size:24px;
+  letter-spacing: -1px;
+  line-height:1;
+}
+.w_group h2 > a {
+  display:inline-block;
+  margin-left:18px;
+  padding:6px 15px;
+  font-size:13px;
+  color:#fff;
+  background:#dfaf43;
+  letter-spacing:-0.5px;
+  vertical-align: 3px;
+  transition: all 300ms ease-in-out 0s;
+  -webkit-transition: all 300ms ease-in-out 0s;
+}
+.w_child, .wall-column {display:block;position:relative;}
+.w_child .wall-column, .w_child article {
+  float:left;
+  width:32%;
+  margin-left:2%;}
+.w_child {overflow:hidden;}
+.w_child .wall-column.spot_margin {margin-left:0;}
+.w_child .w_li {
+  border:1px solid rgb(246, 246, 246);
+  background-color: #fff;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.07);
 }
