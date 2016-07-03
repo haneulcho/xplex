@@ -20,10 +20,12 @@ if ( ! comments_open() ) {
 <div id="reviews">
 	<div id="comments">
 		<h2><?php
-			if ( get_option( 'woocommerce_enable_review_rating' ) === 'yes' && ( $count = $product->get_review_count() ) )
-				printf( _n( '%s review for %s', '%s reviews for %s', $count, 'woocommerce' ), $count, get_the_title() );
-			else
-				_e( 'Reviews', 'woocommerce' );
+			$r_title = '<i class="fa fa-comments-o" aria-hidden="true"></i>&ldquo;'.get_the_title().'&rdquo;';
+			if ( get_option( 'woocommerce_enable_review_rating' ) === 'yes' && ( $count = $product->get_review_count() ) ) {
+				echo $r_title.'에 <span>'.$count.'</span>개의 리뷰가 있습니다.';
+			} else {
+				echo $r_title.'에 아직 리뷰가 없네요.';
+			}
 		?></h2>
 
 		<?php if ( have_comments() ) : ?>
@@ -42,10 +44,6 @@ if ( ! comments_open() ) {
 				echo '</nav>';
 			endif; ?>
 
-		<?php else : ?>
-
-			<p class="woocommerce-noreviews"><?php _e( 'There are no reviews yet.', 'woocommerce' ); ?></p>
-
 		<?php endif; ?>
 	</div>
 
@@ -55,9 +53,8 @@ if ( ! comments_open() ) {
 			<div id="review_form">
 				<?php
 					$commenter = wp_get_current_commenter();
-
 					$comment_form = array(
-						'title_reply'          => have_comments() ? __( 'Add a review', 'woocommerce' ) : __( 'Be the first to review', 'woocommerce' ) . ' &ldquo;' . get_the_title() . '&rdquo;',
+						'title_reply'          => have_comments() ? '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>지금 리뷰를 작성해 주세요!' : '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>지금 첫 리뷰를 작성해 주세요!',
 						'title_reply_to'       => __( 'Leave a Reply to %s', 'woocommerce' ),
 						'comment_notes_before' => '',
 						'comment_notes_after'  => '',
@@ -73,7 +70,7 @@ if ( ! comments_open() ) {
 					);
 
 					if ( get_option( 'woocommerce_enable_review_rating' ) === 'yes' ) {
-						$comment_form['comment_field'] = '<p class="comment-form-rating"><label for="rating">' . __( 'Your Rating', 'woocommerce' ) .'</label><select name="rating" id="rating">
+						$comment_form['comment_notes_before'] = '<p class="comment-form-rating"><label for="rating">' . __( 'Your Rating', 'woocommerce' ) .'</label><select name="rating" id="rating">
 							<option value="">' . __( 'Rate&hellip;', 'woocommerce' ) . '</option>
 							<option value="5">' . __( 'Perfect', 'woocommerce' ) . '</option>
 							<option value="4">' . __( 'Good', 'woocommerce' ) . '</option>
@@ -83,7 +80,7 @@ if ( ! comments_open() ) {
 						</select></p>';
 					}
 
-					$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . __( 'Your Review', 'woocommerce' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>';
+					$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . __( 'Your Review', 'woocommerce' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="여기에 리뷰를 작성하세요."></textarea></p>';
 
 					comment_form( apply_filters( 'woocommerce_product_review_comment_form_args', $comment_form ) );
 				?>

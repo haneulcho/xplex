@@ -293,6 +293,14 @@ if ( ! function_exists( 'storevilla_word_count' ) ) {
     }
 }
 
+/* moving the comment text field to bottom */
+function xplex_move_comment_field_to_bottom( $fields ) {
+	$comment_field = $fields['comment'];
+	unset( $fields['comment'] );
+	$fields['comment'] = $comment_field;
+	return $fields;
+}
+add_filter( 'comment_form_fields', 'xplex_move_comment_field_to_bottom' );
 
 /**
  * Store Villa Header Promo Function Area
