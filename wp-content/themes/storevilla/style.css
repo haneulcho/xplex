@@ -913,7 +913,7 @@ object {
 ======================================================================
 */
 .store-container {
-	max-width: 1180px;
+	max-width: 1140px;
 	margin: 0 auto;
 }
 article .entry-content ul {
@@ -943,26 +943,11 @@ p {
     margin: 0 0 10px;
 }
 h1, h2, h3, h4, h5, h6 {
+    margin:0;
+    padding:0;
     font-weight: 400;
 }
-h1 {
-    font-size: 36px;
-}
-h2 {
-    font-size: 30px;
-}
-h3 {
-    font-size: 26px;
-}
-h4 {
-    font-size: 20px;
-}
-h5 {
-    font-size: 18px;
-}
-h6 {
-    font-size: 16px;
-}
+
 body {
     line-height: 1.5
 }
@@ -3194,7 +3179,7 @@ inner pages css
 */
 #primary {
     float: right;
-    width: 75%;
+    width: 76%;
     padding-top:53px;
     max-width:860px;
 }
@@ -3208,7 +3193,7 @@ inner pages css
 }
 #secondaryleft {
     float: left;
-    width: 26%;
+    width: 23%;
     max-width:230px;
     padding: 53px 0 0 0;
 }
@@ -3216,7 +3201,7 @@ inner pages css
 .heroimg h2 {position:absolute;font-size:0;text-indent:-9999px;line-height:0;}
 .banner_letter {overflow:hidden;margin:20px 0 5px;padding:8px 0;border-top:1px dashed #eeeeee;border-bottom:1px dashed #eeeeee;}
 .banner_letter .main-widget-wrap {float:right;width:350px;max-height:150px;padding:20px 0 0;}
-.banner_letter .main-widget-wrap h3 {margin:0;line-height:1;}
+.banner_letter .main-widget-wrap h3 {margin:0 0 15px;line-height:1;}
 .main-widget-wrap .mc-field-group input {width:235px;}
 #secondaryleft .mc-field-group input {width:100%;margin-bottom:9px;font-size:12px;font-weight:300;letter-spacing:-0.5px;}
 .mc-field-group input {float:left;display:inline-block;padding:8px 13px;border:1px dashed #f06363;background:url('images/mail_plain.jpg') no-repeat 198px 4px;color:#f06363;font-size:13px;font-weight:400;outline:0;border-radius:0;}
@@ -3224,8 +3209,7 @@ inner pages css
 #mc-embedded-subscribe {float:right;width:105px;height:37px;padding:0;border-radius:0;background-color:#f06363;color:#ffffff;font-weight:500;border:0;box-shadow:none;font-size:15px;text-shadow:none;line-height:1;outline:0;}
 #mc-embedded-subscribe:hover,
 #mc-embedded-subscribe:focus {background-color:#df4848;}
-.main-widget-wrap h4, #secondaryleft h4 {font-size:12px;font-weight:400;color:#888888;letter-spacing:-0.5px;line-height:1.3;}
-#secondaryleft h4 {margin:0 0 13px;}
+.main-widget-wrap h4, #secondaryleft h4 {margin:0 0 13px;font-size:12px;font-weight:400;color:#888888;letter-spacing:-0.5px;line-height:1.3;}
 #secondaryleft #mc_embed_signup {overflow:hidden;}
 #secondaryleft #mc-embedded-subscribe {height:34px;font-size:14px;}
 /*
@@ -3279,7 +3263,7 @@ end of css
 woocommerce css
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 */
-.woocommerce ul.products li.product h3 {color:#333;font-size:16px;font-weight:500;padding:.8em 0 3px;}
+.woocommerce ul.products li.product h3 {color:#333;font-size:16px;font-weight:500;padding:16px 0 5px;line-height:1.4;}
 .woocommerce ul.products li.product h3 > div {font-weight:300;}
 .woocommerce ul.products li.product h3,
 .woocommerce ul.products li.product .price {margin-left:20px;margin-right:20px;}
@@ -3387,7 +3371,7 @@ woocommerce css
 /*
 single pages
 */
-.woocommerce div.product div.images {margin-bottom:40px;}
+.woocommerce div.product div.images {margin-bottom:42px;}
 .woocommerce .woocommerce-product-rating .star-rating,
 .woocommerce-review-link {
     margin: 0 10px 0 0;
@@ -3408,7 +3392,8 @@ a.woocommerce-main-image {
     display: block;
     width:400px;
 }
-.woocommerce div.product div.summary {
+.woocommerce #main div.product div.summary {
+    width:49%;
     margin-top: 0;
 }
 .woocommerce div.product form.cart,
@@ -4145,12 +4130,31 @@ sidebar pagelayout css
     margin-bottom: 15px;
 
 }
+/* related products */
 .related.products h2 {
-    color: #6a6a6a;
-
-    text-transform: uppercase;
-    font-size: 26px;
+    display:inline-block;
+    height:40px;
+    padding:12px 26px;
+    font-size:16px;
+    font-weight:500;
+    line-height:1;
+    color:#fff;
+    background:#b7aa8c;
 }
+.related.products ul.products {
+  margin:0 0 45px 0;
+  padding:40px 45px 0;
+  background-color:#fcfcfc;
+}
+
+.related.products ul.products ul.add-to-links li:nth-child(2) {
+  display:none;
+}
+.related.products ul.products ul.add-to-links li:nth-child(3) {
+  width:72%;
+}
+.related.products ul.products .product-button-wrap a.villa-details:before {left:46px;}
+.related.products ul.products .product-button-wrap a.villa-details {padding-left:18px;}
 /*
 wc-proceed-to-checkout
 */
@@ -4337,17 +4341,20 @@ woocommerce-tabs css
     border:none;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li {
-    margin: 0 5px 0 -5px;
+    margin: 0 0 0 -5px;
+    padding:0;
     border: none;
     border-radius: 0;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li a {
-
-    font-weight: 400;
+    height:40px;
+    padding:12px 35px;
+    font-weight: 500;
+    line-height:1;
 }
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active,
 .woocommerce div.product .woocommerce-tabs ul.tabs li:hover {
-    background: #0091D5;
+    background: #dfaf43;
     color: #fff;
     transition: all 300ms ease-in-out 0s;
     -webkit-transition: all 300ms ease-in-out 0s;
@@ -4363,6 +4370,27 @@ woocommerce-tabs css
     border-right: 1px solid #ddd;
     padding: 20px 20px;
 }
+.woocommerce div.product .woocommerce-tabs .panel.entry-content {
+  padding:40px 45px;
+  font-size:14.5px;
+  letter-spacing:-0.5px;
+  line-height:1.55;
+  color:#555;
+  background-color:#fcfcfc;
+}
+.woocommerce div.product .woocommerce-tabs .panel.entry-content p {margin-bottom:1.8em;}
+.woocommerce div.product .woocommerce-tabs .panel.entry-content h2,
+.woocommerce div.product .woocommerce-tabs .panel.entry-content h3 {
+  font-size:1.2em;
+  margin:0 0 5px;
+}
+.woocommerce div.product .woocommerce-tabs .panel.entry-content h4 {
+  font-size:1.2em;
+  margin:0 0 .618em;
+}
+.woocommerce div.product .woocommerce-tabs .panel.entry-content h2,
+.woocommerce div.product .woocommerce-tabs .panel.entry-content h3,
+.woocommerce div.product .woocommerce-tabs .panel.entry-content h4 {font-weight:500;}
 /*form css*/
 .woocommerce form.checkout_coupon, .woocommerce form.login, .woocommerce form.register {
     border-radius: 0;
