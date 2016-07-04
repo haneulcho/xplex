@@ -6,6 +6,8 @@
  *
  * @package Store_Villa
  */
+ // WooFramework init
+ require_once ( get_template_directory() . '/functions/admin-init.php' );
 
 if ( ! function_exists( 'storevilla_setup' ) ) :
 /**
