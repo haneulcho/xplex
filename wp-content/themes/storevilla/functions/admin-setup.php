@@ -117,7 +117,7 @@ function woo_option_setup () {
 			}
 		}
 	}
-	
+
 	// Allow child themes/plugins to filter here.
 	$woo_array = apply_filters( 'woo_options_array', $woo_array );
 	update_option( 'woo_options', $woo_array );
@@ -158,7 +158,7 @@ function woothemes_wp_head() {
 		woo_shortcode_stylesheet();
 	// Output custom.css
 	if ( function_exists( 'woo_output_custom_css' ) )
-		woo_output_custom_css();	
+		woo_output_custom_css();
 	do_action( 'woothemes_wp_head_after' );
 } // End woothemes_wp_head()
 }
@@ -194,9 +194,9 @@ function woo_output_alt_stylesheet() {
 		$style = get_option( 'woo_alt_stylesheet' );
 		$style = esc_attr( strtolower( strip_tags( trim( $style ) ) ) );
 		if( $style != '' ) {
-			echo '<link href="'. esc_url( get_template_directory_uri() . '/styles/'. $style ) . '" rel="stylesheet" type="text/css" />' . "\n";
+			//echo '<link href="'. esc_url( get_template_directory_uri() . '/styles/'. $style ) . '" rel="stylesheet" type="text/css" />' . "\n";
 		} else {
-			echo '<link href="'. esc_url( get_template_directory_uri() . '/styles/default.css' ) . '" rel="stylesheet" type="text/css" />' . "\n";
+			//echo '<link href="'. esc_url( get_template_directory_uri() . '/styles/default.css' ) . '" rel="stylesheet" type="text/css" />' . "\n";
 		}
 	}
 } // End woo_output_alt_stylesheet()
@@ -272,21 +272,6 @@ function woo_head_css () {
 		echo stripslashes( $output );
 	}
 } // End woo_head_css()
-}
-
-if ( ! function_exists( 'woo_output_custom_css' ) ) {
-/**
- * Output the HTML for the "custom.css" file.
- * @since  2.0.0
- * @return void
- */
-function woo_output_custom_css() {
-	$theme_dir = get_template_directory_uri();	
-	if ( is_child_theme() && file_exists( get_stylesheet_directory() . '/custom.css' ) )
-		$theme_dir = get_stylesheet_directory_uri();
-
-	echo "\n" . '<!-- Custom Stylesheet -->' . "\n" . '<link href="'. esc_url( $theme_dir . '/custom.css' ) . '" rel="stylesheet" type="text/css" />' . "\n";
-} // End woo_output_custom_css()
 }
 
 /**
