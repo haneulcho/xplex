@@ -10,7 +10,7 @@
 $post_sidebar = 'leftsidebar';
 
 // webzine 카테고리이면서 글 보기 화면일 때만 왼쪽 사이드바를 출력한다.
-if( is_category(array('webzine','publishmarketing','dear-reader','interview','p-note')) ) {
+if( is_category(array('webzine','publishmarketing','dear-reader','interview','p-note','kids-book-story')) ) {
 	if( !is_singular(array('post')) ) {
 		$webzine_sidebar = false;
 	} else {

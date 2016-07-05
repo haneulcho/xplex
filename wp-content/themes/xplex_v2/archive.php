@@ -32,10 +32,11 @@ get_header(); ?>
 
 					$cats[] = array('id' => 49, 'slug' => 'publishmarketing', 'name' => '유재건의 출판마케팅 이야기');
 					$cats[] = array('id' => 19, 'slug' => 'dear-reader', 'name' => '디어리더');
-					$cats[] = array('id' => 52, 'slug' => 'interview', 'name' => '인터뷰 (Fox 이야기)');
 					$cats[] = array('id' => 48, 'slug' => 'p-note', 'name' => '퍼블리셔\'스 노트');
+					$cats[] = array('id' => 69, 'slug' => 'kids-book-story', 'name' => '고은경의 어린이책 이야기');
+					$cats[] = array('id' => 52, 'slug' => 'interview', 'name' => '인터뷰 (Fox 이야기)');
 
-					echo '<h1 class="page-title">웹진</h1>';
+					echo '<h1 class="page-title">X-저널</h1>';
 				?>
 				<ul class="w_header_cat">
 					<?php

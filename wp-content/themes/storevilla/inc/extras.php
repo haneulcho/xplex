@@ -24,7 +24,7 @@ function storevilla_body_classes( $classes ) {
 		$classes[] = 'hfeed';
 	}
 
-	if(is_category(array('webzine','publishmarketing','dear-reader','interview','p-note')) || is_singular(array('post'))) {
+	if(is_category(array('webzine','publishmarketing','dear-reader','interview','p-note','kids-book-story')) || is_singular(array('post'))) {
 		if(!$theme_webzine){
 				$theme_webzine = 'webzine';
 		}
