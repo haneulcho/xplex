@@ -3263,6 +3263,10 @@ end of css
 woocommerce css
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 */
+.woocommerce ul.products li.product > a {display:inline-block;}
+.woocommerce ul.products li.product .item-img:hover + a h3,
+.woocommerce ul.products li.product > a:hover h3 {color:#f06363;transition: all 300ms ease-in-out 0s;
+    -webkit-transition: all 300ms ease-in-out 0s;}
 .woocommerce ul.products li.product h3 {color:#333;font-size:16px;font-weight:500;padding:16px 0 5px;line-height:1.4;}
 .woocommerce ul.products li.product h3 > div {font-weight:300;margin-top:2px;}
 .woocommerce ul.products li.product h3,
@@ -3337,17 +3341,17 @@ woocommerce css
     display: block;
 }
 .woocommerce #primary ul.products li a img {
-    transform: translateZ(0px);
+    /*transform: translateZ(0px);
     -webkit-transform: translateZ(0px);
     transition-duration: 1s;
     -webkit-transition-duration: 1s;
-    transition-property: transform;
+    transition-property: transform;*/
     vertical-align: middle;
     display: inline-block;
 }
 .woocommerce #primary ul.products li a:hover img {
-    transform: scale(1.3);
-    -webkit-transform: scale(1.3);
+    /*transform: scale(1.3);
+    -webkit-transform: scale(1.3);*/
 }
 .woocommerce ul.products li.product a img {
     margin-bottom: 0;
