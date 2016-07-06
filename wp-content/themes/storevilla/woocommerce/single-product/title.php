@@ -12,8 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 global $post, $product, $woocommerce;
 $availability = $product->get_availability();
+$xterms = wp_get_post_terms($product->id,'product_cat');
+foreach ( $xterms as $xterm ) $xcategories[] = $xterm->slug;
+
 if ( $product->is_in_stock() ) {
-	$availability['availability'] = __('신청가능', 'woocommerce');
+	if ( in_array('xbooks', $xcategories) ) {
+		$availability['availability'] = __('구매가능', 'woocommerce');
+	} else {
+		$availability['availability'] = __('신청가능', 'woocommerce');
+	}
 	$message = '<span class="in_stock">' . esc_html( $availability['availability'] ) . '</span>';
 }
 if ( !$product->is_in_stock() ) {

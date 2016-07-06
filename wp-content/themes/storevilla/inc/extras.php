@@ -377,6 +377,27 @@ if ( ! function_exists( 'xplex_main_heroimg' ) ) {
     }
 }
 
+/* 카테고리가 books일 때 신청하기를 구매하기로 텍스트 수정 */
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text' );
+function woo_custom_cart_button_text() {
+	global $product;
+	$terms = wp_get_post_terms($product->id,'product_cat');
+	foreach ( $terms as $term ) $categories[] = $term->slug;
+	if ( in_array('xbooks', $categories) ) {
+		return __( '구매하기', 'woocommerce' );
+	} else {
+		return __( '신청하기', 'woocommerce' );
+	}
+}
+
+add_filter( 'woocommerce_product_add_to_cart_text', 'woo_archive_custom_cart_button_text' );
+function woo_archive_custom_cart_button_text() {
+	if( has_term( array('xbooks'), 'product_cat' ) ) {
+		return __( '구매하기', 'woocommerce' );
+	} else {
+		return __( '신청하기', 'woocommerce' );
+	}
+}
 
 /* Custom Customizer Class */
 
