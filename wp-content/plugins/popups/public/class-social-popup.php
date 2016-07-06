@@ -284,14 +284,14 @@ class SocialPopup {
 
 
 		if ( empty( $spus) ) {
-			$post_content ='<h1 style="text-align: center;">Support us!</h1>
-<p style="text-align: center;">If you like this site please help and make click on any of these buttons!</p>
+			$post_content ='<h1 style="text-align: center;">팝업창 제목입니다!</h1>
+<p style="text-align: center;">팝업창 내용입니다! 아래는 소셜 버튼 삽입 shortcode 입니다. 언제든지 수정하세요.</p>
 <p style="text-align: center;">[spu-facebook][spu-google][spu-twitter]</p>';
 			$defaults = array(
-			  'post_status'           => 'draft', 
+			  'post_status'           => 'draft',
 			  'post_type'             => 'spucpt',
 			  'post_content'		  => $post_content,
-			  'post_title'			  => 'Popups Example'
+			  'post_title'			  => '팝업창 생성 예시 (편집을 눌러 수정하세요.)'
 			);
 			wp_insert_post( $defaults, $wp_error );
 		}
@@ -349,13 +349,13 @@ class SocialPopup {
 		}
 
 		wp_register_style( 'spu-public-css', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
-		
+
 		wp_register_script( $handle, $js_url, array( 'jquery' ), self::VERSION, true );
-		
+
 		wp_register_script( 'spu-facebook', '//connect.facebook.net/'.get_locale().'/sdk.js#xfbml=1&version=v2.3', array('jquery'), null, FALSE);
 
 		wp_register_script( 'spu-twitter', '//platform.twitter.com/widgets.js', array('jquery'), self::VERSION, FALSE);
-		
+
 		wp_register_script( 'spu-google', '//apis.google.com/js/plusone.js', array('jquery'), self::VERSION, FALSE);
 
 	}
@@ -500,7 +500,7 @@ class SocialPopup {
 	 * @return string          [description]
 	 */
 	function facebook_shortcode( $atts, $content ) {
-		
+
 		extract( shortcode_atts( array(
 			'href' 			=> apply_filters( 'spu/social/fb_href', 'https://www.facebook.com/pages/Timersys/146687622031640' ),
 			'layout' 	 	=> 'button_count', // standard, box_count, button_count, button
@@ -509,7 +509,7 @@ class SocialPopup {
 			'action' 		=> 'like', // recommend
 			'width'			=> '',
 		), $atts ) );
-		
+
 		$layout = strtolower( trim( $layout ) );
 		$action = strtolower( trim( $action ) );
 
@@ -558,12 +558,12 @@ class SocialPopup {
 	function twitter_shortcode( $atts, $content ) {
 
 		extract( shortcode_atts( array(
-			'user' 			=> apply_filters( 'spu/social/tw_user', 'chifliiiii' ),
+			'user' 			=> apply_filters( 'spu/social/tw_user', 'xplex' ),
 			'show_count' 	=> 'true', // false
 			'size' 			=> '', // large
 			'lang' 			=> '',
 		), $atts ) );
-	
+
 		return '<div class="spu-twitter spu-shortcode"><a href="https://twitter.com/'.$user.'" class="twitter-follow-button" data-show-count="'.strtolower( trim( $show_count ) ).'" data-size="'.strtolower( trim( $size ) ).'" data-lang="'.$lang.'"></a></div>';
 
 	}
@@ -578,7 +578,7 @@ class SocialPopup {
 		extract( shortcode_atts( array(
 			'size' 			=> 'medium', //small standard tall
 			'annotation' 	=> 'bubble', //inline none
-			'url' 			=> apply_filters( 'spu/social/gp_url', 'https://plus.google.com/u/0/103508783120806246698/posts' ), 
+			'url' 			=> apply_filters( 'spu/social/gp_url', 'https://plus.google.com/u/0/103508783120806246698/posts' ),
 		), $atts ) );
 
 		$size 		= strtolower( trim( $size ) );
@@ -587,26 +587,26 @@ class SocialPopup {
 		//to avoid problems
 		if( 'medium' != $size && 'small' != $size && 'standard' != $size && 'tall' != $size ) {
 			$size = 'medium';
-		}		
+		}
 		if( 'bubble' != $annotation && 'inline' != $annotation && 'none' != $annotation ) {
 			$annotation = 'bubble';
 		}
 
 		return '<div class="spu-google spu-shortcode"><div class="g-plusone" data-callback="googleCB" data-onendinteraction="closeGoogle" data-recommendations="false" data-annotation="'.$annotation.'" data-size="'.$size.'" data-href="'.$url.'"></div></div>';
-	
+
 	}
 
 	function close_shortcode( $atts, $content ) {
 		extract( shortcode_atts( array(
-			'class' 		=> 'button-primary', 
+			'class' 		=> 'button-primary',
 			'text' 			=> 'Close',
 		), $atts ) );
 
 		return '<button class="spu-close-popup '.$class.'">'.$text.'</button>';
-	}	
-	
+	}
+
 	/**
-	 * Returns plugin info 
+	 * Returns plugin info
 	 * @param  string $i info name
 	 * @return mixed one all or none
 	 */
@@ -614,22 +614,22 @@ class SocialPopup {
 	{
 		// vars
 		$return = false;
-		
-		
+
+
 		// specific
 		if( isset($this->info[ $i ]) )
 		{
 			$return = $this->info[ $i ];
 		}
-		
-		
+
+
 		// all
 		if( $i == 'all' )
 		{
 			$return = $this->info;
 		}
-		
-		
+
+
 		// return
 		return $return;
 	}
@@ -644,16 +644,16 @@ class SocialPopup {
 
 		//if we have matches continue
 		if( ! empty( $spu_matches) ) {
-	
+
 			foreach ($spu_matches as $spu_id ) {
 
 				include( 'views/popup.php');
 
 			} //endforeach
 			echo '<div id="fb-root" class=" fb_reset"></div>';
-			
-		}			
-	
+
+		}
+
 	}
 
 	/**
@@ -689,7 +689,7 @@ class SocialPopup {
 
 	  	define( 'DOING_AJAX', TRUE );
 
-  		$this->print_boxes();	
+  		$this->print_boxes();
 
   		die();
 	}

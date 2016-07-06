@@ -3,7 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 ?>
 
-<p><?php _e( 'You have some social shortcodes to use that will print a Facebook like, a Google+ Follow and a Twitter follow. Check the available options and <strong>configure them with your social accounts</strong>:', 'popups' );?></p>
+<p><?php _e( '페이스북 좋아요, 구글+ 및 트위터 팔로우를 표시하려면 소셜 shortcode를 사용하세요. 사용 가능한 옵션을 확인하고 X-PLEX 계정 환경으로 설정값을 수정하세요.:', 'popups' );?></p>
 
 <p><strong><?php _e( 'Facebook Page', 'popups' );?>:</strong></p>
 <p>
@@ -47,13 +47,13 @@ if ( !defined( 'ABSPATH' ) ) exit;
 </p>
 <a href="tw-opts" onclick="jQuery('#tw-opts').slideToggle();return false;"><?php _e( 'View Twitter Options', 'popups' );?></a>
 <ul id="tw-opts" style="display:none;">
-	<li><b>user:</b> <?php _e( 'Your Twitter user <b>Default value: </b>', 'popups' ); echo ' ' . apply_filters( 'spu/social/tw_user', 'chifliiiii' ); ?></li>
+	<li><b>user:</b> <?php _e( 'Your Twitter user <b>Default value: </b>', 'popups' ); echo ' ' . apply_filters( 'spu/social/tw_user', 'xplex' ); ?></li>
 	<li><b>show_count:</b> <?php _e( 'false <b>Default value:</b> true', 'popups' );?></li>
 	<li><b>size:</b> <?php _e( 'large <b>Default value:</b> ""', 'popups' );?></li>
 	<li><b>lang:</b> </li>
 </ul>
-<h3 style="padding-left:0;margin: 20px 0;"><strong><?php _e('Other available Shortcodes:', 'popups' );?></strong></h3>
-<p><strong><?php _e( 'Close Button', 'popups' );?>:</strong></p>
+<h3 style="padding-left:0;margin: 20px 0;"><strong><?php _e('사용 가능한 기타 Shortcodes:', 'popups' );?></strong></h3>
+<p><strong><?php _e( '닫기 버튼', 'popups' );?>:</strong></p>
 <p>
 [spu-close class="" text="" align=""]
 </p>

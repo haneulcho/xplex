@@ -62,7 +62,7 @@ class SocialPopup_Admin {
 	 * @var      bool
 	 */
 	protected $helper = '';
-	
+
 	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
@@ -80,7 +80,7 @@ class SocialPopup_Admin {
 
 		//settings name
 		$this->options_name		= $this->plugin_slug .'_settings';
-        
+
         //load settings
 		$this->spu_settings 	= $plugin->get_settings();
 
@@ -110,7 +110,7 @@ class SocialPopup_Admin {
 		add_filter('spu/get_post_types', array($this, 'get_post_types'), 1, 3);
 		add_filter('spu/get_taxonomies', array($this, 'get_taxonomies'), 1, 3);
 
-		//AJAX Actions	
+		//AJAX Actions
 		add_action('wp_ajax_spu/field_group/render_rules', array( $this->helper, 'ajax_render_rules' ) );
 		add_action('wp_ajax_spu/field_group/render_operator', array( $this->helper, 'ajax_render_operator' ) );
 
@@ -144,7 +144,7 @@ class SocialPopup_Admin {
 
 		return self::$instance;
 	}
-	
+
 
 	/**
 	 * Register custom post types
@@ -156,18 +156,18 @@ class SocialPopup_Admin {
 		if( class_exists('PopupsP') ){
 			$name .= ' - Premium v'. PopupsP::VERSION;
 		}
-		$name = apply_filters( 'spu/display/title', $name ); 
+		$name = apply_filters( 'spu/display/title', $name );
 		$labels = array(
 			'name'               => $name,
 			'singular_name'      => _x( 'Popups', 'post type singular name', 'popups' ),
-			'menu_name'          => _x( 'Popups', 'admin menu', 'popups' ),
-			'name_admin_bar'     => _x( 'Popups', 'add new on admin bar', 'popups' ),
-			'add_new'            => _x( 'Add New', 'Popups', 'popups' ),
-			'add_new_item'       => __( 'Add New Popups', 'popups' ),
-			'new_item'           => __( 'New Popups', 'popups' ),
-			'edit_item'          => __( 'Edit Popups', 'popups' ),
-			'view_item'          => __( 'View Popups', 'popups' ),
-			'all_items'          => __( 'All Popups', 'popups' ),
+			'menu_name'          => _x( '팝업창 관리', 'admin menu', 'popups' ),
+			'name_admin_bar'     => _x( '팝업창', 'add new on admin bar', 'popups' ),
+			'add_new'            => _x( '팝업창 생성', 'Popups', 'popups' ),
+			'add_new_item'       => __( '새 팝업창 만들기', 'popups' ),
+			'new_item'           => __( '새 팝업창 만들기', 'popups' ),
+			'edit_item'          => __( '팝업창 수정', 'popups' ),
+			'view_item'          => __( '팝업창 보기', 'popups' ),
+			'all_items'          => __( '모든 팝업창 보기', 'popups' ),
 			'search_items'       => __( 'Search Popups', 'popups' ),
 			'parent_item_colon'  => __( 'Parent Popups:', 'popups' ),
 			'not_found'          => __( 'No Popups found.', 'popups' ),
@@ -202,7 +202,7 @@ class SocialPopup_Admin {
 		);
 
 		register_post_type( 'spucpt', $args );
-	
+
 	}
 
 	/**
@@ -213,7 +213,7 @@ class SocialPopup_Admin {
 	public function add_settings_menu() {
 
 		add_submenu_page('edit.php?post_type=spucpt', __( 'Settings', 'popups' ), __( 'Settings', 'popups' ), apply_filters( 'spu/settings_page/roles', 'manage_options'), 'spu_settings', array( $this, 'settings_page' ) );
-	
+
 	}
 
 
@@ -222,7 +222,7 @@ class SocialPopup_Admin {
 	 * Settings page of the plugin
 	 * @since  1.1
 	 * @return  void
-	 */	
+	 */
 	public function settings_page() {
 
 		$defaults = apply_filters( 'spu/settings_page/defaults_opts', array(
@@ -256,19 +256,6 @@ class SocialPopup_Admin {
 	 */
 	public function add_meta_boxes() {
 
-		if( !$this->premium ) {
-
-			add_meta_box(
-				'spu-premium',
-				__( 'Popups Premium', 'popups' ),
-				array( $this, 'popup_premium' ),
-				'spucpt',
-				'normal',
-				'core'
-			);
-
-		}
-
 		add_meta_box(
 			'spu-help',
 			'<i class="spu-icon-info spu-icon"></i>' . __( 'PopUp Shortcodes', 'popups' ),
@@ -276,7 +263,7 @@ class SocialPopup_Admin {
 			'spucpt',
 			'normal',
 			'core'
-		);		
+		);
 
 		add_meta_box(
 			'spu-appearance',
@@ -304,30 +291,6 @@ class SocialPopup_Admin {
 			'normal',
 			'core'
 		);
-
-		add_meta_box(
-			'spu-support',
-			__( 'Need support?', 'popups' ),
-			array( $this, 'metabox_support' ),
-			'spucpt',
-			'side'
-		);
-
-		add_meta_box(
-			'spu-donate',
-			__( 'Donate & support', 'popups' ),
-			array( $this, 'metabox_donate' ),
-			'spucpt',
-			'side'
-		);
-
-		add_meta_box(
-			'spu-links',
-			__( 'About the developer', 'popups' ),
-			array( $this, 'metabox_links' ),
-			'spucpt',
-			'side'
-		);
 	}
 
 	/**
@@ -350,7 +313,7 @@ class SocialPopup_Admin {
 	public function popup_help( $post, $metabox ) {
 
 		include 'views/metaboxes/metabox-help.php';
-	}	
+	}
 	/**
 	 * Include the metabox view for popup rules
 	 * @param  object $post    spucpt post object
@@ -362,7 +325,7 @@ class SocialPopup_Admin {
 		$groups = apply_filters('spu/metaboxes/get_box_rules', $this->helper->get_box_rules( $post->ID ), $post->ID);
 
 		include 'views/metaboxes/metabox-rules.php';
-	}	
+	}
 	/**
 	 * Include the metabox view for popup options
 	 * @param  object $post    spucpt post object
@@ -370,7 +333,7 @@ class SocialPopup_Admin {
 	 * @since 1.1
 	 */
 	public function popup_options( $post, $metabox ) {
-		
+
 		$opts = apply_filters('spu/metaboxes/get_box_options', $this->helper->get_box_options( $post->ID ), $post->ID );
 
 		include 'views/metaboxes/metabox-options.php';
@@ -386,44 +349,6 @@ class SocialPopup_Admin {
 		$opts = apply_filters('spu/metaboxes/get_box_options', $this->helper->get_box_options( $post->ID ), $post->ID );
 
 		include 'views/metaboxes/metabox-appearance.php';
-	}
-
-	/**
-	 * Include the metabox view for donate box
-	 * @param  object $post    spucpt post object
-	 * @param  array $metabox full metabox items array
-	 * @since 1.1
-	 */
-	public function metabox_donate( $post, $metabox ) {
-		
-		$donate_metabox = apply_filters( 'spu/metaboxes/donate_metabox', dirname(__FILE__) . '/views/metaboxes/metabox-donate.php' );
-		
-		include $donate_metabox;
-	}
-	/**
-	 * Include the metabox view for support box
-	 * @param  object $post    spucpt post object
-	 * @param  array $metabox full metabox items array
-	 * @since 1.1
-	 */
-	public function metabox_support( $post, $metabox ) {
-		
-		$support_metabox = apply_filters( 'spu/metaboxes/support_metabox', dirname(__FILE__) . '/views/metaboxes/metabox-support.php' );
-		
-		include $support_metabox;
-	}
-
-	/**
-	 * Include the metabox view for links box
-	 * @param  object $post    spucpt post object
-	 * @param  array $metabox full metabox items array
-	 * @since 1.1
-	 */
-	public function metabox_links( $post, $metabox ) {
-		
-		$links_metabox = apply_filters( 'spu/metaboxes/links_metabox', dirname(__FILE__) . '/views/metaboxes/metabox-links.php' );
-		
-		include $links_metabox;
 	}
 
 	/**
@@ -459,7 +384,7 @@ class SocialPopup_Admin {
     	}
     	// same for posts revisions
     	if ( wp_is_post_revision( $post_id ) ) {
-        	return $post_id; 
+        	return $post_id;
     	}
 
 		// can user edit this post?
@@ -559,7 +484,7 @@ class SocialPopup_Admin {
 		}
 		wp_enqueue_style( 'spu-admin-css', plugins_url( 'assets/css/admin.css', __FILE__ ) , '', SocialPopup::VERSION );
 		wp_enqueue_style( 'wp-color-picker' );
-	
+
 	}
 
 	/**
@@ -589,14 +514,14 @@ class SocialPopup_Admin {
 		wp_enqueue_script( 'spu-admin-js', plugins_url( 'assets/js/admin.js', __FILE__ ) , '', SocialPopup::VERSION );
 
 		wp_localize_script( 'spu-admin-js', 'spu_js',
-				array( 
-					'admin_url' => admin_url( ), 
+				array(
+					'admin_url' => admin_url( ),
 					'nonce' 	=> wp_create_nonce( 'spu_nonce' ),
 					'l10n'		=> array (
 							'or'	=> '<span>'.__('OR', 'popups' ).'</span>'
 						),
 					'opts'      => $this->helper->get_box_options($box_id)
-				) 
+				)
 		);
 
 		wp_localize_script( 'spup-admin-js' , 'spup_js' ,
@@ -635,35 +560,35 @@ class SocialPopup_Admin {
 	 * @return array  Resulting cpts
 	 */
 	function get_post_types( $post_types, $exclude = array(), $include = array() ) 	{
-	
+
 		// get all custom post types
 		$post_types = array_merge($post_types, get_post_types());
-		
-		
+
+
 		// core include / exclude
 		$spu_includes = array_merge( array(), $include );
 		$spu_excludes = array_merge( array( 'spucpt', 'acf', 'revision', 'nav_menu_item' ), $exclude );
-	 
-		
+
+
 		// include
 		foreach( $spu_includes as $p )
-		{					
+		{
 			if( post_type_exists($p) )
-			{							
+			{
 				$post_types[ $p ] = $p;
 			}
 		}
-		
-		
+
+
 		// exclude
 		foreach( $spu_excludes as $p )
 		{
 			unset( $post_types[ $p ] );
 		}
-		
-		
+
+
 		return $post_types;
-		
+
 	}
 
 	/**
@@ -674,12 +599,12 @@ class SocialPopup_Admin {
 	 *
 	 * @return array [type]                [description]
 	 */
-	function get_taxonomies( $choices, $simple_value = false ) {	
-		
+	function get_taxonomies( $choices, $simple_value = false ) {
+
 		// vars
 		$post_types = get_post_types();
-		
-		
+
+
 		if($post_types)
 		{
 			foreach($post_types as $post_type)
@@ -697,20 +622,20 @@ class SocialPopup_Admin {
 							foreach($terms as $term)
 							{
 								$value = $taxonomy . ':' . $term->term_id;
-								
+
 								if( $simple_value )
 								{
 									$value = $term->term_id;
 								}
-								
-								$choices[$post_type_object->label . ': ' . $taxonomy][$value] = $term->name; 
+
+								$choices[$post_type_object->label . ': ' . $taxonomy][$value] = $term->name;
 							}
 						}
 					}
 				}
 			}
 		}
-		
+
 		return $choices;
 	}
 
@@ -745,11 +670,11 @@ class SocialPopup_Admin {
 	function get_rules_choices() {
 		$choices = array(
 			__("User", 'popups' ) => array(
-				'user_type'		    =>	__("User role", 'popups' ),
-				'logged_user'	    =>	__("User is logged", 'popups' ),
-				'left_comment'	    =>	__("User never left a comment", 'popups' ),
-				'search_engine'	    =>	__("User came via a search engine", 'popups' ),
-				'same_site'		    =>	__("User did not arrive via another page on your site", 'popups' ),
+				'user_type'		    =>	__("회원 레벨 조건", 'popups' ),
+				'logged_user'	    =>	__("로그인 한 회원인가?", 'popups' ),
+				'left_comment'	    =>	__("댓글을 한 번도 남기지 않은 회원인가?", 'popups' ),
+				'search_engine'	    =>	__("검색 엔진을 통해 접속한 회원인가?", 'popups' ),
+				'same_site'		    =>	__("X-PLEX 사이트 내 다른 페이지에 도달하지 않은 회원인가?", 'popups' ),
 			),
 			__("Post", 'popups' ) => array(
 				'post'			=>	__("Post", 'popups' ),
