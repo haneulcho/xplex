@@ -2,9 +2,9 @@
 Contributors: madfork, gn_themes
 License: GPL
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MMA2VA7JDXWDY
-Tags: shortcode, shortcodes, short code, video, responsive, responsive video, youtube, vimeo, audio, mp3, tab, tabs, button, buttons, jquery, box, boxes, toggle, spoiler, column, columns, services, service, pullquote, list, lists, images, image, links, fancy, fancy link, fancy links, fancy buttons, jquery tabs, accordion, slider, plugin, admin, gallery, bloginfo, list pages, sub pages, navigation, siblings pages, children pages, permalink, permalinks, feed, document, member, members, guests, membership, documents, carousel, rss, touch, icon, icons
+Tags: shortcode, shortcodes, short code, video, responsive, responsive video, youtube, vimeo, audio, mp3, tab, tabs, button, buttons, jquery, box, boxes, toggle, spoiler, column, columns, services, service, pullquote, list, lists, images, image, links, fancy, fancy link, fancy links, fancy buttons, jquery tabs, accordion, slider, plugin, admin, gallery, bloginfo, list pages, sub pages, navigation, siblings pages, children pages, permalink, permalinks, feed, document, member, members, guests, membership, documents, carousel, rss, touch, icon, icons, trl, right-to-left, multilingual, lang, international
 Requires at least: 3.5
-Tested up to: 5.0
+Tested up to: 4.5
 Stable tag: trunk
 
 Supercharge your WordPress theme with mega pack of shortcodes
@@ -17,35 +17,39 @@ Supercharge your WordPress theme with mega pack of shortcodes
 With this plugin you can easily create tabs, buttons, boxes, different sliders, responsive videos and much, much more. Turn your free theme to premium in just a few clicks. Using Shortcodes Ultimate you can quickly and easily retrieve premium themes features and display it on your site. See screenshots for more information.
 
 = Premium Add-ons =
-* __[Extra Shortcodes](http://gndev.info/shortcodes-ultimate/extra/)__ - 15+ additional shortcodes
-* __[Additional Skins](http://gndev.info/shortcodes-ultimate/skins/)__ - 60+ additional skins for plugin shortcodes
-* __[Shortcode Creator](http://gndev.info/shortcodes-ultimate/maker/)__ - allows you to create your own custom shortcodes
+* [Extra Shortcodes](http://gndev.info/shortcodes-ultimate/extra/) - 15+ additional shortcodes
+* [Additional Skins](http://gndev.info/shortcodes-ultimate/skins/) - 60+ additional skins for plugin shortcodes
+* [Shortcode Creator](http://gndev.info/shortcodes-ultimate/maker/) - allows you to create your own custom shortcodes
+* __[Add-ons Bundle](http://gndev.info/shortcodes-ultimate/add-ons-bundle/)__ - All-in-one, $15 OFF!
 
 = Features =
-* Shortcode Generator
 * 50+ amazing shortcodes
-* Modern responsive design
-* Power of CSS3
-* Custom CSS editor with syntax highlight
-* Special widget
-* Rich API
+* Shortcode Generator
+* Modern design
+* Fully responsive
+* CSS3-powered
+* Custom CSS editor
+* Custom widget
+* Multilingual
+* RTL support
+* Works with any theme
+* Easily extendable
 
-= Demo video =
-[youtube http://www.youtube.com/watch?v=h5hlJb0mSSY]
+= Never stop learning =
 
-= What people are saying (blog posts/tutorials) =
 * [40+ Reasons Shortcodes Ultimate Is A Must Have Plugin](http://www.the-best-web-hosting-service.com/blog/2014/01/ultimateshortcodesreview/)
 * [Show Me the Shortcode](http://thewpchick.com/show-shortcode/) + Video
 * [Shortcodes Ultimate: Ultimatize your written content](http://wisdmlabs.com/blog/how-to-style-wordpress-themes-with-shortcodes-ultimate/)
-* [Add 40+ New Layout Features To WordPress with Shortcodes Ultimate](http://www.makeuseof.com/tag/add-40-new-layout-features-wordpress-shortcodes-ultimate/)
-* [Обзор плагина Shortcodes Ultimate](http://rad-dom.ru/shortcodes-ultimate/) (Ru)
 * [Shortcodes Ultimate Plugin Review](http://kevindankowebdesign.com/shortcodes-ultimate-plugin-review/)
-* [Shortcodes Ultimate — плагин неограниченных возможностей](http://altacademic.ru/shortcodes-ultimate/) (Ru)
+* [Add 4s0+ New Layout Features To WordPress with Shortcodes Ultimate](http://www.makeuseof.com/tag/add-40-new-layout-features-wordpress-shortcodes-ultimate/)
 * [Shortcodes Ultimate – Free Shortcode Plugin For WordPress](http://www.wordpress-masterclass.com/shortcodes-ultimate-free-shortcode-plugin-for-wordpress/)
-* [Shortcodes Ultimate – Newest Update Broke My Website](http://4spotmarketing.com/shortcodes-ultimate-stopped-working-and-the-update-broke-my-website/)
-* Video: [Shortcodes Ultimate Tutorial](http://www.youtube.com/watch?v=IjmaXz-b55I)
-* Video: [How to use special widget](http://www.youtube.com/watch?v=YU3Zu6C5ZfA)
-* Video: [How to create image gallery](http://www.youtube.com/watch?v=kCWyO2F7jTw)
+* (Video) [Supercharge WordPress With A Mega Pack Of Shortcodes!](https://www.youtube.com/watch?v=h5hlJb0mSSY)
+* (Video) [Shortcodes Ultimate Tutorial](http://www.youtube.com/watch?v=IjmaXz-b55I)
+* (Video) [How to use special widget](http://www.youtube.com/watch?v=YU3Zu6C5ZfA)
+* (Video) [How to create image gallery](http://www.youtube.com/watch?v=kCWyO2F7jTw)
+* (RU) [Обзор плагина Shortcodes Ultimate](http://rad-dom.ru/shortcodes-ultimate/)
+* (RU) [Shortcodes Ultimate — плагин неограниченных возможностей](http://altacademic.ru/shortcodes-ultimate/)
+* (RU) [Шорткоды Wordpress](http://somemoreinfo.ru/shortkody-wordpress-ot-anoxina/)
 
 = Requirements =
 * WordPress 3.5+
@@ -63,6 +67,7 @@ With this plugin you can easily create tabs, buttons, boxes, different sliders, 
 * Ja, [Stranger](#)
 * Sk, [Patrik Žec (PATWIST)](http://patwist.com/)
 * Cz, [Punc00](http://nuze.cz/)
+* Se, [Javier Marcilla](http://ninjaseo.es/)
 
 Have a translation? [Contact me](http://gndev.info/feedback/)
 
@@ -70,10 +75,8 @@ Have a translation? [Contact me](http://gndev.info/feedback/)
 * Dmitry Semenov - [Magnific Popup jQuery plugin](http://dimsemenov.com/plugins/magnific-popup/)
 * Craig Thompson - [qTip jQuery plugin](http://qtip2.com/)
 * Vladimir Kharlampidi - [Swiper jQuery plugin](http://www.idangero.us/sliders/swiper/)
-* Designmodo - [Flat UI Free icons](http://designmodo.com/)
 * Dave Gandy - [Font Awesome](http://fortawesome.github.io/Font-Awesome/)
 * James Smith - [Simple Slider jQuery plugin](http://loopj.com/jquery-simple-slider/)
-* Kevin Batdorf - [Liquid Slider jQuery plugin](http://liquidslider.com)
 
 
 == Installation ==
@@ -102,10 +105,44 @@ Upgrade normally
 
 == Frequently Asked Questions ==
 
-[Visit support forum](http://wordpress.org/support/plugin/shortcodes-ultimate/)
+[Visit knowledge base](http://gndev.info/kb/)
 
 
 == Changelog ==
+
+= 4.9.9 =
+* Fixed: vote popup at plugins page
+* Minor improvements, fixes
+
+= 4.9.8.1 =
+* Fixed: compatibility with WordPress 4.3+
+* Added: lightbox captions for slider, carousel and custom_gallery. Commit by [Valentino Pistis](https://github.com/vpistis)
+* Changed: text domain from 'su' to 'shortcodes-ultimate'
+
+= 4.9.8 =
+* Added: Spanish translation
+* Updated: Font Awesome updated to 4.4.0
+* Fixed: buttons line-height on narrow screens
+* Fixed: nested spoilers
+
+= 4.9.7 =
+* Added: [document] is now compatible with https
+* Fixed: carousel items width calculation
+* Added: new attribute for [button title=""], [forum topic](https://wordpress.org/support/topic/how-add-title-tag-to-a-button)
+* Fixed: stripslashes for [button] content
+
+= 4.9.6 =
+* Fixed: Quick fix for disabled custom css since previous update
+
+= 4.9.5 =
+* Added: basic RTL support
+* Fixed: JS error (blocking shortcodes settings) on WordPress 3.5
+* Fixed: minor improvement for slider/gallery posts query. [Forum topic](https://wordpress.org/support/topic/slider-code-suggestion)
+* Fixed: minor imrovements on [quote], fixed markup bug for long values in cite, thanks to [Anatoly Yumashev](http://systemo.biz/)
+* Added: completely redesigned search feature. Now it's like a Google, but for shortcodes =)
+* Added: Insert shortcode popup window hotkey. So now, you can open Insert shortcode window, choose shortcode and insert it with just one click
+* Updated: new demo video at plugin settings page (About tab)
+* Updated: new plugin's banner and icon
 
 = 4.9.4 =
 * Updated: Japanese translation
@@ -459,4 +496,3 @@ Upgrade normally
 
 = 1.0 =
 * Initial release
-

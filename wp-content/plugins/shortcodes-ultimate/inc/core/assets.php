@@ -31,6 +31,8 @@ class Su_Assets {
 		add_action( 'wp_footer',                   array( __CLASS__, 'custom_css' ), 99 );
 		add_action( 'su/generator/preview/after',  array( __CLASS__, 'custom_css' ), 99 );
 		add_action( 'su/examples/preview/after',   array( __CLASS__, 'custom_css' ), 99 );
+		// RTL support
+		add_action( 'su/assets/custom_css/after',        array( __CLASS__, 'rtl_shortcodes' ) );
 		// Custom TinyMCE CSS and JS
 		// add_filter( 'mce_css',                     array( __CLASS__, 'mce_css' ) );
 		// add_filter( 'mce_external_plugins',        array( __CLASS__, 'mce_js' ) );
@@ -50,7 +52,7 @@ class Su_Assets {
 		wp_register_style( 'owl-carousel', plugins_url( 'assets/css/owl-carousel.css', SU_PLUGIN_FILE ), false, '1.3.2', 'all' );
 		wp_register_style( 'owl-carousel-transitions', plugins_url( 'assets/css/owl-carousel-transitions.css', SU_PLUGIN_FILE ), false, '1.3.2', 'all' );
 		// Font Awesome
-		wp_register_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css', false, '4.1.0', 'all' );
+		wp_register_style( 'font-awesome', '//netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', false, '4.4.0', 'all' );
 		// Animate.css
 		wp_register_style( 'animate', plugins_url( 'assets/css/animate.css', SU_PLUGIN_FILE ), false, '3.1.1', 'all' );
 		// InView
@@ -64,12 +66,12 @@ class Su_Assets {
 		wp_register_style( 'magnific-popup', plugins_url( 'assets/css/magnific-popup.css', SU_PLUGIN_FILE ), false, '0.9.9', 'all' );
 		wp_register_script( 'magnific-popup', plugins_url( 'assets/js/magnific-popup.js', SU_PLUGIN_FILE ), array( 'jquery' ), '0.9.9', true );
 		wp_localize_script( 'magnific-popup', 'su_magnific_popup', array(
-				'close'   => __( 'Close (Esc)', 'su' ),
-				'loading' => __( 'Loading...', 'su' ),
-				'prev'    => __( 'Previous (Left arrow key)', 'su' ),
-				'next'    => __( 'Next (Right arrow key)', 'su' ),
-				'counter' => sprintf( __( '%s of %s', 'su' ), '%curr%', '%total%' ),
-				'error'   => sprintf( __( 'Failed to load this link. %sOpen link%s.', 'su' ), '<a href="%url%" target="_blank"><u>', '</u></a>' )
+				'close'   => __( 'Close (Esc)', 'shortcodes-ultimate' ),
+				'loading' => __( 'Loading...', 'shortcodes-ultimate' ),
+				'prev'    => __( 'Previous (Left arrow key)', 'shortcodes-ultimate' ),
+				'next'    => __( 'Next (Right arrow key)', 'shortcodes-ultimate' ),
+				'counter' => sprintf( __( '%s of %s', 'shortcodes-ultimate' ), '%curr%', '%total%' ),
+				'error'   => sprintf( __( 'Failed to load this link. %sOpen link%s.', 'shortcodes-ultimate' ), '<a href="%url%" target="_blank"><u>', '</u></a>' )
 			) );
 		// Ace
 		wp_register_script( 'ace', plugins_url( 'assets/js/ace/ace.js', SU_PLUGIN_FILE ), false, '1.1.3', true );
@@ -81,9 +83,9 @@ class Su_Assets {
 		wp_register_style( 'su-options-page', plugins_url( 'assets/css/options-page.css', SU_PLUGIN_FILE ), false, SU_PLUGIN_VERSION, 'all' );
 		wp_register_script( 'su-options-page', plugins_url( 'assets/js/options-page.js', SU_PLUGIN_FILE ), array( 'magnific-popup', 'jquery-ui-sortable', 'ace', 'jsrender' ), SU_PLUGIN_VERSION, true );
 		wp_localize_script( 'su-options-page', 'su_options_page', array(
-				'upload_title'  => __( 'Choose files', 'su' ),
-				'upload_insert' => __( 'Add selected files', 'su' ),
-				'not_clickable' => __( 'This button is not clickable', 'su' )
+				'upload_title'  => __( 'Choose files', 'shortcodes-ultimate' ),
+				'upload_insert' => __( 'Add selected files', 'shortcodes-ultimate' ),
+				'not_clickable' => __( 'This button is not clickable', 'shortcodes-ultimate' )
 			) );
 		// Cheatsheet
 		wp_register_style( 'su-cheatsheet', plugins_url( 'assets/css/cheatsheet.css', SU_PLUGIN_FILE ), false, SU_PLUGIN_VERSION, 'all' );
@@ -91,13 +93,14 @@ class Su_Assets {
 		wp_register_style( 'su-generator', plugins_url( 'assets/css/generator.css', SU_PLUGIN_FILE ), array( 'farbtastic', 'magnific-popup' ), SU_PLUGIN_VERSION, 'all' );
 		wp_register_script( 'su-generator', plugins_url( 'assets/js/generator.js', SU_PLUGIN_FILE ), array( 'farbtastic', 'magnific-popup', 'qtip' ), SU_PLUGIN_VERSION, true );
 		wp_localize_script( 'su-generator', 'su_generator', array(
-				'upload_title'         => __( 'Choose file', 'su' ),
-				'upload_insert'        => __( 'Insert', 'su' ),
-				'isp_media_title'      => __( 'Select images', 'su' ),
-				'isp_media_insert'     => __( 'Add selected images', 'su' ),
-				'presets_prompt_msg'   => __( 'Please enter a name for new preset', 'su' ),
-				'presets_prompt_value' => __( 'New preset', 'su' ),
-				'last_used'            => __( 'Last used settings', 'su' )
+				'upload_title'         => __( 'Choose file', 'shortcodes-ultimate' ),
+				'upload_insert'        => __( 'Insert', 'shortcodes-ultimate' ),
+				'isp_media_title'      => __( 'Select images', 'shortcodes-ultimate' ),
+				'isp_media_insert'     => __( 'Add selected images', 'shortcodes-ultimate' ),
+				'presets_prompt_msg'   => __( 'Please enter a name for new preset', 'shortcodes-ultimate' ),
+				'presets_prompt_value' => __( 'New preset', 'shortcodes-ultimate' ),
+				'last_used'            => __( 'Last used settings', 'shortcodes-ultimate' ),
+				'hotkey'               => get_option( 'su_option_hotkey' )
 			) );
 		// Shortcodes stylesheets
 		wp_register_style( 'su-content-shortcodes', self::skin_url( 'content-shortcodes.css' ), false, SU_PLUGIN_VERSION, 'all' );
@@ -106,11 +109,14 @@ class Su_Assets {
 		wp_register_style( 'su-other-shortcodes', self::skin_url( 'other-shortcodes.css' ), false, SU_PLUGIN_VERSION, 'all' );
 		wp_register_style( 'su-galleries-shortcodes', self::skin_url( 'galleries-shortcodes.css' ), false, SU_PLUGIN_VERSION, 'all' );
 		wp_register_style( 'su-players-shortcodes', self::skin_url( 'players-shortcodes.css' ), false, SU_PLUGIN_VERSION, 'all' );
+		// RTL stylesheets
+		wp_register_style( 'su-rtl-shortcodes', self::skin_url( 'rtl-shortcodes.css' ), false, SU_PLUGIN_VERSION, 'all' );
+		wp_register_style( 'su-rtl-admin', self::skin_url( 'rtl-admin.css' ), false, SU_PLUGIN_VERSION, 'all' );
 		// Shortcodes scripts
 		wp_register_script( 'su-galleries-shortcodes', plugins_url( 'assets/js/galleries-shortcodes.js', SU_PLUGIN_FILE ), array( 'jquery', 'swiper' ), SU_PLUGIN_VERSION, true );
 		wp_register_script( 'su-players-shortcodes', plugins_url( 'assets/js/players-shortcodes.js', SU_PLUGIN_FILE ), array( 'jquery', 'jplayer' ), SU_PLUGIN_VERSION, true );
 		wp_register_script( 'su-other-shortcodes', plugins_url( 'assets/js/other-shortcodes.js', SU_PLUGIN_FILE ), array( 'jquery' ), SU_PLUGIN_VERSION, true );
-		wp_localize_script( 'su-other-shortcodes', 'su_other_shortcodes', array( 'no_preview' => __( 'This shortcode doesn\'t work in live preview. Please insert it into editor and preview on the site.', 'su' ) ) );
+		wp_localize_script( 'su-other-shortcodes', 'su_other_shortcodes', array( 'no_preview' => __( 'This shortcode doesn\'t work in live preview. Please insert it into editor and preview on the site.', 'shortcodes-ultimate' ) ) );
 		// Hook to deregister assets or add custom
 		do_action( 'su/assets/register' );
 	}
@@ -151,6 +157,8 @@ class Su_Assets {
 		$custom_css = apply_filters( 'su/assets/custom_css', str_replace( '&#039;', '\'', html_entity_decode( (string) get_option( 'su_option_custom-css' ) ) ) );
 		// Print CSS if exists
 		if ( $custom_css ) echo "\n\n<!-- Shortcodes Ultimate custom CSS - begin -->\n<style type='text/css'>\n" . stripslashes( str_replace( array( '%theme_url%', '%home_url%', '%plugin_url%' ), array( trailingslashit( get_stylesheet_directory_uri() ), trailingslashit( get_option( 'home' ) ), trailingslashit( plugins_url( '', SU_PLUGIN_FILE ) ) ), $custom_css ) ) . "\n</style>\n<!-- Shortcodes Ultimate custom CSS - end -->\n\n";
+		// Hook
+		do_action( 'su/assets/custom_css/after' );
 	}
 
 	/**
@@ -171,6 +179,26 @@ class Su_Assets {
 	}
 
 	/**
+	 * RTL support for shortcodes
+	 */
+	public static function rtl_shortcodes( $assets ) {
+		// Check RTL
+		if ( !is_rtl() ) return;
+		// Add RTL stylesheets
+		wp_print_styles( array( 'su-rtl-shortcodes' ) );
+	}
+
+	/**
+	 * RTL support for admin
+	 */
+	public static function rtl_admin( $assets ) {
+		// Check RTL
+		if ( !is_rtl() ) return;
+		// Add RTL stylesheets
+		self::add( 'css', 'su-rtl-admin' );
+	}
+
+	/**
 	 * Add asset to the query
 	 */
 	public static function add( $type, $handle ) {
@@ -179,6 +207,7 @@ class Su_Assets {
 		// Single handle
 		else self::$assets[$type][$handle] = $handle;
 	}
+
 	/**
 	 * Get queried assets
 	 */
