@@ -221,6 +221,201 @@ function storevilla_customize_register( $wp_customize ) {
 	        'setting' => 'xplex_main_heroimg_area_title',
 	    ));
 
+		// XPLEX Quick Menu Area
+		$wp_customize->add_section( 'xplex_quick_menu_area', array(
+			'title'           =>      __('XPLEX Quick Menu Area', 'storevilla'),
+			'priority'        =>      '114',
+			));
+
+		$wp_customize->add_setting('xplex_quick_menu_area_settings', array(
+			'default' => 'enable',
+			'capability' => 'edit_theme_options',
+			'sanitize_callback' => 'storevilla_radio_enable_disable_sanitize'  //done
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_area_settings', array(
+			'type' => 'radio',
+			'label' => __('Enable / Disable XPLEX Quick Menu', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'settings' => 'xplex_quick_menu_area_settings',
+			'choices' => array(
+	         'enable' => __('Enable', 'storevilla'),
+	         'disable' => __('Disable', 'storevilla')
+	        )
+		));
+
+		// Quick Menu 1
+		$wp_customize->add_setting('xplex_quick_menu_icon_1', array(
+			'default' => 'fa fa-list-alt',
+			'sanitize_callback' => 'storevilla_text_sanitize', // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_icon_1',array(
+			'type' => 'text',
+			'description' => '1번 퀵메뉴 아이콘으로 사용할 FontAwesome CSS 클래스명을 적어주세요. <a href="http://fontawesome.io/cheatsheet/" target="_blank">FontAwesome 클래스명 확인하기</a>',
+			'label' => __('Quick Menu Icon 1', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_icon_1',
+		));
+
+		$wp_customize->add_setting('xplex_quick_menu_label_1', array(
+			'default' => '모집중인 강의',
+			'sanitize_callback' => 'storevilla_text_sanitize',  // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_label_1',array(
+			'type' => 'text',
+			'description' => __('1번 퀵메뉴 라벨을 적어주세요.', 'storevilla'),
+			'label' => __('Quick Menu Label 1', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_label_1',
+		));
+
+		$wp_customize->add_setting('xplex_quick_menu_link_1', array(
+			'default' => '',
+			'sanitize_callback' => 'storevilla_text_sanitize',  // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_link_1',array(
+			'type' => 'text',
+			'description' => __('1번 퀵메뉴 클릭시 이동할 링크를 적어주세요.', 'storevilla'),
+			'label' => __('Quick Menu Link 1', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_link_1',
+		));
+
+		// Quick Menu 2
+		$wp_customize->add_setting('xplex_quick_menu_icon_2', array(
+			'default' => 'fa fa-shopping-basket',
+			'sanitize_callback' => 'storevilla_text_sanitize', // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_icon_2',array(
+			'type' => 'text',
+			'description' => '2번 퀵메뉴 아이콘으로 사용할 FontAwesome CSS 클래스명을 적어주세요.</a>',
+			'label' => __('Quick Menu Icon 2', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_icon_2',
+		));
+
+		$wp_customize->add_setting('xplex_quick_menu_label_2', array(
+			'default' => '장바구니',
+			'sanitize_callback' => 'storevilla_text_sanitize',  // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_label_2',array(
+			'type' => 'text',
+			'description' => __('2번 퀵메뉴 라벨을 적어주세요.', 'storevilla'),
+			'label' => __('Quick Menu Label 2', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_label_2',
+		));
+
+		$wp_customize->add_setting('xplex_quick_menu_link_2', array(
+			'default' => '',
+			'sanitize_callback' => 'storevilla_text_sanitize',  // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_link_2',array(
+			'type' => 'text',
+			'description' => __('2번 퀵메뉴 클릭시 이동할 링크를 적어주세요.', 'storevilla'),
+			'label' => __('Quick Menu Link 2', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_link_2',
+		));
+
+		// Quick Menu 3
+		$wp_customize->add_setting('xplex_quick_menu_icon_3', array(
+			'default' => 'fa fa-thumbs-o-up',
+			'sanitize_callback' => 'storevilla_text_sanitize', // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_icon_3',array(
+			'type' => 'text',
+			'description' => '3번 퀵메뉴 아이콘으로 사용할 FontAwesome CSS 클래스명을 적어주세요.</a>',
+			'label' => __('Quick Menu Icon 3', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_icon_3',
+		));
+
+		$wp_customize->add_setting('xplex_quick_menu_label_3', array(
+			'default' => '페이스북',
+			'sanitize_callback' => 'storevilla_text_sanitize',  // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_label_3',array(
+			'type' => 'text',
+			'description' => __('3번 퀵메뉴 라벨을 적어주세요.', 'storevilla'),
+			'label' => __('Quick Menu Label 3', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_label_3',
+		));
+
+		$wp_customize->add_setting('xplex_quick_menu_link_3', array(
+			'default' => '',
+			'sanitize_callback' => 'storevilla_text_sanitize',  // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_link_3',array(
+			'type' => 'text',
+			'description' => __('3번 퀵메뉴 클릭시 이동할 링크를 적어주세요.', 'storevilla'),
+			'label' => __('Quick Menu Link 3', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_link_3',
+		));
+
+		// Quick Menu 4
+		$wp_customize->add_setting('xplex_quick_menu_icon_4', array(
+			'default' => 'fa fa-pencil-square-o',
+			'sanitize_callback' => 'storevilla_text_sanitize', // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_icon_4',array(
+			'type' => 'text',
+			'description' => '4번 퀵메뉴 아이콘으로 사용할 FontAwesome CSS 클래스명을 적어주세요.</a>',
+			'label' => __('Quick Menu Icon 4', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_icon_4',
+		));
+
+		$wp_customize->add_setting('xplex_quick_menu_label_4', array(
+			'default' => '문의하기',
+			'sanitize_callback' => 'storevilla_text_sanitize',  // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_label_4',array(
+			'type' => 'text',
+			'description' => __('4번 퀵메뉴 라벨을 적어주세요.', 'storevilla'),
+			'label' => __('Quick Menu Label 4', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_label_4',
+		));
+
+		$wp_customize->add_setting('xplex_quick_menu_link_4', array(
+			'default' => '',
+			'sanitize_callback' => 'storevilla_text_sanitize',  // done
+			'transport' => 'postMessage'
+		));
+
+		$wp_customize->add_control('xplex_quick_menu_link_4',array(
+			'type' => 'text',
+			'description' => __('4번 퀵메뉴 클릭시 이동할 링크를 적어주세요.', 'storevilla'),
+			'label' => __('Quick Menu Link 4', 'storevilla'),
+			'section' => 'xplex_quick_menu_area',
+			'setting' => 'xplex_quick_menu_link_4',
+		));
+
 		// XPLEX Index Banner Area
 		$wp_customize->add_section( 'storevilla_main_banner_area', array(
 			'title'           =>      __('XPLEX Index Banner Area', 'storevilla'),

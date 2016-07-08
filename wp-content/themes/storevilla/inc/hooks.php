@@ -19,7 +19,11 @@ add_action( 'storevilla_header', 'storevilla_top_header', 10 );
 add_action( 'storevilla_header', 'storevilla_button_header', 20 );
 add_action( 'storevilla_header', 'storevilla_primary_navigation', 60 );
 
+/**
+ * After header
+ */
 
+add_action( 'storevilla_after_header', 'xplex_quick_menu', 0 );
 /**
  * Footer action Area
  */

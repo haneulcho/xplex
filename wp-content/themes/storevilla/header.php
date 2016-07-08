@@ -33,15 +33,15 @@
 						**@see storevilla_top_nav (filter for top header navigation)
 					 * @see  storevilla_button_header() - 20
 					 * @see  storevilla_primary_navigation() - 30
-					 */			
+					 */
 					do_action( 'storevilla_header' ); 
 				?>
 		</header><!-- #masthead -->
-	
+
 	<?php do_action( 'storevilla_after_header' ); ?>
 
 	<div id="content" class="site-content">
 	<?php if( !( is_home() || is_front_page() ) ) { ?>
 		<div class="store-container clearfix">
 			<div class="store-container-inner clearfix">
-	<?php } 
+	<?php }

@@ -377,6 +377,39 @@ if ( ! function_exists( 'xplex_main_heroimg' ) ) {
     }
 }
 
+/* XPLEX Quick Menu Area */
+if ( ! function_exists( 'xplex_quick_menu' ) ) {
+    function xplex_quick_menu() {
+        $qmenu = esc_attr( get_theme_mod( 'xplex_quick_menu_area_settings', 'enable' ) );
+
+				if( !empty( $qmenu ) && $qmenu == 'enable' ) {
+					echo '<div id="qnb" class="store-container"><ul>';
+					for ( $i=1; $i<5; $i++ ) {
+						$qmenu_icon = 'xplex_quick_menu_icon_'.$i;
+						$qmenu_label = 'xplex_quick_menu_label_'.$i;
+						$qmenu_link = 'xplex_quick_menu_link_'.$i;
+						
+						$qicon = '<i class="'.get_theme_mod( $qmenu_icon ).'" aria-hidden="true"></i>';
+						$qlabel = get_theme_mod( $qmenu_label );
+						$qlink = esc_url( get_theme_mod( $qmenu_link ) );
+
+						// www.xplex.org 포함하지 않으면 새창으로 링크 띄우기
+						if( preg_match('/www.xplex.org/', $qlink) ) {
+							$qlink = '<a href="'.$qlink.'">';
+						} else {
+							$qlink = '<a href="'.$qlink.'" target="_blank">';
+						}
+    ?>
+		        <li>
+							<?php if(!empty( $qlink ) ) { ?><?php echo $qlink; ?><?php echo $qicon; ?><?php echo $qlabel; ?></a><?php } ?>
+		        </li>
+    <?php
+					} // for END
+					echo '</ul></div>';
+				} // if END
+    }
+}
+
 /* 카테고리가 books일 때 신청하기를 구매하기로 텍스트 수정 */
 add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text' );
 function woo_custom_cart_button_text() {

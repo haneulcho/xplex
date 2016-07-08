@@ -245,6 +245,26 @@ jQuery(document).ready(function ($) {
         speed:600,
     });
 
+    /* XPLEX Quick Menu Scroll Animation */
+  	if($('#qnb').length) {
+      var $qul = $('#qnb ul');
+  		var $qPosition = $qul.offset().top;
+  		$(window).scroll(function() {
+  			var $wPosition = $(window).scrollTop();
+  			setTimeout(function() {
+  				if($qPosition < $wPosition) {
+            $top_value = ($wPosition - $qul.height()) + 40;
+            $qul.css({
+              'top' : $top_value + 'px'
+            });
+  				} else {
+  					$qul.css({
+              'top' : '30px'
+            });
+  				}
+  			}, 200);
+  		});
+  	}
 
     // ScrollUp
 	jQuery(window).scroll(function() {

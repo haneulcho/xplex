@@ -1319,6 +1319,59 @@ search field css
 .header-wrap .search-cart-wrap .advance-search .sv_search_form #searchsubmit .fa {
     color: #fff;
 }
+/* Quick Menu */
+#qnb {
+  position:relative;
+}
+#qnb ul {
+  position:absolute;
+  top:30px;
+  right:-70px;
+  padding:10px 0;
+  width: 60px;
+  border:solid 1px rgb(246, 246, 246);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2.457px 1.721px 2px 0px rgba(0, 0, 0, 0.13);
+  transition: top 400ms ease-in-out 0s;
+  -webkit-transition: top 400ms ease-in-out 0s;
+}
+#qnb li {
+  position:relative;
+  text-align:center;
+}
+#qnb li:first-child a {
+  color:#f06363;
+}
+#qnb li:first-child:before {
+  display:none;
+}
+#qnb li:before {
+  background: #efefef;
+  content: "";
+  position: absolute;
+  display: block;
+  width: 15px;
+  height: 1px;
+  left: 21px;
+  top: -2px;
+}
+#qnb li > a {
+  display: inline-block;
+  font-size:11px;
+  color:#666666;
+  letter-spacing: -1px;
+  padding:10px;
+  transition: all 200ms ease-in-out 0s;
+  -webkit-transition: all 200ms ease-in-out 0s;
+}
+#qnb li > a i {
+  display:block;
+  font-size:20px;
+  margin-bottom:1px;
+}
+#qnb li > a:hover {
+  color:#f06363;
+}
 /*
 ==========
 site-header-cart menu css
