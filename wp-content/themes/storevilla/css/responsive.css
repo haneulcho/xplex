@@ -1,3 +1,6 @@
+@media (min-width: 1300px) {
+	#qnb {display:block;}
+}
 @media (max-width: 1190px) {
 
 }
@@ -166,15 +169,13 @@
 	.site-footer .footer-widgets .footer-widget-5 {
 		width: 100%;
 	}
-	.header-wrap {
+	.home .header-wrap, .header-wrap {
+		padding:10px 0 0 0;
 		text-align: center;
 	}
 	.header-wrap .site-branding,
 	.header-wrap .search-cart-wrap {
 		float: none;
-	}
-	.header-wrap .site-branding {
-		margin-bottom: 10px;
 	}
 	.header-wrap .search-cart-wrap .advance-search,
 	.header-wrap .search-cart-wrap .site-header-cart {
@@ -187,8 +188,12 @@
 	===============================
 	*/
 	.main-navigation {
-		position: relative;
-		padding: 5px 0;
+		float:none;
+		text-align:left;
+		margin:0;
+		position:absolute;
+		top:0;
+		z-index;999;
 	}
 	.main-navigation ul {
 		position: absolute;
@@ -418,14 +423,6 @@
 }
 .product-button-wrap a.villa-details:before {
 	content:'';
-}
-.main-navigation {
-	float:none;
-	text-align:left;
-	margin:0;
-	position:absolute;
-	top:0;
-	z-index;999;
 }
 .home .main-navigation #primary-menu {
 	text-align:left;

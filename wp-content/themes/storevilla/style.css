@@ -1321,6 +1321,7 @@ search field css
 }
 /* Quick Menu */
 #qnb {
+  display:none;
   position:relative;
 }
 #qnb ul {
@@ -3445,7 +3446,7 @@ single pages
 }
 a.woocommerce-main-image {
     display: block;
-    width:400px;
+    max-width:400px;
 }
 .woocommerce #main div.product div.summary {
     width:49%;
