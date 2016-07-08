@@ -1319,6 +1319,41 @@ search field css
 .header-wrap .search-cart-wrap .advance-search .sv_search_form #searchsubmit .fa {
     color: #fff;
 }
+/* Mobile Outer Menu */
+#m_onb {
+  display:block;
+  margin:0 auto;
+  overflow:hidden;
+}
+#m_onb li {
+  float:left;
+  display:inline-block;
+  width:50%;
+  background-color:#f0f0f0;
+}
+.home #m_onb li {
+  background-color:#f06363;
+}
+.home #m_onb li a {
+  color:#fff;
+}
+#m_onb li:first-child {border-right:1px solid #fff;}
+#m_onb li a {
+  display:block;
+  text-align:center;
+  font-size:14px;
+  font-weight:400;
+  padding:12px 0;
+  color:#555;
+}
+#m_onb li a i {
+  font-size:16px;
+  margin-right:5px;
+}
+#m_onb li a:hover {
+  background-color:#f0f0f0;
+  color:#666;
+}
 /* Quick Menu */
 #qnb {
   display:none;

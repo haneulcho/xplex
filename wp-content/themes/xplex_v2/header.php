@@ -54,6 +54,12 @@
 		</div>
 		<?php } ?>
 	<?php do_action( 'storevilla_after_header' ); ?>
+	<?php	if ( wp_is_mobile() ) { // 모바일이면 메뉴 2개 바깥으로 빼기 ?>
+		<ul id="m_onb">
+			<li><a href="https://www.xplex.org:49408/product-category/xplex-lecture/now/"><i class="fa fa-list-alt" aria-hidden="true"></i> 모집중인 강의</a></li>
+			<li><a href="https://www.xplex.org:49408/product-category/personal-coaching/"><i class="fa fa-hand-o-right" aria-hidden="true"></i> 1:1 코칭</a></li>
+		</ul>
+	<?php } ?>
 
 	<div id="content" class="site-content">
 	<?php if( !( is_home() || is_front_page() ) ) { ?>

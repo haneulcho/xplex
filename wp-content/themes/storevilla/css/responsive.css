@@ -129,6 +129,9 @@
 	.main-navigation ul {
 		display: block !important;
 	}
+	#m_onb {
+		display:none;
+	}
 }
 @media (max-width: 768px) {
 	.site-content .slider-wrapper {
@@ -193,6 +196,7 @@
 		margin:0;
 		position:absolute;
 		top:0;
+		left:-2px;
 		z-index;999;
 	}
 	.main-navigation ul {
@@ -397,7 +401,7 @@
 		padding:15px 20px 10px;
 	}
 .woocommerce #review_form #respond .comment-form {
-	padding:90px 10px 20px;
+	padding:75px 10px 20px;
 	margin:0;
 }
 .woocommerce .woocommerce-tabs .comment-form-rating .stars {
@@ -509,7 +513,13 @@ a.woocommerce-main-image {
 
 	}
 	.woocommerce #main div.product div.summary {width:100%}
-	.foot-navigation {padding:20px;}
+	.foot-navigation {padding:10px 20px;}
+	#footer-menu li {
+		margin:0 15px 0 0;
+	}
+	#footer-menu li a {
+		font-weight:400;
+	}
 
 .site-footer .site-info {background:none;}
 	.leftsidebar #secondaryleft {
@@ -525,7 +535,46 @@ a.woocommerce-main-image {
 		padding:30px 20px 30px;
 		max-width:none;
 	}
-
+.webzine #primary.w_list {
+	padding-left:0;
+	padding-right:0;
+}
+.w_list header.page-header {margin-left:20px;}
+.w_group h2 {text-align:center;margin:0 0 17px 0;}
+.w_group h2 > a {
+	display: block;
+    margin: 12px auto 10px;
+    width: 94px;
+    overflow: hidden;
+}
+.w_view .entry-content {
+	font-size:15px;
+}
+.storevilla-blog .sv-post-content h3 a {
+	font-size:18px;
+}
+.storevilla-blog .sv-post-content .description {
+	margin-bottom:20px;
+	font-size:13.5px;
+}
+.woocommerce .woocommerce-tabs p.stars a {
+	margin-right:10px;
+}
+.woocommerce p.stars a.star-1 {
+	width:1.7em;
+}
+.woocommerce p.stars a.star-2 {
+	width:2.7em;
+}
+.woocommerce p.stars a.star-3 {
+	width:3.7em;
+}
+.woocommerce p.stars a.star-4 {
+	width:4.7em;
+}
+.woocommerce p.stars a.star-5 {
+	width:5.7em;
+}
 
 .woocommerce #reviews #comments ol.commentlist li {
 	margin:0;
@@ -572,12 +621,9 @@ a.woocommerce-main-image {
 	.site-footer .footer-widgets {
 		padding-bottom: 30px;
 	}
-	.site-footer .bottom-footer-wrap {
-		text-align: center;
-	}
 	.site-footer .site-info {
-		padding: 10px 0;
-		float: none;
+		padding: 10px 20px;
+		border-top:1px solid #f0f0f0;
 	}
 	.site-footer .payment-accept {
 		float: none;
