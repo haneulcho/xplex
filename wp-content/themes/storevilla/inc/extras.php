@@ -388,7 +388,7 @@ if ( ! function_exists( 'xplex_quick_menu' ) ) {
 						$qmenu_icon = 'xplex_quick_menu_icon_'.$i;
 						$qmenu_label = 'xplex_quick_menu_label_'.$i;
 						$qmenu_link = 'xplex_quick_menu_link_'.$i;
-						
+
 						$qicon = '<i class="'.get_theme_mod( $qmenu_icon ).'" aria-hidden="true"></i>';
 						$qlabel = get_theme_mod( $qmenu_label );
 						$qlink = esc_url( get_theme_mod( $qmenu_link ) );
@@ -680,13 +680,13 @@ function storevilla_woocommerce_template_single_sharing() { ?>
     <div class="storevilla-social">
         <?php
 				if ( function_exists( 'sharing_display' ) ) {
-sharing_display( '', true );
-}
+					sharing_display( '', true );
+				}
 
-if ( class_exists( 'Jetpack_Likes' ) ) {
-$custom_likes = new Jetpack_Likes;
-echo $custom_likes->post_likes( '' );
-}
+				if ( class_exists( 'Jetpack_Likes' ) ) {
+					$custom_likes = new Jetpack_Likes;
+					echo $custom_likes->post_likes( '' );
+				}
         ?>
     </div>
 <?php }
