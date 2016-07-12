@@ -24,16 +24,24 @@ function storevilla_body_classes( $classes ) {
 		$classes[] = 'hfeed';
 	}
 
+	// if(is_category(array('webzine','publishmarketing','dear-reader','interview','p-note','kids-book-story')) || is_singular(array('post'))) {
+	// 	if(!$theme_webzine){
+	// 			$theme_webzine = 'webzine';
+	// 	}
+	// 	$classes[] = $theme_webzine;
+	// }
+
 	// body에 webzine 클래스 삽입
-	if( is_category(array('webzine','publishmarketing','dear-reader','interview','p-note','kids-book-story')) ) {
+	if(is_category(array('webzine','publishmarketing','dear-reader','interview','p-note','kids-book-story'))) {
 		$is_webzine = true;
 	} else if ( is_singular(array('post')) ) {
 			global $post;
-			$cat = get_the_category($post->ID)[0];
-			$cat_id = $cat->cat_ID;
-			$cat_slug = $cat->slug;
-			$cat_parent_id = $cat->category_parent;
-			if ( $cat_slug == 'webzine' || $cat_id == 53 || $cat_parent_id == 53 ) {
+			$cats = get_the_category($post->ID);
+			$cats_slug = $cats[0]->slug;
+			$cats_id = $cats[0]->cat_ID;
+			$cats_parent_id = $cats[0]->category_parent;
+
+			if ( $cats_slug == 'webzine' || $cats_id == 53 || $cats_parent_id == 53 ) {
 				$is_webzine = true;
 			} else {
 				$is_webzine = false;
@@ -43,7 +51,9 @@ function storevilla_body_classes( $classes ) {
 	}
 
 	if($is_webzine) {
-		$theme_webzine = 'webzine';
+		if(!$theme_webzine){
+				$theme_webzine = 'webzine';
+		}
 		$classes[] = $theme_webzine;
 	}
 
@@ -51,7 +61,7 @@ function storevilla_body_classes( $classes ) {
         global $post;
         $post_sidebar = 'leftsidebar';
         $classes[] = $post_sidebar;
-    }
+  }
 
     if ( is_woocommerce_activated() ) {
 
