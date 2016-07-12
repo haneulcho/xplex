@@ -5075,6 +5075,7 @@ button.product_type_external css
 .webzine #secondaryleft ul.sub-menu li a:hover,
 .webzine .sv_search_form input[type="text"]:focus,
 .webzine h1.page-title,
+.webzine .w_view > h2,
 .webzine .storevilla-blog h3 a:hover,
 .w_header_cat li a:hover,
 .w_header_cat li.w_active a
@@ -5082,7 +5083,8 @@ button.product_type_external css
   color:#3ea6fe;
 }
 .webzine #secondaryleft .widget_nav_menu h3:after,
-.w_group h2 > a:hover {
+.w_group h2 > a:hover,
+.webzine .w_list h1.page-title:after {
   background:#3ea6fe;
 }
 .webzine #xbreadcrumb {height:50px;background-color:#3ea6fe;color:#fff;}
@@ -5101,7 +5103,7 @@ button.product_type_external css
   line-height:1;
 }
 .w_list h1.page-title:after {
-  background: #3ea6fe;
+  background: #f06363;
   content: "";
   position: absolute;
   display: block;
@@ -5183,7 +5185,7 @@ button.product_type_external css
   margin:60px auto;
   font-size:38px;
   font-weight:500;
-  color:#3ea6fe;
+  color:#f06363;
   line-height:1;
   letter-spacing:-1px;
 }
