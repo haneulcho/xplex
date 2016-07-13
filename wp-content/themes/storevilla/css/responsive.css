@@ -661,6 +661,14 @@ a.woocommerce-main-image {
 	}
 }
 @media (max-width: 480px) {
+	#footer-menu li a {
+		font-size:11px;
+		letter-spacing: -1px;
+		line-height:1;
+	}
+	.store-container-inner {
+		padding:0 5px;
+	}
 	.header-wrap .search-cart-wrap .advance-search .sv_search_wrap {
 		display: none;
 	}

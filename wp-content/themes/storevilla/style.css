@@ -1328,8 +1328,9 @@ search field css
 #m_onb li {
   float:left;
   display:inline-block;
-  width:50%;
+  width:32%;
   background-color:#f0f0f0;
+  border-left:1px solid #fff;
 }
 .home #m_onb li {
   background-color:#f06363;
@@ -1337,18 +1338,20 @@ search field css
 .home #m_onb li a {
   color:#fff;
 }
-#m_onb li:first-child {border-right:1px solid #fff;}
+#m_onb li:first-child {width:36%;border-left:none;}
 #m_onb li a {
   display:block;
   text-align:center;
-  font-size:14px;
+  font-size:13px;
   font-weight:400;
   padding:12px 0;
   color:#555;
+  letter-spacing: -0.7px;
 }
 #m_onb li a i {
   font-size:16px;
   margin-right:5px;
+  vertical-align: -1px;
 }
 #m_onb li a:hover {
   background-color:#f0f0f0;
