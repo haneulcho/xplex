@@ -221,6 +221,69 @@ function storevilla_customize_register( $wp_customize ) {
 	        'setting' => 'xplex_main_heroimg_area_title',
 	    ));
 
+			// XPLEX Mobile AD Area
+			$wp_customize->add_section( 'xplex_ad_area', array(
+				'title'           =>      __('XPLEX Mobile AD Area', 'storevilla'),
+				'priority'        =>      '115',
+		    ));
+
+		    $wp_customize->add_setting('xplex_ad_area_settings', array(
+		        'default' => 'enable',
+		        'capability' => 'edit_theme_options',
+		        'sanitize_callback' => 'storevilla_radio_enable_disable_sanitize'  //done
+			));
+
+			$wp_customize->add_control('xplex_ad_area_settings', array(
+				'type' => 'radio',
+				'label' => __('Enable / Disable XPLEX Mobile AD', 'storevilla'),
+				'section' => 'xplex_ad_area',
+				'settings' => 'xplex_ad_area_settings',
+				'choices' => array(
+		         'enable' => __('Enable', 'storevilla'),
+		         'disable' => __('Disable', 'storevilla')
+		        )
+			));
+
+
+			$wp_customize->add_setting( 'xplex_ad_area_image', array(
+		        'default'       =>      '',
+		        'sanitize_callback' => 'esc_url_raw' // done
+		    ));
+
+		    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'xplex_ad_area_image', array(
+		        'section'       =>      'xplex_ad_area',
+		        'label'         =>      __('Upload Mobile AD Image', 'storevilla'),
+		        'type'          =>      'image',
+		    )));
+
+		    $wp_customize->add_setting('xplex_ad_area_title', array(
+		        'default' => '',
+		        'sanitize_callback' => 'storevilla_text_sanitize',  // done
+		        'transport' => 'postMessage'
+		    ));
+
+		    $wp_customize->add_control('xplex_ad_area_title',array(
+		        'type' => 'text',
+						'description' => __('배너 제목을 적어주세요. (화면에 표시되지 않습니다.)', 'storevilla'),
+		        'label' => __('Mobile AD Image Title', 'storevilla'),
+		        'section' => 'xplex_ad_area',
+		        'setting' => 'xplex_ad_area_title',
+		    ));
+
+				$wp_customize->add_setting('xplex_ad_area_link', array(
+					'default' => '',
+					'sanitize_callback' => 'storevilla_text_sanitize',  // done
+					'transport' => 'postMessage'
+				));
+
+				$wp_customize->add_control('xplex_ad_area_link',array(
+					'type' => 'text',
+					'description' => __('모바일 배너 클릭시 이동할 링크를 적어주세요.', 'storevilla'),
+					'label' => __('Mobile AD Link', 'storevilla'),
+					'section' => 'xplex_ad_area',
+					'setting' => 'xplex_ad_area_link',
+				));
+
 		// XPLEX Quick Menu Area
 		$wp_customize->add_section( 'xplex_quick_menu_area', array(
 			'title'           =>      __('XPLEX Quick Menu Area', 'storevilla'),

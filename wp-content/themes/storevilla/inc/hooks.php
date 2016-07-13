@@ -48,14 +48,16 @@ add_action( 'storevilla_footer', 'xplex_footer_section', 20 );
 
 /**
 * Header
-* @see  storevilla_index_img_area()
+* @see  xplex_main_heroimg()
+* @see  xplex_main_banner()
 * @see  storevilla_main_slider()
 * @see  storevilla_main_widget()
 */
 
 add_action( 'storevilla_homepage', 'xplex_main_heroimg', 10 );
-add_action( 'storevilla_homepage', 'storevilla_main_slider', 20 );
-add_action( 'storevilla_homepage', 'storevilla_main_widget', 30 );
+add_action( 'storevilla_homepage', 'xplex_ad', 20 );
+add_action( 'storevilla_homepage', 'storevilla_main_slider', 30 );
+add_action( 'storevilla_homepage', 'storevilla_main_widget', 40 );
 
 
 /**

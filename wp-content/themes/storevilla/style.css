@@ -5206,3 +5206,15 @@ button.product_type_external css
 #wpstats {
 	display: none;
 }
+.xad {
+  margin:20px auto 0;
+  text-align: center;
+}
+.xad a {
+  display:inline-block;
+  width:100%;
+  max-width:768px;
+}
+.xad a > img {
+  width:100%;
+}

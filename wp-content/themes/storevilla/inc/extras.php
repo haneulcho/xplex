@@ -403,6 +403,31 @@ if ( ! function_exists( 'xplex_main_heroimg' ) ) {
     }
 }
 
+/* XPLEX Mobile AD Area */
+if ( ! function_exists( 'xplex_ad' ) ) {
+
+    function xplex_ad() {
+
+        $xad = esc_attr( get_theme_mod( 'xplex_ad_area_settings', 'enable' ) );
+
+        $xad_image = esc_url( get_theme_mod( 'xplex_ad_area_image' ) );
+        $xad_title = get_theme_mod( 'xplex_ad_area_title' );
+				$xad_link = esc_url( get_theme_mod( 'xplex_ad_area_link' ) );
+
+				if(!empty( $xad ) && $xad == 'enable') {
+					if ( wp_is_mobile() ) {
+    ?>
+        <div class="xad">
+					<?php if(!empty( $xad_image )) { ?>
+						<a href="<?php echo $xad_link; ?>"><img src="<?php echo $xad_image; ?>" title="<?php echo $xad_title; ?>" /></a>
+					<?php } ?>
+        </div>
+    <?php
+					} // 모바일에서만 표시
+				}
+    }
+}
+
 /* XPLEX Quick Menu Area */
 if ( ! function_exists( 'xplex_quick_menu' ) ) {
     function xplex_quick_menu() {
