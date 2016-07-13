@@ -418,6 +418,9 @@
 .top-header .top-navigation ul li{
 	margin-right:4px;
 }
+.top-header .top-navigation ul li:nth-child(2) {
+	display:none;
+}
 
 	.woocommerce #reviews #review_form_wrapper, .comments-area {
 		padding:15px 20px 10px;
