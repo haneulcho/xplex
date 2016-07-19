@@ -506,25 +506,34 @@ function wooc_extra_register_fields() {
 	<input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) esc_attr_e( $_POST['billing_first_name'] ); ?>" />
 	</p>
 	<div class="clear"></div>
-	<p class="form-row form-row-first">
-	<label for="xplex_sex">성별</label>
-	<input type="text" class="input-text" name="xplex_sex" id="reg_xplex_sex" value="<?php if ( ! empty( $_POST['xplex_sex'] ) ) esc_attr_e( $_POST['xplex_sex'] ); ?>" />
-	</p>
+	<p class="form-row form-row-first" style="width:60px">성별</p>
+	<div style="float:left">
+		<label style="display:inline-block;margin-right:10px;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_sex" value="남성">남</label>
+		<label style="display:inline-block;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_sex" value="여성">여</label>
+	</div>
 	<div class="clear"></div>
-	<p class="form-row form-row-first">
-	<label for="xplex_age">연령대</label>
-	<input type="text" class="input-text" name="xplex_age" id="reg_xplex_age" value="<?php if ( ! empty( $_POST['xplex_age'] ) ) esc_attr_e( $_POST['xplex_age'] ); ?>" />
-	</p>
+	<p class="form-row form-row-first" style="width:60px">연령대</p>
+	<div style="float:left;margin:4px 0 10px 0">
+		<label style="display:block;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_age" value="20대">20대</label>
+		<label style="display:block;margin-right:10px;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_age" value="30대">30대</label>
+		<label style="display:block;margin-right:10px;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_age" value="40대">40대</label>
+		<label style="display:block;margin-right:10px;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_age" value="50대 이상">50대 이상</label>
+	</div>
 	<div class="clear"></div>
-	<p class="form-row form-row-first">
-	<label for="xplex_job">직업</label>
-	<input type="text" class="input-text" name="xplex_job" id="reg_xplex_job" value="<?php if ( ! empty( $_POST['xplex_job'] ) ) esc_attr_e( $_POST['xplex_job'] ); ?>" />
+	<p class="form-row form-row-first" style="width:60px">직업</p>
+	<div style="width:73%;float:left;margin:0 0 10px 0">
+		<label style="display:inline-block;margin-right:10px;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_job" value="출판관련 종사자">출판관련 종사자</label>
+		<label style="display:inline-block;margin-right:10px;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_job" value="직장인">직장인</label>
+		<label style="display:inline-block;margin-right:10px;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_job" value="주부">주부</label>
+		<label style="display:inline-block;margin-right:10px;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_job" value="학생">학생</label>
+		<label style="display:inline-block;margin-right:10px;vertical-align:-3px"><input type="radio" class="input-radio" style="margin-right:5px" name="xplex_job" value="기타">기타</label>
+	</div>
 	</p>
 	<div class="clear"></div>
 <?php
 }
 
-add_action('woocommerce_register_form_start', 'wooc_extra_register_fields');
+add_action('woocommerce_register_form', 'wooc_extra_register_fields');
 
 // 이름 필드 유효성 검사
 function wooc_validate_extra_register_fields($username, $email, $validation_errors) {
@@ -543,13 +552,13 @@ function wooc_save_extra_register_fields($customer_id) {
 		update_user_meta( $customer_id, 'billing_first_name', sanitize_text_field( $_POST['billing_first_name'] ) );
 	}
 	if ( isset( $_POST['xplex_sex'] ) ) {
-		update_user_meta( $customer_id, 'xplex_sex', sanitize_text_field( $_POST['xplex_sex'] ) );
+		update_user_meta( $customer_id, 'xplex_sex', $_POST['xplex_sex'] );
 	}
 	if ( isset( $_POST['xplex_age'] ) ) {
-		update_user_meta( $customer_id, 'xplex_age', sanitize_text_field( $_POST['xplex_age'] ) );
+		update_user_meta( $customer_id, 'xplex_age', $_POST['xplex_age'] );
 	}
 	if ( isset( $_POST['xplex_job'] ) ) {
-		update_user_meta( $customer_id, 'xplex_job', sanitize_text_field( $_POST['xplex_job'] ) );
+		update_user_meta( $customer_id, 'xplex_job', $_POST['xplex_job'] );
 	}
 }
 
