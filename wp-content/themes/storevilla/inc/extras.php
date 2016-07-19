@@ -461,6 +461,110 @@ if ( ! function_exists( 'xplex_quick_menu' ) ) {
     }
 }
 
+// 어드민 사용자 정보 프론트 이름, 성별, 연령대, 직업 필드 추가
+do_action('show_user_profile', $profileuser);
+do_action('edit_user_profile', $profileuser);
+
+add_action('show_user_profile', 'add_extra_xplex_fields');
+add_action('edit_user_profile', 'add_extra_xplex_fields');
+
+function add_extra_xplex_fields($user) {
+?>
+	<h3>XPLEX 회원가입 추가 정보</h3>
+	<table class="form-table">
+		<tr>
+			<th><label for="xplex_sex">성별</label></th>
+			<td><input type="text" name="xplex_sex" value="<?php echo esc_attr(get_the_author_meta( 'xplex_sex', $user->ID )); ?>" class="regular-text" /></td>
+		</tr>
+		<tr>
+			<th><label for="xplex_age">연령대</label></th>
+			<td><input type="text" name="xplex_age" value="<?php echo esc_attr(get_the_author_meta( 'xplex_age', $user->ID )); ?>" class="regular-text" /></td>
+		</tr>
+		<tr>
+			<th><label for="xplex_job">직업</label></th>
+			<td><input type="text" name="xplex_job" value="<?php echo esc_attr(get_the_author_meta( 'xplex_job', $user->ID )); ?>" class="regular-text" /></td>
+		</tr>
+	</table>
+<?php
+}
+
+// 어드민 사용자 추가정보 저장
+function save_extra_xplex_fields($user_id) {
+	update_user_meta($user_id,'xplex_sex', sanitize_text_field($_POST['xplex_sex']));
+	update_user_meta($user_id,'xplex_age', sanitize_text_field($_POST['xplex_age']));
+	update_user_meta($user_id,'xplex_job', sanitize_text_field($_POST['xplex_job']));
+}
+
+add_action('personal_options_update', 'save_extra_xplex_fields');
+add_action('edit_user_profile_update', 'save_extra_xplex_fields');
+
+// 회원가입 프론트 이름, 성별, 연령대, 직업 필드 추가
+function wooc_extra_register_fields() {
+?>
+	<p class="form-row form-row-first">
+	<label for="reg_billing_first_name"><?php _e( 'First name', 'woocommerce' ); ?> <span class="required">*</span></label>
+	<input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) esc_attr_e( $_POST['billing_first_name'] ); ?>" />
+	</p>
+	<div class="clear"></div>
+	<p class="form-row form-row-first">
+	<label for="xplex_sex">성별</label>
+	<input type="text" class="input-text" name="xplex_sex" id="reg_xplex_sex" value="<?php if ( ! empty( $_POST['xplex_sex'] ) ) esc_attr_e( $_POST['xplex_sex'] ); ?>" />
+	</p>
+	<div class="clear"></div>
+	<p class="form-row form-row-first">
+	<label for="xplex_age">연령대</label>
+	<input type="text" class="input-text" name="xplex_age" id="reg_xplex_age" value="<?php if ( ! empty( $_POST['xplex_age'] ) ) esc_attr_e( $_POST['xplex_age'] ); ?>" />
+	</p>
+	<div class="clear"></div>
+	<p class="form-row form-row-first">
+	<label for="xplex_job">직업</label>
+	<input type="text" class="input-text" name="xplex_job" id="reg_xplex_job" value="<?php if ( ! empty( $_POST['xplex_job'] ) ) esc_attr_e( $_POST['xplex_job'] ); ?>" />
+	</p>
+	<div class="clear"></div>
+<?php
+}
+
+add_action('woocommerce_register_form_start', 'wooc_extra_register_fields');
+
+// 이름 필드 유효성 검사
+function wooc_validate_extra_register_fields($username, $email, $validation_errors) {
+	if ( isset( $_POST['billing_first_name'] ) && empty( $_POST['billing_first_name'] ) ) {
+		$validation_errors->add( 'billing_first_name_error', __( '<strong>Error</strong>: 이름은 꼭 입력하셔야 합니다!', 'woocommerce' ) );
+	}
+}
+
+add_action('woocommerce_register_post', 'wooc_validate_extra_register_fields', 10, 1);
+
+// 이름: 워드프레스 기본 정보와 우커머스 정보에 저장
+// 성별, 연령대, 직업: 워드프레스 기본 정보에 저장
+function wooc_save_extra_register_fields($customer_id) {
+	if ( isset( $_POST['billing_first_name'] ) ) {
+		update_user_meta( $customer_id, 'first_name', sanitize_text_field( $_POST['billing_first_name'] ) );
+		update_user_meta( $customer_id, 'billing_first_name', sanitize_text_field( $_POST['billing_first_name'] ) );
+	}
+	if ( isset( $_POST['xplex_sex'] ) ) {
+		update_user_meta( $customer_id, 'xplex_sex', sanitize_text_field( $_POST['xplex_sex'] ) );
+	}
+	if ( isset( $_POST['xplex_age'] ) ) {
+		update_user_meta( $customer_id, 'xplex_age', sanitize_text_field( $_POST['xplex_age'] ) );
+	}
+	if ( isset( $_POST['xplex_job'] ) ) {
+		update_user_meta( $customer_id, 'xplex_job', sanitize_text_field( $_POST['xplex_job'] ) );
+	}
+}
+
+add_action('woocommerce_created_customer', 'wooc_save_extra_register_fields');
+
+// 회원가입시 아이디대신 이름을 Display Name으로 기본 설정
+function registration_save_displayname($user_id) {
+	if ( isset( $_POST['billing_first_name']) ){
+		$pretty_name = $_POST['billing_first_name'];
+		wp_update_user( array ('ID' => $user_id, 'display_name'=> $pretty_name) ) ;
+	}
+}
+
+add_action('user_register', 'registration_save_displayname', 1000);
+
 /* 카테고리가 books일 때 신청하기를 구매하기로 텍스트 수정 */
 add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text' );
 function woo_custom_cart_button_text() {
