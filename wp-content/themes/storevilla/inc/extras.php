@@ -574,7 +574,7 @@ function registration_save_displayname($user_id) {
 
 add_action('user_register', 'registration_save_displayname', 1000);
 
-/* 카테고리가 books일 때 신청하기를 구매하기로 텍스트 수정 */
+// 카테고리가 books일 때 신청하기를 구매하기로 텍스트 수정
 add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text' );
 function woo_custom_cart_button_text() {
 	global $product;
@@ -620,20 +620,64 @@ if(class_exists( 'WP_Customize_control')) :
 
 endif;
 
-
-
 /* WooCommerce Action and filter ADD and REMOVE Section */
 
 remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
 
 remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
 remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+
+// 세일상품 뱃지 표기 체크박스 필드 추가
+add_action( 'woocommerce_product_options_general_product_data', 'xplex_add_custom_general_fields' );
+add_action( 'woocommerce_process_product_meta', 'xplex_add_custom_general_fields_save' );
+
+function xplex_add_custom_general_fields() {
+  global $woocommerce, $post;
+  echo '<div class="options_group">';
+  woocommerce_wp_checkbox (
+    array (
+      'id'            => 'is_sale_badge',
+      'label'         => __('세일 뱃지 표시', 'woocommerce' ),
+      'description'   => __( '체크하면 상품에 세일 뱃지가 생겨요.', 'woocommerce' )
+    )
+  );
+  echo '</div>';
+}
+
+// 세일상품 뱃지 표기 여부 우커머스 상품 정보에 저앙
+function xplex_add_custom_general_fields_save( $post_id ){
+	$xplex_is_sale_badge = isset( $_POST['is_sale_badge'] ) ? 'yes' : 'no';
+	update_post_meta( $post_id, 'is_sale_badge', $xplex_is_sale_badge );
+}
+
+// 세일상품 뱃지 상품 보기에 출력
+add_filter('woocommerce_sale_flash', 'woo_custom_hide_sales_flash');
+function woo_custom_hide_sales_flash()
+{
+		global $post, $product;
+		// 세일상품 뱃지 표기 여부 가져오기
+		$is_sale_badge = get_post_meta( $post->ID, 'is_sale_badge', true );
+		if ( $product->is_on_sale() ) {
+				if ($is_sale_badge == 'yes') {
+					return '<span class="onsale">' . __( 'SALE!', 'woocommerce' ) . '</span>';
+				}
+		}
+}
+
 function storevilla_woocommerce_template_loop_product_thumbnail(){ ?>
     <div class="item-img">
 
-        <?php global $post, $product; if ( $product->is_on_sale() ) :
-            echo apply_filters( 'woocommerce_sale_flash', '<div class="new-label new-top-right">' . __( 'Sale!', 'storevilla' ) . '</div>', $post, $product ); ?>
-        <?php endif; ?>
+        <?php
+						global $post, $product;
+						// 세일상품 뱃지 상품 리스트에 출력
+						// 세일상품 뱃지 표기 여부 가져오기
+						$is_sale_badge = get_post_meta( $post->ID, 'is_sale_badge', true );
+						if ( $product->is_on_sale() ) {
+								if ($is_sale_badge == 'yes') {
+									echo '<div class="new-label new-top-right">Sale!</div>';
+								}
+						}
+				?>
         <?php
             global $product_label_custom;
             if ($product_label_custom != ''){
@@ -839,22 +883,24 @@ add_action( 'xplex_custom_breadcrumb', 'storevilla_change_breadcrumb_delimiter',
  * Woo Commerce Social Share
 **/
 
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 55 );
-function storevilla_woocommerce_template_single_sharing() { ?>
-    <div class="storevilla-social">
-        <?php
-				if ( function_exists( 'sharing_display' ) ) {
-					sharing_display( '', true );
-				}
+// 2016.11.08 젯팩 업데이트에 따른 sns공유버튼 중복출력 버그로 기존 코드 제거
 
-				if ( class_exists( 'Jetpack_Likes' ) ) {
-					$custom_likes = new Jetpack_Likes;
-					echo $custom_likes->post_likes( '' );
-				}
-        ?>
-    </div>
-<?php }
-add_action( 'woocommerce_single_product_summary', 'storevilla_woocommerce_template_single_sharing', 50 );
+// remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 55 );
+// function storevilla_woocommerce_template_single_sharing() {
+//     <div class="storevilla-social">
+//
+// 				if ( function_exists( 'sharing_display' ) ) {
+// 					sharing_display( '', true );
+// 				}
+//
+// 				if ( class_exists( 'Jetpack_Likes' ) ) {
+// 					$custom_likes = new Jetpack_Likes;
+// 					echo $custom_likes->post_likes( '' );
+// 				}
+//
+//     </div>
+// }
+// add_action( 'woocommerce_single_product_summary', 'storevilla_woocommerce_template_single_sharing', 50 );
 
 /**
  * Woo Commerce Related product
