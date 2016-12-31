@@ -9,14 +9,14 @@
 		<input type="hidden" name="member_uid" value="<?php echo $content->member_uid?>">
 		<input type="hidden" name="member_display" value="<?php echo $content->member_display?>">
 		<input type="hidden" name="date" value="<?php echo $content->date?>">
-		
+
 		<div class="kboard-header"></div>
-		
+
 		<div class="kboard-attr-row kboard-attr-title">
 			<label class="attr-name"><?php echo __('Title')?></label>
 			<div class="attr-value"><input type="text" name="title" value="<?php echo $content->title?>"></div>
 		</div>
-		
+
 		<?php if($board->use_category):?>
 			<?php if($board->initCategory1()):?>
 			<div class="kboard-attr-row">
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			<?php endif?>
-			
+
 			<?php if($board->initCategory2()):?>
 			<div class="kboard-attr-row">
 				<label class="attr-name"><?php echo __('Category', 'kboard')?>2</label>
@@ -44,12 +44,18 @@
 			</div>
 			<?php endif?>
 		<?php endif?>
-		
+
 		<div class="kboard-attr-row">
 			<label class="attr-name"><?php echo __('Secret', 'kboard')?></label>
-			<div class="attr-value"><input type="checkbox" name="secret" value="true"<?php if($content->secret):?> checked<?php endif?>></div>
+			<div class="attr-value">
+			<?php if($board->isAdmin()):?>
+				<input type="checkbox" name="secret" value="true"<?php if($content->secret):?> checked<?php endif?>>
+			<?php else:?>
+				<input type="checkbox" class="input_hidden" name="secret" value="true" checked><span style="line-height:30px">문의는 비밀글로 작성됩니다.</span>
+			<?php endif?>
+			</div>
 		</div>
-		
+
 		<?php if($board->isAdmin()):?>
 		<div class="kboard-attr-row">
 			<label class="attr-name"><?php echo __('Notice', 'kboard')?></label>
@@ -69,7 +75,7 @@
 			<div class="attr-value"><input type="text" name="captcha" value=""></div>
 		</div>
 		<?php endif?>
-		
+
 		<div class="kboard-attr-row">
 			<label class="attr-name"><?php echo __('Name', 'kboard')?></label>
 			<div class="attr-value"><input type="text" name="kboard_option_name" value="<?php echo $content->option->name?>"></div>
@@ -78,7 +84,7 @@
 			<label class="attr-name"><?php echo __('Phone number', 'kboard')?></label>
 			<div class="attr-value"><input type="text" name="kboard_option_tel" value="<?php echo $content->option->tel?>"></div>
 		</div>
-		
+
 		<div class="kboard-content">
 			<?php if($board->use_editor):?>
 				<?php wp_editor($content->content, 'kboard_content'); ?>
@@ -86,7 +92,7 @@
 				<textarea name="kboard_content" id="kboard_content"><?php echo $content->content?></textarea>
 			<?php endif?>
 		</div>
-		
+
 		<div class="kboard-attr-row">
 			<label class="attr-name"><?php echo __('Thumbnail', 'kboard')?></label>
 			<div class="attr-value">
@@ -94,7 +100,7 @@
 				<input type="file" name="thumbnail">
 			</div>
 		</div>
-		
+
 		<div class="kboard-attr-row">
 			<label class="attr-name"><?php echo __('Attachment', 'kboard')?></label>
 			<div class="attr-value">
@@ -109,7 +115,7 @@
 				<input type="file" name="kboard_attach_file2">
 			</div>
 		</div>
-		
+
 		<div class="kboard-attr-row">
 			<label class="attr-name"><?php echo __('WP Search', 'kboard')?></label>
 			<div class="attr-value">
@@ -120,7 +126,7 @@
 				</select>
 			</div>
 		</div>
-		
+
 		<div class="kboard-control">
 			<div class="left">
 				<?php if($content->uid):?>

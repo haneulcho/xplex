@@ -23,7 +23,6 @@ class Jetpack_Options {
 				'wpcc_options',
 				'relatedposts',
 				'file_data',
-				'security_report',
 				'autoupdate_plugins',          // (array)  An array of plugin ids ( eg. jetpack/jetpack ) that should be autoupdated
 				'autoupdate_themes',           // (array)  An array of theme ids ( eg. twentyfourteen ) that should be autoupdated
 				'autoupdate_core',             // (bool)   Whether or not to autoupdate core
@@ -32,11 +31,16 @@ class Jetpack_Options {
 				'site_icon_url',               // (string) url to the full site icon
 				'site_icon_id',                // (int)    Attachment id of the site icon file
 				'dismissed_manage_banner',     // (bool) Dismiss Jetpack manage banner allows the user to dismiss the banner permanently
-				'updates',                     // (array) information about available updates to plugins, theme, WordPress core, and if site is under version control
+				'restapi_stats_cache',         // (array) Stats Cache data.
+				'unique_connection',           // (array)  A flag to determine a unique connection to wordpress.com two values "connected" and "disconnected" with values for how many times each has occured
+				'protect_whitelist'            // (array) IP Address for the Protect module to ignore
 			);
+
 		case 'private' :
 			return array(
 				'register',
+				'authorize',
+				'activate_manage',
 				'blog_token',                  // (string) The Client Secret/Blog Token of this site.
 				'user_token',                  // (string) The User Token of this site. (deprecated)
 				'user_tokens'                  // (array)  User Tokens for each user of this site who has connected to jetpack.wordpress.com.
@@ -58,9 +62,8 @@ class Jetpack_Options {
 			'identity_crisis_whitelist',    // (array)  An array of options, each having an array of the values whitelisted for it.
 			'gplus_authors',                // (array)  The Google+ authorship information for connected users.
 			'last_heartbeat',               // (int)    The timestamp of the last heartbeat that fired.
-			'last_security_report',         // (int)    The timestamp of the last security report that was run.
-			'sync_bulk_reindexing',         // (bool)   If a bulk reindex is currently underway.
-			'jumpstart'                     // (string) A flag for whether or not to show the Jump Start.  Accepts: new_connection, jumpstart_activated, jetpack_action_taken, jumpstart_dismissed.
+			'jumpstart',                    // (string) A flag for whether or not to show the Jump Start.  Accepts: new_connection, jumpstart_activated, jetpack_action_taken, jumpstart_dismissed.
+			'hide_jitm'                     // (array)  A list of just in time messages that we should not show because they have been dismissed by the user
 		);
 	}
 
@@ -115,6 +118,26 @@ class Jetpack_Options {
 		return $default;
 	}
 
+	/**
+	 * Returns the requested option, and ensures it's autoloaded in the future.
+	 * This does _not_ adjust the prefix in any way (does not prefix jetpack_%)
+	 *
+	 * @param string $name Option name
+	 * @param mixed $default (optional)
+	 *
+	 * @return mixed|void
+	 */
+	public static function get_option_and_ensure_autoload( $name, $default ) {
+		$value = get_option( $name );
+
+		if ( $value === false && $default !== false ) {
+			update_option( $name, $default );
+			$value = $default;
+		}
+
+		return $value;
+	}
+
 	private static function update_grouped_option( $group, $name, $value ) {
 		$options = get_option( self::$grouped_options[ $group ] );
 		if ( ! is_array( $options ) ) {
@@ -130,11 +153,20 @@ class Jetpack_Options {
 	 *
 	 * @param string $name Option name
 	 * @param mixed $value Option value
+	 * @param string $autoload If not compact option, allows specifying whether to autoload or not.
 	 */
-	public static function update_option( $name, $value ) {
+	public static function update_option( $name, $value, $autoload = null ) {
+		/**
+		 * Fires before Jetpack updates a specific option.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param str $name The name of the option being updated.
+		 * @param mixed $value The new value of the option.
+		 */
 		do_action( 'pre_update_jetpack_option_' . $name, $name, $value );
 		if ( self::is_valid( $name, 'non_compact' ) ) {
-			return update_option( "jetpack_$name", $value );
+			return update_option( "jetpack_$name", $value, $autoload );
 		}
 
 		foreach ( array_keys( self::$grouped_options ) as $group ) {

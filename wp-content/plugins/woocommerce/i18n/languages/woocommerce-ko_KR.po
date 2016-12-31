@@ -8287,7 +8287,7 @@ msgstr "%3$d 개의 결과 중 %1$d–%2$d입니다"
 
 #: templates/loop/sale-flash.php:16 templates/single-product/sale-flash.php:16
 msgid "Sale!"
-msgstr "세일!"
+msgstr "Sale!"
 
 #: templates/myaccount/form-add-payment-method.php:40
 msgid ""

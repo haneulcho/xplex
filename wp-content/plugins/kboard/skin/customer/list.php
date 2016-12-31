@@ -4,7 +4,7 @@
 	<div class="kboard-header">
 		<form id="kboard-search-form" method="get" action="<?php echo $url->set('mod', 'list')->toString()?>">
 			<?php echo $url->set('category1', '')->set('category2', '')->set('pageid', '1')->set('target', '')->set('keyword', '')->set('mod', 'list')->toInput()?>
-			
+
 			<?php if($board->use_category == 'yes'):?>
 			<div class="kboard-category">
 				<?php if($board->initCategory1()):?>
@@ -15,7 +15,7 @@
 						<?php endwhile?>
 					</select>
 				<?php endif?>
-				
+
 				<?php if($board->initCategory2()):?>
 					<select name="category2" onchange="jQuery('#kboard-search-form').submit();">
 						<option value=""><?php echo __('All', 'kboard')?></option>
@@ -26,7 +26,7 @@
 				<?php endif?>
 			</div>
 			<?php endif?>
-			
+
 			<div class="kboard-search">
 				<select name="target">
 					<option value=""><?php echo __('All', 'kboard')?></option>
@@ -40,7 +40,7 @@
 		</form>
 	</div>
 	<!-- 검색폼 끝 -->
-	
+
 	<!-- 리스트 시작 -->
 	<div class="kboard-list">
 		<table>
@@ -70,9 +70,7 @@
 				<tr>
 					<td class="kboard-list-uid"><?php echo $list->index()?></td>
 					<td class="kboard-list-title"><div class="cut_strings">
-							<a href="<?php echo $url->set('uid', $content->uid)->set('mod', 'document')->toString()?>"><?php echo $content->title?>
-							<?php if($content->secret):?><img src="<?php echo $skin_path?>/images/icon_lock.png" alt="<?php echo __('Secret', 'kboard')?>"><?php endif?>
-							</a>
+							<a href="<?php echo $url->set('uid', $content->uid)->set('mod', 'document')->toString()?>"><?php if($board->isAdmin() || ($content->member_uid == $user_ID)):?><?php echo $content->title?><?php else:?><?php echo $content->member_display?>님의 문의입니다.<?php endif?></a>
 							<?php echo $content->getCommentsCount()?>
 						</div></td>
 					<td class="kboard-list-user"><?php echo $content->member_display?></td>
@@ -85,7 +83,7 @@
 		</table>
 	</div>
 	<!-- 리스트 끝 -->
-	
+
 	<!-- 페이징 시작 -->
 	<div class="kboard-pagination">
 		<ul class="kboard-pagination-pages">
@@ -93,7 +91,7 @@
 		</ul>
 	</div>
 	<!-- 페이징 끝 -->
-	
+
 	<?php if($board->isWriter()):?>
 	<!-- 버튼 시작 -->
 	<div class="kboard-control">
@@ -101,7 +99,7 @@
 	</div>
 	<!-- 버튼 끝 -->
 	<?php endif?>
-	
+
 	<div class="kboard-customer-poweredby">
 		<a href="http://www.cosmosfarm.com/products/kboard" onclick="window.open(this.href); return false;" title="<?php echo __('KBoard is the best community software available for WordPress', 'kboard')?>">Powered by KBoard</a>
 	</div>

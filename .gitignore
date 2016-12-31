@@ -4,4 +4,5 @@ wp-config.php
 readme.html
 hosting_index.html
 .DS_Store
+*/.DS_Store
 /wp-content/uploads

@@ -31,17 +31,24 @@ require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-embeds-endpoint.p
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-get-site-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-get-taxonomies-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-get-taxonomy-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-get-term-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-comments-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-media-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-post-types-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-post-type-taxonomies-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-posts-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-roles-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-terms-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-users-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-site-user-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-comment-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-media-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-post-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-taxonomy-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-term-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-user-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-upload-media-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-site-settings-endpoint.php' );
-require_once( $json_endpoints_dir . 'class.wpcom-json-api-publicize-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-sharing-buttons-endpoint.php' );
 
 // **********
@@ -59,6 +66,27 @@ require_once( $json_endpoints_dir . 'class.wpcom-json-api-upload-media-v1-1-endp
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-get-post-v1-1-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-posts-v1-1-endpoint.php' );
 require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-post-v1-1-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-get-autosave-v1-1-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-autosave-post-v1-1-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-get-post-counts-v1-1-endpoint.php' );
+
+// Custom Menus
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-menus-v1-1-endpoint.php' );
+
+// Users
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-list-invites-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-invites-endpoint.php' );
+
+// Custom CSS
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-get-customcss.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-customcss.php' );
+
+// **********
+// v1.2
+// **********
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-update-post-v1-2-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-site-settings-v1-2-endpoint.php' );
+require_once( $json_endpoints_dir . 'class.wpcom-json-api-get-site-v1-2-endpoint.php' );
 
 // Jetpack Only Endpoints
 $json_jetpack_endpoints_dir = dirname( __FILE__ ) . '/json-endpoints/jetpack/';
@@ -87,8 +115,59 @@ new WPCOM_JSON_API_GET_Site_Endpoint( array(
 
 	'response_format' => WPCOM_JSON_API_GET_Site_Endpoint::$site_format,
 
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/?pretty=1',
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/',
 ) );
+
+new WPCOM_JSON_API_GET_Site_V1_2_Endpoint( array(
+	'description' => 'Get information about a site.',
+	'group'	      => 'sites',
+	'stat'        => 'sites:X',
+	'allowed_if_flagged' => true,
+	'method'      => 'GET',
+	'min_version' => '1.2',
+	'path'        => '/sites/%s',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+	),
+
+	'query_parameters' => array(
+		'context' => false,
+	),
+
+	'response_format' => WPCOM_JSON_API_GET_Site_V1_2_Endpoint::$site_format,
+
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.2/sites/en.blog.wordpress.com/',
+) );
+
+new WPCOM_JSON_API_GET_Post_Counts_V1_1_Endpoint( array(
+	'description'   => 'Get number of posts in the post type groups by post status',
+	'group'         => 'sites',
+	'stat'          => 'sites:X:post-counts:X',
+	'force'         => 'wpcom',
+	'method'        => 'GET',
+	'min_version'   => '1.1',
+	'max_version'   => '1.2',
+	'path'          => '/sites/%s/post-counts/%s',
+	'path_labels'   => array(
+		'$site'       => '(int|string) Site ID or domain',
+		'$post_type'  => '(string) Post Type',
+	),
+
+	'query_parameters' => array(
+		'context' => false,
+		'author' => '(int) author ID',
+	),
+
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.2/sites/en.blog.wordpress.com/post-counts/page',
+
+	'response_format' => array(
+		'counts' => array(
+			'all' => '(array) Number of posts by any author in the post type grouped by post status',
+			'mine' => '(array) Number of posts by the current user in the post type grouped by post status'
+		)
+	)
+) );
+
 
 new WPCOM_JSON_API_List_Post_Formats_Endpoint( array(
 	'description' => 'Get a list of post formats supported by a site.',
@@ -110,9 +189,27 @@ new WPCOM_JSON_API_List_Post_Formats_Endpoint( array(
 	)
 ) );
 
+new WPCOM_JSON_API_List_Page_Templates_Endpoint( array(
+	'description' => 'Get a list of page templates supported by a site.',
+	'group'       => 'sites',
+	'stat'        => 'sites:X:post-templates',
+
+	'method'      => 'GET',
+	'path'        => '/sites/%s/page-templates',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+	),
+	'query_parameters' => array(
+		'context' => false,
+	),
+	'response_format' => array(
+		'templates' => '(array) A list of supported page templates. Contains label and file.',
+	)
+) );
+
 new WPCOM_JSON_API_List_Post_Types_Endpoint( array (
 	'description' => 'Get a list of post types available for a site.',
-	'group'       => '__do_not_document',
+	'group'       => 'sites',
 	'stat'        => 'sites:X:post-types',
 
 	'method'      => 'GET',
@@ -128,6 +225,22 @@ new WPCOM_JSON_API_List_Post_Types_Endpoint( array (
 	'response_format' => array(
 		'found'      => '(int) The number of post types found',
 		'post_types' => '(array) A list of available post types',
+	)
+) );
+
+new WPCOM_JSON_API_List_Post_Type_Taxonomies_Endpoint( array (
+	'description' => 'Get a list of taxonomies associated with a post type.',
+	'group'       => 'taxonomy',
+	'stat'        => 'sites:X:post-types:X:taxonomies',
+	'method'      => 'GET',
+	'path'        => '/sites/%s/post-types/%s/taxonomies',
+	'path_labels' => array(
+		'$site'      => '(int|string) Site ID or domain',
+		'$post_type' => '(string) Post type',
+	),
+	'response_format' => array(
+		'found'      => '(int) The number of taxonomies found',
+		'taxonomies' => '(array:taxonomy) A list of available taxonomies',
 	)
 ) );
 
@@ -147,30 +260,12 @@ new WPCOM_JSON_API_List_Shortcodes_Endpoint( array(
 	'response_format' => array(
 		'shortcodes' => '(array) A list of supported shortcodes by their handle.',
 	),
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/example.wordpress.com/shortcodes',
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/82974409/shortcodes',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		),
-	),
-	'example_response' => '
-	{
-		"shortcodes": [
-			"wp_caption",
-			"caption",
-			"gallery",
-			"playlist",
-			"audio",
-			"video",
-			"flickr",
-			"github-buttons",
-			"gist",
-			"gravatar",
-			"gravatar_profile",
-			"polldaddy",
-			"simplenote",
-		],
-	}	',
+	)
 ) );
 
 new WPCOM_JSON_API_Render_Shortcode_Endpoint( array(
@@ -191,38 +286,12 @@ new WPCOM_JSON_API_Render_Shortcode_Endpoint( array(
 		'scripts'   => '(array) An array of JavaScript files needed to render the shortcode. Returned in the format of <code>{ "script-slug" : { "src": "http://example.com/file.js", "extra" : "" } }</code> where extra contains any neccessary extra JS for initializing the source file and src contains the script to load. Omitted if no scripts are neccessary.',
 		'styles'    => '(array) An array of CSS files needed to render the shortcode. Returned in the format of <code>{ "style-slug" : { "src": "http://example.com/file.css", "media" : "all" } }</code>. Omitted if no styles are neccessary.',
 	),
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/shortcodes/render?shortcode=%5Bgallery%20ids%3D%22729%2C732%2C731%2C720%22%5D',
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/82974409/shortcodes/render?shortcode=%5Bgallery%20ids%3D%22729%2C732%2C731%2C720%22%5D',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		),
-	),
-	'example_response' => '
-	{
-		"shortcode": "[[gallery ids=\"729,732,731,720\"]]",
-		"result": "\n\t\t<style type="text/css">\n\t\t\t#gallery-0-1 {\n\t\t\t\tmargin: auto;\n\t\t\t}\n\t\t\t#gallery-0-1 .gallery-item {\n\t\t\t\tfloat: left;\n\t\t\t\tmargin-top: 10px;\n\t\t\t\ttext-align: center;\n\t\t\t\twidth: 33%;\n\t\t\t}\n\t\t\t#gallery-0-1 img {\n\t\t\t\tborder: 2px solid #cfcfcf;\n\t\t\t}\n\t\t\t#gallery-0-1 .gallery-caption {\n\t\t\t\tmargin-left: 0;\n\t\t\t}\n\t\t\t/* see gallery_shortcode() in wp-includes/media.php */\n\t\t</style>\n\t\t<div id="gallery-0-1" class="gallery galleryid-0 gallery-columns-3 gallery-size-thumbnail"><dl class="gallery-item">\n\t\t\t<dt class="gallery-icon landscape">\n\t\t\t\t<a href="http://en.blog.wordpress.com/2007/07/10/submit-for-review/submit-for-review/"><img width=\"150\" height=\"61\" src=\"https://wpcom.files.wordpress.com/2007/07/submit-for-review.jpg?w=150\" class=\"attachment-thumbnail\" alt=\"Submit for Review\" data-attachment-id=\"731\" data-orig-file=\"https://wpcom.files.wordpress.com/2007/07/submit-for-review.jpg\" data-orig-size=\"921,372\" data-comments-opened=\"1\" data-image-meta=\"[]\" data-image-title=\"Submit for Review\" data-image-description=\"\" data-medium-file=\"https://wpcom.files.wordpress.com/2007/07/submit-for-review.jpg?w=300\" data-large-file=\"https://wpcom.files.wordpress.com/2007/07/submit-for-review.jpg?w=921\" /></a>\n\t\t\t</dt></dl>\n\t\t\t<br style="clear: both" />\n\t\t</div>\n",
-		"scripts": {
-			"spin": {
-				"src": "https://en.blog.wordpress.com/wp-includes/js/spin.js?ver=1.3"
-			},
-			"jquery.spin": {
-				"src": "https://en.blog.wordpress.com/wp-includes/js/jquery/jquery.spin.js?ver=1.3"
-			},
-			"jetpack-carousel": {
-				"src": "https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel.js?ver=1738091679",
-			}
-		},
-		"styles": {
-			"jetpack-carousel": {
-				"src": "https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel.css?ver=1201731771",
-				"media": "all"
-			},
-			"jetpack-carousel-ie8fix": {
-				"src": "https://s1.wp.com/wp-content/mu-plugins/carousel/jetpack-carousel-ie8fix.css?ver=1777576104",
-				"media": "all"
-			}
-		},
-	}	'
+	)
 ) );
 
 /*
@@ -240,25 +309,12 @@ new WPCOM_JSON_API_List_Embeds_Endpoint( array(
 	'response_format' => array(
 		'embeds' => '(array) A list of supported embeds by their regex pattern.',
 	),
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/example.wordpress.com/embeds',
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/82974409/embeds',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		),
-	),
-	'example_response' => '
-	{
-		"embeds": [
-			"#https?://gist\\.github\\.com/([a-zA-Z0-9]+)#",
-			"#https?://(www.)?youtube\\.com/embed/([^/]+)#i",
-			"/^https?:\\/\\/(?:app.simplenote.com|simp.ly)\\/publish\\/(\\w+)/i",
-			"#https?://(www\\.)?flickr\\.com/.*#i",
-			"#https?://flic\\.kr/.*#i",
-			"#https?://wordpress.tv/.*#i",
-			"#https?://(.+\\.)?polldaddy\\.com/.*#i",
-			"#https?://cloudup\\.com/([^/.]+)#",
-		],
-	}	'
+	)
 ) );
 
 new WPCOM_JSON_API_Render_Embed_Endpoint( array(
@@ -277,17 +333,12 @@ new WPCOM_JSON_API_Render_Embed_Endpoint( array(
 		'embed_url' => '(string) The embed_url that was passed in for rendering.',
 		'result'    => '(html) The rendered HTML result of the embed.',
 	),
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/embeds/render?embed_url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSQEQr7c0-dw',
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/apiexamples.wordpress.com/embeds/render?embed_url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DSQEQr7c0-dw',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		),
-	),
-	'example_response' => '
-	{
-		"embed_url": "https://www.youtube.com/watch?v=SQEQr7c0-dw",
-		"result": "<span class="embed-youtube" style="text-align:center; display: block;""><​iframe class="youtube-player" type="text/html" width="640" height="390" src="https://www.youtube.com/embed/SQEQr7c0-dw?version=3&#038;rel=1&#038;fs=1&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent" frameborder="0" allowfullscreen="true"></iframe></span>",
-	}	'
+	)
 ) );
 
 new WPCOM_JSON_API_Render_Embed_Reversal_Endpoint( array(
@@ -311,7 +362,7 @@ new WPCOM_JSON_API_Render_Embed_Reversal_Endpoint( array(
 		'scripts'   => '(array) An array of JavaScript files needed to render the embed or shortcode. Returned in the format of <code>{ "script-slug" : { "src": "http://example.com/file.js", "extra" : "" } }</code> where extra contains any neccessary extra JS for initializing the source file and src contains the script to load. Omitted if no scripts are neccessary.',
 		'styles'    => '(array) An array of CSS files needed to render the embed or shortcode. Returned in the format of <code>{ "style-slug" : { "src": "http://example.com/file.css", "media" : "all" } }</code>. Omitted if no styles are neccessary.',
 	),
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/shortcode-reversals/render/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/shortcode-reversals/render/',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
@@ -320,13 +371,6 @@ new WPCOM_JSON_API_Render_Embed_Reversal_Endpoint( array(
 		'body' => array(
 			'maybe_embed' => '<iframe width="480" height="302" src="http://www.ustream.tv/embed/recorded/26370522/highlight/299667?v=3&amp;wmode=direct" scrolling="no" frameborder="0"></iframe>',
 		)
-	),
-
-	'example_response' => array(
-		'maybe_embed' => '<iframe width="480" height="302" src="http://www.ustream.tv/embed/recorded/26370522/highlight/299667?v=3&amp;wmode=direct" scrolling="no" frameborder="0"></iframe>',
-		'render_result' => '<iframe src="https://www.ustream.tv/embed/recorded/26370522/highlight/299667?v=3&#038;wmode=direct" width="480" height="302" scrolling="no" frameborder="0" style="border: 0px none transparent;"></iframe>',
-		'reversal_type' => 'shortcode',
-		'result' => '[ustream id=26370522 highlight=299667 hwaccel=1 version=3 width=480 height=302]',
 	),
 ) );
 
@@ -389,7 +433,7 @@ new WPCOM_JSON_API_List_Posts_Endpoint( array(
 		'meta_value'   => '(string) Metadata value that the post should contain. Will only be applied if a `meta_key` is also given',
 	),
 
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/?number=5&pretty=1'
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/?number=5'
 ) );
 
 new WPCOM_JSON_API_List_Posts_v1_1_Endpoint( array(
@@ -444,7 +488,7 @@ new WPCOM_JSON_API_List_Posts_v1_1_Endpoint( array(
 		'meta_value'   => '(string) Metadata value that the post should contain. Will only be applied if a `meta_key` is also given',
 	),
 
-	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/en.blog.wordpress.com/posts/?number=2&pretty=1'
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/en.blog.wordpress.com/posts/?number=2'
 ) );
 
 new WPCOM_JSON_API_Get_Post_Endpoint( array(
@@ -460,7 +504,7 @@ new WPCOM_JSON_API_Get_Post_Endpoint( array(
 		'$post_ID' => '(int) The post ID',
 	),
 
-	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/7/?pretty=1'
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/7'
 ) );
 
 new WPCOM_JSON_API_Get_Post_v1_1_Endpoint( array(
@@ -475,7 +519,7 @@ new WPCOM_JSON_API_Get_Post_v1_1_Endpoint( array(
 		'$site'    => '(int|string) Site ID or domain',
 		'$post_ID' => '(int) The post ID',
 	),
-	'example_request'  => 'https://public-api.wordpress.com/rest/v1.1/sites/en.blog.wordpress.com/posts/7/?pretty=1'
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1.1/sites/en.blog.wordpress.com/posts/7'
 ) );
 
 new WPCOM_JSON_API_Get_Post_Endpoint( array(
@@ -505,7 +549,7 @@ new WPCOM_JSON_API_Get_Post_Endpoint( array(
 		'$post_slug' => '(string) The post slug (a.k.a. sanitized name)',
 	),
 
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/slug:blogging-and-stuff?pretty=1',
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/slug:blogging-and-stuff',
 ) );
 
 new WPCOM_JSON_API_Get_Post_v1_1_Endpoint( array(
@@ -520,14 +564,14 @@ new WPCOM_JSON_API_Get_Post_v1_1_Endpoint( array(
 		'$site'      => '(int|string) Site ID or domain',
 		'$post_slug' => '(string) The post slug (a.k.a. sanitized name)',
 	),
-	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/en.blog.wordpress.com/posts/slug:blogging-and-stuff?pretty=1',
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/en.blog.wordpress.com/posts/slug:blogging-and-stuff',
 ) );
 
 new WPCOM_JSON_API_Update_Post_Endpoint( array(
 	'description' => 'Create a post.',
 	'group'       => 'posts',
 	'stat'        => 'posts:new',
-	'new_version' => '1.1',
+	'new_version' => '1.2',
 	'max_version' => '1',
 	'method'      => 'POST',
 	'path'        => '/sites/%s/posts/new',
@@ -561,7 +605,7 @@ new WPCOM_JSON_API_Update_Post_Endpoint( array(
 		'type'      => "(string) The post type. Defaults to 'post'. Post types besides post and page need to be whitelisted using the <code>rest_api_allowed_post_types</code> filter.",
 		'categories' => "(array|string) Comma-separated list or array of categories (name or id)",
 		'tags'       => "(array|string) Comma-separated list or array of tags (name or id)",
-		'format'     => get_post_format_strings(),
+		'format'     => array_merge( array( 'default' => 'Use default post format' ), get_post_format_strings() ),
 		'featured_image' => "(string) The post ID of an existing attachment to set as the featured image. Pass an empty string to delete the existing image.",
 		'media'      => "(media) An array of files to attach to the post. To upload media, the entire request should be multipart/form-data encoded. Multiple media items will be displayed in a gallery. Accepts  jpg, jpeg, png, gif, pdf, doc, ppt, odt, pptx, docx, pps, ppsx, xls, xlsx, key. Audio and Video may also be available. See <code>allowed_file_types</code> in the options response of the site endpoint. <br /><br /><strong>Example</strong>:<br />" .
 		 				"<code>curl \<br />--form 'title=Image' \<br />--form 'media[]=@/path/to/file.jpg' \<br />-H 'Authorization: BEARER your-token' \<br />'https://public-api.wordpress.com/rest/v1/sites/123/posts/new'</code>",
@@ -574,7 +618,7 @@ new WPCOM_JSON_API_Update_Post_Endpoint( array(
 		'menu_order'    => "(int) (Pages Only) the order pages should appear in. Use 0 to maintain alphabetical order.",
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/posts/new/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/posts/new/',
 
 	'example_request_data' => array(
 		'headers' => array(
@@ -587,110 +631,14 @@ new WPCOM_JSON_API_Update_Post_Endpoint( array(
 			'tags'       => 'tests',
 			'categories' => 'API'
 		)
-	),
-
-	'example_response'     => '
-{
-	"ID": 1270,
-	"author": {
-		"ID": 18342963,
-		"email": false,
-		"name": "binarysmash",
-		"URL": "http:\/\/binarysmash.wordpress.com",
-		"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/binarysmash"
-	},
-	"date": "2012-04-11T19:42:44+00:00",
-	"modified": "2012-04-11T19:42:44+00:00",
-	"title": "Hello World",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2012\/04\/11\/hello-world-3\/",
-	"short_URL": "http:\/\/wp.me\/p23HjV-ku",
-	"content": "<p>Hello. I am a test post. I was created by the API<\/p>\n",
-	"excerpt": "<p>Hello. I am a test post. I was created by the API<\/p>\n",
-	"status": "publish",
-	"sticky": false,
-	"password": "",
-	"parent": false,
-	"type": "post",
-	"comments_open": true,
-	"pings_open": true,
-	"likes_enabled": true,
-	"sharing_enabled": true,
-	"comment_count": 0,
-	"like_count": 0,
-	"i_like": false,
-	"is_reblogged": false,
-	"is_following": false,
-	"featured_image": "",
-	"format": "standard",
-	"geo": false,
-	"current_user_can": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"capabilities": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"publicize_URLs": [
-
-	],
-	"tags": {
-		"tests": {
-			"name": "tests",
-			"slug": "tests",
-			"description": "",
-			"post_count": 1,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/tests",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/tests\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"categories": {
-		"API": {
-			"name": "API",
-			"slug": "api",
-			"description": "",
-			"post_count": 1,
-			"parent": 0,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/api",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/api\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"metadata": {
-		{
-			"id" : 123,
-			"key" : "test_meta_key",
-			"value" : "test_value",
-		}
-	},
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1270",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1270\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1270\/replies\/",
-			"likes": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1270\/likes\/"
-		}
-	}
-}'
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 	'description' => 'Create a post.',
 	'group'       => 'posts',
 	'stat'        => 'posts:new',
+	'new_version' => '1.2',
 	'min_version' => '1.1',
 	'max_version' => '1.1',
 	'method'      => 'POST',
@@ -714,6 +662,7 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 			'private' => 'Privately publish the post.',
 			'draft'   => 'Save the post as a draft.',
 			'pending' => 'Mark the post as pending editorial approval.',
+			'future'  => 'Schedule the post (alias for publish; you must also set a future date).',
 			'auto-draft' => 'Save a placeholder for a newly created post, with no content.',
 		),
 		'sticky'    => array(
@@ -723,9 +672,10 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 		'password'  => '(string) The plaintext password protecting the post, or, more likely, the empty string if the post is not password protected.',
 		'parent'    => "(int) The post ID of the new post's parent.",
 		'type'      => "(string) The post type. Defaults to 'post'. Post types besides post and page need to be whitelisted using the <code>rest_api_allowed_post_types</code> filter.",
+		'terms'      => '(object) Mapping of taxonomy to comma-separated list or array of terms (name or id)',
 		'categories' => "(array|string) Comma-separated list or array of categories (name or id)",
 		'tags'       => "(array|string) Comma-separated list or array of tags (name or id)",
-		'format'     => get_post_format_strings(),
+		'format'     => array_merge( array( 'default' => 'Use default post format' ), get_post_format_strings() ),
 		'featured_image' => "(string) The post ID of an existing attachment to set as the featured image. Pass an empty string to delete the existing image.",
 		'media'      => "(media) An array of files to attach to the post. To upload media, the entire request should be multipart/form-data encoded. Multiple media items will be displayed in a gallery. Accepts  jpg, jpeg, png, gif, pdf, doc, ppt, odt, pptx, docx, pps, ppsx, xls, xlsx, key. Audio and Video may also be available. See <code>allowed_file_types</code> in the options response of the site endpoint. Errors produced by media uploads, if any, will be in `media_errors` in the response. <br /><br /><strong>Example</strong>:<br />" .
 		 				"<code>curl \<br />--form 'title=Image Post' \<br />--form 'media[0]=@/path/to/file.jpg' \<br />--form 'media_attrs[0][caption]=My Great Photo' \<br />-H 'Authorization: BEARER your-token' \<br />'https://public-api.wordpress.com/rest/v1/sites/123/posts/new'</code>",
@@ -737,9 +687,10 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 		'likes_enabled' => "(bool) Should the post be open to likes? Defaults to the blog's preference.",
 		'sharing_enabled' => "(bool) Should sharing buttons show on this post? Defaults to true.",
 		'menu_order'    => "(int) (Pages Only) the order pages should appear in. Use 0 to maintain alphabetical order.",
+		'page_template' => '(string) (Pages Only) The page template this page should use.',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/30434183/posts/new/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/posts/new/',
 
 	'example_request_data' => array(
 		'headers' => array(
@@ -752,110 +703,88 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 			'tags'       => 'tests',
 			'categories' => 'API'
 		)
+	)
+) );
+
+new WPCOM_JSON_API_Update_Post_v1_2_Endpoint( array(
+	'description' => 'Create a post.',
+	'group'       => 'posts',
+	'stat'        => 'posts:new',
+	'min_version' => '1.2',
+	'max_version' => '1.2',
+	'method'      => 'POST',
+	'path'        => '/sites/%s/posts/new',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
 	),
 
-	'example_response'     => '
-{
-	"ID": 1270,
-	"author": {
-		"ID": 18342963,
-		"email": false,
-		"name": "binarysmash",
-		"URL": "http:\/\/binarysmash.wordpress.com",
-		"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/binarysmash"
-	},
-	"date": "2012-04-11T19:42:44+00:00",
-	"modified": "2012-04-11T19:42:44+00:00",
-	"title": "Hello World",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2012\/04\/11\/hello-world-3\/",
-	"short_URL": "http:\/\/wp.me\/p23HjV-ku",
-	"content": "<p>Hello. I am a test post. I was created by the API<\/p>\n",
-	"excerpt": "<p>Hello. I am a test post. I was created by the API<\/p>\n",
-	"status": "publish",
-	"sticky": false,
-	"password": "",
-	"parent": false,
-	"type": "post",
-	"discussion": {
-		"comments_open": true,
-		"comment_status": "open",
-		"pings_open": true,
-		"ping_status": "open",
-		"comment_count": 0
-	},
-	"likes_enabled": true,
-	"sharing_enabled": true,
-	"like_count": 0,
-	"i_like": false,
-	"is_reblogged": false,
-	"is_following": false,
-	"featured_image": "",
-	"format": "standard",
-	"geo": false,
-	"capabilities": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"publicize_URLs": [
+	'request_format' => array(
+		// explicitly document all input
+		'date'      => "(ISO 8601 datetime) The post's creation time.",
+		'title'     => '(HTML) The post title.',
+		'content'   => '(HTML) The post content.',
+		'excerpt'   => '(HTML) An optional post excerpt.',
+		'slug'      => '(string) The name (slug) for the post, used in URLs.',
+		'author'    => '(string) The username or ID for the user to assign the post to.',
+		'publicize' => '(array|bool) True or false if the post be publicized to external services. An array of services if we only want to publicize to a select few. Defaults to true.',
+		'publicize_message' => '(string) Custom message to be publicized to external services.',
+		'status'    => array(
+			'publish' => 'Publish the post.',
+			'private' => 'Privately publish the post.',
+			'draft'   => 'Save the post as a draft.',
+			'pending' => 'Mark the post as pending editorial approval.',
+			'future'  => 'Schedule the post (alias for publish; you must also set a future date).',
+			'auto-draft' => 'Save a placeholder for a newly created post, with no content.',
+		),
+		'sticky'    => array(
+			'false'   => 'Post is not marked as sticky.',
+			'true'    => 'Stick the post to the front page.',
+		),
+		'password'  => '(string) The plaintext password protecting the post, or, more likely, the empty string if the post is not password protected.',
+		'parent'    => "(int) The post ID of the new post's parent.",
+		'type'      => "(string) The post type. Defaults to 'post'. Post types besides post and page need to be whitelisted using the <code>rest_api_allowed_post_types</code> filter.",
+		'terms'      => '(object) Mapping of taxonomy to comma-separated list or array of term names',
+		'categories' => "(array|string) Comma-separated list or array of category names",
+		'tags'       => "(array|string) Comma-separated list or array of tag names",
+		'terms_by_id'      => '(object) Mapping of taxonomy to comma-separated list or array of term IDs',
+		'categories_by_id' => "(array|string) Comma-separated list or array of category IDs",
+		'tags_by_id'       => "(array|string) Comma-separated list or array of tag IDs",
+		'format'     => array_merge( array( 'default' => 'Use default post format' ), get_post_format_strings() ),
+		'featured_image' => "(string) The post ID of an existing attachment to set as the featured image. Pass an empty string to delete the existing image.",
+		'media'      => "(media) An array of files to attach to the post. To upload media, the entire request should be multipart/form-data encoded. Multiple media items will be displayed in a gallery. Accepts  jpg, jpeg, png, gif, pdf, doc, ppt, odt, pptx, docx, pps, ppsx, xls, xlsx, key. Audio and Video may also be available. See <code>allowed_file_types</code> in the options response of the site endpoint. Errors produced by media uploads, if any, will be in `media_errors` in the response. <br /><br /><strong>Example</strong>:<br />" .
+		 				"<code>curl \<br />--form 'title=Image Post' \<br />--form 'media[0]=@/path/to/file.jpg' \<br />--form 'media_attrs[0][caption]=My Great Photo' \<br />-H 'Authorization: BEARER your-token' \<br />'https://public-api.wordpress.com/rest/v1/sites/123/posts/new'</code>",
+		'media_urls' => "(array) An array of URLs for images to attach to a post. Sideloads the media in for a post. Errors produced by media sideloading, if any, will be in `media_errors` in the response.",
+		'media_attrs' => "(array) An array of attributes (`title`, `description` and `caption`) are supported to assign to the media uploaded via the `media` or `media_urls` properties. You must use a numeric index for the keys of `media_attrs` which follow the same sequence as `media` and `media_urls`. <br /><br /><strong>Example</strong>:<br />" .
+		                 "<code>curl \<br />--form 'title=Gallery Post' \<br />--form 'media[]=@/path/to/file1.jpg' \<br />--form 'media_urls[]=http://exapmple.com/file2.jpg' \<br /> \<br />--form 'media_attrs[0][caption]=This will be the caption for file1.jpg' \<br />--form 'media_attrs[1][title]=This will be the title for file2.jpg' \<br />-H 'Authorization: BEARER your-token' \<br />'https://public-api.wordpress.com/rest/v1/sites/123/posts/new'</code>",
+		'metadata'      => "(array) Array of metadata objects containing the following properties: `key` (metadata key), `id` (meta ID), `previous_value` (if set, the action will only occur for the provided previous value), `value` (the new value to set the meta to), `operation` (the operation to perform: `update` or `add`; defaults to `update`). All unprotected meta keys are available by default for read requests. Both unprotected and protected meta keys are avaiable for authenticated requests with proper capabilities. Protected meta keys can be made available with the <code>rest_api_allowed_public_metadata</code> filter.",
+		'discussion'    => '(object) A hash containing one or more of the following boolean values, which default to the blog\'s discussion preferences: `comments_open`, `pings_open`',
+		'likes_enabled' => "(bool) Should the post be open to likes? Defaults to the blog's preference.",
+		'sharing_enabled' => "(bool) Should sharing buttons show on this post? Defaults to true.",
+		'menu_order'    => "(int) (Pages Only) the order pages should appear in. Use 0 to maintain alphabetical order.",
+		'page_template' => '(string) (Pages Only) The page template this page should use.',
+	),
 
-	],
-	"tags": {
-		"tests": {
-			"name": "tests",
-			"slug": "tests",
-			"description": "",
-			"post_count": 1,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/tags\/tests",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/tags\/tests\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"categories": {
-		"API": {
-			"name": "API",
-			"slug": "api",
-			"description": "",
-			"post_count": 1,
-			"parent": 0,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/categories\/api",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/categories\/api\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"metadata": {
-		{
-			"id" : 123,
-			"key" : "test_meta_key",
-			"value" : "test_value",
-		}
-	},
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1270",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1270\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1270\/replies\/",
-			"likes": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1270\/likes\/"
-		}
-	}
-}'
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.2/sites/82974409/posts/new/',
+
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+
+		'body' => array(
+			'title'      => 'Hello World',
+			'content'    => 'Hello. I am a test post. I was created by the API',
+			'tags'       => 'tests',
+			'categories' => 'API'
+		)
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Post_Endpoint( array(
 	'description' => 'Edit a post.',
 	'group'       => 'posts',
 	'stat'        => 'posts:1:POST',
-	'new_version' => '1.1',
+	'new_version' => '1.2',
 	'max_version' => '1',
 	'method'      => 'POST',
 	'path'        => '/sites/%s/posts/%d',
@@ -878,6 +807,7 @@ new WPCOM_JSON_API_Update_Post_Endpoint( array(
 			'private' => 'Privately publish the post.',
 			'draft'   => 'Save the post as a draft.',
 			'pending' => 'Mark the post as pending editorial approval.',
+			'trash'   => 'Set the post as trashed.',
 		),
 		'sticky'    => array(
 			'false'   => 'Post is not marked as sticky.',
@@ -887,7 +817,7 @@ new WPCOM_JSON_API_Update_Post_Endpoint( array(
 		'parent'     => "(int) The post ID of the new post's parent.",
 		'categories' => "(array|string) Comma-separated list or array of categories (name or id)",
 		'tags'       => "(array|string) Comma-separated list or array of tags (name or id)",
-		'format'     => get_post_format_strings(),
+		'format'     => array_merge( array( 'default' => 'Use default post format' ), get_post_format_strings() ),
 		'comments_open' => '(bool) Should the post be open to comments?',
 		'pings_open'    => '(bool) Should the post be open to comments?',
 		'likes_enabled' => "(bool) Should the post be open to likes?",
@@ -900,7 +830,7 @@ new WPCOM_JSON_API_Update_Post_Endpoint( array(
 		'metadata'      => "(array) Array of metadata objects containing the following properties: `key` (metadata key), `id` (meta ID), `previous_value` (if set, the action will only occur for the provided previous value), `value` (the new value to set the meta to), `operation` (the operation to perform: `update` or `add`; defaults to `update`). All unprotected meta keys are available by default for read requests. Both unprotected and protected meta keys are available for authenticated requests with proper capabilities. Protected meta keys can be made available with the <code>rest_api_allowed_public_metadata</code> filter.",
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/posts/1222/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/posts/881',
 
 	'example_request_data' => array(
 		'headers' => array(
@@ -913,112 +843,14 @@ new WPCOM_JSON_API_Update_Post_Endpoint( array(
 			'tags'       => 'tests',
 			'categories' => 'API'
 		)
-	),
-
-	'example_response'     => '
-{
-	"ID": 1222,
-	"author": {
-		"ID": 422,
-		"email": false,
-		"name": "Justin Shreve",
-		"URL": "http:\/\/justin.wordpress.com",
-		"avatar_URL": "http:\/\/1.gravatar.com\/avatar\/9ea5b460afb2859968095ad3afe4804b?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/justin"
-	},
-	"date": "2012-04-11T15:53:52+00:00",
-	"modified": "2012-04-11T19:44:35+00:00",
-	"title": "Hello World (Again)",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2012\/04\/11\/hello-world-2\/",
-	"short_URL": "http:\/\/wp.me\/p23HjV-jI",
-	"content": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"excerpt": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"status": "publish",
-	"sticky": false,
-	"password": "",
-	"parent": false,
-	"type": "post",
-	"comments_open": true,
-	"pings_open": true,
-	"likes_enabled": true,
-	"sharing_enabled": true,
-	"comment_count": 5,
-	"like_count": 0,
-	"i_like": false,
-	"is_reblogged": false,
-	"is_following": false,
-	"featured_image": "",
-	"post_thumbnail": null,
-	"format": "standard",
-	"geo": false,
-	"current_user_can": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"capabilities": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"publicize_URLs": [
-
-	],
-	"tags": {
-		"tests": {
-			"name": "tests",
-			"slug": "tests",
-			"description": "",
-			"post_count": 2,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/tests",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/tests\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"categories": {
-		"API": {
-			"name": "API",
-			"slug": "api",
-			"description": "",
-			"post_count": 2,
-			"parent": 0,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/api",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/api\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"metadata": {
-		{
-			"id" : 123,
-			"key" : "test_meta_key",
-			"value" : "test_value",
-		}
-	},
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222\/replies\/",
-			"likes": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222\/likes\/"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 	'description' => 'Edit a post.',
 	'group'       => 'posts',
 	'stat'        => 'posts:1:POST',
+	'new_version' => '1.2',
 	'min_version' => '1.1',
 	'max_version' => '1.1',
 	'method'      => 'POST',
@@ -1041,7 +873,9 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 			'publish' => 'Publish the post.',
 			'private' => 'Privately publish the post.',
 			'draft'   => 'Save the post as a draft.',
+			'future'  => 'Schedule the post (alias for publish; you must also set a future date).',
 			'pending' => 'Mark the post as pending editorial approval.',
+			'trash'   => 'Set the post as trashed.',
 		),
 		'sticky'    => array(
 			'false'   => 'Post is not marked as sticky.',
@@ -1049,12 +883,14 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 		),
 		'password'   => '(string) The plaintext password protecting the post, or, more likely, the empty string if the post is not password protected.',
 		'parent'     => "(int) The post ID of the new post's parent.",
+		'terms'      => '(object) Mapping of taxonomy to comma-separated list or array of terms (name or id)',
 		'categories' => "(array|string) Comma-separated list or array of categories (name or id)",
 		'tags'       => "(array|string) Comma-separated list or array of tags (name or id)",
-		'format'     => get_post_format_strings(),
+		'format'     => array_merge( array( 'default' => 'Use default post format' ), get_post_format_strings() ),
 		'discussion' => '(object) A hash containing one or more of the following boolean values, which default to the blog\'s discussion preferences: `comments_open`, `pings_open`',
 		'likes_enabled' => "(bool) Should the post be open to likes?",
 		'menu_order'    => "(int) (Pages only) the order pages should appear in. Use 0 to maintain alphabetical order.",
+		'page_template' => '(string) (Pages Only) The page template this page should use.',
 		'sharing_enabled' => "(bool) Should sharing buttons show on this post?",
 		'featured_image' => "(string) The post ID of an existing attachment to set as the featured image. Pass an empty string to delete the existing image.",
 		'media'      => "(media) An array of files to attach to the post. To upload media, the entire request should be multipart/form-data encoded. Multiple media items will be displayed in a gallery. Accepts  jpg, jpeg, png, gif, pdf, doc, ppt, odt, pptx, docx, pps, ppsx, xls, xlsx, key. Audio and Video may also be available. See <code>allowed_file_types</code> in the options resposne of the site endpoint. <br /><br /><strong>Example</strong>:<br />" .
@@ -1063,7 +899,7 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 		'metadata'      => "(array) Array of metadata objects containing the following properties: `key` (metadata key), `id` (meta ID), `previous_value` (if set, the action will only occur for the provided previous value), `value` (the new value to set the meta to), `operation` (the operation to perform: `update` or `add`; defaults to `update`). All unprotected meta keys are available by default for read requests. Both unprotected and protected meta keys are available for authenticated requests with proper capabilities. Protected meta keys can be made available with the <code>rest_api_allowed_public_metadata</code> filter.",
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/30434183/posts/1222/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/posts/881',
 
 	'example_request_data' => array(
 		'headers' => array(
@@ -1076,105 +912,78 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 			'tags'       => 'tests',
 			'categories' => 'API'
 		)
+	)
+) );
+
+new WPCOM_JSON_API_Update_Post_v1_2_Endpoint( array(
+	'description' => 'Edit a post.',
+	'group'       => 'posts',
+	'stat'        => 'posts:1:POST',
+	'min_version' => '1.2',
+	'max_version' => '1.2',
+	'method'      => 'POST',
+	'path'        => '/sites/%s/posts/%d',
+	'path_labels' => array(
+		'$site'    => '(int|string) Site ID or domain',
+		'$post_ID' => '(int) The post ID',
 	),
 
-	'example_response'     => '
-{
-	"ID": 1222,
-	"author": {
-		"ID": 422,
-		"email": false,
-		"name": "Justin Shreve",
-		"URL": "http:\/\/justin.wordpress.com",
-		"avatar_URL": "http:\/\/1.gravatar.com\/avatar\/9ea5b460afb2859968095ad3afe4804b?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/justin"
-	},
-	"date": "2012-04-11T15:53:52+00:00",
-	"modified": "2012-04-11T19:44:35+00:00",
-	"title": "Hello World (Again)",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2012\/04\/11\/hello-world-2\/",
-	"short_URL": "http:\/\/wp.me\/p23HjV-jI",
-	"content": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"excerpt": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"status": "publish",
-	"sticky": false,
-	"password": "",
-	"parent": false,
-	"type": "post",
-	"discussion": {
-		"comments_open": true,
-		"comment_status": "open",
-		"pings_open": true,
-		"ping_status": "open",
-		"comment_count": 5
-	},
-	"likes_enabled": true,
-	"sharing_enabled": true,
-	"like_count": 0,
-	"i_like": false,
-	"is_reblogged": false,
-	"is_following": false,
-	"featured_image": "",
-	"post_thumbnail": null,
-	"format": "standard",
-	"geo": false,
-	"capabilities": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"publicize_URLs": [
+	'request_format' => array(
+		'date'      => "(ISO 8601 datetime) The post's creation time.",
+		'title'     => '(HTML) The post title.',
+		'content'   => '(HTML) The post content.',
+		'excerpt'   => '(HTML) An optional post excerpt.',
+		'slug'      => '(string) The name (slug) for the post, used in URLs.',
+		'author'    => '(string) The username or ID for the user to assign the post to.',
+		'publicize' => '(array|bool) True or false if the post be publicized to external services. An array of services if we only want to publicize to a select few. Defaults to true.',
+		'publicize_message' => '(string) Custom message to be publicized to external services.',
+		'status'    => array(
+			'publish' => 'Publish the post.',
+			'private' => 'Privately publish the post.',
+			'draft'   => 'Save the post as a draft.',
+			'future'  => 'Schedule the post (alias for publish; you must also set a future date).',
+			'pending' => 'Mark the post as pending editorial approval.',
+			'trash'   => 'Set the post as trashed.',
+		),
+		'sticky'    => array(
+			'false'   => 'Post is not marked as sticky.',
+			'true'    => 'Stick the post to the front page.',
+		),
+		'password'   => '(string) The plaintext password protecting the post, or, more likely, the empty string if the post is not password protected.',
+		'parent'     => "(int) The post ID of the new post's parent.",
+		'terms'      => '(object) Mapping of taxonomy to comma-separated list or array of term names',
+		'terms_by_id' => '(object) Mapping of taxonomy to comma-separated list or array of term IDs',
+		'categories' => "(array|string) Comma-separated list or array of category names",
+		'categories_by_id' => "(array|string) Comma-separated list or array of category IDs",
+		'tags'       => "(array|string) Comma-separated list or array of tag names",
+		'tags_by_id'       => "(array|string) Comma-separated list or array of tag IDs",
+		'format'     => array_merge( array( 'default' => 'Use default post format' ), get_post_format_strings() ),
+		'discussion' => '(object) A hash containing one or more of the following boolean values, which default to the blog\'s discussion preferences: `comments_open`, `pings_open`',
+		'likes_enabled' => "(bool) Should the post be open to likes?",
+		'menu_order'    => "(int) (Pages only) the order pages should appear in. Use 0 to maintain alphabetical order.",
+		'page_template' => '(string) (Pages Only) The page template this page should use.',
+		'sharing_enabled' => "(bool) Should sharing buttons show on this post?",
+		'featured_image' => "(string) The post ID of an existing attachment to set as the featured image. Pass an empty string to delete the existing image.",
+		'media'      => "(media) An array of files to attach to the post. To upload media, the entire request should be multipart/form-data encoded. Multiple media items will be displayed in a gallery. Accepts  jpg, jpeg, png, gif, pdf, doc, ppt, odt, pptx, docx, pps, ppsx, xls, xlsx, key. Audio and Video may also be available. See <code>allowed_file_types</code> in the options resposne of the site endpoint. <br /><br /><strong>Example</strong>:<br />" .
+		 				"<code>curl \<br />--form 'title=Image' \<br />--form 'media[]=@/path/to/file.jpg' \<br />-H 'Authorization: BEARER your-token' \<br />'https://public-api.wordpress.com/rest/v1/sites/123/posts/new'</code>",
+		'media_urls' => "(array) An array of URLs for images to attach to a post. Sideloads the media in for a post.",
+		'metadata'      => "(array) Array of metadata objects containing the following properties: `key` (metadata key), `id` (meta ID), `previous_value` (if set, the action will only occur for the provided previous value), `value` (the new value to set the meta to), `operation` (the operation to perform: `update` or `add`; defaults to `update`). All unprotected meta keys are available by default for read requests. Both unprotected and protected meta keys are available for authenticated requests with proper capabilities. Protected meta keys can be made available with the <code>rest_api_allowed_public_metadata</code> filter.",
+	),
 
-	],
-	"tags": {
-		"tests": {
-			"name": "tests",
-			"slug": "tests",
-			"description": "",
-			"post_count": 2,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/tags\/tests",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/tags\/tests\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"categories": {
-		"API": {
-			"name": "API",
-			"slug": "api",
-			"description": "",
-			"post_count": 2,
-			"parent": 0,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/categories\/api",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/categories\/api\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"metadata": {
-		{
-			"id" : 123,
-			"key" : "test_meta_key",
-			"value" : "test_value",
-		}
-	},
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222\/replies\/",
-			"likes": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222\/likes\/"
-		}
-	}
-}'
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.2/sites/82974409/posts/881',
 
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+
+		'body' => array(
+			'title'      => 'Hello World (Again)',
+			'content'    => 'Hello. I am an edited post. I was edited by the API',
+			'tags'       => 'tests',
+			'categories' => 'API'
+		)
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Post_Endpoint( array(
@@ -1190,112 +999,13 @@ new WPCOM_JSON_API_Update_Post_Endpoint( array(
 		'$post_ID' => '(int) The post ID',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/posts/1222/delete/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/posts/$post_ID/delete/',
 
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		)
-	),
-
-	'example_response'     => '
-{
-	"ID": 1222,
-	"author": {
-		"ID": 422,
-		"email": false,
-		"name": "Justin Shreve",
-		"URL": "http:\/\/justin.wordpress.com",
-		"avatar_URL": "http:\/\/1.gravatar.com\/avatar\/9ea5b460afb2859968095ad3afe4804b?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/justin"
-	},
-	"date": "2012-04-11T15:53:52+00:00",
-	"modified": "2012-04-11T19:49:42+00:00",
-	"title": "Hello World (Again)",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2012\/04\/11\/hello-world-2\/",
-	"short_URL": "http:\/\/wp.me\/p23HjV-jI",
-	"content": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"excerpt": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"status": "trash",
-	"sticky": false,
-	"password": "",
-	"parent": false,
-	"type": "post",
-	"comments_open": true,
-	"pings_open": true,
-	"likes_enabled": true,
-	"sharing_enabled": true,
-	"comment_count": 5,
-	"like_count": 0,
-	"i_like": false,
-	"is_reblogged": false,
-	"is_following": false,
-	"featured_image": "",
-	"post_thumbnail": null,
-	"format": "standard",
-	"geo": false,
-	"current_user_can": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"capabilities": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"publicize_URLs": [
-
-	],
-	"tags": {
-		"tests": {
-			"name": "tests",
-			"slug": "tests",
-			"description": "",
-			"post_count": 1,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/tests",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/tests\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"metadata": {
-		{
-			"id" : 123,
-			"key" : "test_meta_key",
-			"value" : "test_value",
-		}
-	},
-	"categories": {
-		"API": {
-			"name": "API",
-			"slug": "api",
-			"description": "",
-			"post_count": 1,
-			"parent": 0,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/api",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/api\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222\/replies\/",
-			"likes": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222\/likes\/"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
@@ -1311,111 +1021,13 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 		'$post_ID' => '(int) The post ID',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/30434183/posts/1222/delete/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/posts/$post_ID/delete/',
 
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		)
-	),
-
-	'example_response'     => '
-{
-	"ID": 1222,
-	"author": {
-		"ID": 422,
-		"email": false,
-		"name": "Justin Shreve",
-		"URL": "http:\/\/justin.wordpress.com",
-		"avatar_URL": "http:\/\/1.gravatar.com\/avatar\/9ea5b460afb2859968095ad3afe4804b?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/justin"
-	},
-	"date": "2012-04-11T15:53:52+00:00",
-	"modified": "2012-04-11T19:49:42+00:00",
-	"title": "Hello World (Again)",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2012\/04\/11\/hello-world-2\/",
-	"short_URL": "http:\/\/wp.me\/p23HjV-jI",
-	"content": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"excerpt": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"status": "trash",
-	"sticky": false,
-	"password": "",
-	"parent": false,
-	"type": "post",
-	"discussion": {
-		"comments_open": true,
-		"comment_status": "open",
-		"pings_open": true,
-		"ping_status": "open",
-		"comment_count": 5
-	},
-	"likes_enabled": true,
-	"sharing_enabled": true,
-	"like_count": 0,
-	"i_like": false,
-	"is_reblogged": false,
-	"is_following": false,
-	"featured_image": "",
-	"post_thumbnail": null,
-	"format": "standard",
-	"geo": false,
-	"capabilities": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"publicize_URLs": [
-
-	],
-	"tags": {
-		"tests": {
-			"name": "tests",
-			"slug": "tests",
-			"description": "",
-			"post_count": 1,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/tags\/tests",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/tags\/tests\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"metadata": {
-		{
-			"id" : 123,
-			"key" : "test_meta_key",
-			"value" : "test_value",
-		}
-	},
-	"categories": {
-		"API": {
-			"name": "API",
-			"slug": "api",
-			"description": "",
-			"post_count": 1,
-			"parent": 0,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/categories\/api",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/categories\/api\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222\/replies\/",
-			"likes": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222\/likes\/"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Post_Endpoint( array(
@@ -1432,112 +1044,13 @@ new WPCOM_JSON_API_Update_Post_Endpoint( array(
 		'$post_ID' => '(int) The post ID',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/posts/1222/restore/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/posts/$post_ID/restore/',
 
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		)
-	),
-
-	'example_response'     => '
-{
-	"ID": 1222,
-	"author": {
-		"ID": 422,
-		"email": false,
-		"name": "Justin Shreve",
-		"URL": "http:\/\/justin.wordpress.com",
-		"avatar_URL": "http:\/\/1.gravatar.com\/avatar\/9ea5b460afb2859968095ad3afe4804b?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/justin"
-	},
-	"date": "2012-04-11T15:53:52+00:00",
-	"modified": "2012-04-11T19:49:42+00:00",
-	"title": "Hello World (Again)",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2012\/04\/11\/hello-world-2\/",
-	"short_URL": "http:\/\/wp.me\/p23HjV-jI",
-	"content": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"excerpt": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"status": "draft",
-	"sticky": false,
-	"password": "",
-	"parent": false,
-	"type": "post",
-	"comments_open": true,
-	"pings_open": true,
-	"likes_enabled": true,
-	"sharing_enabled": true,
-	"comment_count": 5,
-	"like_count": 0,
-	"i_like": false,
-	"is_reblogged": false,
-	"is_following": false,
-	"featured_image": "",
-	"post_thumbnail": null,
-	"format": "standard",
-	"geo": false,
-	"current_user_can": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"capabilities": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"publicize_URLs": [
-
-	],
-	"tags": {
-		"tests": {
-			"name": "tests",
-			"slug": "tests",
-			"description": "",
-			"post_count": 1,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/tests",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/tests\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"metadata": {
-		{
-			"id" : 123,
-			"key" : "test_meta_key",
-			"value" : "test_value",
-		}
-	},
-	"categories": {
-		"API": {
-			"name": "API",
-			"slug": "api",
-			"description": "",
-			"post_count": 1,
-			"parent": 0,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/api",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/api\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222\/replies\/",
-			"likes": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222\/likes\/"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
@@ -1553,107 +1066,75 @@ new WPCOM_JSON_API_Update_Post_v1_1_Endpoint( array(
 		'$post_ID' => '(int) The post ID',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/30434183/posts/1222/restore/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/posts/$post_ID/restore/',
 
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		)
+	)
+) );
+
+new WPCOM_JSON_API_Get_Autosave_v1_1_Endpoint( array(
+	'description' => 'Get the most recent autosave for a post.',
+	'group'       => '__do_not_document',
+	'stat'        => 'posts:autosave',
+	'min_version' => '1.1',
+	'method'      => 'GET',
+	'path'        => '/sites/%s/posts/%d/autosave',
+	'path_labels' => array(
+		'$site'    => '(int|string) Site ID or domain',
+		'$post_ID' => '(int) The post ID',
+	),
+	'response_format' => array(
+		'ID'          => '(int) autodraft post ID',
+		'post_ID'     => '(int) post ID',
+		'author_ID'   => '(int) author ID',
+		'title'       => '(HTML) The post title.',
+		'content'     => '(HTML) The post content.',
+		'excerpt'     => '(HTML) The post excerpt.',
+		'preview_URL' => '(string) preview URL for the post',
+		'modified'    => '(ISO 8601 datetime) modified time',
 	),
 
-	'example_response'     => '
-{
-	"ID": 1222,
-	"author": {
-		"ID": 422,
-		"email": false,
-		"name": "Justin Shreve",
-		"URL": "http:\/\/justin.wordpress.com",
-		"avatar_URL": "http:\/\/1.gravatar.com\/avatar\/9ea5b460afb2859968095ad3afe4804b?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/justin"
-	},
-	"date": "2012-04-11T15:53:52+00:00",
-	"modified": "2012-04-11T19:49:42+00:00",
-	"title": "Hello World (Again)",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2012\/04\/11\/hello-world-2\/",
-	"short_URL": "http:\/\/wp.me\/p23HjV-jI",
-	"content": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"excerpt": "<p>Hello. I am an edited post. I was edited by the API<\/p>\n",
-	"status": "draft",
-	"sticky": false,
-	"password": "",
-	"parent": false,
-	"type": "post",
-	"comments_open": true,
-	"pings_open": true,
-	"likes_enabled": true,
-	"sharing_enabled": true,
-	"comment_count": 5,
-	"like_count": 0,
-	"i_like": false,
-	"is_reblogged": false,
-	"is_following": false,
-	"featured_image": "",
-	"post_thumbnail": null,
-	"format": "standard",
-	"geo": false,
-	"capabilities": {
-		"publish_post": true,
-		"delete_post": true,
-		"edit_post": true,
-	},
-	"publicize_URLs": [
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/posts/1/autosave',
+) );
 
-	],
-	"tags": {
-		"tests": {
-			"name": "tests",
-			"slug": "tests",
-			"description": "",
-			"post_count": 1,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/tags\/tests",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/tags\/tests\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"metadata": {
-		{
-			"id" : 123,
-			"key" : "test_meta_key",
-			"value" : "test_value",
-		}
-	},
-	"categories": {
-		"API": {
-			"name": "API",
-			"slug": "api",
-			"description": "",
-			"post_count": 1,
-			"parent": 0,
-			"meta": {
-				"links": {
-					"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/categories\/api",
-					"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/categories\/api\/help",
-					"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183"
-				}
-			}
-		}
-	},
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222\/replies\/",
-			"likes": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/posts\/1222\/likes\/"
-		}
-	}
-}'
+new WPCOM_JSON_API_Autosave_Post_v1_1_Endpoint( array(
+	'description' => 'Create a post autosave.',
+	'group'       => '__do_not_document',
+	'stat'        => 'posts:autosave',
+	'min_version' => '1.1',
+	'method'      => 'POST',
+	'path'        => '/sites/%s/posts/%d/autosave',
+	'path_labels' => array(
+		'$site'    => '(int|string) Site ID or domain',
+		'$post_ID' => '(int) The post ID',
+	),
+	'request_format' => array(
+		'content' => '(HTML) The post content.',
+		'title'   => '(HTML) The post title.',
+		'excerpt' => '(HTML) The post excerpt.',
+	),
+	'response_format' => array(
+		'ID'          => '(int) autodraft post ID',
+		'post_ID'     => '(int) post ID',
+		'preview_URL' => '(string) preview URL for the post',
+		'modified'    => '(ISO 8601 datetime) modified time',
+	),
 
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/posts/1/autosave',
+
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+
+		'body' => array(
+			'title'    => 'Howdy',
+			'content'    => 'Hello. I am a test post. I was created by the API',
+		)
+	)
 ) );
 
 /*
@@ -1685,7 +1166,12 @@ new WPCOM_JSON_API_List_Media_Endpoint( array(
 		'found' => '(int) The number of total results found'
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/example.wordpress.com/media/?number=2&pretty=true',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/media/?number=2',
+	'example_request_data' =>  array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		)
+	)
 ) );
 
 new WPCOM_JSON_API_List_Media_v1_1_Endpoint( array(
@@ -1726,91 +1212,12 @@ new WPCOM_JSON_API_List_Media_v1_1_Endpoint( array(
 		'found' => '(int) The number of total results found'
 	),
 
-		'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/opossumapi.wordpress.com/media',
-		'example_request_data' =>  array(
-			'headers' => array(
-				'authorization' => 'Bearer YOUR_API_TOKEN'
-			)
-		),
-
-		'example_response'     => '
-	{
-	    "found": 5549,
-	    "media": [
-	        {
-	            "ID": "880165",
-	            "URL": "https:\/\/opossumapi.files.wordpress.com\/2014\/10\/screen-shot-2014-10-14-at-3-22-19-pm.png",
-	            "guid": "http:\/\/opossumapi.files.wordpress.com\/2014\/10\/screen-shot-2014-10-14-at-3-22-19-pm.png",
-	            "date": "2014-10-14T22:22:41+00:00",
-	            "post_ID": 0,
-	            "file": "screen-shot-2014-10-14-at-3-22-19-pm.png",
-	            "mime_type": "image\/png",
-	            "extension": "png",
-	            "title": "Screen Shot 2014-10-14 at 3.22.19 PM",
-	            "caption": "",
-	            "description": "",
-	            "alt": "",
-	            "height": 602,
-	            "width": 764,
-	            "exif": {
-	                "aperture": 0,
-	                "credit": "",
-	                "camera": "",
-	                "caption": "",
-	                "created_timestamp": 0,
-	                "copyright": "",
-	                "focal_length": 0,
-	                "iso": 0,
-	                "shutter_speed": 0,
-	                "title": "",
-	                "orientation": 0
-	            },
-	            "meta": {
-	                "links": {
-	                    "self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880165",
-	                    "help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880165\/help",
-	                    "site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-	                }
-	            }
-	        },
-	        {
-	            "ID": "880156",
-	            "URL": "https:\/\/opossumapi.files.wordpress.com\/2014\/10\/encdrtnnuk-3000x30001530.jpeg",
-	            "guid": "http:\/\/opossumapi.files.wordpress.com\/2014\/10\/encdrtnnuk-3000x30001530.jpeg",
-	            "date": "2014-10-14T22:08:30+00:00",
-	            "post_ID": 880155,
-	            "file": "encdrtnnuk-3000x30001530.jpeg",
-	            "mime_type": "image\/jpeg",
-	            "extension": "jpeg",
-	            "title": "encdrtnnuk-3000x30001530",
-	            "caption": "",
-	            "description": "",
-	            "height": 1536,
-	            "width": 2048,
-	            "exif": {
-	                "aperture": 0,
-	                "credit": "",
-	                "camera": "",
-	                "caption": "",
-	                "created_timestamp": 0,
-	                "copyright": "",
-	                "focal_length": 0,
-	                "iso": 0,
-	                "shutter_speed": 0,
-	                "title": "",
-	                "orientation": 0
-	            },
-	            "meta": {
-	                "links": {
-	                    "self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880156",
-	                    "help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880156\/help",
-	                    "site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183",
-	                    "parent": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/880155"
-	                }
-	            }
-	        },
-	    ]
-	}',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/media',
+	'example_request_data' =>  array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		)
+	)
 ) );
 
 new WPCOM_JSON_API_Get_Media_Endpoint( array(
@@ -1837,7 +1244,12 @@ new WPCOM_JSON_API_Get_Media_Endpoint( array(
 		'metadata'         => '(array) Array of metadata about the file, such as Exif data or sizes',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/example.wordpress.com/media/36',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/media/934',
+	'example_request_data' =>  array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		)
+	)
 ) );
 
 new WPCOM_JSON_API_Get_Media_v1_1_Endpoint( array(
@@ -1856,6 +1268,7 @@ new WPCOM_JSON_API_Get_Media_v1_1_Endpoint( array(
 		'ID'               => '(int) The ID of the media item',
 		'date'             => '(ISO 8601 datetime) The date the media was uploaded',
 		'post_ID'          => '(int) ID of the post this media is attached to',
+		'author_ID'        => '(int) ID of the user who uploaded the media',
 		'URL'              => '(string) URL to the file',
 		'guid'             => '(string) Unique identifier',
 		'file'			   => '(string) Filename',
@@ -1865,58 +1278,21 @@ new WPCOM_JSON_API_Get_Media_v1_1_Endpoint( array(
 		'caption'          => '(string) User-provided caption of the file',
 		'description'      => '(string) Description of the file',
 		'alt'              => '(string)  Alternative text for image files.',
+		'thumbnails'       => '(object) Media item thumbnail URL options',
 		'height'           => '(int) (Image & video only) Height of the media item',
 		'width'            => '(int) (Image & video only) Width of the media item',
+		'length'           => '(int) (Video & audio only) Duration of the media item, in seconds',
 		'exif'             => '(array) (Image & audio only) Exif (meta) information about the media item',
 		'videopress_guid'  => '(string) (Video only) VideoPress GUID of the video when uploaded on a blog with VideoPress',
 		'videopress_processing_done'  => '(bool) (Video only) If the video is uploaded on a blog with VideoPress, this will return the status of processing on the video.'
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/opossumapi.wordpress.com/media/880165',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/media/934',
 	'example_request_data' =>  array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		)
-	),
-
-	'example_response'     => '
-	{
-	    "ID": "880165",
-	    "URL": "https:\/\/opossumapi.files.wordpress.com\/2014\/10\/screen-shot-2014-10-14-at-3-22-19-pm.png",
-	    "guid": "http:\/\/opossumapi.files.wordpress.com\/2014\/10\/screen-shot-2014-10-14-at-3-22-19-pm.png",
-	    "date": "2014-10-14T22:22:41+00:00",
-	    "post_ID": 0,
-	    "file": "screen-shot-2014-10-14-at-3-22-19-pm.png",
-	    "mime_type": "image\/png",
-	    "extension": "png",
-	    "title": "Screen Shot 2014-10-14 at 3.22.19 PM",
-	    "caption": "",
-	    "description": "",
-	    "alt": "",
-	    "height": 602,
-	    "width": 764,
-	    "exif": {
-	        "aperture": 0,
-	        "credit": "",
-	        "camera": "",
-	        "caption": "",
-	        "created_timestamp": 0,
-	        "copyright": "",
-	        "focal_length": 0,
-	        "iso": 0,
-	        "shutter_speed": 0,
-	        "title": "",
-	        "orientation": 0
-	    },
-	    "meta": {
-	        "links": {
-	            "self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880165",
-	            "help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880165\/help",
-	            "site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-	        }
-	    }
-	}
-',
+	)
 ) );
 
 new WPCOM_JSON_API_Upload_Media_Endpoint( array(
@@ -1938,12 +1314,20 @@ new WPCOM_JSON_API_Upload_Media_Endpoint( array(
 		'media_urls' => "(array) An array of URLs to upload to the post."
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/media/new/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/media/new/',
 
 	'response_format' => array(
 		'media' => '(array) Array of uploaded media',
 		'errors' => '(array) Array of error messages of uploading media failures'
 	),
+	'example_request_data' =>  array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+		'body' => array(
+			'media_urls' => "https://s.w.org/about/images/logos/codeispoetry-rgb.png"
+		)
+	)
 ) );
 
 new WPCOM_JSON_API_Upload_Media_v1_1_Endpoint( array(
@@ -1971,56 +1355,15 @@ new WPCOM_JSON_API_Upload_Media_v1_1_Endpoint( array(
 		'errors' => '(array) Array of error messages of uploading media failures'
 	),
 
-	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/33534099/media/new',
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/media/new',
 	'example_request_data' =>  array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		),
 		'body' => array(
-			'media_urls[]' => "https://s.w.org/about/images/logos/codeispoetry-rgb.png"
+			'media_urls' => "https://s.w.org/about/images/logos/codeispoetry-rgb.png"
 		)
-	),
-	'example_response' => '
-	{
-		"media": [
-			{
-				"ID": 25378,
-				"URL": "https://developer.files.wordpress.com/2015/01/codeispoetry-rgb.png",
-				"guid": "http://developer.files.wordpress.com/2015/01/codeispoetry-rgb.png",
-				"date": "2015-01-14T22:55:33+00:00",
-				"post_ID": 0,
-				"file": "codeispoetry-rgb.png",
-				"mime_type": "image/png",
-				"extension": "png",
-				"title": "codeispoetry-rgb",
-				"caption": "",
-				"description": "",
-				"alt": "",
-				"height": 34,
-				"width": 500,
-				"exif": {
-					"aperture": 0,
-					"credit": "",
-					"camera": "",
-					"caption": "",
-					"created_timestamp": 0,
-					"copyright": "",
-					"focal_length": 0,
-					"iso": 0,
-					"shutter_speed": 0,
-					"title": "",
-					"orientation": 0
-				},
-				"meta": {
-					"links": {
-						"self": "https://public-api.wordpress.com/rest/v1/sites/33534099/media/25378",
-						"help": "https://public-api.wordpress.com/rest/v1/sites/33534099/media/25378/help",
-						"site": "https://public-api.wordpress.com/rest/v1/sites/33534099"
-					}
-				}
-			}
-		]
-	}	'
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Media_Endpoint( array(
@@ -2051,6 +1394,15 @@ new WPCOM_JSON_API_Update_Media_Endpoint( array(
 		'caption'     => '(string) User provided caption of the file',
 		'description' => '(string) Description of the file',
 		'metadata'    => '(array) Array of metadata about the file, such as Exif data or sizes',
+	),
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/media/446',
+	'example_request_data' =>  array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+		'body' => array(
+			'title' => 'Updated Title'
+		)
 	)
 ) );
 
@@ -2081,6 +1433,7 @@ new WPCOM_JSON_API_Update_Media_v1_1_Endpoint( array(
 		'ID'               => '(int) The ID of the media item',
 		'date'             => '(ISO 8601 datetime) The date the media was uploaded',
 		'post_ID'          => '(int) ID of the post this media is attached to',
+		'author_ID'        => '(int) ID of the user who uploaded the media',
 		'URL'              => '(string) URL to the file',
 		'guid'             => '(string) Unique identifier',
 		'file'			   => '(string) File name',
@@ -2090,14 +1443,16 @@ new WPCOM_JSON_API_Update_Media_v1_1_Endpoint( array(
 		'caption'          => '(string) User provided caption of the file',
 		'description'      => '(string) Description of the file',
 		'alt'              => '(string)  Alternative text for image files.',
+		'thumbnails'       => '(object) Media item thumbnail URL options',
 		'height'           => '(int) (Image & video only) Height of the media item',
 		'width'            => '(int) (Image & video only) Width of the media item',
+		'length'           => '(int) (Video & audio only) Duration of the media item, in seconds',
 		'exif'             => '(array) (Image & audio only) Exif (meta) information about the media item',
 		'videopress_guid'  => '(string) (Video only) VideoPress GUID of the video when uploaded on a blog with VideoPress',
 		'videopress_processing_done'  => '(bool) (Video only) If the video is uploaded on a blog with VideoPress, this will return the status of processing on the video.'
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/opossumapi.wordpress.com/media/880165',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/media/446',
 	'example_request_data' =>  array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
@@ -2105,46 +1460,7 @@ new WPCOM_JSON_API_Update_Media_v1_1_Endpoint( array(
 		'body' => array(
 			'title' => 'Updated Title'
 		)
-	),
-
-	'example_response'     => '
-	{
-	    "ID": "880165",
-	    "URL": "https:\/\/opossumapi.files.wordpress.com\/2014\/10\/screen-shot-2014-10-14-at-3-22-19-pm.png",
-	    "guid": "http:\/\/opossumapi.files.wordpress.com\/2014\/10\/screen-shot-2014-10-14-at-3-22-19-pm.png",
-	    "date": "2014-10-14T22:22:41+00:00",
-	    "post_ID": 0,
-	    "file": "screen-shot-2014-10-14-at-3-22-19-pm.png",
-	    "mime_type": "image\/png",
-	    "extension": "png",
-	    "title": "Updated Title",
-	    "caption": "",
-	    "description": "",
-	    "alt": "",
-	    "height": 602,
-	    "width": 764,
-	    "exif": {
-	        "aperture": 0,
-	        "credit": "",
-	        "camera": "",
-	        "caption": "",
-	        "created_timestamp": 0,
-	        "copyright": "",
-	        "focal_length": 0,
-	        "iso": 0,
-	        "shutter_speed": 0,
-	        "title": "",
-	        "orientation": 0
-	    },
-	    "meta": {
-	        "links": {
-	            "self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880165",
-	            "help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880165\/help",
-	            "site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-	        }
-	    }
-	}
-',
+	)
 ) );
 
 
@@ -2172,6 +1488,13 @@ new WPCOM_JSON_API_Delete_Media_Endpoint( array(
 		'caption'          => '(string) User provided caption of the file',
 		'description'      => '(string) Description of the file',
 		'metadata'         => '(array) Misc array of information about the file, such as exif data or sizes',
+	),
+
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/media/$media_ID/delete',
+	'example_request_data' =>  array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		)
 	)
 ) );
 
@@ -2193,6 +1516,7 @@ new WPCOM_JSON_API_Delete_Media_v1_1_Endpoint( array(
 		'ID'               => '(int) The ID of the media item',
 		'date'             => '(ISO 8601 datetime) The date the media was uploaded',
 		'post_ID'          => '(int) ID of the post this media is attached to',
+		'author_ID'        => '(int) ID of the user who uploaded the media',
 		'URL'              => '(string) URL to the file',
 		'guid'             => '(string) Unique identifier',
 		'file'			   => '(string) File name',
@@ -2202,59 +1526,21 @@ new WPCOM_JSON_API_Delete_Media_v1_1_Endpoint( array(
 		'caption'          => '(string) User-provided caption of the file',
 		'description'      => '(string) Description of the file',
 		'alt'              => '(string)  Alternative text for image files.',
+		'thumbnails'       => '(object) Media item thumbnail URL options',
 		'height'           => '(int) (Image & video only) Height of the media item',
 		'width'            => '(int) (Image & video only) Width of the media item',
+		'length'           => '(int) (Video & audio only) Duration of the media item, in seconds',
 		'exif'             => '(array) (Image & audio only) Exif (meta) information about the media item',
 		'videopress_guid'  => '(string) (Video only) VideoPress GUID of the video when uploaded on a blog with VideoPress',
 		'videopress_processing_done'  => '(bool) (Video only) If the video is Uuploaded on a blog with VideoPress, this will return the status of processing on the Video'
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/opossumapi.wordpress.com/media/880165/delete',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/media/$media_ID/delete',
 	'example_request_data' =>  array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		)
-	),
-
-	'example_response'     => '
-	{
-		"status": "deleted",
-	    "ID": "880165",
-	    "URL": "https:\/\/opossumapi.files.wordpress.com\/2014\/10\/screen-shot-2014-10-14-at-3-22-19-pm.png",
-	    "guid": "http:\/\/opossumapi.files.wordpress.com\/2014\/10\/screen-shot-2014-10-14-at-3-22-19-pm.png",
-	    "date": "2014-10-14T22:22:41+00:00",
-	    "post_ID": 0,
-	    "file": "screen-shot-2014-10-14-at-3-22-19-pm.png",
-	    "mime_type": "image\/png",
-	    "extension": "png",
-	    "title": "Screen Shot 2014-10-14 at 3.22.19 PM",
-	    "caption": "",
-	    "description": "",
-	    "alt": "",
-	    "height": 602,
-	    "width": 764,
-	    "exif": {
-	        "aperture": 0,
-	        "credit": "",
-	        "camera": "",
-	        "caption": "",
-	        "created_timestamp": 0,
-	        "copyright": "",
-	        "focal_length": 0,
-	        "iso": 0,
-	        "shutter_speed": 0,
-	        "title": "",
-	        "orientation": 0
-	    },
-	    "meta": {
-	        "links": {
-	            "self": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880165",
-	            "help": "https:\/\/public-api.wordpress.com\/rest\/v1.1\/sites\/30434183\/media\/880165\/help",
-	            "site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-	        }
-	    }
-	}
-',
+	)
 ) );
 
 /*
@@ -2271,7 +1557,7 @@ new WPCOM_JSON_API_List_Comments_Endpoint( array(
 		'$site' => '(int|string) Site ID or domain',
 	),
 
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/comments/?number=2&pretty=1'
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/comments/?number=2'
 ) );
 
 new WPCOM_JSON_API_List_Comments_Endpoint( array(
@@ -2286,7 +1572,7 @@ new WPCOM_JSON_API_List_Comments_Endpoint( array(
 		'$post_ID' => '(int) The post ID',
 	),
 
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/7/replies/?number=2&pretty=1'
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/posts/7/replies/?number=2'
 ) );
 
 new WPCOM_JSON_API_Get_Comment_Endpoint( array(
@@ -2301,7 +1587,7 @@ new WPCOM_JSON_API_Get_Comment_Endpoint( array(
 		'$comment_ID' => '(int) The comment ID'
 	),
 
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/comments/147564/?pretty=1'
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/comments/147564'
 ) );
 
 new WPCOM_JSON_API_Update_Comment_Endpoint( array(
@@ -2324,9 +1610,8 @@ new WPCOM_JSON_API_Update_Comment_Endpoint( array(
 	),
 
 	'pass_wpcom_user_details' => true,
-	'can_use_user_details_instead_of_blog_membership' => true,
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/posts/1222/replies/new/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/posts/843/replies/new/',
 	'example_request_data' =>  array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
@@ -2334,45 +1619,7 @@ new WPCOM_JSON_API_Update_Comment_Endpoint( array(
 		'body' => array(
 			'content' => 'Your reply is very interesting. This is a reply.'
 		)
-	),
-
-	'example_response'     => '
-{
-	"ID": 9,
-	"post": {
-		"ID": 1222,
-		"type": "post",
-		"link": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222"
-	},
-	"author": {
-		"ID": 18342963,
-		"email": false,
-		"name": "binarysmash",
-		"URL": "http:\/\/binarysmash.wordpress.com",
-		"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/binarysmash"
-	},
-	"date": "2012-04-11T18:09:41+00:00",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2012\/04\/11\/hello-world-2\/#comment-9",
-	"short_URL": "http:\/\/wp.me\/p23HjV-jI%23comment-9",
-	"content": "<p>Your reply is very interesting. This is a reply.<\/p>\n",
-	"status": "approved",
-	"parent": {
-		"ID":8,
-		"type": "comment",
-		"link": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/8"
-	},
-	"type": "comment",
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/9",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/9\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183",
-			"post": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1222",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/9\/replies\/"
-		}
-	}
-}',
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Comment_Endpoint( array(
@@ -2394,9 +1641,8 @@ new WPCOM_JSON_API_Update_Comment_Endpoint( array(
 	),
 
 	'pass_wpcom_user_details' => true,
-	'can_use_user_details_instead_of_blog_membership' => true,
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/comments/8/replies/new/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/comments/29/replies/new',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
@@ -2404,45 +1650,7 @@ new WPCOM_JSON_API_Update_Comment_Endpoint( array(
 		'body' => array(
 			'content' => 'This reply is very interesting. This is editing a comment reply via the API.',
 		)
-	),
-	'example_response'     => '
-{
-	"ID": 13,
-	"post": {
-		"ID": 1,
-		"type": "post",
-		"link": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1"
-	},
-	"author": {
-		"ID": 18342963,
-		"email": false,
-		"name": "binarysmash",
-		"URL": "http:\/\/binarysmash.wordpress.com",
-		"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/binarysmash"
-	},
-	"date": "2012-04-11T20:16:28+00:00",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2011\/12\/13\/hello-world\/#comment-13",
-	"short_URL": "http:\/\/wp.me\/p23HjV-1%23comment-13",
-	"content": "<p>This reply is very interesting. This is editing a comment reply via the API.<\/p>\n",
-	"status": "approved",
-	"parent": {
-		"ID": 1,
-		"type": "comment",
-		"link": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/1"
-	},
-	"type": "comment",
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/13",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/13\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183",
-			"post": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/13\/replies\/"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Comment_Endpoint( array(
@@ -2470,7 +1678,7 @@ new WPCOM_JSON_API_Update_Comment_Endpoint( array(
 		),
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/comments/8/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/comments/29',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
@@ -2479,45 +1687,7 @@ new WPCOM_JSON_API_Update_Comment_Endpoint( array(
 			'content' => 'This reply is now edited via the API.',
 			'status'  => 'approved',
 		)
-	),
-	'example_response'     => '
-{
-	"ID": 13,
-	"post": {
-		"ID": 1,
-		"type": "post",
-		"link": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1"
-	},
-	"author": {
-		"ID": 18342963,
-		"email": false,
-		"name": "binarysmash",
-		"URL": "http:\/\/binarysmash.wordpress.com",
-		"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/binarysmash"
-	},
-	"date": "2012-04-11T20:16:28+00:00",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2011\/12\/13\/hello-world\/#comment-13",
-	"short_URL": "http:\/\/wp.me\/p23HjV-1%23comment-13",
-	"content": "<p>This reply is very interesting. This is editing a comment reply via the API.<\/p>\n",
-	"status": "approved",
-	"parent": {
-		"ID": 1,
-		"type": "comment",
-		"link": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/1"
-	},
-	"type": "comment",
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/13",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/13\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183",
-			"post": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/13\/replies\/"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Comment_Endpoint( array(
@@ -2532,51 +1702,12 @@ new WPCOM_JSON_API_Update_Comment_Endpoint( array(
 		'$comment_ID' => '(int) The comment ID'
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/comments/8/delete/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/comments/$comment_ID/delete',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		)
-	),
-
-	'example_response'     => '
-{
-	"ID": 13,
-	"post": {
-		"ID": 1,
-		"type": "post",
-		"link": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1"
-	},
-	"author": {
-		"ID": 18342963,
-		"email": false,
-		"name": "binarysmash",
-		"URL": "http:\/\/binarysmash.wordpress.com",
-		"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
-		"profile_URL": "http:\/\/en.gravatar.com\/binarysmash"
-	},
-	"date": "2012-04-11T20:16:28+00:00",
-	"URL": "http:\/\/opossumapi.wordpress.com\/2011\/12\/13\/hello-world\/#comment-13",
-	"short_URL": "http:\/\/wp.me\/p23HjV-1%23comment-13",
-	"content": "<p>This reply is very interesting. This is editing a comment reply via the API.<\/p>\n",
-	"status": "deleted",
-	"parent": {
-		"ID": 1,
-		"type": "comment",
-		"link": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/1"
-	},
-	"type": "comment",
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/13",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/13\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183",
-			"post": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/posts\/1",
-			"replies": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/comments\/13\/replies\/"
-		}
-	}
-}'
-
+	)
 ) );
 
 /**
@@ -2594,7 +1725,7 @@ new WPCOM_JSON_API_Get_Taxonomy_Endpoint( array(
 		'$category' => '(string) The category slug'
 	),
 
-	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/categories/slug:community?pretty=1'
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/categories/slug:community'
 ) );
 
 new WPCOM_JSON_API_Get_Taxonomies_Endpoint( array(
@@ -2613,7 +1744,7 @@ new WPCOM_JSON_API_Get_Taxonomies_Endpoint( array(
 		'search'   => '(string) Limit response to include only categories whose names or slugs match the provided search query.',
 		'order'    => array(
 			'ASC'  => 'Return categories in ascending order.',
-			'DESC' => 'Return categories in decending order.',
+			'DESC' => 'Return categories in descending order.',
 		),
 		'order_by' => array(
 			'name'  => 'Order by the name of each category.',
@@ -2624,7 +1755,7 @@ new WPCOM_JSON_API_Get_Taxonomies_Endpoint( array(
 		'found'      => '(int) The number of categories returned.',
 		'categories' => '(array) Array of category objects.',
 	),
-	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/categories/?number=5&pretty=1'
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/categories/?number=5'
 ) );
 
 new WPCOM_JSON_API_Get_Taxonomies_Endpoint( array(
@@ -2643,7 +1774,7 @@ new WPCOM_JSON_API_Get_Taxonomies_Endpoint( array(
 		'search'   => '(string) Limit response to include only tags whose names or slugs match the provided search query.',
 		'order'    => array(
 			'ASC'  => 'Return tags in ascending order.',
-			'DESC' => 'Return tags in decending order.',
+			'DESC' => 'Return tags in descending order.',
 		),
 		'order_by' => array(
 			'name'  => 'Order by the name of each tag.',
@@ -2654,7 +1785,7 @@ new WPCOM_JSON_API_Get_Taxonomies_Endpoint( array(
 		'found'    => '(int) The number of tags returned.',
 		'tags'     => '(array) Array of tag objects.',
 	),
-	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/tags/?number=5&pretty=1'
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/tags/?number=5'
 ) );
 
 new WPCOM_JSON_API_Get_Taxonomy_Endpoint( array(
@@ -2669,7 +1800,7 @@ new WPCOM_JSON_API_Get_Taxonomy_Endpoint( array(
 		'$tag'  => '(string) The tag slug'
 	),
 
-	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/tags/slug:wordpresscom?pretty=1'
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/tags/slug:wordpresscom'
 ) );
 
 new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
@@ -2689,7 +1820,7 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'parent'      => '(int) ID of the parent category',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/categories/new/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/categories/new/',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
@@ -2697,22 +1828,7 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'body' => array(
 			'name' => 'Puppies',
 		)
-	),
-	'example_response'     => '
-{
-	"name": "Puppies",
-	"slug": "puppies",
-	"description": "",
-	"post_count": 0,
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/puppies",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/puppies\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
@@ -2731,7 +1847,7 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'description' => '(string) A description of the tag',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/tags/new/',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/tags/new/',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
@@ -2739,22 +1855,7 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'body' => array(
 			'name' => 'Kitties'
 		)
-	),
-	'example_response'     => '
-{
-	"name": "Kitties",
-	"slug": "kitties",
-	"description": "",
-	"post_count": 0,
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/kitties",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/kitties\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
@@ -2774,7 +1875,7 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'description' => '(string) A description of the tag',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/tags/slug:testing-tag',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/tags/slug:testing-tag',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
@@ -2782,22 +1883,7 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'body' => array(
 			'description' => 'Kitties are awesome!'
 		)
-	),
-	'example_response'     => '
-{
-	"name": "testing tag",
-	"slug": "testing-tag",
-	"description": "Kitties are awesome!",
-	"post_count": 0,
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/testing-tag",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/tags\/testing-tag\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
@@ -2818,7 +1904,7 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'parent'      => '(int) ID of the parent category',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/categories/slug:testing-category',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/categories/slug:testing-category',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
@@ -2826,23 +1912,7 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'body' => array(
 			'description' => 'Puppies are great!'
 		)
-	),
-	'example_response'     => '
-{
-	"name": "testing category",
-	"slug": "testing-category",
-	"description": "Puppies are great!",
-	"post_count": 0,
-	"parent": 0,
-	"meta": {
-		"links": {
-			"self": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/testing-category",
-			"help": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183\/categories\/testing-category\/help",
-			"site": "https:\/\/public-api.wordpress.com\/rest\/v1\/sites\/30434183"
-		}
-	}
-}'
-
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
@@ -2861,16 +1931,12 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'success' => '(bool) Was the operation successful?',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/categories/slug:some-category-name/delete',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/categories/slug:$category/delete',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		),
-	),
-	'example_response'     => '{
-	"slug": "some-category-name",
-	"success": "true"
-}'
+	)
 ) );
 
 new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
@@ -2889,16 +1955,165 @@ new WPCOM_JSON_API_Update_Taxonomy_Endpoint( array(
 		'success' => '(bool) Was the operation successful?',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/tags/slug:some-tag-name/delete',
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/tags/slug:$tag/delete',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		),
+	)
+) );
+
+new WPCOM_JSON_API_List_Terms_Endpoint( array(
+	'description' => 'Get a list of a site\'s terms by taxonomy.',
+	'group'       => 'taxonomy',
+	'stat'        => 'terms',
+	'method'      => 'GET',
+	'path'        => '/sites/%s/taxonomies/%s/terms',
+	'path_labels' => array(
+		'$site'     => '(int|string) Site ID or domain',
+		'$taxonomy' => '(string) Taxonomy',
 	),
-	'example_response'     => '{
-	"slug": "some-tag-name",
-	"success": "true"
-}'
+	'query_parameters' => array(
+		'number'   => '(int=100) The number of terms to return. Limit: 1000.',
+		'offset'   => '(int=0) 0-indexed offset.',
+		'page'     => '(int) Return the Nth 1-indexed page of terms. Takes precedence over the <code>offset</code> parameter.',
+		'search'   => '(string) Limit response to include only terms whose names or slugs match the provided search query.',
+		'order'    => array(
+			'ASC'  => 'Return terms in ascending order.',
+			'DESC' => 'Return terms in descending order.',
+		),
+		'order_by' => array(
+			'name'  => 'Order by the name of each tag.',
+			'count' => 'Order by the number of posts in each tag.',
+		),
+	),
+	'response_format' => array(
+		'found' => '(int) The number of terms returned.',
+		'terms' => '(array) Array of tag objects.',
+	),
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/taxonomies/post_tags/terms?number=5'
+) );
+
+new WPCOM_JSON_API_Get_Term_Endpoint( array(
+	'description' => 'Get information about a single term.',
+	'group'       => 'taxonomy',
+	'stat'        => 'terms:1',
+	'method'      => 'GET',
+	'path'        => '/sites/%s/taxonomies/%s/terms/slug:%s',
+	'path_labels' => array(
+		'$site'     => '(int|string) Site ID or domain',
+		'$taxonomy' => '(string) Taxonomy',
+		'$slug'     => '(string) Term slug',
+	),
+	'response_format' => array(
+		'ID'          => '(int) The term ID.',
+		'name'        => '(string) The name of the term.',
+		'slug'        => '(string) The slug of the term.',
+		'description' => '(string) The description of the term.',
+		'post_count'  => '(int) The number of posts using this term.',
+		'parent'      => '(int) The parent ID for the term, if hierarchical.',
+	),
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/taxonomies/post_tag/terms/slug:wordpresscom'
+) );
+
+new WPCOM_JSON_API_Update_Term_Endpoint( array(
+	'description' => 'Create a new term.',
+	'group'       => 'taxonomy',
+	'stat'        => 'terms:new',
+	'method'      => 'POST',
+	'path'        => '/sites/%s/taxonomies/%s/terms/new',
+	'path_labels' => array(
+		'$site'     => '(int|string) Site ID or domain',
+		'$taxonomy' => '(string) Taxonomy',
+	),
+	'request_format' => array(
+		'name'        => '(string) Name of the term',
+		'description' => '(string) A description of the term',
+	),
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/taxonomies/post_tag/terms/new',
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+		'body' => array(
+			'name' => 'Ribs & Chicken'
+		)
+	)
+) );
+
+new WPCOM_JSON_API_Update_Term_Endpoint( array(
+	'description' => 'Edit a term.',
+	'group'       => 'taxonomy',
+	'stat'        => 'terms:1:POST',
+	'method'      => 'POST',
+	'path'        => '/sites/%s/taxonomies/%s/terms/slug:%s',
+	'path_labels' => array(
+		'$site'     => '(int|string) Site ID or domain',
+		'$taxonomy' => '(string) Taxonomy',
+		'$slug'     => '(string) The term slug',
+	),
+	'request_format' => array(
+		'name'        => '(string) Name of the term',
+		'description' => '(string) A description of the term',
+	),
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/taxonomies/post_tag/terms/slug:testing-term',
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+		'body' => array(
+			'description' => 'The most delicious'
+		)
+	)
+) );
+
+new WPCOM_JSON_API_Update_Term_Endpoint( array(
+	'description' => 'Delete a term.',
+	'group'       => 'taxonomy',
+	'stat'        => 'terms:1:delete',
+	'method'      => 'POST',
+	'path'        => '/sites/%s/taxonomies/%s/terms/slug:%s/delete',
+	'path_labels' => array(
+		'$site'     => '(int|string) Site ID or domain',
+		'$taxonomy' => '(string) Taxonomy',
+		'$slug'     => '(string) The term slug',
+	),
+	'response_format' => array(
+		'slug'    => '(string) The slug of the deleted term',
+		'success' => '(bool) Whether the operation was successful',
+	),
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/taxonomies/post_tag/terms/slug:$term/delete',
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+	)
+) );
+
+new WPCOM_JSON_API_List_Roles_Endpoint( array(
+	'description' => 'List the user roles of a site.',
+	'group'       => '__do_not_document',
+	'stat'        => 'roles:list',
+
+	'method'      => 'GET',
+	'path'        => '/sites/%s/roles',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+	),
+
+	'query_parameters' => array(
+	),
+
+	'response_format' => array(
+		'roles'  => '(array:role) Array of role objects.',
+	),
+
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/roles',
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+	)
 ) );
 
 new WPCOM_JSON_API_List_Users_Endpoint( array(
@@ -2929,8 +2144,11 @@ new WPCOM_JSON_API_List_Users_Endpoint( array(
 			'display_name'  => 'Order by display name.',
 			'post_count'    => 'Order by number of posts published.',
 		),
-		'authors_only'      => "(bool) Set to true to fetch authors only",
+		'authors_only'      => '(bool) Set to true to fetch authors only',
 		'type'              => "(string) Specify the post type to query authors for. Only works when combined with the `authors_only` flag. Defaults to 'post'. Post types besides post and page need to be whitelisted using the <code>rest_api_allowed_post_types</code> filter.",
+		'search'            => '(string) Find matching users.',
+		'search_columns'    => "(array) Specify which columns to check for matching users. Can be any of 'ID', 'user_login', 'user_email', 'user_url', 'user_nicename', and 'display_name'. Only works when combined with `search` parameter.",
+		'role'              => '(string) Specify a specific user role to fetch.'
 	),
 
 	'response_format' => array(
@@ -2938,26 +2156,236 @@ new WPCOM_JSON_API_List_Users_Endpoint( array(
 		'authors'  => '(array:author) Array of author objects.',
 	),
 
-	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/users',
+	'example_response' => '{
+		"found": 1,
+		"users": [
+			{
+				"ID": 78972699,
+				"login": "apiexamples",
+				"email": "justin+apiexamples@a8c.com",
+				"name": "apiexamples",
+				"first_name": "",
+				"last_name": "",
+				"nice_name": "apiexamples",
+				"URL": "http://apiexamples.wordpress.com",
+				"avatar_URL": "https://1.gravatar.com/avatar/a2afb7b6c0e23e5d363d8612fb1bd5ad?s=96&d=identicon&r=G",
+				"profile_URL": "https://en.gravatar.com/apiexamples",
+				"site_ID": 82974409,
+				"roles": [
+					"administrator"
+				],
+				"is_super_admin": false
+			}
+		]
+	}',
+
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/users',
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+	)
+) );
+
+new WPCOM_JSON_API_Update_User_Endpoint( array(
+	'description' => 'Deletes or removes a user of a site.',
+	'group'       => 'users',
+	'stat'        => 'users:delete',
+
+	'method'      => 'POST',
+	'path'        => '/sites/%s/users/%d/delete',
+	'path_labels' => array(
+		'$site'       => '(int|string) The site ID or domain.',
+		'$user_ID'    => '(int) The user\'s ID'
+	),
+
+	'request_format' => array(
+		'reassign' => '(int) An optional id of a user to reassign posts to.',
+	),
+
+	'response_format' => array(
+		'success' => '(bool) Was the deletion of user successful?',
+	),
+
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/users/1/delete',
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+	)
+) );
+
+new WPCOM_JSON_API_List_Invites_Endpoint( array(
+	'description' => 'List the invites of a site.',
+	'group'       => '__do_not_document',
+	'stat'        => 'invites:list',
+
+	'method'      => 'GET',
+	'path'        => '/sites/%s/invites',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+	),
+
+	'query_parameters' => array(
+		'number'   => '(int=25) Limit the total number of invites to be returned.',
+		'offset'   => '(int=0) The first n invites to be skipped in the returned array.',
+		'status'   => array(
+			'pending' => 'Return only pending invites.',
+			'all'     => 'Return all invites, pending and accepted, that have not been deleted.',
+		)
+	),
+
+	'response_format' => array(
+		'found'   => '(int) The total number of invites found that match the request (ignoring limits and offsets).',
+		'invites' => '(array) Array of invites.',
+	),
+
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/82974409/invites',
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+	),
+) );
+
+new WPCOM_JSON_API_Site_User_Endpoint( array(
+	'description' => 'Get details of a user of a site by ID.',
+	'group'       => '__do_not_document', //'users'
+	'stat'        => 'sites:1:user',
+	'method'      => 'GET',
+	'path'        => '/sites/%s/users/%d',
+	'path_labels' => array(
+		'$site'    => '(int|string) Site ID or domain',
+		'$user_id' => '(int) User ID',
+	),
+	'response_format' => WPCOM_JSON_API_Site_User_Endpoint::$user_format,
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/user/23',
 	'example_request_data' => array(
 		'headers' => array(
 			'authorization' => 'Bearer YOUR_API_TOKEN'
 		),
 	),
 	'example_response'     => '{
-		"found": 1,
-		"users": [
-			{
-				"ID": 18342963,
-				"login": "binarysmash"
-				"email": false,
-				"name": "binarysmash",
-				"URL": "http:\/\/binarysmash.wordpress.com",
-				"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
-				"profile_URL": "http:\/\/en.gravatar.com\/binarysmash"
-			},
-		]
+		"ID": 18342963,
+		"login": "binarysmash"
+		"email": false,
+		"name": "binarysmash",
+		"URL": "http:\/\/binarysmash.wordpress.com",
+		"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
+		"profile_URL": "http:\/\/en.gravatar.com\/binarysmash",
+		"roles": [ "administrator" ]
 	}'
+) );
+
+new WPCOM_JSON_API_Site_User_Endpoint( array(
+	'description' => 'Get details of a user of a site by login.',
+	'group'       => 'users',
+	'stat'        => 'sites:1:user',
+	'method'      => 'GET',
+	'path'        => '/sites/%s/users/login:%s',
+	'path_labels' => array(
+		'$site'    => '(int|string) The site ID or domain.',
+		'$user_id' => '(string) The user\'s login.',
+	),
+	'response_format' => WPCOM_JSON_API_Site_User_Endpoint::$user_format,
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/user/login:binarysmash',
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+	),
+	'example_response'     => '{
+		"ID": 18342963,
+		"login": "binarysmash"
+		"email": false,
+		"name": "binarysmash",
+		"URL": "http:\/\/binarysmash.wordpress.com",
+		"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
+		"profile_URL": "http:\/\/en.gravatar.com\/binarysmash",
+		"roles": [ "administrator" ]
+	}'
+) );
+
+new WPCOM_JSON_API_Site_User_Endpoint( array(
+	'description' => 'Update details of a user of a site.',
+	'group'       => 'users',
+	'stat'        => 'sites:1:user',
+	'method'      => 'POST',
+	'path'        => '/sites/%s/users/%d',
+	'path_labels' => array(
+		'$site'    => '(int|string) The site ID or domain.',
+		'$user_id' => '(int) The user\'s ID.',
+	),
+	'request_format'  => WPCOM_JSON_API_Site_User_Endpoint::$user_format,
+	'response_format' => WPCOM_JSON_API_Site_User_Endpoint::$user_format,
+	'example_request'      => 'https://public-api.wordpress.com/rest/v1/sites/30434183/user/23',
+	'example_request_data' => array(
+		'headers' => array(
+			'authorization' => 'Bearer YOUR_API_TOKEN'
+		),
+		'body' => array(
+			'roles' => array(
+				array(
+					'administrator',
+				)
+			),
+			'first_name' => 'Rocco',
+			'last_name' => 'Tripaldi',
+		)
+	),
+	'example_response'     => '{
+		"ID": 18342963,
+		"login": "binarysmash"
+		"email": false,
+		"name": "binarysmash",
+		"URL": "http:\/\/binarysmash.wordpress.com",
+		"avatar_URL": "http:\/\/0.gravatar.com\/avatar\/a178ebb1731d432338e6bb0158720fcc?s=96&d=identicon&r=G",
+		"profile_URL": "http:\/\/en.gravatar.com\/binarysmash",
+		"roles": [ "administrator" ]
+	}'
+) );
+
+new WPCOM_JSON_API_Update_Invites_Endpoint( array(
+	'description' => 'Delete an invite for a user to join a site.',
+	'group'       => '__do_not_document',
+	'stat'        => 'invites:1:delete',
+	'method'      => 'POST',
+	'path'        => '/sites/%s/invites/%s/delete',
+	'path_labels' => array(
+		'$site'      => '(int|string) Site ID or domain',
+		'$invite_id' => '(string) The ID of the invite'
+	),
+	'response_format' => array(
+		'invite_key' => '(string) Identifier for the deleted invite',
+		'deleted' => '(bool) Was the invitation removed?'
+	),
+
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/30434183/invites/123523562/delete',
+
+	'example_request_data' => array(
+		'headers' => array( 'authorization' => 'Bearer YOUR_API_TOKEN' ),
+	),
+) );
+
+new WPCOM_JSON_API_Update_Invites_Endpoint( array(
+	'description' => 'Resend invitation for a user to join a site.',
+	'group'       => '__do_not_document',
+	'stat'        => 'invites:1',
+	'method'      => 'POST',
+	'path'        => '/sites/%s/invites/%s/resend',
+	'path_labels' => array(
+		'$site'      => '(int|string) Site ID or domain',
+		'$invite_id' => '(string) The ID of the invite'
+	),
+	'response_format' => array(
+		'result' => '(bool) Was the invitation resent?'
+	),
+
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/30434183/invites/123523562',
+
+	'example_request_data' => array(
+		'headers' => array( 'authorization' => 'Bearer YOUR_API_TOKEN' ),
+	),
 ) );
 
 new WPCOM_JSON_API_Site_Settings_Endpoint( array(
@@ -2980,11 +2408,105 @@ new WPCOM_JSON_API_Site_Settings_Endpoint( array(
 	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/settings?pretty=1',
 ) );
 
+new WPCOM_JSON_API_Site_Settings_V1_2_Endpoint( array(
+	'description' => 'Get detailed settings information about a site.',
+	'group'	      => '__do_not_document',
+	'stat'        => 'sites:X',
+	'min_version'   => '1.2',
+	'method'      => 'GET',
+	'path'        => '/sites/%s/settings',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+	),
+
+	'query_parameters' => array(
+		'context' => false,
+	),
+
+	'response_format' => WPCOM_JSON_API_Site_Settings_Endpoint::$site_format,
+
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.2/sites/en.blog.wordpress.com/settings?pretty=1',
+) );
+
 new WPCOM_JSON_API_Site_Settings_Endpoint( array(
 	'description' => 'Update settings for a site.',
 	'group'       => '__do_not_document',
 	'stat'        => 'sites:X',
 
+	'method'      => 'POST',
+	'path'        => '/sites/%s/settings',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+	),
+
+	'request_format'  => array(
+		'blogname'                             => '(string) Blog name',
+		'blogdescription'                      => '(string) Blog description',
+		'default_pingback_flag'                => '(bool) Notify blogs linked from article?',
+		'default_ping_status'                  => '(bool) Allow link notifications from other blogs?',
+		'default_comment_status'               => '(bool) Allow comments on new articles?',
+		'blog_public'                          => '(string) Site visibility; -1: private, 0: discourage search engines, 1: allow search engines',
+		'jetpack_sync_non_public_post_stati'   => '(bool) allow sync of post and pages with non-public posts stati',
+		'jetpack_relatedposts_enabled'         => '(bool) Enable related posts?',
+		'jetpack_relatedposts_show_headline'   => '(bool) Show headline in related posts?',
+		'jetpack_relatedposts_show_thumbnails' => '(bool) Show thumbnails in related posts?',
+		'jetpack_protect_whitelist'            => '(array) List of IP addresses to whitelist',
+		'infinite_scroll'                      => '(bool) Support infinite scroll of posts?',
+		'default_category'                     => '(int) Default post category',
+		'default_post_format'                  => '(string) Default post format',
+		'require_name_email'                   => '(bool) Require comment authors to fill out name and email?',
+		'comment_registration'                 => '(bool) Require users to be registered and logged in to comment?',
+		'close_comments_for_old_posts'         => '(bool) Automatically close comments on old posts?',
+		'close_comments_days_old'              => '(int) Age at which to close comments',
+		'thread_comments'                      => '(bool) Enable threaded comments?',
+		'thread_comments_depth'                => '(int) Depth to thread comments',
+		'page_comments'                        => '(bool) Break comments into pages?',
+		'comments_per_page'                    => '(int) Number of comments to display per page',
+		'default_comments_page'                => '(string) newest|oldest Which page of comments to display first',
+		'comment_order'                        => '(string) asc|desc Order to display comments within page',
+		'comments_notify'                      => '(bool) Email me when someone comments?',
+		'moderation_notify'                    => '(bool) Email me when a comment is helf for moderation?',
+		'social_notifications_like'            => '(bool) Email me when someone likes my post?',
+		'social_notifications_reblog'          => '(bool) Email me when someone reblogs my post?',
+		'social_notifications_subscribe'       => '(bool) Email me when someone follows my blog?',
+		'comment_moderation'                   => '(bool) Moderate comments for manual approval?',
+		'comment_whitelist'                    => '(bool) Moderate comments unless author has a previously-approved comment?',
+		'comment_max_links'                    => '(int) Moderate comments that contain X or more links',
+		'moderation_keys'                      => '(string) Words or phrases that trigger comment moderation, one per line',
+		'blacklist_keys'                       => '(string) Words or phrases that mark comment spam, one per line',
+		'lang_id'                              => '(int) ID for language blog is written in',
+		'wga'                                  => '(array) Google Analytics Settings',
+		'disabled_likes'                       => '(bool) Are likes globally disabled (they can still be turned on per post)?',
+		'disabled_reblogs'                     => '(bool) Are reblogs disabled on posts?',
+		'jetpack_comment_likes_enabled'        => '(bool) Are comment likes enabled for all comments?',
+		'sharing_button_style'                 => '(string) Style to use for sharing buttons (icon-text, icon, text, or official)',
+		'sharing_label'                        => '(string) Label to use for sharing buttons, e.g. "Share this:"',
+		'sharing_show'                         => '(string|array:string) Post type or array of types where sharing buttons are to be displayed',
+		'sharing_open_links'                   => '(string) Link target for sharing buttons (same or new)',
+		'twitter_via'                          => '(string) Twitter username to include in tweets when people share using the Twitter button',
+		'jetpack-twitter-cards-site-tag'       => '(string) The Twitter username of the owner of the site\'s domain.',
+		'eventbrite_api_token'                 => '(int) The Keyring token ID for an Eventbrite token to associate with the site',
+		'holidaysnow'                          => '(bool) Enable snowfall on front end of site?',
+		'timezone_string'                      => '(string) PHP-compatible timezone string like \'UTC-5\'',
+		'gmt_offset'                           => '(int) Site offset from UTC in hours',
+		'jetpack_testimonial'                  => '(bool) Whether testimonial custom post type is enabled for the site',
+		'jetpack_testimonial_posts_per_page'   => '(int) Number of testimonials to show per page',
+		'jetpack_portfolio'                    => '(bool) Whether portfolio custom post type is enabled for the site',
+		'jetpack_portfolio_posts_per_page'     => '(int) Number of portfolio projects to show per page',
+	),
+
+	'response_format' => array(
+		'updated' => '(array)'
+	),
+
+	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/settings?pretty=1',
+) );
+
+new WPCOM_JSON_API_Site_Settings_V1_2_Endpoint( array(
+	'description' => 'Update settings for a site.',
+	'group'       => '__do_not_document',
+	'stat'        => 'sites:X',
+	'min_version'   => '1.2',
 	'method'      => 'POST',
 	'path'        => '/sites/%s/settings',
 	'path_labels' => array(
@@ -3027,6 +2549,7 @@ new WPCOM_JSON_API_Site_Settings_Endpoint( array(
 		'moderation_keys'              => '(string) Words or phrases that trigger comment moderation, one per line',
 		'blacklist_keys'               => '(string) Words or phrases that mark comment spam, one per line',
 		'lang_id'                      => '(int) ID for language blog is written in',
+		'locale'                       => '(string) locale code for language blog is written in',
 		'wga'                          => '(array) Google Analytics Settings',
 		'disabled_likes'               => '(bool) Are likes globally disabled (they can still be turned on per post)?',
 		'disabled_reblogs'             => '(bool) Are reblogs disabled on posts?',
@@ -3037,81 +2560,20 @@ new WPCOM_JSON_API_Site_Settings_Endpoint( array(
 		'sharing_open_links'           => '(string) Link target for sharing buttons (same or new)',
 		'twitter_via'                  => '(string) Twitter username to include in tweets when people share using the Twitter button',
 		'jetpack-twitter-cards-site-tag' => '(string) The Twitter username of the owner of the site\'s domain.',
+		'eventbrite_api_token'         => '(int) The Keyring token ID for an Eventbrite token to associate with the site',
+		'holidaysnow'                  => '(bool) Enable snowfall on front end of site?',
+		'timezone_string'              => '(string) PHP-compatible timezone string like \'UTC-5\'',
+		'gmt_offset'                   => '(int) Site offset from UTC in hours',
+		'seo_meta_description' 		   => '(string) The seo meta description for the site.',
+		'advanced_seo_title_formats'   => '(array) SEO meta title formats. Allowed keys: front_page, posts, pages, groups, archives',
+		'verification_services_codes'  => '(array) Website verification codes. Allowed keys: google, pinterest, bing, yandex',
 	),
 
 	'response_format' => array(
 		'updated' => '(array)'
 	),
 
-	'example_request' => 'https://public-api.wordpress.com/rest/v1/sites/en.blog.wordpress.com/settings?pretty=1',
-) );
-
-/**
- * Publicize Endpoints
- */
-
-new WPCOM_JSON_API_Get_Connections_Endpoint( array(
-	'description' => 'Get a list of a site\'s current Publicize connections to third-party services for the current user (personal or shared).',
-	'group'       => 'Publicize',
-	'stat'        => 'connections',
-	'method'      => 'GET',
-	'path'        => '/sites/%s/connections/',
-	'path_labels' => array(
-		'$site' => '(int|string) Site ID or domain',
-	),
-	'query_parameters' => array(
-		'service'   => "(string) Get Publicize connections for a specific service only. Default is 'all' but you can enter 'facebook', 'twitter', etc."
-	),
-	'response_format' => array(
-		'connections'    => '(array:object) List of Publicize connections'
-	)
-) );
-
-new WPCOM_JSON_API_Get_Connection_Endpoint( array(
-	'description' => 'Get information about a specific Publicize connection.',
-	'group'       => 'Publicize',
-	'stat'        => 'connections:1',
-	'method'      => 'GET',
-	'path'        => '/sites/%s/connections/%d',
-	'path_labels' => array(
-		'$site'          => '(int|string) Site ID or domain',
-		'$connection_id' => '(int) The ID of the Publicize connection',
-	),
-	'response_format' => array(
-		'ID'               => '(int) Identifier for the Publicize connection',
-		'token_ID'         => '(int) Identifier for the Keyring token',
-		'conn_ID'          => '(int) Identifier for the Publicize connection',
-		'site_ID'          => '(int) Identifier for the Site',
-		'user_ID'          => '(int) Identifier for the Publicize connection user, or 0 if the connection is shared',
-		'shared'           => '(bool) Is this connection specific to the current user, or a shared one for the site?',
-		'service'          => '(string) An identifier for the type of service (facebook, linkedin, path, tumblr, etc)',
-		'label'            => '(string) Formatted nicename for the service.',
-		'issued'           => '(ISO 8601 datetime) When the conncetion was created',
-		'expires'          => '(ISO 8601 datetime) When the connection expires and needs to be refreshed',
-		'external_ID'      => '(string) An identifier for the user on the third-party service',
-		'external_name'    => '(string) Usually a username or login name.',
-		'external_display' => '(string) How the user prefers their name to be displayed on the third-party service.',
-		'URL'              => '(string|null) URL to the user\'s profile. NULL if there is no URL to link to.',
-		'status'           => '(string) The current status of the connection. "ok" for connections with no problems, and "broken" for connections that need fixed.',
-		'refresh_url'      => '(string) The URL to refresh a token if it is broken.',
-		'meta'             => '(object) Extra and optional metadata for the current Publicize connection',
-	)
-) );
-
-new WPCOM_JSON_API_Delete_Connection_Endpoint( array(
-	'description' => 'Delete a publicize connection.',
-	'group'		  => 'Publicize',
-	'stat'		  => 'connections:1:delete',
-	'method'	  => 'POST',
-	'path'		  => '/sites/%s/connections/%d/delete',
-	'path_labels' => array(
-		'$site'          => '(int|string) Site ID or domain',
-		'$connection_id' => 'The ID of the connection',
-	),
-	'response_format' => array(
-		'ID'      => '(int) Identifier for the connection',
-		'deleted' => '(bool) Confirmation that the connection has been removed'
-	)
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.2/sites/en.blog.wordpress.com/settings?pretty=1',
 ) );
 
 /**
@@ -3120,7 +2582,7 @@ new WPCOM_JSON_API_Delete_Connection_Endpoint( array(
 
 new WPCOM_JSON_API_Get_Sharing_Buttons_Endpoint( array(
 	'description' => 'Get a list of a site\'s sharing buttons.',
-	'group'       => '__do_not_document',
+	'group'       => 'sharing',
 	'stat'        => 'sharing-buttons',
 	'method'      => 'GET',
 	'path'        => '/sites/%s/sharing-buttons/',
@@ -3193,7 +2655,7 @@ new WPCOM_JSON_API_Get_Sharing_Button_Endpoint( array(
 
 new WPCOM_JSON_API_Update_Sharing_Buttons_Endpoint( array(
 	'description' => 'Edit all sharing buttons for a site.',
-	'group'       => '__do_not_document',
+	'group'       => 'sharing',
 	'stat'        => 'sharing-buttons:X:POST',
 	'method'      => 'POST',
 	'path'        => '/sites/%s/sharing-buttons',
@@ -3359,4 +2821,195 @@ new WPCOM_JSON_API_Delete_Sharing_Button_Endpoint( array(
 	"ID": "custom-123456789",
 	"success": "true"
 }'
+) );
+
+/*
+ * Custom CSS endpoints
+ */
+new WPCOM_JSON_API_Get_CustomCss_Endpoint( array (
+	'description'      => 'Retrieve custom-css data for a site.',
+	'group'            => '__do_not_document',
+	'stat'             => 'customcss:1:get',
+	'method'           => 'GET',
+	'min_version'      => '1.1',
+	'path'             => '/sites/%s/customcss',
+	'path_labels'      => array(
+		'$site' => '(string) Site ID or domain.',
+	),
+	'response_format'  => array(
+		'css' => '(string) The raw CSS.',
+		'preprocessor' => '(string) The name of the preprocessor if any.',
+		'add_to_existing' => '(bool) False to skip the existing styles.',
+	),
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1.1/sites/12345678/customcss',
+	'example_response' => array(
+		array(
+			'css' => '.stie-title { color: #fff; }',
+			'preprocessor' => 'sass',
+			'add_to_existing' => 'true',
+		)
+	)
+) );
+
+new WPCOM_JSON_API_Update_CustomCss_Endpoint( array (
+	'description'      => 'Set custom-css data for a site.',
+	'group'            => '__do_not_document',
+	'stat'             => 'customcss:1:update',
+	'method'           => 'POST',
+	'min_version'      => '1.1',
+	'path'             => '/sites/%s/customcss',
+	'path_labels'      => array(
+		'$site' => '(string) Site ID or domain.',
+	),
+	'request_format'  => array(
+		'css' => '(string) Optional. The raw CSS.',
+		'preprocessor' => '(string) Optional. The name of the preprocessor if any.',
+		'add_to_existing' => '(bool) Optional. False to skip the existing styles.',
+	),
+	'response_format'  => array(
+		'css' => '(string) The raw CSS.',
+		'preprocessor' => '(string) The name of the preprocessor if any.',
+		'add_to_existing' => '(bool) False to skip the existing styles.',
+	),
+	'example_request'  => 'https://public-api.wordpress.com/rest/v1.1/sites/12345678/customcss',
+	'example_request_data' => array(
+		'headers' => array( 'authorization' => 'Bearer YOUR_API_TOKEN' ),
+		'body' => array(
+			'css' => '.stie-title { color: #fff; }',
+			'preprocessor' => 'sass'
+		),
+	),
+	'example_response' => array(
+		array(
+			'css' => '.stie-title { color: #fff; }',
+			'preprocessor' => 'sass',
+			'add_to_existing' => 'true',
+		)
+	)
+) );
+
+/*
+ * Custom Menus endpoints
+ */
+new WPCOM_JSON_API_Menus_New_Menu_Endpoint( array (
+	'method' => 'POST',
+	'description' => 'Create a new navigation menu.',
+	'group' => 'menus',
+	'stat' => 'menus:new-menu',
+	'path' => '/sites/%s/menus/new',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+	),
+	'request_format'  => array(
+		'name' => '(string) Name of menu',
+	),
+	'response_format' => array(
+		'id' => '(int) Newly created menu ID',
+	),
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/menus/new',
+	'example_request_data' => array(
+		'headers' => array( 'authorization' => 'Bearer YOUR_API_TOKEN' ),
+		'body' => array(
+			'name' => 'Menu 1'
+		)
+	),
+) );
+
+new WPCOM_JSON_API_Menus_Update_Menu_Endpoint( array (
+	'method' => 'POST',
+	'description' => 'Update a navigation menu.',
+	'group' => 'menus',
+	'stat' => 'menus:update-menu',
+	'path' => '/sites/%s/menus/%d',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+		'$menu_id' => '(int) Menu ID',
+	),
+	'request_format'  => array(
+		'name'  => '(string) Name of menu',
+		'items' => '(array) A list of menu item objects.
+			<br/><br/>
+			Item objects contain fields relating to that item, e.g. id, type, content_id,
+			but they can also contain other items objects - this nesting represents parents
+			and child items in the item tree.'
+	),
+	'response_format' => array(
+		'menu' => '(object) Updated menu object',
+	),
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/menus/347757165',
+	'example_request_data' => array(
+		'headers' => array( 'authorization' => 'Bearer YOUR_API_TOKEN' ),
+		'body' => array(
+			'name' => 'Menu 1'
+		),
+	),
+) );
+
+new WPCOM_JSON_API_Menus_List_Menus_Endpoint( array (
+	'method'=> 'GET',
+	'description' => 'Get a list of all navigation menus.',
+	'group' => 'menus',
+	'stat' => 'menus:list-menu',
+	'path' => '/sites/%s/menus',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+	),
+	'response_format' => array(
+		'menus' => '(array) A list of menu objects.<br/><br/>
+			A menu object contains a name, items, locations, etc.
+			Check the example response for the full structure.
+			<br/><br/>
+			Item objects contain fields relating to that item, e.g. id, type, content_id,
+			but they can also contain other items objects - this nesting represents parents
+			and child items in the item tree.',
+		'locations' => '(array) Locations where menus can be placed. List of objects, one per location.'
+	),
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/menus',
+	'example_request_data' => array(
+		'headers' => array( 'authorization' => 'Bearer YOUR_API_TOKEN' ),
+	),
+) );
+
+new WPCOM_JSON_API_Menus_Get_Menu_Endpoint( array (
+	'method'=> 'GET',
+	'description' => 'Get a single navigation menu.',
+	'group' => 'menus',
+	'stat' => 'menus:get-menu',
+	'path' => '/sites/%s/menus/%d',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+		'$menu_id' => '(int) Menu ID',
+	),
+	'response_format' => array(
+		'menu' => '(object) A menu object.<br/><br/>
+			A menu object contains a name, items, locations, etc.
+			Check the example response for the full structure.
+			<br/><br/>
+			Item objects contain fields relating to that item, e.g. id, type, content_id,
+			but they can also contain other items objects - this nesting represents parents
+			and child items in the item tree.'
+	),
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/menus/347757165',
+	'example_request_data' => array(
+		'headers' => array( 'authorization' => 'Bearer YOUR_API_TOKEN' ),
+	),
+) );
+
+new WPCOM_JSON_API_Menus_Delete_Menu_Endpoint( array (
+	'method' => 'POST',
+	'description' => 'Delete a navigation menu',
+	'group' => 'menus',
+	'stat' => 'menus:delete-menu',
+	'path' => '/sites/%s/menus/%d/delete',
+	'path_labels' => array(
+		'$site' => '(int|string) Site ID or domain',
+		'$menu_id' => '(int) Menu ID',
+	),
+	'response_format' => array(
+		'deleted' => '(bool) Has the menu been deleted?',
+	),
+	'example_request' => 'https://public-api.wordpress.com/rest/v1.1/sites/82974409/menus/$menu_id/delete',
+	'example_request_data' => array(
+		'headers' => array( 'authorization' => 'Bearer YOUR_API_TOKEN' ),
+	),
 ) );

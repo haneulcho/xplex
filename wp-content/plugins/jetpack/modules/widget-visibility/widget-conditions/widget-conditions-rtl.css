@@ -1,8 +1,7 @@
+/* Do not modify this file directly.  It is concatenated from individual module CSS files. */
 .wp-customizer  .expanded .widget-conditional .widget-conditional-inner {
-	width: 98%;
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box; 
+	width: 98%; /* Safari/Chrome, other WebKit */    /* Firefox, other Gecko */
+	box-sizing: border-box;
 }
 
 .wp-customizer  .expanded .widget-conditional .form{
@@ -48,6 +47,9 @@
 .widget-conditional .selection {
 	margin-left: 70px;
 }
+.widget-conditional .conditions-rule-has-children {
+	display: block;
+}
 .widget-conditional .condition .actions {
 	margin-top: -28px;
 }
@@ -58,10 +60,7 @@
 .widget-conditional .condition:last-child .condition-conjunction {
 	display: none;
 }
-.widget-control-actions .alignright {
-	text-align: left;
-	color:#999;
-}
+
 .wp-core-ui .button.display-options {
 	margin-left: 5px;
 }

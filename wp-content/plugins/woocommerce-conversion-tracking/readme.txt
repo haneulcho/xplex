@@ -1,9 +1,9 @@
 === WooCommerce Conversion Tracking ===
 Contributors: tareq1988
 Tags: ecommerce, e-commerce, commerce, woocommerce, tracking, facebook, google, adwords, tracking-pixel
-Donate link: http://tareq.wedevs.com/donate/
-Requires at least: 3.8
-Tested up to: 3.8.1
+Donate link: https://tareq.co/donate/
+Requires at least: 4.0
+Tested up to: 4.5.2
 Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -42,6 +42,24 @@ Nothing here right now
 2. Tracking code on single product.
 
 == Changelog ==
+
+= 1.2.1 - 9-June-2016 =
+* [fix] Fatal error on thank you page when without parameters
+
+= 1.2 - 10-April-2016 =
+* [new] Order number variable `{order_number}` added on checkout page
+
+= 1.1 - 08-Jan-2016 =
+* [new] Dynamic values on product and checkout script
+
+= 1.0 - 08/07/2015 =
+* [fix] Removed product specific codes from product single page, should show only on checkout. My bad!
+
+= 0.3 - 31/05/2015 =
+* [fix] Product specific code only loads on product page itself, not checkout
+
+= 0.2 - 30/05/2015 =
+* Renamed position option "In Footer" to "Inside Body Tag", may be was confusing to users.
 
 = 0.1.1 - 06/04/2014 =
 * Added position parameter for display position control

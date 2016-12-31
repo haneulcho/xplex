@@ -25,6 +25,12 @@ class Jetpack_Comic {
 		// Make sure the post types are loaded for imports
 		add_action( 'import_start', array( $this, 'register_post_types' ) );
 
+		// Add to REST API post type whitelist
+		add_filter( 'rest_api_allowed_post_types', array( $this, 'allow_rest_api_type' ) );
+
+		// If called via REST API, we need to register later in lifecycle
+		add_action( 'restapi_theme_init', array( $this, 'maybe_register_post_types' ) );
+
 		// Return early if theme does not support Jetpack Comic.
 		if ( ! ( $this->site_supports_comics() ) )
 			return;
@@ -72,6 +78,7 @@ class Jetpack_Comic {
 		add_action( 'admin_footer-edit.php', array( $this, 'admin_footer' ) );
 		add_action( 'load-edit.php', array( $this, 'bulk_edit' ) );
 		add_action( 'admin_notices', array( $this, 'bulk_edit_notices' ) );
+
 	}
 
 	public function admin_footer() {
@@ -194,6 +201,14 @@ class Jetpack_Comic {
 		wp_enqueue_style( 'jetpack-comics-admin', plugins_url( 'comics/admin.css', __FILE__ ) );
 	}
 
+	public function maybe_register_post_types() {
+		// Return early if theme does not support Jetpack Comic.
+		if ( ! ( $this->site_supports_comics() ) )
+			return;
+
+		$this->register_post_types();
+	}
+
 	function register_post_types() {
 		if ( post_type_exists( self::POST_TYPE ) ) {
 			return;
@@ -202,18 +217,21 @@ class Jetpack_Comic {
 		register_post_type( self::POST_TYPE, array(
 			'description' => __( 'Comics', 'jetpack' ),
 			'labels' => array(
-				'name'               => esc_html__( 'Comics',                   'jetpack' ),
-				'singular_name'      => esc_html__( 'Comic',                    'jetpack' ),
-				'menu_name'          => esc_html__( 'Comics',                   'jetpack' ),
-				'all_items'          => esc_html__( 'All Comics',               'jetpack' ),
-				'add_new'            => esc_html__( 'Add New',                  'jetpack' ),
-				'add_new_item'       => esc_html__( 'Add New Comic',            'jetpack' ),
-				'edit_item'          => esc_html__( 'Edit Comic',               'jetpack' ),
-				'new_item'           => esc_html__( 'New Comic',                'jetpack' ),
-				'view_item'          => esc_html__( 'View Comic',               'jetpack' ),
-				'search_items'       => esc_html__( 'Search Comics',            'jetpack' ),
-				'not_found'          => esc_html__( 'No Comics found',          'jetpack' ),
-				'not_found_in_trash' => esc_html__( 'No Comics found in Trash', 'jetpack' ),
+				'name'                  => esc_html__( 'Comics',                   'jetpack' ),
+				'singular_name'         => esc_html__( 'Comic',                    'jetpack' ),
+				'menu_name'             => esc_html__( 'Comics',                   'jetpack' ),
+				'all_items'             => esc_html__( 'All Comics',               'jetpack' ),
+				'add_new'               => esc_html__( 'Add New',                  'jetpack' ),
+				'add_new_item'          => esc_html__( 'Add New Comic',            'jetpack' ),
+				'edit_item'             => esc_html__( 'Edit Comic',               'jetpack' ),
+				'new_item'              => esc_html__( 'New Comic',                'jetpack' ),
+				'view_item'             => esc_html__( 'View Comic',               'jetpack' ),
+				'search_items'          => esc_html__( 'Search Comics',            'jetpack' ),
+				'not_found'             => esc_html__( 'No Comics found',          'jetpack' ),
+				'not_found_in_trash'    => esc_html__( 'No Comics found in Trash', 'jetpack' ),
+				'filter_items_list'     => esc_html__( 'Filter comics list',       'jetpack' ),
+				'items_list_navigation' => esc_html__( 'Comics list navigation',   'jetpack' ),
+				'items_list'            => esc_html__( 'Comics list',              'jetpack' ),
 			),
 			'supports' => array(
 				'title',
@@ -239,6 +257,7 @@ class Jetpack_Comic {
 			'map_meta_cap'    => true,
 			'has_archive'     => true,
 			'query_var'       => 'comic',
+			'show_in_rest'    => true,
 		) );
 	}
 
@@ -316,8 +335,9 @@ class Jetpack_Comic {
 								|| current_theme_supports( self::POST_TYPE )
 								|| get_stylesheet() == 'pub/panel' );
 			restore_current_blog();
-		      /** This action is documented in modules/custom-post-types/nova.php */
-		      return (bool) apply_filters( 'jetpack_enable_cpt', $supports_comics, self::POST_TYPE );
+
+			/** This action is documented in modules/custom-post-types/nova.php */
+			return (bool) apply_filters( 'jetpack_enable_cpt', $supports_comics, self::POST_TYPE );
 		}
 
 		$supports_comics = false;
@@ -337,11 +357,11 @@ class Jetpack_Comic {
 			$supports_comics = true;
 		}
 
-		 /**
+		/**
 		 * Filter it in case something else knows better.
 		 */
-		    /** This action is documented in modules/custom-post-types/nova.php */
-		    return (bool) apply_filters( 'jetpack_enable_cpt', $supports_comics, self::POST_TYPE );
+		/** This action is documented in modules/custom-post-types/nova.php */
+		return (bool) apply_filters( 'jetpack_enable_cpt', $supports_comics, self::POST_TYPE );
 	}
 
 	/**
@@ -482,6 +502,14 @@ class Jetpack_Comic {
 		return $query;
 	}
 
+	/**
+	 * Add to REST API post type whitelist
+	 */
+	public function allow_rest_api_type( $post_types ) {
+		$post_types[] = self::POST_TYPE;
+		return $post_types;
+	}
+
 }
 
 add_action( 'init', array( 'Jetpack_Comic', 'init' ) );
@@ -493,7 +521,7 @@ function comics_welcome_email( $welcome_email, $blog_id, $user_id, $password, $t
 
 Your webcomic's new site is ready to go. Get started by <a href=\"BLOG_URLwp-admin/customize.php#title\">setting your comic's title and tagline</a> so your readers know what it's all about.
 
-Looking for more help with setting up your site? Check out the WordPress.com <a href=\"http://learn.wordpress.com/\">beginner's tutorial</a> and the <a href=\"http://en.support.wordpress.com/comics/\">guide to comics on WordPress.com</a>. Dive right in by <a href=\"BLOG_URLwp-admin/customize.php#title\">publishing your first strip!</a>
+Looking for more help with setting up your site? Check out the WordPress.com <a href=\"http://learn.wordpress.com/\" target=\"_blank\">beginner's tutorial</a> and the <a href=\"http://en.support.wordpress.com/comics/\" target=\"_blank\">guide to comics on WordPress.com</a>. Dive right in by <a href=\"BLOG_URLwp-admin/customize.php#title\">publishing your first strip!</a>
 
 Lots of laughs,
 The WordPress.com Team", 'jetpack' );

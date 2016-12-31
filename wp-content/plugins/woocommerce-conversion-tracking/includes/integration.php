@@ -17,7 +17,11 @@ class WeDevs_WC_Tracking_Integration extends WC_Integration {
         $this->init_form_fields();
         $this->init_settings();
 
-        add_action( 'woocommerce_update_options_integration', array($this, 'process_admin_options') );
+        // Save settings if the we are in the right section
+        if ( isset( $_POST[ 'section' ] ) && $this->id === $_POST[ 'section' ] ) {
+            add_action( 'woocommerce_update_options_integration', array($this, 'process_admin_options') );
+        }
+
         add_action( 'woocommerce_product_options_reviews', array($this, 'product_options') );
         add_action( 'woocommerce_process_product_meta', array($this, 'product_options_save'), 10, 2 );
 
@@ -25,6 +29,7 @@ class WeDevs_WC_Tracking_Integration extends WC_Integration {
         add_action( 'template_redirect', array($this, 'track_registration') );
         add_action( 'wp_head', array($this, 'code_handler') );
         add_action( 'wp_footer', array($this, 'code_handler') );
+        add_action( 'woocommerce_thankyou', array($this, 'thankyou_page') );
     }
 
     /**
@@ -35,36 +40,36 @@ class WeDevs_WC_Tracking_Integration extends WC_Integration {
     function init_form_fields() {
         $this->form_fields = array(
             'position' => array(
-                'title' => __( 'Script Position', 'wc-conversion-tracking' ),
+                'title'       => __( 'Script Position', 'wc-conversion-tracking' ),
                 'description' => __( 'Select what position in your page you want to display the tag', 'wc-conversion-tracking' ),
-                'desc_tip' => true,
-                'id' => 'position',
-                'type' => 'select',
-                'options' => array(
-                    'head' => __( 'Inside HEAD tag', 'wc-conversion-tracking' ),
-                    'footer' => __( 'In footer', 'wc-conversion-tracking' ),
+                'desc_tip'    => true,
+                'id'          => 'position',
+                'type'        => 'select',
+                'options'     => array(
+                    'head'   => __( 'Inside HEAD tag', 'wc-conversion-tracking' ),
+                    'footer' => __( 'Inside Body Tag', 'wc-conversion-tracking' ),
                 )
             ),
             'cart' => array(
-                'title' => __( 'Cart Scripts', 'wc-conversion-tracking' ),
-                'description' => __( 'Adds script on the cart page HEAD tag', 'wc-conversion-tracking' ),
-                'desc_tip' => true,
-                'id' => 'cart',
-                'type' => 'textarea',
+                'title'       => __( 'Cart Scripts', 'wc-conversion-tracking' ),
+                'description' => __( 'Adds script on the cart page', 'wc-conversion-tracking' ),
+                'desc_tip'    => true,
+                'id'          => 'cart',
+                'type'        => 'textarea',
             ),
             'checkout' => array(
-                'title' => __( 'Checkout Scripts', 'wc-conversion-tracking' ),
-                'description' => __( 'Adds script on the purchase success page HEAD tag', 'wc-conversion-tracking' ),
-                'desc_tip' => true,
-                'id' => 'checkout',
-                'type' => 'textarea',
+                'title'       => __( 'Checkout Scripts', 'wc-conversion-tracking' ),
+                'desc_tip'    => __( 'Adds script on the purchase success page', 'wc-conversion-tracking' ),
+                'description' => __( 'You can use {order_number}, {order_total}, {order_subtotal}, and {currency} for dynamic values', 'wc-conversion-tracking' ),
+                'id'          => 'checkout',
+                'type'        => 'textarea',
             ),
             'reg' => array(
-                'title' => __( 'Registration Scripts', 'wc-conversion-tracking' ),
-                'description' => __( 'Adds script on the successful registraion page HEAD tag', 'wc-conversion-tracking' ),
-                'desc_tip' => true,
-                'id' => 'registration',
-                'type' => 'textarea',
+                'title'       => __( 'Registration Scripts', 'wc-conversion-tracking' ),
+                'description' => __( 'Adds script on the successful registraion page', 'wc-conversion-tracking' ),
+                'desc_tip'    => true,
+                'id'          => 'registration',
+                'type'        => 'textarea',
             ),
         );
     }
@@ -107,7 +112,12 @@ class WeDevs_WC_Tracking_Integration extends WC_Integration {
 
         echo '<div class="options_group">';
 
-        woocommerce_wp_textarea_input( array('id' => '_wc_conv_track', 'label' => __( 'Conversion Tracking Code', 'wc-conversion-tracking' ), 'desc_tip' => 'true', 'description' => __( 'Insert conversion tracking code for this product.', 'wc-conversion-tracking' )) );
+        woocommerce_wp_textarea_input( array(
+            'id'          => '_wc_conv_track',
+            'label'       => __( 'Conversion Tracking Code', 'wc-conversion-tracking' ),
+            'desc_tip'    => true,
+            'description' => __( 'Insert conversion tracking code for this product. You can use {product_name}, {price}, {sale_price}, {regular_price}, {price_excluding_tax}, and {price_including_tax} for dynamic values.', 'wc-conversion-tracking' )
+        ) );
 
         echo '</div>';
     }
@@ -166,12 +176,38 @@ class WeDevs_WC_Tracking_Integration extends WC_Integration {
 
         } elseif ( is_order_received_page() ) {
 
-            echo $this->print_conversion_code( $this->get_option( 'checkout' ) );
+            echo $this->print_conversion_code( $this->process_order_markdown( $this->get_option( 'checkout' ) ) );
+        }
+    }
 
-        } elseif ( is_product() ) {
+    /**
+     * Put product specific conversion tracking pixel in thank you page
+     *
+     * @param  int  $order_id
+     *
+     * @since 0.3
+     *
+     * @return void
+     */
+    public function thankyou_page( $order_id ) {
+        $order = wc_get_order( $order_id );
 
-            $code = get_post_meta( get_the_ID(), '_wc_conv_track', true );
-            echo $this->print_conversion_code( $code );
+        if ( $items = $order->get_items() ) {
+            foreach ($items as $item) {
+                $product = $order->get_product_from_item( $item );
+
+                if ( ! $product ) {
+                    continue;
+                }
+
+                $code = get_post_meta( $product->id, '_wc_conv_track', true );
+
+                if ( empty( $code ) ) {
+                    continue;
+                }
+
+                echo $this->print_conversion_code( $this->process_product_markdown( $code, $product ) );
+            }
         }
     }
 
@@ -188,6 +224,7 @@ class WeDevs_WC_Tracking_Integration extends WC_Integration {
      * Prints the code
      *
      * @param string $code
+     *
      * @return void
      */
     function print_conversion_code( $code ) {
@@ -195,9 +232,71 @@ class WeDevs_WC_Tracking_Integration extends WC_Integration {
             return;
         }
 
-        echo "<!-- Tracking pixel by WooCommerce Conversion Tracking plugin -->\n";
+        echo "<!-- Tracking pixel by WooCommerce Conversion Tracking plugin by Tareq Hasan -->\n";
         echo $code;
         echo "\n<!-- Tracking pixel by WooCommerce Conversion Tracking plugin -->\n";
+    }
+
+    /**
+     * Filter the code for dynamic data for order received page
+     *
+     * @since 1.1
+     *
+     * @param  string  $code
+     *
+     * @return string
+     */
+    function process_order_markdown( $code ) {
+        global $wp;
+
+        if ( ! is_order_received_page() ) {
+            return $code;
+        }
+
+        $order = wc_get_order( $wp->query_vars['order-received'] );
+
+        // bail out if not a valid instance
+        if ( ! is_a( $order, 'WC_Order' ) ) {
+            return $code;
+        }
+
+        $order_currency = $order->get_order_currency();
+        $order_total    = $order->get_total();
+        $order_number   = $order->get_order_number();
+        $order_subtotal = $order->get_subtotal();
+
+        $code           = str_replace( '{currency}', $order_currency, $code );
+        $code           = str_replace( '{order_total}', $order_total, $code );
+        $code           = str_replace( '{order_number}', $order_number, $code );
+        $code           = str_replace( '{order_subtotal}', $order_subtotal, $code );
+
+        return $code;
+    }
+
+    /**
+     * Filter the code for dynamic data for products
+     *
+     * @since 1.1
+     *
+     * @param  string  $code
+     *
+     * @return string
+     */
+    function process_product_markdown( $code, $product ) {
+        $price               = $product->get_price();
+        $sale_price          = $product->get_sale_price();
+        $regular_price       = $product->get_regular_price();
+        $price_excluding_tax = $product->get_price_excluding_tax();
+        $price_including_tax = $product->get_price_including_tax();
+
+        $code                = str_replace( '{product_name}', $product->get_title(), $code );
+        $code                = str_replace( '{price}', $price, $code );
+        $code                = str_replace( '{sale_price}', $sale_price, $code );
+        $code                = str_replace( '{regular_price}', $regular_price, $code );
+        $code                = str_replace( '{price_including_tax}', $price_including_tax, $code );
+        $code                = str_replace( '{price_excluding_tax}', $price_excluding_tax, $code );
+
+        return $code;
     }
 
 }

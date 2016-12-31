@@ -64,6 +64,7 @@ img { border: 0; }
 #kboard-customer-editor .kboard-attr-row .attr-value input[type=radio],
 #kboard-customer-editor .kboard-attr-row .attr-value input[type=checkbox] { margin-top: 8px; }
 #kboard-customer-editor .kboard-attr-row .attr-value input[type=file] { margin: 0; padding: 6px 2px; font-size: 12px; color: #666666; border: 0; }
+#kboard-customer-editor .kboard-attr-row .input_hidden { opacity: 0; position: absolute; left: 9999px; visibility: hidden}
 #kboard-customer-editor .kboard-content { float: left; padding: 9px 0; width: 100%; border-bottom: 1px solid #e3e3e3; text-align: center; background-color: white; }
 #kboard-customer-editor .kboard-content textarea { display: inline; margin: 0; padding: 0; width: 98%; height: 250px; border-radius: 3px; border: 1px solid #cccccc; font-size: 12px; }
 #kboard-customer-editor .kboard-control { float: left; padding: 15px 0; width: 100%; }
@@ -106,10 +107,10 @@ img { border: 0; }
 	#kboard-customer-list .kboard-list table td.kboard-list-date { width: 70px; }
 	#kboard-customer-list .kboard-list td.kboard-list-user,
 	#kboard-customer-list .kboard-list td.kboard-list-view { display: none; }
-	
+
 	#kboard-customer-editor .kboard-attr-row input[type=text],
 	#kboard-customer-editor .kboard-attr-row input[type=file],
 	#kboard-customer-editor .kboard-attr-row input[type=password] { width: 50%; }
-	
+
 	#kboard-customer-document .kboard-detail .detail-attr { clear: both; }
 }

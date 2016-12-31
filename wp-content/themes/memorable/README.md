@@ -1,2 +1,0 @@
-Memorable by WooThemes
-======================

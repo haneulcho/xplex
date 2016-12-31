@@ -1,3 +1,0 @@
-220930
-f9b9d2efccf3bffc9aea1e5293a408d5
-memorable/style.css

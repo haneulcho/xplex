@@ -1,5 +1,0 @@
-ver 1.0.0
-- WooCommerce 2.1 Compatible
-
-ver 0.1.0 
-- Init.
