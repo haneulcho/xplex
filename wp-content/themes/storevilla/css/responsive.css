@@ -538,13 +538,20 @@ a.woocommerce-main-image {
 		padding:53px 20px 30px;
 	}
 
+	.xbooks #secondaryleft {
+		float:none;
+		width:100%;
+		max-width:none;
+		padding:53px 20px 30px;
+	}
+
 	#primary {
 		float:none;
 		width:100%;
 		padding:30px 20px 30px;
 		max-width:none;
 	}
-.webzine #primary.w_list {
+.webzine #primary.w_list, .xbooks #primary.w_list {
 	padding-left:0;
 	padding-right:0;
 }

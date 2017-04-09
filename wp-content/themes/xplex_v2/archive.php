@@ -84,7 +84,7 @@ get_header(); ?>
 			} else {
 				echo '<div class="w_group"><div class="w_child">';
 				while ( have_posts() ) : the_post();
-					get_template_part( 'template-parts/content', 'archive' );
+					get_template_part( 'template-parts/content', 'archive_xbooks' );
 				endwhile;
 				echo '</div></div>';
 				the_posts_pagination( array(

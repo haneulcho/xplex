@@ -31,6 +31,32 @@ function storevilla_body_classes( $classes ) {
 	// 	$classes[] = $theme_webzine;
 	// }
 
+	// body에 xbooks 클래스 삽입
+	if(is_category(array('xbooks'))) {
+		$is_xbooks = true;
+	} else if ( is_singular(array('post')) ) {
+			global $post;
+			$cats = get_the_category($post->ID);
+			$cats_slug = $cats[0]->slug;
+			$cats_id = $cats[0]->cat_ID;
+			$cats_parent_id = $cats[0]->category_parent;
+
+			if ( $cats_slug == 'xbooks' || $cats_id == 82 || $cats_parent_id == 82 ) {
+				$is_xbooks = true;
+			} else {
+				$is_xbooks = false;
+			}
+	} else {
+		$is_xbooks = false;
+	}
+
+	if($is_xbooks) {
+		if(!$theme_webzine){
+			$theme_webzine = 'xbooks';
+		}
+		$classes[] = $theme_webzine;
+	}
+
 	// body에 webzine 클래스 삽입
 	if(is_category(array('webzine','publishmarketing','dear-reader','interview','p-note','kids-book-story'))) {
 		$is_webzine = true;

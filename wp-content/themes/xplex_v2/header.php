@@ -44,7 +44,7 @@
 			if( !( is_category() ) ) {
 				do_action( 'xplex_custom_breadcrumb' );
 			}
-			if( is_category('webzine') || is_category('publishmarketing') || is_category('dear-reader') || is_category('interview') || is_category('p-note') ) {
+			if( is_category('xbooks') || is_category('webzine') || is_category('publishmarketing') || is_category('dear-reader') || is_category('interview') || is_category('p-note') ) {
 			?>
 				<nav class="woocommerce-breadcrumb" itemprop="breadcrumb"><a href="<?php echo get_home_url(); ?>">X-PLEX</a> &gt; <?php echo single_cat_title(); ?></nav>
 			<?php

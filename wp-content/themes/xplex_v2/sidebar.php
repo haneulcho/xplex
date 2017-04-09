@@ -38,6 +38,10 @@ if( $webzine_sidebar ) {
 			<div class="advance-search">
 				<?php storevilla_product_search(); ?>
 			</div>
+			<!-- xbooks, webzine 엑스북스 및 웹진 검색바 추가 -->
+			<!-- <div class="normal-search">
+				get_search_form();
+			</div> -->
 		<?php } else{ ?>
 			<div class="normal-search">
 				<?php get_search_form(); ?>

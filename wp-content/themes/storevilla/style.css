@@ -5080,19 +5080,40 @@ button.product_type_external css
 .webzine h1.page-title,
 .webzine .w_view > h2,
 .webzine .storevilla-blog h3 a:hover,
+.xbooks .main-navigation li.current-category-ancestor > a,
+.xbooks .main-navigation li.current-menu-ancestor > a,
+.xbooks #primary-menu >li>a:hover,
+.xbooks .main-navigation li.menu-item-has-children > a:hover:before,
+.xbooks .main-navigation ul li.current-menu-item > a,
+.xbooks .main-navigation ul li.current-post-ancestor > a,
+.xbooks .main-navigation ul li a:hover,
+.xbooks .main-navigation ul ul li.current-menu-item a,
+.xbooks .main-navigation ul ul li a:hover,
+.xbooks #secondaryleft ul.sub-menu li.current-menu-item a,
+.xbooks #secondaryleft ul.sub-menu li.current-menu-parent a,
+.xbooks #secondaryleft ul.sub-menu li a:hover,
+.xbooks .sv_search_form input[type="text"]:focus,
+.xbooks h1.page-title,
+.xbooks .w_view > h2,
+.xbooks .storevilla-blog h3 a:hover,
 .w_header_cat li a:hover,
 .w_header_cat li.w_active a
  {
   color:#3ea6fe;
 }
 .webzine #secondaryleft .widget_nav_menu h3:after,
+.xbooks #secondaryleft .widget_nav_menu h3:after,
 .w_group h2 > a:hover,
-.webzine .w_list h1.page-title:after {
+.webzine .w_list h1.page-title:after,
+.xbooks .w_list h1.page-title:after {
   background:#3ea6fe;
 }
-.webzine #xbreadcrumb {height:50px;background-color:#3ea6fe;color:#fff;}
+.webzine #xbreadcrumb,
+.xbooks #xbreadcrumb {height:50px;background-color:#3ea6fe;color:#fff;}
 .webzine .pagination .nav-links span.current,
-.webzine .pagination .nav-links a:hover {
+.webzine .pagination .nav-links a:hover,
+.xbooks .pagination .nav-links span.current,
+.xbooks .pagination .nav-links a:hover {
     background: #3ea6fe;
     border-color: #3ea6fe;
     color: #fff;
