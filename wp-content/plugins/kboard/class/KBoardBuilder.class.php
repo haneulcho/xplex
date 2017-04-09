@@ -227,32 +227,32 @@ class KBoardBuilder {
 			// 고객문의 게시판
 			// 2016.12.31 Haneul Cho 수정
 			// 답글이 공개글일 때 원글이 있고, 원글이 비밀글이면 답글은 원글 작성자와 답글 작성자만 열람 가능
-				if($this->board_id == 2) {
-						// 공지사항이 아닌 글, 관리자가 아닐 때만 적용
-						if(!$content->notice && $user_ID != 1) {
-								// 내글만 열람 가능 / 내글이 아니라면 원글이 내글인지 체크
-								if($content->member_uid == $user_ID) {
-										$allow_document = true;
-								} else {
-										if($content->parent_uid) {
-											$parent_content = new KBContent($this->board_id);
-											$parent_content->initWithUID($content->parent_uid);
-											// 원글 작성자가 본인이면 열람
-											if($parent_content->member_uid == $user_ID) {
-												$allow_document = true;
-											} else {
-												echo '<script>alert("'.__('열람 권한이 없습니다.', 'kboard').'");history.go(-1);</script>';
-											}
+			if($this->board_id == 2) {
+					// 공지사항이 아닌 글, 관리자가 아닐 때만 적용
+					if(!$content->notice && $user_ID != 1) {
+							// 내글만 열람 가능 / 내글이 아니라면 원글이 내글인지 체크
+							if($content->member_uid == $user_ID) {
+									$allow_document = true;
+							} else {
+									if($content->parent_uid) {
+										$parent_content = new KBContent($this->board_id);
+										$parent_content->initWithUID($content->parent_uid);
+										// 원글 작성자가 본인이면 열람
+										if($parent_content->member_uid == $user_ID) {
+											$allow_document = true;
 										} else {
-												echo '<script>alert("'.__('열람 권한이 없습니다.', 'kboard').'");history.go(-1);</script>';
+											echo '<script>alert("'.__('열람 권한이 없습니다.', 'kboard').'");history.go(-1);</script>';
 										}
-								}
-						} else {
-								$allow_document = true;
-						}
-				} else {
-						$allow_document = true;
-				}
+									} else {
+											echo '<script>alert("'.__('열람 권한이 없습니다.', 'kboard').'");history.go(-1);</script>';
+									}
+							}
+					} else {
+							$allow_document = true;
+					}
+			} else {
+					$allow_document = true;
+			}
 		}
 
 		if($allow_document == true){
