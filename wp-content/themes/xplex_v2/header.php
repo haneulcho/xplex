@@ -58,7 +58,7 @@
 		<ul id="m_onb">
 			<li><a href="https://www.xplex.org:49408/product-category/xplex-lecture/now/"><i class="fa fa-list-alt" aria-hidden="true"></i> 모집중인 강의</a></li>
 			<li><a href="https://www.xplex.org:49408/product-category/personal-coaching/"><i class="fa fa-hand-o-right" aria-hidden="true"></i> 1:1 코칭</a></li>
-			<li><a href="https://www.xplex.org:49408/product-category/xbooks/"><i class="fa fa-book" aria-hidden="true"></i> 엑스북스</a></li>
+			<li><a href="https://www.xplex.org:49408/category/xbooks/"><i class="fa fa-book" aria-hidden="true"></i> 엑스북스</a></li>
 		</ul>
 	<?php } ?>
 
